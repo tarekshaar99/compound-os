@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Entry {
+  id        String        @id @default(cuid())
+  title     String
+  domain    String
+  notes     String        @default("")
+  createdAt DateTime      @default(now())
+  analysis  EntryAnalysis?
+}
+
+model EntryAnalysis {
+  id             Int      @id @default(autoincrement())
+  entryId        String   @unique
+  entry          Entry    @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  summary5       String
+  insights       String
+  risks          String
+  contentAngles  String
+  tags           String
+  entities       String
+  rawJson        String
+  model          String
+  promptVersion  String
+  createdAt      DateTime @default(now())
+}

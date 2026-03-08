@@ -1,0 +1,37 @@
+You are a sharp business analyst. Analyze the entry below and return ONLY a valid JSON object — no markdown, no backticks, no extra text before or after.
+
+Entry title: {{title}}
+Domain: {{domain}}
+Notes:
+{{notes}}
+
+Return exactly this JSON shape:
+{
+  "summary5": [
+    "One-sentence summary line 1",
+    "One-sentence summary line 2",
+    "One-sentence summary line 3",
+    "One-sentence summary line 4",
+    "One-sentence summary line 5"
+  ],
+  "insights": [
+    "Key insight about this idea or project",
+    "Second insight",
+    "Third insight"
+  ],
+  "risks": [
+    "Main risk or challenge",
+    "Second risk or challenge"
+  ],
+  "contentAngles": [
+    { "hook": "Attention-grabbing opening", "angle": "The specific angle or framing", "cta": "Call to action" },
+    { "hook": "...", "angle": "...", "cta": "..." },
+    { "hook": "...", "angle": "...", "cta": "..." }
+  ],
+  "tags": ["tag1", "tag2", "tag3", "tag4"],
+  "entities": ["Person or brand or product mentioned", "..."]
+}
+
+Rules:
+- All arrays must have the exact number of items shown above.
+- Output raw JSON only. No other text.
