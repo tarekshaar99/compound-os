@@ -52,26 +52,33 @@ const sections = [
   },
 ];
 
+const pricingChecklist = [
+  "Full OTU options trading framework",
+  "VIX allocation model & macro regimes",
+  "Hybrid athlete training program",
+  "Nutrition & recovery protocols",
+  "Discipline & journaling system",
+  "All future updates included",
+];
+
 export default function Home() {
   return (
     <div className="min-h-screen">
       {/* ───── HERO ───── */}
       <section className="flex flex-col items-center justify-center text-center px-6 pt-28 pb-20 md:pt-36 md:pb-28">
-        <p className="text-sm uppercase tracking-widest text-[var(--text-muted)] mb-5">
+        <p className="text-sm uppercase tracking-widest text-[var(--text-muted)] mb-6">
           by Tarek Shaar
         </p>
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] leading-tight max-w-3xl">
-          Build capital. Control risk.
-          <br />
-          Stay disciplined.
+        <h1 className="text-2xl md:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-[var(--text-primary)] leading-snug md:leading-tight max-w-4xl">
+          I was a depressed, overweight kid who couldn&apos;t hold eye contact, lost thousands chasing crypto, paid $15k for courses that taught me nothing, and spent years building in silence because being seen meant being hurt.
         </h1>
-        <p className="mt-5 text-[var(--text-secondary)] text-lg md:text-xl max-w-xl mx-auto leading-relaxed">
-          A practical system for men who want structure across trading, fitness, and mindset.
+        <p className="mt-8 text-[var(--text-secondary)] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+          This site is everything I had to figure out alone.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
           <a
-            href="#get-system"
+            href="#pricing"
             className="px-8 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5"
           >
             Get the System
@@ -83,10 +90,27 @@ export default function Home() {
             View What&apos;s Inside
           </a>
         </div>
+      </section>
 
-        <p className="mt-6 text-sm text-[var(--text-muted)]">
-          Not theory. Real frameworks used weekly.
-        </p>
+      {/* ───── HOW I GOT HERE ───── */}
+      <section className="px-6 py-20 md:py-28">
+        <div className="max-w-2xl mx-auto space-y-10">
+          <p className="text-[var(--text-secondary)] text-base md:text-lg leading-[1.9]">
+            I started lifting to prove something. Ego lifted until I broke my shoulder and lower back. Switched to powerlifting - realized it was feeding the same ego. Went to the other extreme: triathlon training, full cardio, vegan. I do this - I swing hard until something breaks, then I recalibrate. Eventually I found what actually works: a simple hybrid routine, 3x strength per week, Zone 2 cardio on off days, consistent protein. Nothing extreme. Just repeatable.
+          </p>
+
+          <p className="text-[var(--text-secondary)] text-base md:text-lg leading-[1.9]">
+            I ran a crypto mining farm in 2019. Scaled it up, watched it collapse. Tried to recover through day trading - lost more. Paid $15,000 across multiple courses chasing strategies from 20-year-olds posting PnL screenshots. What I eventually learned: a realistic return is 3-5% per month. If you&apos;re not making 11% per year, you&apos;re losing to inflation. The answer wasn&apos;t a hot strategy. It was a boring, conservative wheel strategy on quality stocks, managed by VIX, compounded over time.
+          </p>
+
+          <p className="text-[var(--text-secondary)] text-base md:text-lg leading-[1.9]">
+            During COVID I hit a wall I couldn&apos;t lift or trade my way out of. I started journaling, meditating, reading - Eckhart Tolle, Alan Watts, Aaron Abke, Neville Goddard. For the first time I looked directly at how I was wired instead of running from it. What I found: almost everything I was chasing was fear in disguise. The mindset section is my complete notes from that period - what actually shifted things, not what sounds good.
+          </p>
+
+          <p className="text-[var(--text-muted)] text-base md:text-lg leading-relaxed pt-4 border-t border-[var(--border)]">
+            The Compound System is what I built after all of that. Three pillars that reinforce each other - because they did in real life.
+          </p>
+        </div>
       </section>
 
       {/* ───── WHAT YOU GET ───── */}
@@ -232,8 +256,8 @@ export default function Home() {
               },
               {
                 step: "03",
-                title: "Updated regularly",
-                desc: "New frameworks, refinements, and protocols added as the system evolves.",
+                title: "A living document",
+                desc: "Refined as the system evolves. This is a living document, not a static course.",
               },
             ].map((item) => (
               <div
@@ -255,8 +279,55 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ───── PRICING ───── */}
+      <section id="pricing" className="px-6 py-20 md:py-28">
+        <div className="max-w-xl mx-auto">
+          <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-10 md:p-14 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-8">
+              One-time access. No subscription.
+            </h2>
+
+            <div className="mb-6">
+              <span className="text-6xl md:text-7xl font-bold text-[var(--accent)]">$29</span>
+            </div>
+
+            <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-10 max-w-md mx-auto">
+              Lifetime access to all three pillars - trading, fitness, and mindset. Updated as the system evolves.
+            </p>
+
+            <ul className="space-y-4 text-left max-w-sm mx-auto mb-10">
+              {pricingChecklist.map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="text-[var(--accent)] mt-0.5 flex-shrink-0">✓</span>
+                  <span className="text-[var(--text-secondary)] leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href="#pricing"
+              className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 w-full sm:w-auto"
+            >
+              Get the System
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ───── COMMUNITY TEASER ───── */}
+      <section className="px-6 py-16 md:py-20">
+        <div className="max-w-2xl mx-auto text-center">
+          <h3 className="text-xl md:text-2xl font-bold text-[var(--text-muted)] mb-3">
+            Community - Coming Soon
+          </h3>
+          <p className="text-[var(--text-muted)] text-base leading-relaxed">
+            A space for people building in silence. No noise. Just execution.
+          </p>
+        </div>
+      </section>
+
       {/* ───── FINAL CTA ───── */}
-      <section id="get-system" className="px-6 py-20 md:py-28">
+      <section className="px-6 py-20 md:py-28">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
             Stop guessing. Start executing.
@@ -266,7 +337,7 @@ export default function Home() {
           </p>
 
           <a
-            href="#get-system"
+            href="#pricing"
             className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5"
           >
             Get the System
@@ -295,6 +366,10 @@ export default function Home() {
               Email
             </a>
           </div>
+
+          <p className="mt-10 text-xs text-[var(--text-muted)]">
+            Built by someone still in the process. Not a guru. Just a system.
+          </p>
         </div>
       </section>
     </div>
