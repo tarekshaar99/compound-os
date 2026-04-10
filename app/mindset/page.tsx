@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import Paywall from "../components/Paywall";
 
 interface Section {
   heading: string;
@@ -469,9 +470,10 @@ function ContentSection({
   );
 }
 
-export default function MindsetPage() {
-  const [activeCategory, setActiveCategory] = useState("identity");
-  const active = categories.find((c) => c.id === activeCategory)!;
+function MindsetContent({ lockedPreview = false }: { lockedPreview?: boolean }) {
+  const visibleCategories = lockedPreview ? categories.slice(0, 1) : categories;
+  const [activeCategory, setActiveCategory] = useState(visibleCategories[0].id);
+  const active = visibleCategories.find((c) => c.id === activeCategory)!;
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white">
@@ -492,7 +494,7 @@ export default function MindsetPage() {
         <p className="text-lg leading-[1.7] text-white/55 max-w-[600px] m-0">
           Years of spiritual study distilled into a practical framework for
           understanding your psyche, recognizing the patterns that run your
-          life, and freeing yourself from the ego&apos;s grip. Not theory  - 
+          life, and freeing yourself from the ego&apos;s grip. Not theory  -
           lived experience.
         </p>
       </div>
@@ -501,7 +503,7 @@ export default function MindsetPage() {
       <div className="max-w-[1200px] mx-auto px-6 pb-32 grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 md:gap-12 items-start">
         {/* Sidebar */}
         <div className="md:sticky md:top-6 flex flex-col gap-1">
-          {categories.map((cat) => (
+          {visibleCategories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
@@ -570,5 +572,30 @@ export default function MindsetPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function MindsetPage() {
+  const [hasAccess, setHasAccess] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setHasAccess(!!localStorage.getItem("cos_access"));
+  }, []);
+
+  if (hasAccess === null) {
+    return (
+      <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
+        <div className="w-10 h-10 border-2 border-[var(--accent-mindset)] border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  return (
+    <Paywall
+      previewContent={<MindsetContent lockedPreview />}
+      accent="var(--accent-mindset)"
+    >
+      <MindsetContent />
+    </Paywall>
   );
 }

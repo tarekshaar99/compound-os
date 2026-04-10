@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import Paywall from "../components/Paywall";
 
 interface Section {
   heading: string;
@@ -669,9 +670,10 @@ function ContentSection({
   );
 }
 
-export default function FitnessPage() {
-  const [activeCategory, setActiveCategory] = useState("philosophy");
-  const active = categories.find((c) => c.id === activeCategory)!;
+function FitnessContent({ lockedPreview = false }: { lockedPreview?: boolean }) {
+  const visibleCategories = lockedPreview ? categories.slice(0, 1) : categories;
+  const [activeCategory, setActiveCategory] = useState(visibleCategories[0].id);
+  const active = visibleCategories.find((c) => c.id === activeCategory)!;
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white">
@@ -699,7 +701,7 @@ export default function FitnessPage() {
       <div className="max-w-[1200px] mx-auto px-6 pb-32 grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 md:gap-12 items-start">
         {/* Sidebar */}
         <div className="md:sticky md:top-6 flex flex-col gap-1">
-          {categories.map((cat) => (
+          {visibleCategories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
@@ -768,5 +770,30 @@ export default function FitnessPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function FitnessPage() {
+  const [hasAccess, setHasAccess] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setHasAccess(!!localStorage.getItem("cos_access"));
+  }, []);
+
+  if (hasAccess === null) {
+    return (
+      <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
+        <div className="w-10 h-10 border-2 border-[var(--accent-fitness)] border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  return (
+    <Paywall
+      previewContent={<FitnessContent lockedPreview />}
+      accent="var(--accent-fitness)"
+    >
+      <FitnessContent />
+    </Paywall>
   );
 }

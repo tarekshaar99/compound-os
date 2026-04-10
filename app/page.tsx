@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CheckoutButton from "./components/CheckoutButton";
 
 const deliverables = [
   "Options trading system (Wheel, spreads, VIX framework)",
@@ -77,12 +78,11 @@ export default function Home() {
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
-          <a
-            href="#pricing"
-            className="px-8 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5"
+          <CheckoutButton
+            className="px-8 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 cursor-pointer"
           >
             Get the System
-          </a>
+          </CheckoutButton>
           <a
             href="#what-you-get"
             className="px-8 py-4 rounded-xl border border-[var(--border)] text-[var(--text-primary)] font-medium text-base transition-all hover:border-[var(--text-muted)] hover:-translate-y-0.5"
@@ -304,12 +304,11 @@ export default function Home() {
               ))}
             </ul>
 
-            <a
-              href="#pricing"
-              className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 w-full sm:w-auto"
+            <CheckoutButton
+              className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 w-full sm:w-auto cursor-pointer"
             >
               Get the System
-            </a>
+            </CheckoutButton>
           </div>
         </div>
       </section>
@@ -336,12 +335,11 @@ export default function Home() {
             One system. Full control.
           </p>
 
-          <a
-            href="#pricing"
-            className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5"
+          <CheckoutButton
+            className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 cursor-pointer"
           >
             Get the System
-          </a>
+          </CheckoutButton>
 
           <div className="mt-14 flex justify-center gap-4">
             <a

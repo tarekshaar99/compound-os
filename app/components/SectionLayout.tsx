@@ -15,12 +15,14 @@ export default function SectionLayout({
   accent,
   sections,
   children,
+  locked = false,
 }: {
   title: string;
   subtitle: string;
   accent: string;
   sections: SectionItem[];
   children: (active: string) => React.ReactNode;
+  locked?: boolean;
 }) {
   const [active, setActive] = useState(sections[0]?.id ?? "");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -31,7 +33,9 @@ export default function SectionLayout({
     contentRef.current?.scrollTo(0, 0);
   }, [active]);
 
-  const filtered = sections.filter((s) =>
+  // When locked, only show the first section
+  const visibleSections = locked ? sections.slice(0, 1) : sections;
+  const filtered = visibleSections.filter((s) =>
     s.label.toLowerCase().includes(search.toLowerCase())
   );
 
