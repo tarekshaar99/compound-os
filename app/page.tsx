@@ -1,32 +1,72 @@
-import Nav from "./components/Nav";
 import Link from "next/link";
+
+const sections = [
+  {
+    title: "Trading",
+    href: "/trading",
+    accent: "var(--accent-trading)",
+    icon: "◈",
+    description:
+      "OTU options framework, The Wheel, VIX allocation, macro regimes, and pre-trade checklists.",
+  },
+  {
+    title: "Mindset",
+    href: "/mindset",
+    accent: "var(--accent-mindset)",
+    icon: "◉",
+    description:
+      "Mental models, discipline systems, journaling frameworks, and emotional regulation.",
+  },
+  {
+    title: "Fitness",
+    href: "/fitness",
+    accent: "var(--accent-fitness)",
+    icon: "△",
+    description:
+      "Training programs, nutrition protocols, recovery routines, and progress tracking.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      <Nav />
-      <main className="flex flex-col items-center justify-center min-h-[80vh] px-6 text-center">
-        <h1 className="text-4xl font-semibold tracking-tight text-zinc-900">
+    <div className="min-h-screen flex flex-col items-center justify-center px-6">
+      <div className="text-center mb-14">
+        <h1 className="text-5xl font-bold tracking-tight text-[var(--text-primary)]">
           Compound OS
         </h1>
-        <p className="mt-3 text-zinc-500 max-w-sm">
-          Log what you are building across Media, Trading, Brand, and Life.
+        <p className="mt-3 text-[var(--text-secondary)] text-lg max-w-md mx-auto">
+          Your personal operating system for trading, mindset, and fitness.
         </p>
-        <div className="mt-8 flex gap-4">
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full">
+        {sections.map((s) => (
           <Link
-            href="/new"
-            className="px-5 py-2.5 bg-zinc-900 text-white text-sm rounded-lg hover:bg-zinc-700"
+            key={s.href}
+            href={s.href}
+            className="group bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-8 transition-all hover:border-[var(--text-muted)] hover:-translate-y-1"
           >
-            New Entry
+            <div
+              className="text-3xl mb-4 w-14 h-14 rounded-xl flex items-center justify-center"
+              style={{
+                background: `color-mix(in srgb, ${s.accent} 12%, transparent)`,
+                color: s.accent,
+              }}
+            >
+              {s.icon}
+            </div>
+            <h2
+              className="text-xl font-bold mb-2"
+              style={{ color: s.accent }}
+            >
+              {s.title}
+            </h2>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+              {s.description}
+            </p>
           </Link>
-          <Link
-            href="/entries"
-            className="px-5 py-2.5 border border-zinc-300 text-zinc-700 text-sm rounded-lg hover:bg-zinc-50"
-          >
-            View Entries
-          </Link>
-        </div>
-      </main>
+        ))}
+      </div>
     </div>
   );
 }
