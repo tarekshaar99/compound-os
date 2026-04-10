@@ -52,18 +52,18 @@ function Dashboard() {
         <StatBox label="Target Delta (CSP)" value="20-25δ" sub="Safe account baseline" />
         <StatBox label="CC Duration" value="25-45d" sub="Optimal income & flexibility" />
       </div>
-      <Card title="Quick Reference — The OTU Framework" accent="#4ecdc4">
+      <Card title="Quick Reference  -  The OTU Framework" accent="#4ecdc4">
         <P><B>1. Sell Cash-Secured Puts</B> on stocks you believe in at 20-25 delta, 25-45 DTE</P>
-        <P><B>2. Get Assigned</B> — this is the plan, not a failure. Immediately sell covered calls.</P>
+        <P><B>2. Get Assigned</B>  -  this is the plan, not a failure. Immediately sell covered calls.</P>
         <P><B>3. Sell Covered Calls</B> at cost basis or above. Use delta based on conviction.</P>
-        <P><B>4. Manage by VIX</B> — adjust cash allocation, delta, and strategy per VIX regime.</P>
+        <P><B>4. Manage by VIX</B>  -  adjust cash allocation, delta, and strategy per VIX regime.</P>
         <P last><B>5. Add Bear Call Spreads</B> monthly on indices for short-delta income (5-8% of portfolio).</P>
       </Card>
       <Card title="Key Behavioral Rules" accent="#ff6b6b">
-        <P>• Don&apos;t react to news — capitalize on the fear it creates</P>
+        <P>• Don&apos;t react to news  -  capitalize on the fear it creates</P>
         <P>• Paper losses are temporary if fundamentals are intact</P>
-        <P>• Stay mechanical — don&apos;t let individual losses change overall strategy</P>
-        <P>• Expected moves are typically mispriced on the put side — this is your edge</P>
+        <P>• Stay mechanical  -  don&apos;t let individual losses change overall strategy</P>
+        <P>• Expected moves are typically mispriced on the put side  -  this is your edge</P>
         <P last>• Patience is the most profitable skill in volatile markets</P>
       </Card>
     </>
@@ -84,19 +84,19 @@ function Principles() {
   return (
     <>
       <SectionTitle>Trading Principles</SectionTitle>
-      <Sub>Core rules — the non-negotiables for the OTU strategy.</Sub>
+      <Sub>Core rules  -  the non-negotiables for the OTU strategy.</Sub>
       {rules.map((r, i) => (
         <RuleCard key={i} number={i + 1} text={r} highlight={i === 0 || i === 6 || i === 7} />
       ))}
       <Card title="Additional Principles from Coaching Calls" accent="#ffd93d">
         <P>• Sell covered calls on Wednesday for Friday (or following Friday) expiration for optimal time premium</P>
-        <P>• Don&apos;t sell covered calls on red days — wait for green days for better premiums</P>
+        <P>• Don&apos;t sell covered calls on red days  -  wait for green days for better premiums</P>
         <P>• Uncover positions before Fed meetings to capture potential upside moves</P>
-        <P>• Avoid selling covered calls through earnings — assignment risk is too high</P>
-        <P>• Roll puts down/out only once — after that, take assignment and switch to covered calls</P>
+        <P>• Avoid selling covered calls through earnings  -  assignment risk is too high</P>
+        <P>• Roll puts down/out only once  -  after that, take assignment and switch to covered calls</P>
         <P>• Treat each lot at different cost bases separately</P>
         <P>• Tax-loss harvest deep underwater LEAPS by October if not near breakeven</P>
-        <P last>• Use SPX over SPY for bear call spreads — cash-settled, no assignment risk</P>
+        <P last>• Use SPX over SPY for bear call spreads  -  cash-settled, no assignment risk</P>
       </Card>
     </>
   );
@@ -106,7 +106,7 @@ function Wheel() {
   return (
     <>
       <SectionTitle>The Wheel Strategy</SectionTitle>
-      <Sub>The core income engine — a systematic cycle of selling puts, getting assigned, and selling calls.</Sub>
+      <Sub>The core income engine  -  a systematic cycle of selling puts, getting assigned, and selling calls.</Sub>
       <Card title="Phase 1: Sell Cash-Secured Puts" accent="#4ecdc4">
         <P><B>Goal:</B> Collect premium while waiting to buy stock at a discount.</P>
         <P><B>Delta:</B> 20-25 delta for safe account, up to 30 delta for aggressive.</P>
@@ -115,14 +115,14 @@ function Wheel() {
         <P last><B>Management:</B> Close at 80% profit, or manage Monday of expiration week.</P>
       </Card>
       <Card title="Phase 2: Get Assigned (This Is The Plan)" accent="#ffd93d">
-        <P>Assignment is not a failure — it&apos;s the expected outcome of the wheel.</P>
+        <P>Assignment is not a failure  -  it&apos;s the expected outcome of the wheel.</P>
         <P>Your cost basis = Strike Price – Premium Collected.</P>
         <P last>Immediately move to Phase 3 upon assignment.</P>
       </Card>
       <Card title="Phase 3: Sell Covered Calls" accent="#ff6b6b">
         <P><B>At/Above Cost Basis:</B> Sell 15-30 day covered calls at 20-30 delta based on conviction.</P>
         <P><B>Below Cost Basis:</B> Sell 8-12 delta covered calls, 7-9 days out. Grind cost basis down with weekly premium.</P>
-        <P><B>If called away:</B> Cycle restarts — go back to Phase 1.</P>
+        <P><B>If called away:</B> Cycle restarts  -  go back to Phase 1.</P>
         <P last><B>Rolling:</B> Roll up and out once max. If tested again, let shares get called away.</P>
       </Card>
       <Card title="Assignment Levels + VIX Framework">
@@ -157,11 +157,11 @@ function Vix() {
         ]}
       />
       <Card title="Key VIX Principles" accent="#ff6b6b">
-        <P>• VIX $18-$20 is a gray area — wait for break above $21 to deploy remaining capital</P>
-        <P>• VIX above 30 historically signals market bottoms — deploy capital, don&apos;t panic</P>
+        <P>• VIX $18-$20 is a gray area  -  wait for break above $21 to deploy remaining capital</P>
+        <P>• VIX above 30 historically signals market bottoms  -  deploy capital, don&apos;t panic</P>
         <P>• Low VIX = compressed premiums, so hold more cash for when volatility returns</P>
         <P>• High VIX = sell further OTM for the same or better premium returns</P>
-        <P last>• Avoid bear call spreads when VIX is elevated — use CSPs instead</P>
+        <P last>• Avoid bear call spreads when VIX is elevated  -  use CSPs instead</P>
       </Card>
       <Card title="VIX-Based Strategy Map">
         <Table
@@ -183,15 +183,15 @@ function CoveredCalls() {
     <>
       <SectionTitle>Covered Calls</SectionTitle>
       <Sub>Selling calls against shares you own to generate income and reduce cost basis.</Sub>
-      <Card title="Covered Call Dynamics — Delta by Conviction" accent="#4ecdc4">
+      <Card title="Covered Call Dynamics  -  Delta by Conviction" accent="#4ecdc4">
         <Table
           headers={["Conviction", "Delta", "Duration", "Notes"]}
           rows={[
-            ["Extremely Bullish", "No CC", "—", "Leave uncovered for full upside"],
+            ["Extremely Bullish", "No CC", " - ", "Leave uncovered for full upside"],
             ["Bullish", "20-25 delta", "15-30 days", "Standard income play"],
             ["Neutral", "30 delta", "15-30 days", "More premium, less upside"],
             ["Bearish", "ATM call", "7-14 days", "Maximum premium extraction"],
-            ["Extremely Bearish", "Sell stock", "—", "Exit the position entirely"],
+            ["Extremely Bearish", "Sell stock", " - ", "Exit the position entirely"],
           ]}
         />
       </Card>
@@ -201,13 +201,13 @@ function CoveredCalls() {
         <P><B>Duration:</B> 7-9 days out (Wednesday to Friday schedule)</P>
         <P><B>Premium target:</B> 0.3-0.5% per week</P>
         <P><B>Timing:</B> Sell on green days only. Wait until Wednesday.</P>
-        <P last><B>Earnings:</B> NEVER sell below-cost CCs past earnings dates — assignment risk is too high.</P>
+        <P last><B>Earnings:</B> NEVER sell below-cost CCs past earnings dates  -  assignment risk is too high.</P>
       </Card>
       <Card title="Covered Call Timing Rules">
         <P>• Sell CCs on Wednesday for Friday or following Friday expiration</P>
         <P>• Uncover positions before Fed meetings for potential upside capture</P>
         <P>• Use shorter durations (7-9 days) during high volatility for flexibility</P>
-        <P>• Roll up and out maximum once — then let shares get called away</P>
+        <P>• Roll up and out maximum once  -  then let shares get called away</P>
         <P>• When delta reaches 45 on a sold CC, time to take action (roll or close)</P>
         <P last>• For LEAPS: only cover LEAPS during bear markets, not during bull runs</P>
       </Card>
@@ -219,7 +219,7 @@ function CSPs() {
   return (
     <>
       <SectionTitle>Cash-Secured Puts</SectionTitle>
-      <Sub>The entry point of the wheel — selling puts on stocks you want to own at a discount.</Sub>
+      <Sub>The entry point of the wheel  -  selling puts on stocks you want to own at a discount.</Sub>
       <Card title="CSP Entry Framework" accent="#4ecdc4">
         <P><B>Safe Account:</B> 20-25 delta, 25-45 DTE. Target 1.5%+ return.</P>
         <P><B>Aggressive Account:</B> 25-30 delta, 25-45 DTE. Target 2%+ return.</P>
@@ -254,9 +254,9 @@ function Spreads() {
   return (
     <>
       <SectionTitle>Bear Call Spreads</SectionTitle>
-      <Sub>Monthly short-delta income on indices — a hedge and income addition to the wheel.</Sub>
+      <Sub>Monthly short-delta income on indices  -  a hedge and income addition to the wheel.</Sub>
       <Card title="Bear Call Spread Framework" accent="#ff6b6b">
-        <P><B>Underlyings:</B> SPX (preferred — cash settled), QQQ, SPY. Never individual stocks.</P>
+        <P><B>Underlyings:</B> SPX (preferred  -  cash settled), QQQ, SPY. Never individual stocks.</P>
         <P><B>Delta:</B> 15 delta or lower for the short leg.</P>
         <P><B>Width:</B> 5-10 point spreads. 5-point can offer better risk/reward.</P>
         <P><B>DTE:</B> 3-5 weeks to expiration.</P>
@@ -269,7 +269,7 @@ function Spreads() {
         <P>• Adds short delta to offset long-delta wheel portfolio</P>
         <P>• Probability of profit typically ~85-95%</P>
         <P>• Premium received upfront (credit spread)</P>
-        <P>• SPX is cash-settled — no assignment risk</P>
+        <P>• SPX is cash-settled  -  no assignment risk</P>
         <P last>• Monthly implementation creates consistent income layer</P>
       </Card>
     </>
@@ -280,7 +280,7 @@ function Leaps() {
   return (
     <>
       <SectionTitle>LEAPS Options</SectionTitle>
-      <Sub>Long-dated call options for leveraged appreciation — used sparingly and only at ideal entries.</Sub>
+      <Sub>Long-dated call options for leveraged appreciation  -  used sparingly and only at ideal entries.</Sub>
       <Card title="LEAPS Entry Criteria (ALL must be met)" accent="#ffd93d">
         <P>✓ Stock is at or near the <B>lower Bollinger Band</B></P>
         <P>✓ VIX is <B>above 15</B></P>
@@ -291,11 +291,11 @@ function Leaps() {
       </Card>
       <Card title="LEAPS Management" accent="#ff6b6b">
         <P>• Manage 60-90 days before expiration to salvage remaining premium</P>
-        <P>• Out-of-the-money LEAPS cause significant P&L swings — expect this</P>
+        <P>• Out-of-the-money LEAPS cause significant P&L swings  -  expect this</P>
         <P>• Returns smooth out once LEAPS return in-the-money</P>
         <P>• Only sell covered calls against LEAPS during bear markets</P>
         <P>• Tax-loss harvest by October if deep underwater with no recovery path</P>
-        <P last>• Avoid LEAPS on stocks with imminent earnings — use CSPs instead</P>
+        <P last>• Avoid LEAPS on stocks with imminent earnings  -  use CSPs instead</P>
       </Card>
     </>
   );
@@ -333,7 +333,7 @@ function StockCriteria() {
 
 function SafeHaven() {
   const stocks = [
-    { ticker: "BRK.B", name: "Berkshire Hathaway", pe: 12, div: "—", note: "Conglomerate of great companies. Insurance, Coca Cola, BofA, Occidental." },
+    { ticker: "BRK.B", name: "Berkshire Hathaway", pe: 12, div: " - ", note: "Conglomerate of great companies. Insurance, Coca Cola, BofA, Occidental." },
     { ticker: "MCD", name: "McDonald's", pe: 26, div: "2.31%", note: "Affordable food. Owns land & buildings. Triple income: dividend + CC + appreciation." },
     { ticker: "LMT", name: "Lockheed Martin", pe: 20, div: "2.83%", note: "Government contracts. F-35, F-16, missiles, radar, helicopters. Rallied during crash." },
     { ticker: "XOM", name: "Exxon Mobil", pe: 14, div: "3.42%", note: "Energy sector. Solid fundamentals. Diversification into energy." },
@@ -404,17 +404,17 @@ function Risk() {
         />
       </Card>
       <Card title="When To Increase Cash" accent="#ffd93d">
-        <P>• VIX drops below 15 — premiums compress, hold more cash</P>
+        <P>• VIX drops below 15  -  premiums compress, hold more cash</P>
         <P>• Let covered calls get called away naturally (don&apos;t fight it)</P>
         <P>• Sell portions of profitable premium positions to maintain liquidity</P>
-        <P>• Before earnings season — reduce exposure to avoid gap risk</P>
+        <P>• Before earnings season  -  reduce exposure to avoid gap risk</P>
         <P last>• When geopolitical uncertainty is elevated</P>
       </Card>
       <Card title="Loss Management">
         <P>• Close bear call spreads at 50% loss of max loss</P>
         <P>• Manage LEAPS 60-90 days before expiration</P>
-        <P>• Roll puts down/out maximum once — then take assignment</P>
-        <P>• Never use margin — cash secured keeps you safe</P>
+        <P>• Roll puts down/out maximum once  -  then take assignment</P>
+        <P>• Never use margin  -  cash secured keeps you safe</P>
         <P last>• Tax-loss harvest underwater positions by October</P>
       </Card>
     </>
@@ -427,9 +427,9 @@ function Macro() {
       <SectionTitle>Macro Framework</SectionTitle>
       <Sub>The three pillars and how they drive markets.</Sub>
       <Card title="The Three Pillars of Macro" accent="#4ecdc4">
-        <P><B>1. Growth</B> — How fast is the economy growing? Accelerating or decelerating? Drives corporate earnings and stock prices.</P>
-        <P><B>2. Inflation</B> — At what rate are prices rising? Impacts interest rates, bond yields, and all asset valuations.</P>
-        <P last><B>3. Policy</B> — How are central banks responding? Tightening to fight inflation or easing to support growth?</P>
+        <P><B>1. Growth</B>  -  How fast is the economy growing? Accelerating or decelerating? Drives corporate earnings and stock prices.</P>
+        <P><B>2. Inflation</B>  -  At what rate are prices rising? Impacts interest rates, bond yields, and all asset valuations.</P>
+        <P last><B>3. Policy</B>  -  How are central banks responding? Tightening to fight inflation or easing to support growth?</P>
       </Card>
       <Card title="Business Cycle Phases" accent="#ffd93d">
         <Table
@@ -447,8 +447,8 @@ function Macro() {
         <P><B>Leading Indicators</B> change before the economy (stock prices, PMIs, building permits).</P>
         <P><B>Coincident Indicators</B> change with the economy (payrolls, industrial production).</P>
         <P><B>Lagging Indicators</B> change after the economy (unemployment rate, CPI).</P>
-        <P><B>Credit</B> is more important than money — most &quot;money&quot; is created by bank lending.</P>
-        <P last><B>Don&apos;t Fight the Fed</B> — anticipating the central bank pivot is a core macro skill.</P>
+        <P><B>Credit</B> is more important than money  -  most &quot;money&quot; is created by bank lending.</P>
+        <P last><B>Don&apos;t Fight the Fed</B>  -  anticipating the central bank pivot is a core macro skill.</P>
       </Card>
     </>
   );
@@ -458,7 +458,7 @@ function Indicators() {
   return (
     <>
       <SectionTitle>Key Economic Indicators</SectionTitle>
-      <Sub>The &quot;Macro Alphabet&quot; — data that tells you where we are in the cycle.</Sub>
+      <Sub>The &quot;Macro Alphabet&quot;  -  data that tells you where we are in the cycle.</Sub>
       <Table
         headers={["Indicator", "Frequency", "What It Measures", "Why It Matters"]}
         rows={[
@@ -477,12 +477,12 @@ function Indicators() {
         ]}
       />
       <Card title="Key Indicators from Coaching Calls" accent="#ffd93d">
-        <P>• <B>CME FedWatch Tool</B> — primary signal for positioning. Rate cut odds directly affect strategy.</P>
-        <P>• <B>VIX</B> — dictates cash allocation and delta selection.</P>
-        <P>• <B>Bollinger Bands</B> — primary technical tool for entry timing.</P>
-        <P>• <B>Put-to-call ratio</B> — contrarian indicator. Extremes signal reversals.</P>
-        <P>• <B>S5FI Index</B> — stocks above 50-day MA. Fewer = buying opportunities in oversold names.</P>
-        <P last>• <B>Unusual Whales</B> — institutional options flow for trade idea generation.</P>
+        <P>• <B>CME FedWatch Tool</B>  -  primary signal for positioning. Rate cut odds directly affect strategy.</P>
+        <P>• <B>VIX</B>  -  dictates cash allocation and delta selection.</P>
+        <P>• <B>Bollinger Bands</B>  -  primary technical tool for entry timing.</P>
+        <P>• <B>Put-to-call ratio</B>  -  contrarian indicator. Extremes signal reversals.</P>
+        <P>• <B>S5FI Index</B>  -  stocks above 50-day MA. Fewer = buying opportunities in oversold names.</P>
+        <P last>• <B>Unusual Whales</B>  -  institutional options flow for trade idea generation.</P>
       </Card>
     </>
   );
@@ -511,7 +511,7 @@ function Regimes() {
       </Card>
       <Card title="Correlation Shifts" accent="#ff6b6b">
         <P><B>Disinflationary regimes:</B> Stock-bond correlation is negative (bonds hedge stocks).</P>
-        <P last><B>Inflationary regimes:</B> Stock-bond correlation turns positive (both fall together — 2022 lesson).</P>
+        <P last><B>Inflationary regimes:</B> Stock-bond correlation turns positive (both fall together  -  2022 lesson).</P>
       </Card>
     </>
   );
@@ -521,7 +521,7 @@ function CaseStudies() {
   return (
     <>
       <SectionTitle>Historical Case Studies</SectionTitle>
-      <Sub>Pattern recognition from major market episodes — history rhymes.</Sub>
+      <Sub>Pattern recognition from major market episodes  -  history rhymes.</Sub>
       <Card title="1970s Stagflation" accent="#ff6b6b">
         <P><B>What happened:</B> Oil embargo + loose monetary policy → decade of high inflation + weak growth.</P>
         <P><B>Winners:</B> Commodities, Gold. <B>Losers:</B> Stocks (negative real returns), Bonds.</P>
@@ -535,11 +535,11 @@ function CaseStudies() {
       <Card title="2008 Global Financial Crisis" accent="#4ecdc4">
         <P><B>What happened:</B> Housing bubble + leverage + subprime → S&amp;P fell 57%. Lehman collapse.</P>
         <P><B>Winners:</B> Treasury bonds, USD. <B>Losers:</B> Everything risky.</P>
-        <P last><B>Lesson:</B> Credit is the key — watch spreads. In a crisis, all correlations go to 1.</P>
+        <P last><B>Lesson:</B> Credit is the key  -  watch spreads. In a crisis, all correlations go to 1.</P>
       </Card>
       <Card title="2010-2012 Eurozone Crisis">
         <P><B>What happened:</B> PIIGS debt crisis, doom loop between banks and sovereigns.</P>
-        <P><B>Ended by:</B> Draghi&apos;s &quot;whatever it takes&quot; — credible verbal intervention.</P>
+        <P><B>Ended by:</B> Draghi&apos;s &quot;whatever it takes&quot;  -  credible verbal intervention.</P>
         <P last><B>Lesson:</B> Politics can dominate markets. Verbal intervention works if credible.</P>
       </Card>
     </>
@@ -555,7 +555,7 @@ function WeeklyRoutine() {
         <P last>Update your dashboard with the week&apos;s data. Note surprises vs. consensus. Record policy announcements.</P>
       </Card>
       <Card title="Step 2: Narrative Review (The 'Why')" accent="#ffd93d">
-        <P last>Read weekly summaries. Identify the market&apos;s focus. Compare narrative to actual data — disconnects are opportunities.</P>
+        <P last>Read weekly summaries. Identify the market&apos;s focus. Compare narrative to actual data  -  disconnects are opportunities.</P>
       </Card>
       <Card title="Step 3: Cross-Asset Check (The 'How')" accent="#ff6b6b">
         <P last>Review S&amp;P, 10Y yield, yield curve, USD, Gold, Oil. Are they telling a consistent story?</P>
