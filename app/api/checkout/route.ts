@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
 function getStripe() {
@@ -7,9 +7,20 @@ function getStripe() {
   return new Stripe(key);
 }
 
-export async function POST() {
+function getBaseUrl(req: NextRequest) {
+  // Try env var first, fall back to request origin
+  return (
+    process.env.NEXT_PUBLIC_BASE_URL ||
+    process.env.BASE_URL ||
+    req.nextUrl.origin
+  );
+}
+
+export async function POST(req: NextRequest) {
   try {
     const stripe = getStripe();
+    const baseUrl = getBaseUrl(req);
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
@@ -27,8 +38,8 @@ export async function POST() {
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/#pricing`,
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/#pricing`,
     });
 
     return NextResponse.json({ url: session.url });
