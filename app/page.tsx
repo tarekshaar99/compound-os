@@ -31,6 +31,9 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6">
       <div className="text-center mb-14">
+        <p className="text-sm uppercase tracking-widest text-[var(--text-muted)] mb-3">
+          by Tarek Shaar
+        </p>
         <h1 className="text-5xl font-bold tracking-tight text-[var(--text-primary)]">
           Compound OS
         </h1>
