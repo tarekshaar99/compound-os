@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2026-03-25.dahlia",
-});
+function getStripe() {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) throw new Error("STRIPE_SECRET_KEY is not set");
+  return new Stripe(key);
+}
 
 export async function POST() {
   try {
+    const stripe = getStripe();
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
@@ -15,11 +18,11 @@ export async function POST() {
           price_data: {
             currency: "usd",
             product_data: {
-              name: "Compound OS — Lifetime Access",
+              name: "Compound OS - Lifetime Access",
               description:
                 "Full access to all three pillars: Trading, Fitness, and Mindset. All future updates included.",
             },
-            unit_amount: 2900, // $29.00
+            unit_amount: 2900,
           },
           quantity: 1,
         },
