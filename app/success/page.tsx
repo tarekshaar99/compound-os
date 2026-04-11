@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Suspense } from "react";
+import LoginForm from "../components/LoginForm";
 
 function SuccessContent() {
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const sessionId = searchParams.get("session_id");
@@ -26,6 +28,7 @@ function SuccessContent() {
       .then((data) => {
         if (data.valid && data.token) {
           localStorage.setItem("cos_access", data.token);
+          if (data.email) setEmail(data.email);
           setStatus("success");
         } else {
           setStatus("error");
@@ -78,37 +81,59 @@ function SuccessContent() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6">
-      <div className="text-center max-w-lg">
-        <div className="w-16 h-16 rounded-full bg-[var(--accent)]/12 flex items-center justify-center text-[var(--accent)] text-3xl mx-auto mb-6">
-          ✓
+    <div className="min-h-screen flex items-center justify-center px-6 py-20">
+      <div className="w-full max-w-lg">
+        {/* Success header */}
+        <div className="text-center mb-10">
+          <div className="w-16 h-16 rounded-full bg-[var(--accent)]/12 flex items-center justify-center text-[var(--accent)] text-3xl mx-auto mb-6">
+            ✓
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
+            You&apos;re in.
+          </h1>
+          <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
+            Payment confirmed. You now have lifetime access to all three pillars.
+          </p>
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
-          You&apos;re in.
-        </h1>
-        <p className="text-[var(--text-secondary)] text-lg mb-10 leading-relaxed">
-          You now have full access to all three pillars. No subscription, no expiry. Start wherever makes sense for you.
-        </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Link
-            href="/trading"
-            className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-trading)] font-bold transition-all hover:border-[var(--text-muted)] hover:-translate-y-0.5"
-          >
-            Trading
-          </Link>
-          <Link
-            href="/fitness"
-            className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-fitness)] font-bold transition-all hover:border-[var(--text-muted)] hover:-translate-y-0.5"
-          >
-            Fitness
-          </Link>
-          <Link
-            href="/mindset"
-            className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-mindset)] font-bold transition-all hover:border-[var(--text-muted)] hover:-translate-y-0.5"
-          >
-            Mindset
-          </Link>
+        {/* Sign in prompt */}
+        <div className="mb-10">
+          <LoginForm
+            defaultEmail={email}
+            heading="Set up your login"
+            subtext="Link your email so you can sign in from any device, anytime."
+            compact
+          />
+          <p className="text-center text-xs text-[var(--text-muted)] mt-3">
+            We&apos;ll send a magic link. No password needed.
+          </p>
+        </div>
+
+        {/* Skip and go to content */}
+        <div className="text-center mb-6">
+          <p className="text-sm text-[var(--text-muted)] mb-4">
+            Or jump straight in:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <Link
+              href="/trading"
+              className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-trading)] font-bold transition-all hover:border-[var(--text-muted)] hover:-translate-y-0.5"
+            >
+              Trading
+            </Link>
+            <Link
+              href="/fitness"
+              className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-fitness)] font-bold transition-all hover:border-[var(--text-muted)] hover:-translate-y-0.5"
+            >
+              Fitness
+            </Link>
+            <Link
+              href="/mindset"
+              className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-mindset)] font-bold transition-all hover:border-[var(--text-muted)] hover:-translate-y-0.5"
+            >
+              Mindset
+            </Link>
+          </div>
         </div>
       </div>
     </div>

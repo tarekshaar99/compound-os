@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CheckoutButton from "./components/CheckoutButton";
+import LoginForm from "./components/LoginForm";
 
 const deliverables = [
   "Options trading system (Wheel, spreads, VIX framework)",
@@ -310,6 +311,22 @@ export default function Home() {
               Get the System
             </CheckoutButton>
           </div>
+        </div>
+      </section>
+
+      {/* ───── MEMBER LOGIN ───── */}
+      <section id="login" className="px-6 py-20 md:py-28">
+        <div className="max-w-md mx-auto">
+          <LoginForm
+            heading="Already have access?"
+            subtext="Enter your email to receive a login link. No password needed."
+          />
+          <p className="text-center text-sm text-[var(--text-muted)] mt-5">
+            Don&apos;t have access yet?{" "}
+            <a href="#pricing" className="text-[var(--accent)] hover:underline">
+              Get the System
+            </a>
+          </p>
         </div>
       </section>
 
