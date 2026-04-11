@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { supabase } from "../lib/supabase";
+import { getSupabase } from "../lib/supabase";
 
 function CheckoutButton({ className }: { className?: string }) {
   const [loading, setLoading] = useState(false);
@@ -55,7 +55,7 @@ export default function Paywall({
       }
 
       // 2. Check Supabase auth session
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { session } } = await getSupabase().auth.getSession();
       if (session?.user?.email) {
         // 3. Check if user is paid or admin in our users table
         try {
