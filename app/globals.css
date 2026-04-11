@@ -2,7 +2,7 @@
 
 :root {
   --bg: #0a0b0f;
-  --sidebar-bg: #0f1015;
+  --sidebar-bg: #0e0f14;
   --card-bg: #13141a;
   --border: #1e2028;
   --accent: #00d4aa;
@@ -27,6 +27,11 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }

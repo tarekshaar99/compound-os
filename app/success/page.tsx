@@ -8,7 +8,9 @@ import LoginForm from "../components/LoginForm";
 
 function SuccessContent() {
   const searchParams = useSearchParams();
-  const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
+  const [status, setStatus] = useState<"loading" | "success" | "error">(
+    "loading"
+  );
   const [email, setEmail] = useState("");
 
   useEffect(() => {
@@ -42,7 +44,9 @@ function SuccessContent() {
       <div className="min-h-screen flex items-center justify-center px-6">
         <div className="text-center">
           <div className="w-12 h-12 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin mx-auto mb-6" />
-          <p className="text-[var(--text-secondary)] text-lg">Verifying your payment...</p>
+          <p className="text-[var(--text-secondary)] text-lg">
+            Verifying your payment...
+          </p>
         </div>
       </div>
     );
@@ -57,7 +61,8 @@ function SuccessContent() {
             Something went wrong
           </h1>
           <p className="text-[var(--text-secondary)] mb-8">
-            We couldn&apos;t verify your payment. If you were charged, please contact us and we&apos;ll sort it out immediately.
+            We couldn&apos;t verify your payment. If you were charged, please
+            contact us and we&apos;ll sort it out immediately.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -88,48 +93,49 @@ function SuccessContent() {
           <div className="w-16 h-16 rounded-full bg-[var(--accent)]/12 flex items-center justify-center text-[var(--accent)] text-3xl mx-auto mb-6">
             ✓
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-3">
             You&apos;re in.
           </h1>
           <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
-            Payment confirmed. You now have lifetime access to all three pillars.
+            Payment confirmed. You now have lifetime access.
           </p>
         </div>
 
-        {/* Sign in prompt */}
-        <div className="mb-10">
-          <LoginForm
-            defaultEmail={email}
-            heading="Set up your login"
-            subtext="Link your email so you can sign in from any device, anytime."
-            compact
-          />
-          <p className="text-center text-xs text-[var(--text-muted)] mt-3">
-            We&apos;ll send a magic link. No password needed.
-          </p>
+        {/* Create account prompt */}
+        <div className="bg-[var(--sidebar-bg)] border border-[var(--border)] rounded-2xl p-8 mb-8">
+          <div className="text-center mb-6">
+            <h2 className="text-xl font-bold text-[var(--text-primary)] mb-2">
+              Create your account
+            </h2>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+              Set up your login so you can access the system from any device, anytime. We&apos;ll send you a magic link - no password needed.
+            </p>
+          </div>
+
+          <LoginForm defaultEmail={email} mode="signup" compact />
         </div>
 
         {/* Skip and go to content */}
-        <div className="text-center mb-6">
-          <p className="text-sm text-[var(--text-muted)] mb-4">
-            Or jump straight in:
+        <div className="text-center">
+          <p className="text-xs text-[var(--text-muted)] mb-4 uppercase tracking-wider">
+            Or jump straight in
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <Link
               href="/trading"
-              className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-trading)] font-bold transition-all hover:border-[var(--text-muted)] hover:-translate-y-0.5"
+              className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-trading)] font-bold text-sm transition-all hover:border-[var(--accent-trading)]/30 hover:-translate-y-0.5"
             >
               Trading
             </Link>
             <Link
               href="/fitness"
-              className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-fitness)] font-bold transition-all hover:border-[var(--text-muted)] hover:-translate-y-0.5"
+              className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-fitness)] font-bold text-sm transition-all hover:border-[var(--accent-fitness)]/30 hover:-translate-y-0.5"
             >
               Fitness
             </Link>
             <Link
               href="/mindset"
-              className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-mindset)] font-bold transition-all hover:border-[var(--text-muted)] hover:-translate-y-0.5"
+              className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-mindset)] font-bold text-sm transition-all hover:border-[var(--accent-mindset)]/30 hover:-translate-y-0.5"
             >
               Mindset
             </Link>

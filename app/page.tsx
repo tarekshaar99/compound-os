@@ -1,6 +1,7 @@
 import Link from "next/link";
 import CheckoutButton from "./components/CheckoutButton";
 import LoginForm from "./components/LoginForm";
+import Header from "./components/Header";
 
 const deliverables = [
   "Options trading system (Wheel, spreads, VIX framework)",
@@ -66,23 +67,26 @@ const pricingChecklist = [
 export default function Home() {
   return (
     <div className="min-h-screen">
+      <Header />
+
       {/* ───── HERO ───── */}
-      <section className="flex flex-col items-center justify-center text-center px-6 pt-28 pb-20 md:pt-36 md:pb-28">
-        <p className="text-sm uppercase tracking-widest text-[var(--text-muted)] mb-6">
+      <section className="relative flex flex-col items-center justify-center text-center px-6 pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        {/* Subtle gradient glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[var(--accent)]/5 rounded-full blur-[120px] pointer-events-none" />
+
+        <p className="relative text-sm uppercase tracking-widest text-[var(--accent)] font-medium mb-6">
           by Tarek Shaar
         </p>
-        <h1 className="text-2xl md:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-[var(--text-primary)] leading-snug md:leading-tight max-w-4xl">
+        <h1 className="relative text-2xl md:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-[var(--text-primary)] leading-snug md:leading-tight max-w-4xl">
           I was a depressed, overweight kid who couldn&apos;t hold eye contact, lost thousands chasing crypto, paid $15k for courses that taught me nothing, and spent years building in silence because being seen meant being hurt.
         </h1>
-        <p className="mt-8 text-[var(--text-secondary)] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+        <p className="relative mt-8 text-[var(--text-secondary)] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
           This site is everything I had to figure out alone.
         </p>
 
-        <div className="mt-10 flex flex-col sm:flex-row gap-4">
-          <CheckoutButton
-            className="px-8 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 cursor-pointer"
-          >
-            Get the System
+        <div className="relative mt-10 flex flex-col sm:flex-row gap-4">
+          <CheckoutButton className="px-8 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] cursor-pointer">
+            Get the System — $29
           </CheckoutButton>
           <a
             href="#what-you-get"
@@ -95,27 +99,34 @@ export default function Home() {
 
       {/* ───── HOW I GOT HERE ───── */}
       <section className="px-6 py-20 md:py-28">
-        <div className="max-w-2xl mx-auto space-y-10">
-          <p className="text-[var(--text-secondary)] text-base md:text-lg leading-[1.9]">
-            I started lifting to prove something. Ego lifted until I broke my shoulder and lower back. Switched to powerlifting - realized it was feeding the same ego. Went to the other extreme: triathlon training, full cardio, vegan. I do this - I swing hard until something breaks, then I recalibrate. Eventually I found what actually works: a simple hybrid routine, 3x strength per week, Zone 2 cardio on off days, consistent protein. Nothing extreme. Just repeatable.
-          </p>
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-xs uppercase tracking-widest text-[var(--accent)] font-medium mb-10 text-center">
+            How I got here
+          </h2>
+          <div className="space-y-8">
+            <p className="text-[var(--text-secondary)] text-base md:text-lg leading-[1.9]">
+              I started lifting to prove something. Ego lifted until I broke my shoulder and lower back. Switched to powerlifting - realized it was feeding the same ego. Went to the other extreme: triathlon training, full cardio, vegan. I do this - I swing hard until something breaks, then I recalibrate. Eventually I found what actually works: a simple hybrid routine, 3x strength per week, Zone 2 cardio on off days, consistent protein. Nothing extreme. Just repeatable.
+            </p>
 
-          <p className="text-[var(--text-secondary)] text-base md:text-lg leading-[1.9]">
-            I ran a crypto mining farm in 2019. Scaled it up, watched it collapse. Tried to recover through day trading - lost more. Paid $15,000 across multiple courses chasing strategies from 20-year-olds posting PnL screenshots. What I eventually learned: a realistic return is 3-5% per month. If you&apos;re not making 11% per year, you&apos;re losing to inflation. The answer wasn&apos;t a hot strategy. It was a boring, conservative wheel strategy on quality stocks, managed by VIX, compounded over time.
-          </p>
+            <p className="text-[var(--text-secondary)] text-base md:text-lg leading-[1.9]">
+              I ran a crypto mining farm in 2019. Scaled it up, watched it collapse. Tried to recover through day trading - lost more. Paid $15,000 across multiple courses chasing strategies from 20-year-olds posting PnL screenshots. What I eventually learned: a realistic return is 3-5% per month. If you&apos;re not making 11% per year, you&apos;re losing to inflation. The answer wasn&apos;t a hot strategy. It was a boring, conservative wheel strategy on quality stocks, managed by VIX, compounded over time.
+            </p>
 
-          <p className="text-[var(--text-secondary)] text-base md:text-lg leading-[1.9]">
-            During COVID I hit a wall I couldn&apos;t lift or trade my way out of. I started journaling, meditating, reading - Eckhart Tolle, Alan Watts, Aaron Abke, Neville Goddard. For the first time I looked directly at how I was wired instead of running from it. What I found: almost everything I was chasing was fear in disguise. The mindset section is my complete notes from that period - what actually shifted things, not what sounds good.
-          </p>
+            <p className="text-[var(--text-secondary)] text-base md:text-lg leading-[1.9]">
+              During COVID I hit a wall I couldn&apos;t lift or trade my way out of. I started journaling, meditating, reading - Eckhart Tolle, Alan Watts, Aaron Abke, Neville Goddard. For the first time I looked directly at how I was wired instead of running from it. What I found: almost everything I was chasing was fear in disguise. The mindset section is my complete notes from that period - what actually shifted things, not what sounds good.
+            </p>
 
-          <p className="text-[var(--text-muted)] text-base md:text-lg leading-relaxed pt-4 border-t border-[var(--border)]">
-            The Compound System is what I built after all of that. Three pillars that reinforce each other - because they did in real life.
-          </p>
+            <div className="pt-6 border-t border-[var(--border)]">
+              <p className="text-[var(--text-primary)] text-base md:text-lg leading-relaxed font-medium">
+                The Compound System is what I built after all of that. Three pillars that reinforce each other - because they did in real life.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ───── WHAT YOU GET ───── */}
-      <section id="what-you-get" className="px-6 py-20 md:py-28">
+      <section id="what-you-get" className="px-6 py-20 md:py-28 bg-[var(--sidebar-bg)]">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] text-center mb-4">
             What you get inside Compound OS
@@ -128,10 +139,10 @@ export default function Home() {
             {deliverables.map((item, i) => (
               <div
                 key={i}
-                className="flex items-start gap-4 p-5 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl"
+                className="flex items-start gap-4 p-5 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl hover:border-[var(--accent)]/30 transition-colors"
               >
-                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[var(--accent)]/12 flex items-center justify-center text-[var(--accent)] text-sm font-bold mt-0.5">
-                  {i + 1}
+                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] text-sm font-bold font-mono mt-0.5">
+                  {String(i + 1).padStart(2, "0")}
                 </div>
                 <p className="text-[var(--text-primary)] text-base leading-relaxed">
                   {item}
@@ -157,7 +168,7 @@ export default function Home() {
               <Link
                 key={s.href}
                 href={s.href}
-                className="group bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-8 transition-all hover:border-[var(--text-muted)] hover:-translate-y-1"
+                className="group bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-8 transition-all hover:border-[var(--text-muted)] hover:-translate-y-1 hover:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.5)]"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div
@@ -192,7 +203,7 @@ export default function Home() {
       </section>
 
       {/* ───── WHO THIS IS FOR / NOT FOR ───── */}
-      <section className="px-6 py-20 md:py-28">
+      <section className="px-6 py-20 md:py-28 bg-[var(--sidebar-bg)]">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* FOR */}
           <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-8">
@@ -281,22 +292,28 @@ export default function Home() {
       </section>
 
       {/* ───── PRICING ───── */}
-      <section id="pricing" className="px-6 py-20 md:py-28">
+      <section id="pricing" className="px-6 py-20 md:py-28 bg-[var(--sidebar-bg)]">
         <div className="max-w-xl mx-auto">
-          <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-10 md:p-14 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-8">
+          <div className="relative bg-[var(--card-bg)] border border-[var(--accent)]/20 rounded-2xl p-10 md:p-14 text-center overflow-hidden">
+            {/* Glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-[var(--accent)]/8 rounded-full blur-[80px] pointer-events-none" />
+
+            <h2 className="relative text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-8">
               One-time access. No subscription.
             </h2>
 
-            <div className="mb-6">
+            <div className="relative mb-2">
               <span className="text-6xl md:text-7xl font-bold text-[var(--accent)]">$29</span>
             </div>
+            <p className="relative text-sm text-[var(--text-muted)] mb-8">
+              one-time payment
+            </p>
 
-            <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-10 max-w-md mx-auto">
+            <p className="relative text-[var(--text-secondary)] text-base leading-relaxed mb-10 max-w-md mx-auto">
               Lifetime access to all three pillars - trading, fitness, and mindset. Updated as the system evolves.
             </p>
 
-            <ul className="space-y-4 text-left max-w-sm mx-auto mb-10">
+            <ul className="relative space-y-4 text-left max-w-sm mx-auto mb-10">
               {pricingChecklist.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <span className="text-[var(--accent)] mt-0.5 flex-shrink-0">✓</span>
@@ -305,36 +322,38 @@ export default function Home() {
               ))}
             </ul>
 
-            <CheckoutButton
-              className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 w-full sm:w-auto cursor-pointer"
-            >
+            <CheckoutButton className="relative inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] w-full sm:w-auto cursor-pointer">
               Get the System
             </CheckoutButton>
           </div>
         </div>
       </section>
 
-      {/* ───── MEMBER LOGIN ───── */}
+      {/* ───── SIGN IN / CREATE ACCOUNT ───── */}
       <section id="login" className="px-6 py-20 md:py-28">
         <div className="max-w-md mx-auto">
-          <LoginForm
-            heading="Already have access?"
-            subtext="Enter your email to receive a login link. No password needed."
-          />
-          <p className="text-center text-sm text-[var(--text-muted)] mt-5">
-            Don&apos;t have access yet?{" "}
-            <a href="#pricing" className="text-[var(--accent)] hover:underline">
-              Get the System
-            </a>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-3">
+              Member Access
+            </h2>
+            <p className="text-[var(--text-secondary)] text-sm">
+              Sign in to your account or create one after purchasing.
+            </p>
+          </div>
+
+          <LoginForm />
+
+          <p className="text-center text-sm text-[var(--text-muted)] mt-6">
+            No password needed - we&apos;ll email you a secure link.
           </p>
         </div>
       </section>
 
       {/* ───── COMMUNITY TEASER ───── */}
-      <section className="px-6 py-16 md:py-20">
+      <section className="px-6 py-16 md:py-20 bg-[var(--sidebar-bg)]">
         <div className="max-w-2xl mx-auto text-center">
           <h3 className="text-xl md:text-2xl font-bold text-[var(--text-muted)] mb-3">
-            Community - Coming Soon
+            Community — Coming Soon
           </h3>
           <p className="text-[var(--text-muted)] text-base leading-relaxed">
             A space for people building in silence. No noise. Just execution.
@@ -352,10 +371,8 @@ export default function Home() {
             One system. Full control.
           </p>
 
-          <CheckoutButton
-            className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 cursor-pointer"
-          >
-            Get the System
+          <CheckoutButton className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] cursor-pointer">
+            Get the System — $29
           </CheckoutButton>
 
           <div className="mt-14 flex justify-center gap-4">
