@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { supabase } from "../lib/supabase";
 
 function CheckoutButton({ className }: { className?: string }) {
   const [loading, setLoading] = useState(false);
@@ -24,7 +26,7 @@ function CheckoutButton({ className }: { className?: string }) {
       disabled={loading}
       className={
         className ||
-        "px-8 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 disabled:opacity-50"
+        "px-8 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 disabled:opacity-50 cursor-pointer"
       }
     >
       {loading ? "Redirecting..." : "Get full access - $29 one-time"}
@@ -44,8 +46,38 @@ export default function Paywall({
   const [hasAccess, setHasAccess] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("cos_access");
-    setHasAccess(!!token);
+    async function checkAccess() {
+      // 1. Check localStorage (Stripe-only flow)
+      const token = localStorage.getItem("cos_access");
+      if (token) {
+        setHasAccess(true);
+        return;
+      }
+
+      // 2. Check Supabase auth session
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user?.email) {
+        // 3. Check if user is paid or admin in our users table
+        try {
+          const res = await fetch("/api/access", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: session.user.email }),
+          });
+          const data = await res.json();
+          if (data.access) {
+            setHasAccess(true);
+            return;
+          }
+        } catch {
+          // Fall through to no access
+        }
+      }
+
+      setHasAccess(false);
+    }
+
+    checkAccess();
   }, []);
 
   // Still checking - show nothing to avoid flash
@@ -100,6 +132,12 @@ export default function Paywall({
           <p className="mt-5 text-sm text-[var(--text-muted)]">
             One-time payment. No subscription. All future updates included.
           </p>
+          <Link
+            href="/login"
+            className="mt-4 text-sm text-[var(--text-muted)] hover:text-[var(--text-secondary)] underline transition-colors"
+          >
+            Already purchased? Log in
+          </Link>
         </div>
       </div>
     </div>

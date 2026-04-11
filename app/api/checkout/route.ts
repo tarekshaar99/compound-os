@@ -7,8 +7,6 @@ function getStripe() {
   return new Stripe(key);
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://thecompoundsystem.com";
-
 export async function POST() {
   try {
     const stripe = getStripe();

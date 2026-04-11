@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import SectionLayout, { SectionItem } from "../components/SectionLayout";
 import { Card, StatBox, Table, RuleCard } from "../components/Card";
 import Paywall from "../components/Paywall";
@@ -628,20 +627,6 @@ const SECTION_MAP: Record<string, () => React.ReactNode> = {
 };
 
 export default function TradingPage() {
-  const [hasAccess, setHasAccess] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setHasAccess(!!localStorage.getItem("cos_access"));
-  }, []);
-
-  if (hasAccess === null) {
-    return (
-      <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
-        <div className="w-10 h-10 border-2 border-[var(--accent-trading)] border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
-
   const preview = (
     <SectionLayout
       title="Trading"

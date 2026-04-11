@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Paywall from "../components/Paywall";
 
@@ -576,20 +576,6 @@ function MindsetContent({ lockedPreview = false }: { lockedPreview?: boolean }) 
 }
 
 export default function MindsetPage() {
-  const [hasAccess, setHasAccess] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setHasAccess(!!localStorage.getItem("cos_access"));
-  }, []);
-
-  if (hasAccess === null) {
-    return (
-      <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
-        <div className="w-10 h-10 border-2 border-[var(--accent-mindset)] border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
-
   return (
     <Paywall
       previewContent={<MindsetContent lockedPreview />}
