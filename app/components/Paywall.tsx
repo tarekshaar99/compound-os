@@ -104,7 +104,7 @@ export default function Paywall({
       <div className="relative">
         {/* Gradient fade from content to blur */}
         <div
-          className="h-40 -mt-40 relative z-10"
+          className="h-48 -mt-48 relative z-10"
           style={{
             background:
               "linear-gradient(to bottom, transparent, #0A0A0A)",
@@ -113,30 +113,52 @@ export default function Paywall({
 
         {/* Paywall block */}
         <div className="bg-[#0A0A0A] relative z-10 flex flex-col items-center justify-center text-center px-6 py-20 md:py-32">
-          <div
-            className="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl mb-6"
-            style={{
-              background: `color-mix(in srgb, ${accent} 12%, transparent)`,
-              color: accent,
-            }}
-          >
-            ◈
+          {/* Lock icon */}
+          <div className="w-14 h-14 rounded-full border-2 border-white/[0.08] flex items-center justify-center mb-8">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--text-muted)]">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-3">
-            This is a preview
+
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-3 tracking-tight">
+            You&apos;re seeing a preview
           </h2>
-          <p className="text-[var(--text-secondary)] text-base md:text-lg max-w-md mb-8 leading-relaxed">
-            You&apos;re seeing the first section. Get lifetime access to the full system for a one-time payment.
+          <p className="text-[var(--text-secondary)] text-base md:text-lg max-w-lg mb-3 leading-relaxed">
+            The full system includes structured frameworks, checklists, and protocols across Trading, Fitness, and Mindset — built from years of real execution.
           </p>
+          <p className="text-[var(--text-muted)] text-sm max-w-md mb-8 leading-relaxed">
+            One purchase. Lifetime access. Every future update included.
+          </p>
+
           <CheckoutButton />
-          <p className="mt-5 text-sm text-[var(--text-muted)]">
-            One-time payment. No subscription. All future updates included.
-          </p>
+
+          <div className="flex items-center gap-6 mt-6 text-xs text-[var(--text-muted)]">
+            <span className="flex items-center gap-1.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[var(--accent)]">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Instant access
+            </span>
+            <span className="flex items-center gap-1.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[var(--accent)]">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              No subscription
+            </span>
+            <span className="flex items-center gap-1.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[var(--accent)]">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Free updates
+            </span>
+          </div>
+
           <Link
             href="/login"
-            className="mt-4 text-sm text-[var(--text-muted)] hover:text-[var(--text-secondary)] underline transition-colors"
+            className="mt-8 text-sm text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors"
           >
-            Already purchased? Log in
+            Already have access? Sign in &rarr;
           </Link>
         </div>
       </div>

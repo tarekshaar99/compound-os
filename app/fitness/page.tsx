@@ -680,11 +680,11 @@ function FitnessContent({ lockedPreview = false }: { lockedPreview?: boolean }) 
       {/* Header */}
       <div className="max-w-[1200px] mx-auto pt-20 pb-12 px-6">
         <Link
-          href="/"
+          href="/dashboard"
           className="text-[11px] font-bold tracking-[0.15em] uppercase mb-4 inline-block transition-colors hover:text-white/80"
           style={{ color: active.color }}
         >
-          &larr; Compound OS
+          &larr; Dashboard
         </Link>
         <h1 className="text-[clamp(36px,5vw,56px)] font-bold leading-[1.1] tracking-tighter mb-5 max-w-[700px]">
           Build the machine.
