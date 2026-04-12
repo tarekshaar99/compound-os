@@ -1,7 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
+import {
+  getProgress,
+  markSectionComplete,
+  markSectionIncomplete,
+  setLastVisited,
+} from "../lib/progress";
 
 export interface SectionItem {
   id: string;
@@ -16,6 +22,7 @@ export default function SectionLayout({
   sections,
   children,
   locked = false,
+  pillar,
 }: {
   title: string;
   subtitle: string;
@@ -23,21 +30,60 @@ export default function SectionLayout({
   sections: SectionItem[];
   children: (active: string) => React.ReactNode;
   locked?: boolean;
+  pillar?: "trading" | "fitness" | "mindset";
 }) {
   const [active, setActive] = useState(sections[0]?.id ?? "");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const [completedSections, setCompletedSections] = useState<string[]>([]);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  // Load progress on mount
+  useEffect(() => {
+    if (pillar) {
+      const p = getProgress();
+      setCompletedSections(p[pillar].completedSections);
+    }
+  }, [pillar]);
+
+  // Track last visited section
+  useEffect(() => {
+    if (pillar && active) {
+      setLastVisited(pillar, active);
+    }
+  }, [pillar, active]);
 
   useEffect(() => {
     contentRef.current?.scrollTo(0, 0);
   }, [active]);
+
+  const isCompleted = useCallback(
+    (sectionId: string) => completedSections.includes(sectionId),
+    [completedSections]
+  );
+
+  const toggleComplete = useCallback(
+    (sectionId: string) => {
+      if (!pillar) return;
+      if (completedSections.includes(sectionId)) {
+        const updated = markSectionIncomplete(pillar, sectionId);
+        setCompletedSections(updated[pillar].completedSections);
+      } else {
+        const updated = markSectionComplete(pillar, sectionId);
+        setCompletedSections(updated[pillar].completedSections);
+      }
+    },
+    [pillar, completedSections]
+  );
 
   // When locked, only show the first section
   const visibleSections = locked ? sections.slice(0, 1) : sections;
   const filtered = visibleSections.filter((s) =>
     s.label.toLowerCase().includes(search.toLowerCase())
   );
+
+  const completedCount = completedSections.length;
+  const totalCount = sections.length;
 
   return (
     <div className="h-screen flex overflow-hidden">
@@ -56,10 +102,10 @@ export default function SectionLayout({
       >
         <div className="p-5 pb-3 border-b border-[var(--border)]">
           <Link
-            href="/"
+            href="/dashboard"
             className="text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)] uppercase tracking-widest"
           >
-            &larr; Compound OS
+            &larr; Dashboard
           </Link>
           <div
             className="text-xl font-bold mt-2 mb-0.5"
@@ -68,6 +114,26 @@ export default function SectionLayout({
             {title}
           </div>
           <div className="text-xs text-[var(--text-muted)]">{subtitle}</div>
+
+          {/* Progress indicator */}
+          {pillar && !locked && (
+            <div className="mt-3 mb-1">
+              <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)] mb-1.5">
+                <span>{completedCount} of {totalCount} complete</span>
+                <span>{totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0}%</span>
+              </div>
+              <div className="w-full h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all duration-500"
+                  style={{
+                    width: `${totalCount > 0 ? (completedCount / totalCount) * 100 : 0}%`,
+                    background: accent,
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
           <input
             type="text"
             placeholder="Search sections..."
@@ -92,7 +158,14 @@ export default function SectionLayout({
                 fontWeight: active === s.id ? 600 : 400,
               }}
             >
-              <span className="text-base min-w-[22px]">{s.icon}</span>
+              {/* Completion checkmark or icon */}
+              {pillar && !locked && isCompleted(s.id) ? (
+                <span className="text-base min-w-[22px]" style={{ color: accent }}>
+                  ✓
+                </span>
+              ) : (
+                <span className="text-base min-w-[22px]">{s.icon}</span>
+              )}
               {s.label}
             </button>
           ))}
@@ -107,7 +180,38 @@ export default function SectionLayout({
         >
           Menu
         </button>
-        <div className="max-w-[860px]">{children(active)}</div>
+        <div className="max-w-[860px]">
+          {children(active)}
+
+          {/* Mark Complete button at bottom of each section */}
+          {pillar && !locked && (
+            <div className="mt-10 pt-6 border-t border-[var(--border)]">
+              <button
+                onClick={() => toggleComplete(active)}
+                className="flex items-center gap-2.5 px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer border"
+                style={{
+                  background: isCompleted(active)
+                    ? `color-mix(in srgb, ${accent} 12%, transparent)`
+                    : "transparent",
+                  borderColor: isCompleted(active) ? accent : "var(--border)",
+                  color: isCompleted(active) ? accent : "var(--text-secondary)",
+                }}
+              >
+                <span
+                  className="w-5 h-5 rounded-md border-2 flex items-center justify-center text-xs transition-all"
+                  style={{
+                    borderColor: isCompleted(active) ? accent : "var(--text-muted)",
+                    background: isCompleted(active) ? accent : "transparent",
+                    color: isCompleted(active) ? "#0a0b0f" : "transparent",
+                  }}
+                >
+                  ✓
+                </span>
+                {isCompleted(active) ? "Completed" : "Mark as complete"}
+              </button>
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );

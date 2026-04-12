@@ -349,18 +349,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ───── COMMUNITY TEASER ───── */}
-      <section className="px-6 py-16 md:py-20 bg-[var(--sidebar-bg)]">
-        <div className="max-w-2xl mx-auto text-center">
-          <h3 className="text-xl md:text-2xl font-bold text-[var(--text-muted)] mb-3">
-            Community — Coming Soon
-          </h3>
-          <p className="text-[var(--text-muted)] text-base leading-relaxed">
-            A space for people building in silence. No noise. Just execution.
-          </p>
-        </div>
-      </section>
-
       {/* ───── FINAL CTA ───── */}
       <section className="px-6 py-20 md:py-28">
         <div className="max-w-2xl mx-auto text-center">

@@ -645,6 +645,7 @@ export default function TradingPage() {
       subtitle="Options & Macro Framework"
       accent="var(--accent-trading)"
       sections={SECTIONS}
+      pillar="trading"
     >
       {(active) => {
         const Component = SECTION_MAP[active] ?? Dashboard;

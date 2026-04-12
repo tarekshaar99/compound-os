@@ -90,54 +90,89 @@ function SuccessContent() {
       <div className="w-full max-w-lg">
         {/* Success header */}
         <div className="text-center mb-10">
-          <div className="w-16 h-16 rounded-full bg-[var(--accent)]/12 flex items-center justify-center text-[var(--accent)] text-3xl mx-auto mb-6">
-            ✓
+          <div className="w-16 h-16 rounded-full bg-[var(--accent)]/12 flex items-center justify-center mx-auto mb-6">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-3">
-            You&apos;re in.
+          <h1 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-3 tracking-tight">
+            You&apos;re in. Welcome.
           </h1>
-          <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
-            Payment confirmed. You now have lifetime access.
+          <p className="text-[var(--text-secondary)] text-lg leading-relaxed max-w-md mx-auto">
+            Payment confirmed. You now have lifetime access to the full Compound System.
           </p>
         </div>
 
-        {/* Create account prompt */}
-        <div className="bg-[var(--sidebar-bg)] border border-[var(--border)] rounded-2xl p-8 mb-8">
-          <div className="text-center mb-6">
-            <h2 className="text-xl font-bold text-[var(--text-primary)] mb-2">
-              Create your account
+        {/* Step 1: Create account */}
+        <div className="bg-[var(--sidebar-bg)] border border-[var(--border)] rounded-2xl p-8 mb-6">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-7 h-7 rounded-full bg-[var(--accent)] text-[#0a0b0f] flex items-center justify-center text-xs font-bold shrink-0">
+              1
+            </div>
+            <h2 className="text-lg font-bold text-[var(--text-primary)]">
+              Save your access
             </h2>
-            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-              Set up your login so you can access the system from any device, anytime. We&apos;ll send you a magic link - no password needed.
-            </p>
           </div>
-
-          <LoginForm defaultEmail={email} mode="signup" compact />
+          <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5 pl-10">
+            Create your account so you can log in from any device. We&apos;ll send a magic link — no password needed.
+          </p>
+          <div className="pl-10">
+            <LoginForm defaultEmail={email} mode="signup" compact />
+          </div>
         </div>
 
-        {/* Skip and go to content */}
-        <div className="text-center">
-          <p className="text-xs text-[var(--text-muted)] mb-4 uppercase tracking-wider">
-            Or jump straight in
+        {/* Step 2: Choose your starting point */}
+        <div className="bg-[var(--sidebar-bg)] border border-[var(--border)] rounded-2xl p-8">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-7 h-7 rounded-full border-2 border-[var(--text-muted)] text-[var(--text-muted)] flex items-center justify-center text-xs font-bold shrink-0">
+              2
+            </div>
+            <h2 className="text-lg font-bold text-[var(--text-primary)]">
+              Choose where to start
+            </h2>
+          </div>
+          <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5 pl-10">
+            All three pillars are unlocked. Start with what matters most to you right now.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 gap-3 pl-10">
             <Link
               href="/trading"
-              className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-trading)] font-bold text-sm transition-all hover:border-[var(--accent-trading)]/30 hover:-translate-y-0.5"
+              className="flex items-center gap-4 px-5 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] transition-all hover:border-[var(--accent-trading)]/30 hover:-translate-y-0.5 group"
             >
-              Trading
+              <span className="text-xl" style={{ color: "#00d4aa" }}>◈</span>
+              <div className="flex-1">
+                <div className="text-sm font-semibold text-[var(--text-primary)]">Trading</div>
+                <div className="text-xs text-[var(--text-muted)]">Options strategies, macro framework, risk management</div>
+              </div>
+              <span className="text-xs font-semibold text-[var(--accent-trading)] opacity-0 group-hover:opacity-100 transition-opacity">
+                Start &rarr;
+              </span>
             </Link>
             <Link
               href="/fitness"
-              className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-fitness)] font-bold text-sm transition-all hover:border-[var(--accent-fitness)]/30 hover:-translate-y-0.5"
+              className="flex items-center gap-4 px-5 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] transition-all hover:border-[var(--accent-fitness)]/30 hover:-translate-y-0.5 group"
             >
-              Fitness
+              <span className="text-xl" style={{ color: "#f97316" }}>⚡</span>
+              <div className="flex-1">
+                <div className="text-sm font-semibold text-[var(--text-primary)]">Fitness</div>
+                <div className="text-xs text-[var(--text-muted)]">Hybrid athlete system, nutrition, recovery protocols</div>
+              </div>
+              <span className="text-xs font-semibold text-[var(--accent-fitness)] opacity-0 group-hover:opacity-100 transition-opacity">
+                Start &rarr;
+              </span>
             </Link>
             <Link
               href="/mindset"
-              className="px-6 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] text-[var(--accent-mindset)] font-bold text-sm transition-all hover:border-[var(--accent-mindset)]/30 hover:-translate-y-0.5"
+              className="flex items-center gap-4 px-5 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] transition-all hover:border-[var(--accent-mindset)]/30 hover:-translate-y-0.5 group"
             >
-              Mindset
+              <span className="text-xl" style={{ color: "#a78bfa" }}>◉</span>
+              <div className="flex-1">
+                <div className="text-sm font-semibold text-[var(--text-primary)]">Mindset</div>
+                <div className="text-xs text-[var(--text-muted)]">Identity work, emotional mastery, daily practice</div>
+              </div>
+              <span className="text-xs font-semibold text-[var(--accent-mindset)] opacity-0 group-hover:opacity-100 transition-opacity">
+                Start &rarr;
+              </span>
             </Link>
           </div>
         </div>
