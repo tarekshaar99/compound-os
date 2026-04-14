@@ -11,23 +11,40 @@ function CallbackHandler() {
 
   useEffect(() => {
     async function handleCallback() {
+      const supabase = getSupabase();
+
+      // Method 1: PKCE flow — exchange code for session
       const code = searchParams.get("code");
-
       if (code) {
-        // Exchange the code for a session on the CLIENT side
-        // This stores the session in browser localStorage
-        const { error } = await getSupabase().auth.exchangeCodeForSession(code);
-
+        const { error } = await supabase.auth.exchangeCodeForSession(code);
         if (!error) {
-          // Session is now stored in browser — redirect home
-          router.push("/");
+          router.push("/dashboard");
           return;
         }
-
-        console.error("Auth callback error:", error);
+        console.error("Auth callback code exchange error:", error);
       }
 
-      // If no code or exchange failed, show error
+      // Method 2: Check URL hash for implicit flow tokens
+      // (Supabase may put access_token in the hash fragment)
+      if (typeof window !== "undefined" && window.location.hash) {
+        // Supabase client auto-detects hash tokens when detectSessionInUrl is true
+        // Give it a moment to process
+        await new Promise((r) => setTimeout(r, 500));
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          router.push("/dashboard");
+          return;
+        }
+      }
+
+      // Method 3: Maybe session was already established
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        router.push("/dashboard");
+        return;
+      }
+
+      // All methods failed
       setError(true);
     }
 

@@ -68,7 +68,7 @@ export default function Header() {
                   href="/trading"
                   className="hidden sm:block px-3 py-2 rounded-lg text-sm text-[var(--text-muted)] hover:text-[var(--accent-trading)] transition-colors"
                 >
-                  Trading
+                  Markets
                 </Link>
                 <Link
                   href="/fitness"
@@ -86,7 +86,7 @@ export default function Header() {
             ) : (
               <>
                 <a
-                  href="#login"
+                  href="/login"
                   className="px-4 py-2 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                 >
                   Sign In
@@ -95,7 +95,7 @@ export default function Header() {
                   href="#pricing"
                   className="px-5 py-2 rounded-lg bg-[var(--accent)] text-[#0a0b0f] text-sm font-bold transition-all hover:opacity-90"
                 >
-                  Start the System
+                  Get the System
                 </a>
               </>
             )}

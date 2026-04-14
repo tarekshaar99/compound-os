@@ -595,6 +595,89 @@ Protein compliance: did you hit your daily target? Track this as a simple yes/no
       },
     ],
   },
+  {
+    id: "nervous-system",
+    icon: "◉",
+    title: "Nervous System & Regulation",
+    subtitle: "The physiological layer under everything else",
+    color: "#F97316",
+    intro:
+      "Training, nutrition, and sleep assume a regulated nervous system. If yours is dysregulated — stuck in sympathetic overdrive, wired from chronic stress, or numb from avoidance — no program will produce results. This category covers the practices that calibrate the underlying system: breathwork, fasting, cold exposure, grounding, and somatic work. These aren't soft. They're the foundation the hard work sits on.",
+    sections: [
+      {
+        heading: "Why the Nervous System Matters",
+        content: `You cannot out-train a dysregulated nervous system. You can out-eat one for a while. You can out-lift one in the short term. But eventually it catches up — as recovery that doesn't happen, sleep that doesn't restore, workouts that don't translate to results, and a body that resists change.
+
+Chronic sympathetic activation (fight or flight) elevates cortisol. Elevated cortisol breaks down muscle, holds onto fat, disrupts sleep, suppresses immunity, and blunts recovery. All the training stimulus in the world can't override that physiology.
+
+The equally important failure mode: dorsal shutdown. Chronic overwhelm collapses the system into numbness, disconnection, and low motivation. Training feels pointless. Discipline crumbles. Not because you're lazy — because the physiological engine for action is off.
+
+Both states need the same intervention: practices that restore parasympathetic access and build nervous system capacity. This is what this section is for.`,
+      },
+      {
+        heading: "Breathwork Protocol",
+        content: `Breathwork is the most direct, free, and portable tool for shifting nervous system state. You don't need equipment. You don't need time. You need 3-5 minutes and a consistent daily practice.
+
+Wim Hof style (activation + stress tolerance): 30 deep breaths, inhaling through the nose and exhaling without force. After the 30th breath, exhale fully and hold the breath out for as long as possible. When you feel the urge to breathe, take a full inhale and hold for 15-30 seconds, then release. Repeat for 2-3 rounds. Do this in the morning or before training. Builds CO2 tolerance and trains the ability to stay calm under physical stress.
+
+Box breathing (calming, focus): 4 seconds inhale, 4 seconds hold, 4 seconds exhale, 4 seconds hold. Repeat for 5 minutes. Use before high-focus work, before difficult conversations, or any time you notice yourself spinning.
+
+Physiological sigh (instant calm): double inhale through the nose (one big, one small to top off), then a long slow exhale through the mouth. Repeat 3-5 times. Drops sympathetic activation within 30 seconds. Use any time you need to reset — traffic, email inbox, before bed.
+
+Rule: any breathwork practiced daily beats any breathwork practiced occasionally. Pick one and own it.`,
+      },
+      {
+        heading: "Fasting",
+        content: `A 24-hour fast per week is a high-leverage practice for cellular cleanup, insulin sensitivity, and mental clarity. It is not for weight loss — that is a side effect at best. It is for metabolic health.
+
+Protocol: eat dinner on day one. Skip all food until dinner on day two. Water, black coffee, and unsweetened tea are fine. Nothing with calories.
+
+What happens: by hour 12-16, insulin drops and fat oxidation increases. By hour 18-24, autophagy (the process by which cells clear out damaged components) begins. Growth hormone rises. Mental clarity often sharpens. The fast is not comfortable — the discomfort is part of the training.
+
+Start with 16:8 (eat within an 8-hour window) if 24 hours feels like too much. Work up gradually. Do not fast if you are underweight, pregnant, nursing, have a history of disordered eating, or are in a heavy training block without enough recovery capacity.
+
+The goal is not to fast constantly. The goal is to build the capacity to do it when useful — and to break the identity that you "can't function" without constant feeding.`,
+      },
+      {
+        heading: "Cold & Heat Exposure",
+        content: `Deliberate cold exposure trains the nervous system to stay calm in discomfort. That skill transfers to every other domain — difficult conversations, hard workouts, investment drawdowns, building a life.
+
+Cold shower protocol: 1-3 minutes at the end of a regular shower. Water as cold as the tap goes. Breathe slowly through the nose. Do not brace, clench, or rush — feel the cold, stay with it, relax into it. Three days a week minimum. More is fine.
+
+The point is not the temperature. The point is the practice of staying calm when your body is screaming. If you can relax in a cold shower, you can relax in a difficult meeting. Same skill.
+
+Heat exposure (sauna, hot water) complements cold. 15-20 minutes in a sauna 2-4 times per week improves cardiovascular health, increases heat shock protein production, and dramatically improves sleep quality. Follow heat with cold when possible — the contrast amplifies the nervous system benefits.
+
+Do not start either if you have heart conditions or are pregnant without clearing it with a physician.`,
+      },
+      {
+        heading: "Grounding & Presence Practices",
+        content: `The nervous system registers the physical environment. Time spent in nature, on natural surfaces, in sunlight — these inputs regulate the system in ways no indoor practice can replicate.
+
+Walking barefoot on grass, sand, or earth for 10-15 minutes discharges static electrical charge the body accumulates from synthetic flooring and electronics. Call it grounding or call it nothing — the observable effect is real: calmer baseline, better sleep that night, reduced inflammation markers in multiple studies.
+
+Morning sunlight within an hour of waking sets circadian rhythm. 10 minutes of direct sun on the eyes (not looking at the sun — just outside with eyes open) reliably improves sleep quality that night and mood throughout the day. Free, requires no equipment, works universally.
+
+Nature exposure — time near trees, water, open horizons — lowers cortisol measurably. Not a hippie aesthetic. A measurable physiological response. If you live somewhere you can walk outside on unpaved surfaces for 20 minutes daily, you have a recovery tool most people pay for and still can't replicate.
+
+Slow down your pace. Walk slowly. Talk slowly. The masters move with presence, not urgency. A rushed body produces a rushed mind.`,
+      },
+      {
+        heading: "Building Capacity for Abundance",
+        content: `Your nervous system gates what you can receive — including money, love, success, and rest. If the body does not feel safe holding a certain level of any of these, you will unconsciously push it away.
+
+This isn't metaphor. The physiological mechanism is real. When something shifts your state faster than your nervous system can tolerate — a big win, a large deposit, a new relationship — the body registers it as threat. Dysregulation follows. Self-sabotage follows. You "somehow" return to the state that felt familiar.
+
+Some people are addicted to chaos. Their nervous system has normalized fear, lack, scarcity, and conflict. Peace feels wrong. Abundance feels uncomfortable. The work is not to force peace — it is to slowly expand the window of what feels tolerable.
+
+Practices that build this capacity: breathwork (daily), slow walks (daily), cold exposure (weekly), time in nature (weekly), tension release through physical work or movement, and deliberate pauses throughout the day to notice what you are feeling in your body.
+
+This is the actual work under "mindset." Not affirmations. Not visualization alone. Teaching the body, through repeated small doses, that calm is safe. That having is safe. That being seen is safe. That receiving is safe.
+
+The result: a nervous system that can hold what your goals are asking for. Without that, every external win gets auto-corrected away.`,
+      },
+    ],
+  },
 ];
 
 function ChevronDown() {

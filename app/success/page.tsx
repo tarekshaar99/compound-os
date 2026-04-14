@@ -141,8 +141,8 @@ function SuccessContent() {
             >
               <span className="text-xl" style={{ color: "#00d4aa" }}>◈</span>
               <div className="flex-1">
-                <div className="text-sm font-semibold text-[var(--text-primary)]">Trading</div>
-                <div className="text-xs text-[var(--text-muted)]">Options strategies, macro framework, risk management</div>
+                <div className="text-sm font-semibold text-[var(--text-primary)]">Markets</div>
+                <div className="text-xs text-[var(--text-muted)]">Investing foundations, the Wheel Strategy, macro & portfolio</div>
               </div>
               <span className="text-xs font-semibold text-[var(--accent-trading)] opacity-0 group-hover:opacity-100 transition-opacity">
                 Start &rarr;

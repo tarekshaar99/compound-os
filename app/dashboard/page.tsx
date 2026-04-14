@@ -9,33 +9,33 @@ import Header from "../components/Header";
 
 const PILLAR_CONFIG = {
   trading: {
-    label: "Trading",
-    description: "Options strategies, macro framework, risk management",
+    label: "Markets",
+    description: "Investing foundations, the Wheel Strategy, macro & portfolio strategy",
     icon: "◈",
     accent: "var(--accent-trading)",
     accentHex: "#00d4aa",
     href: "/trading",
-    totalSections: 17,
-    quickAction: { label: "Pre-Trade Checklist", section: "checklist" },
+    totalSections: 28,
+    quickAction: { label: "Investing Foundations", section: "foundations" },
   },
   fitness: {
     label: "Fitness",
-    description: "Hybrid athlete system, nutrition, recovery protocols",
+    description: "Hybrid athlete system, nutrition, recovery, nervous system",
     icon: "⚡",
     accent: "var(--accent-fitness)",
     accentHex: "#f97316",
     href: "/fitness",
-    totalSections: 9,
+    totalSections: 10,
     quickAction: { label: "Weekly Schedule", section: "schedule" },
   },
   mindset: {
     label: "Mindset",
-    description: "Identity work, emotional mastery, daily practice",
+    description: "Identity, emotional mastery, wealth psychology, daily practice",
     icon: "◉",
     accent: "var(--accent-mindset)",
     accentHex: "#a78bfa",
     href: "/mindset",
-    totalSections: 6,
+    totalSections: 7,
     quickAction: { label: "Daily Practice", section: "practice" },
   },
 } as const;
@@ -176,7 +176,7 @@ function StartHereBanner({ onDismiss }: { onDismiss: () => void }) {
             className="px-4 py-2.5 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
             style={{ background: "#00d4aa", color: "#0a0b0f" }}
           >
-            Start with Trading
+            Start with Markets
           </Link>
           <Link
             href="/fitness"
