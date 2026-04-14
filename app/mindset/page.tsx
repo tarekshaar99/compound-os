@@ -395,6 +395,105 @@ Slow down. Walk slowly. Talk slowly. The masters move through life with presence
       },
     ],
   },
+  {
+    id: "wealth",
+    icon: "◆",
+    title: "Wealth & Identity",
+    subtitle: "Money follows the person you become",
+    color: "#A78BFA",
+    intro:
+      "Most people think wealth is a math problem. It isn't. It's an identity problem. If $1M was wired to your account tomorrow, you'd still dress, think, and associate the same way — and within a few years, your net worth would revert to whatever ceiling your subconscious holds. This section is about rewriting that ceiling. Not through affirmations. Through actually seeing the identity that's been running the show.",
+    sections: [
+      {
+        heading: "Wealth Is Inside-Out",
+        content: `The #1 separator between the wealthy and the struggling isn't intelligence. It isn't work ethic. It's identity — how someone perceives themselves, the world, and what's possible.
+
+95% of your financial behavior runs from subconscious programming installed before age seven. Your conscious mind knows what you want. Your subconscious knows what you believe. When the two disagree, the subconscious wins every time.
+
+This is why lottery winners go broke. Their internal operating system is calibrated for scarcity. When external reality conflicts with internal identity, the subconscious auto-corrects until they match. Usually by spending, losing, or self-sabotaging the money away.
+
+The lesson isn't "think positive." The lesson is: if you want to hold wealth, you first have to become someone who can hold it. The external number follows the internal state. Never the other way around.`,
+      },
+      {
+        heading: "The Four Archetypes of Self-Sabotage",
+        content: `Four patterns keep people trapped in "working on themselves" forever without ever actually arriving. Each one is an identity of "not enough" dressed up as self-improvement.
+
+The Fiat Chaser. Believes they're not wealthy enough, not smart enough, not worthy enough. Always one more course, one more certification, one more mentor away from being ready. Money stays out of reach because the identity says "not yet."
+
+The Self-Punisher. Believes they're not healed enough, not perfect enough. Constantly scrubbing at invisible stains. Makes inner work the destination instead of the path. Never arrives because arrival would mean the punisher has nothing to do.
+
+The Intellectual Junkie. Believes they're not knowledgeable enough. Consumes content endlessly. Books, podcasts, courses, frameworks. Hasn't implemented 5% of what they already know. Confuses knowing about with being.
+
+The Avid Struggler. Believes they're not worthy. Addicted to struggle because struggle is familiar. Success feels threatening — it would require them to stop suffering, which means letting go of their identity as someone who suffers nobly.
+
+The trap all four share: "working on yourself" becomes a way of never being enough. Inner work is a stepping stone. If it becomes the destination, it's just another prison.`,
+      },
+      {
+        heading: "The Five Challenges to Real Wealth",
+        content: `Five obstacles sit between most people and the wealth they say they want. None of them are external.
+
+One: forgetting your why. "I want more money" isn't a why — it's a symptom. The real why has to be deeper: freedom, impact, legacy, space to create. Without a deep why, you'll quit the moment it gets hard. And it will get hard.
+
+Two: shiny object syndrome. Every week a new opportunity looks better than the last. You chase everything and commit to nothing. Patience is the rarest skill in wealth building. The people who win don't have more opportunities — they stop abandoning the good ones for the next shiny thing.
+
+Three: addiction to trading time for money. "Busy" is toxic. If you're proud of being busy, you've confused effort with progress. Work enough to cover what you need, then redirect your energy to building systems and investing. Your goal is to detach income from hours.
+
+Four: lack of self-trust. Living in survival mode means ego takes the wheel. You second-guess everything. You need approval before deciding. You mistake fear for wisdom. Self-trust is built by following intuition in small decisions until it becomes reliable in the big ones.
+
+Five: 3D attachment. Clinging to specific outcomes. Wanting a thing so badly you push it away with your grip. The paradox: surrender and non-attachment is what lets things flow toward you. Move with intention, not desperation.`,
+      },
+      {
+        heading: "Money Is Energy",
+        content: `Money is not a pile of sacred paper. It's energy — it moves, circulates, and seeks environments that value it.
+
+Your relationship with money directly shapes your results. If you're afraid of it, it avoids you. If you resent it, it leaves you. If you treat spending it as a tragedy, it stops flowing through you. If you celebrate it — celebrate receiving AND spending on things that matter — it circulates.
+
+Audit your language. Do you say "I can't afford that"? That's a command to the subconscious. Replace it with "that isn't a priority right now." Do you say "money is hard to earn"? That's a belief you're reinforcing every time you say it. Notice the invisible scripts.
+
+The wealthy don't have a better relationship with money because they're wealthy. They became wealthy because they had a better relationship with money first.`,
+      },
+      {
+        heading: "The $500K Tipping Point",
+        content: `Going from $0 to $500K liquid is the hardest milestone of the financial journey. Not because the math is harder — the math is simpler at the start. Because identity is the real bottleneck.
+
+Below $500K, almost every person hits the same invisible ceiling. Old beliefs resurface. Self-sabotage intensifies. You make an unexplainable decision. You break your own rules. You feel the need to "take a break."
+
+That's not bad luck. That's your subconscious doing exactly what it was programmed to do: return you to the state that feels familiar. Familiar doesn't mean good. It just means known.
+
+Above $500K, something shifts. You've broken inertia. You've proven to yourself that you can hold a number the old identity said wasn't for you. Capital starts doing work that used to require your time. The compounding gets real.
+
+The practical takeaway: the first $100K will be the slowest and the hardest. Don't quit. Don't compare yourself to someone at $5M. They had their own $0 to $500K — you just weren't there for it.`,
+      },
+      {
+        heading: "Systems Thinking",
+        content: `The world divides into two kinds of thinkers: systems thinkers and everyone else. This isn't elitism — it's a skill distinction that determines outcomes.
+
+Non-systems thinkers see cause and effect. "If I do X, Y will happen." They oversimplify. They miss second- and third-order consequences. They make decisions that look rational in isolation but destroy value in context.
+
+Systems thinkers see interconnection. They model feedback loops. They understand that a body is a system of systems, an economy is a system of systems, a portfolio is a system of systems. They ask "and then what?" three levels deep before acting.
+
+The classic example: someone starves themselves on 1,000 calories a day to lose weight. Short-term: weight drops. But the body is a complex system — the metabolism down-regulates, thyroid slows, cortisol spikes, nutrient deficiencies develop, sleep breaks. When normal eating resumes, the weight returns with interest. The simple intervention had second-order consequences that invalidated the whole plan.
+
+Investing works the same way. Saving aggressively looks smart. But if inflation outpaces savings, you're losing in real terms. "Safe" asset allocation in one regime is reckless in another. Every decision ripples.
+
+The gap between your mental model and actual reality = the amount of suffering in your life. Closing that gap — by thinking in systems — is the most useful mental upgrade available.`,
+      },
+      {
+        heading: "Reprogramming Practice",
+        content: `Identity doesn't change through insight. It changes through repetition.
+
+The practice is simple in structure and hard in execution. Three moves.
+
+One: get crystal clear on what you want — in present-tense "I AM" / "I HAVE" statements. Not "I want to earn $500K." That keeps it future-tense, permanently out of reach. Instead: "I am earning $500K a year doing work I love." Be specific: monthly income, assets, bank balance, time freedom, lifestyle, purpose.
+
+Two: define who you need to be to have that. Ask, "how does the type of person who currently has this reality show up in the world?" What are their core values? Their skills? Their beliefs about money? Their daily habits? How do they carry themselves? This is the specification for the identity upgrade.
+
+Three: embody it daily. Read and declare your "I AM" statements out loud. Notice where your body resists — that's where the old identity lives. Use calming practices (breathwork, meditation) to build nervous system capacity for the new identity. You have to feel safe holding abundance before you can hold it.
+
+Do this for 90 days before judging it. Most people quit at day 11. The ones who don't quit get a different life.`,
+      },
+    ],
+  },
 ];
 
 function ChevronDown() {

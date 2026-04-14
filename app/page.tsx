@@ -1,68 +1,204 @@
-import Link from "next/link";
 import CheckoutButton from "./components/CheckoutButton";
-import LoginForm from "./components/LoginForm";
 import Header from "./components/Header";
+import MobileCTA from "./components/MobileCTA";
 
-const deliverables = [
-  "Options trading system (Wheel, spreads, VIX framework)",
-  "Capital allocation model (risk-based)",
-  "Pre-trade checklist & execution rules",
-  "Weekly trading routine",
-  "Hybrid athlete training system (strength + cardio)",
-  "Nutrition & recovery protocols",
-  "Discipline & journaling framework",
+/* ────────────────────── DATA ────────────────────── */
+
+const systemIncludes = [
+  {
+    pillar: "Markets",
+    accent: "#00d4aa",
+    icon: "◈",
+    items: [
+      "Investing foundations, 4 wealth stages & the 6-step analysis framework",
+      "Complete Wheel Strategy (CSPs, covered calls, spreads, LEAPS)",
+      "VIX-based capital allocation model",
+      "3-tier portfolio allocation & position sizing math",
+      "Technical analysis, Elliott Waves, Fibonacci framework",
+      "Macro regimes, key indicators, and 11 mistakes to avoid",
+    ],
+  },
+  {
+    pillar: "Fitness",
+    accent: "#f97316",
+    icon: "⚡",
+    items: [
+      "Full hybrid athlete program (3x strength + 2-3x cardio)",
+      "Time-under-tension protocols with progression rules",
+      "Zone 2 and interval cardio programming",
+      "Nutrition framework with macro targets",
+      "Mobility, recovery, and supplement stack",
+      "Nervous system regulation: breathwork, fasting, cold exposure",
+    ],
+  },
+  {
+    pillar: "Mindset",
+    accent: "#a78bfa",
+    icon: "◉",
+    items: [
+      "Identity mapping & ego pattern recognition",
+      "Emotional regulation and trigger response system",
+      "Habit and addiction pattern-breaking protocols",
+      "Wealth psychology, money beliefs, the $500K tipping point",
+      "Decision-making and relationship frameworks",
+      "Daily execution routine and journaling system",
+    ],
+  },
 ];
 
 const forYou = [
-  "You are building capital and want structure",
-  "You struggle with consistency and discipline",
-  "You want a system, not motivation",
+  "You want structure, not motivation",
+  "You keep starting but can't stay consistent",
+  "You've bought courses that collected dust",
+  "You want rules you can follow, not content to consume",
+  "You're building something and need your systems dialed in",
 ];
 
 const notForYou = [
-  "You are looking for quick wins or signals",
-  "You avoid responsibility",
-  "You want passive learning without execution",
+  "You want quick wins or get-rich signals",
+  "You want to be told what to think instead of how to think",
+  "You avoid accountability and blame circumstances",
+  "You need hand-holding or a coach to function",
 ];
 
-const sections = [
+const faqs = [
   {
-    title: "Trading",
-    href: "/trading",
-    accent: "var(--accent-trading)",
-    icon: "◈",
-    description:
-      "Options framework, capital allocation, risk management, macro regimes, and pre-trade checklists. A complete system for building capital with discipline.",
-    tag: "Lead pillar",
+    q: "Is this a course?",
+    a: "No. No videos, no modules, no drip content. Compound OS is a structured reference system — frameworks, checklists, and protocols organized into sections you open and use. Think operating manual, not lecture series.",
   },
   {
-    title: "Fitness",
-    href: "/fitness",
-    accent: "var(--accent-fitness)",
-    icon: "△",
-    description:
-      "Hybrid athlete training: 3x strength sessions with TUT, 2-3 cardio sessions (Zone 2 + intervals), nutrition protocols, mobility, and recovery.",
-    tag: "Physical edge",
+    q: "Do I need trading or investing experience?",
+    a: "The Markets pillar starts from first principles — investing foundations, wealth stages, the 6-step analysis framework. If you know what a stock is, you can follow it. If you're already trading, the VIX framework, Wheel Strategy, and risk management will sharpen your execution immediately.",
   },
   {
-    title: "Mindset",
-    href: "/mindset",
-    accent: "var(--accent-mindset)",
-    icon: "◉",
-    description:
-      "Discipline systems, emotional control, decision-making frameworks, and daily practice routines. The mental infrastructure behind consistent execution.",
-    tag: "Mental control",
+    q: "Will this be updated?",
+    a: "Yes. As the frameworks get refined, your access stays current. One payment covers everything — now and every future update.",
+  },
+  {
+    q: "What if it's not for me?",
+    a: "Reach out. I'm not interested in taking money from people who won't use it.",
+  },
+  {
+    q: "Why is it only $29?",
+    a: "Because I built this for myself before I ever sold it. The system already exists — I'm not creating content to fill a product. The price reflects access, not production. It won't stay at $29.",
+  },
+  {
+    q: "What format is the content in?",
+    a: "A private web app you access from any device. Structured sections with a sidebar, search, and progress tracking. It's designed to be used weekly, not read once.",
+  },
+  {
+    q: "Can I access it on my phone?",
+    a: "Yes. The system is fully responsive. Most members use it on mobile during their market session, at the gym, or during their morning routine.",
   },
 ];
 
-const pricingChecklist = [
-  "Full OTU options trading framework",
-  "VIX allocation model & macro regimes",
-  "Hybrid athlete training program",
-  "Nutrition & recovery protocols",
-  "Discipline & journaling system",
-  "All future updates included",
-];
+/* ────────────────────── PRODUCT PREVIEW ────────────────────── */
+
+function ProductPreview() {
+  return (
+    <div className="relative max-w-4xl mx-auto">
+      {/* Browser chrome mockup */}
+      <div className="rounded-xl border border-[var(--border)] overflow-hidden bg-[var(--card-bg)] shadow-2xl shadow-black/40">
+        {/* Title bar */}
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)] bg-[var(--sidebar-bg)]">
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+          </div>
+          <div className="flex-1 mx-8">
+            <div className="bg-[var(--bg)] rounded-md px-3 py-1 text-xs text-[var(--text-muted)] text-center max-w-xs mx-auto">
+              thecompoundsystem.com/markets
+            </div>
+          </div>
+        </div>
+
+        {/* App layout mockup */}
+        <div className="flex min-h-[340px] md:min-h-[400px]">
+          {/* Sidebar */}
+          <div className="hidden sm:block w-56 border-r border-[var(--border)] bg-[var(--sidebar-bg)] p-4">
+            <div className="text-sm font-bold text-[#00d4aa] mb-1">Markets</div>
+            <div className="text-[10px] text-[var(--text-muted)] mb-4">Investing, Trading &amp; Macro</div>
+            {/* Progress bar */}
+            <div className="w-full h-1 rounded-full bg-white/[0.06] mb-4">
+              <div className="h-full rounded-full bg-[#00d4aa] w-[35%]" />
+            </div>
+            {[
+              { icon: "✓", label: "Dashboard", active: false, done: true },
+              { icon: "✓", label: "Investing Foundations", active: false, done: true },
+              { icon: "⟳", label: "The Wheel Strategy", active: true, done: false },
+              { icon: "📊", label: "VIX Framework", active: false, done: false },
+              { icon: "📞", label: "Covered Calls", active: false, done: false },
+              { icon: "📉", label: "Cash-Secured Puts", active: false, done: false },
+              { icon: "🐻", label: "Bear Call Spreads", active: false, done: false },
+              { icon: "✅", label: "Stock Criteria", active: false, done: false },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-[11px] mb-0.5"
+                style={{
+                  background: item.active ? "rgba(0,212,170,0.08)" : "transparent",
+                  color: item.done ? "#00d4aa" : item.active ? "#00d4aa" : "var(--text-muted)",
+                  fontWeight: item.active ? 600 : 400,
+                }}
+              >
+                <span className="min-w-[16px] text-center text-[10px]">{item.done ? "✓" : item.icon}</span>
+                {item.label}
+              </div>
+            ))}
+          </div>
+
+          {/* Content area */}
+          <div className="flex-1 p-5 md:p-8">
+            <div className="text-lg md:text-xl font-bold text-[var(--text-primary)] mb-1">The Wheel Strategy</div>
+            <div className="text-xs text-[var(--text-secondary)] mb-5">The core income engine behind the Markets system.</div>
+
+            {/* Stat boxes */}
+            <div className="flex flex-wrap gap-2.5 mb-5">
+              {[
+                { label: "Core Strategy", value: "The Wheel", sub: "CSPs → Assignment → CCs" },
+                { label: "Target Delta", value: "20-25δ", sub: "Safe baseline" },
+                { label: "Duration", value: "25-45d", sub: "Optimal range" },
+              ].map((stat, i) => (
+                <div key={i} className="flex-1 min-w-[100px] bg-[var(--sidebar-bg)] border border-[var(--border)] rounded-lg p-3">
+                  <div className="text-[9px] text-[var(--text-muted)] uppercase tracking-wider">{stat.label}</div>
+                  <div className="text-sm font-bold text-[#00d4aa] mt-1">{stat.value}</div>
+                  <div className="text-[9px] text-[var(--text-muted)] mt-0.5">{stat.sub}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Content preview */}
+            <div className="bg-[var(--sidebar-bg)] border border-[var(--border)] rounded-lg p-4">
+              <div className="text-xs font-semibold text-[var(--text-primary)] mb-2">Quick Reference — The Wheel Strategy</div>
+              <div className="space-y-1.5">
+                {[
+                  "1. Sell Cash-Secured Puts on stocks you believe in at 20-25 delta",
+                  "2. Get Assigned — this is the plan, not a failure",
+                  "3. Sell Covered Calls at cost basis or above",
+                  "4. Manage by VIX — adjust allocation per regime",
+                ].map((line, i) => (
+                  <div key={i} className="text-[10px] md:text-[11px] text-[var(--text-secondary)] leading-relaxed">{line}</div>
+                ))}
+              </div>
+            </div>
+
+            {/* Mark complete button */}
+            <div className="mt-5 flex items-center gap-2">
+              <div className="w-4 h-4 rounded border-2 border-[var(--text-muted)]" />
+              <span className="text-[11px] text-[var(--text-muted)]">Mark as complete</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Fade at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[var(--bg)] to-transparent rounded-b-xl pointer-events-none" />
+    </div>
+  );
+}
+
+/* ────────────────────── PAGE ────────────────────── */
 
 export default function Home() {
   return (
@@ -70,213 +206,161 @@ export default function Home() {
       <Header />
 
       {/* ───── HERO ───── */}
-      <section className="relative flex flex-col items-center justify-center text-center px-6 pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        {/* Subtle gradient glow */}
+      <section className="relative flex flex-col items-center justify-center text-center px-6 pt-28 pb-14 md:pt-36 md:pb-20 overflow-hidden">
+        {/* Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[var(--accent)]/5 rounded-full blur-[120px] pointer-events-none" />
 
-        <p className="relative text-sm uppercase tracking-widest text-[var(--accent)] font-medium mb-6">
-          by Tarek Shaar
-        </p>
-        <h1 className="relative text-2xl md:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-[var(--text-primary)] leading-snug md:leading-tight max-w-4xl">
-          I was a depressed, overweight kid who couldn&apos;t hold eye contact, lost thousands chasing crypto, paid $15k for courses that taught me nothing, and spent years building in silence because being seen meant being hurt.
+        <h1 className="relative text-[1.75rem] md:text-5xl lg:text-[3.25rem] font-bold tracking-tight text-[var(--text-primary)] leading-[1.15] max-w-3xl">
+          The complete system for how you trade, train, and operate.
         </h1>
-        <p className="relative mt-8 text-[var(--text-secondary)] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-          This site is everything I had to figure out alone.
+        <p className="relative mt-5 text-[var(--text-secondary)] text-base md:text-xl max-w-xl mx-auto leading-relaxed">
+          32 structured sections. Rules, checklists, and frameworks for your money, body, and discipline — built to use, not to consume.
         </p>
 
-        <div className="relative mt-10 flex flex-col sm:flex-row gap-4">
-          <CheckoutButton className="px-8 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] cursor-pointer">
-            Get the System — $29
+        <div className="relative mt-8 md:mt-10">
+          <CheckoutButton className="px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] cursor-pointer">
+            Get Compound OS — $29
           </CheckoutButton>
-          <a
-            href="#what-you-get"
-            className="px-8 py-4 rounded-xl border border-[var(--border)] text-[var(--text-primary)] font-medium text-base transition-all hover:border-[var(--text-muted)] hover:-translate-y-0.5"
-          >
-            View What&apos;s Inside
-          </a>
-        </div>
-      </section>
-
-      {/* ───── HOW I GOT HERE ───── */}
-      <section className="px-6 py-20 md:py-28">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-xs uppercase tracking-widest text-[var(--accent)] font-medium mb-10 text-center">
-            How I got here
-          </h2>
-          <div className="space-y-8">
-            <p className="text-[var(--text-secondary)] text-base md:text-lg leading-[1.9]">
-              I started lifting to prove something. Ego lifted until I broke my shoulder and lower back. Switched to powerlifting - realized it was feeding the same ego. Went to the other extreme: triathlon training, full cardio, vegan. I do this - I swing hard until something breaks, then I recalibrate. Eventually I found what actually works: a simple hybrid routine, 3x strength per week, Zone 2 cardio on off days, consistent protein. Nothing extreme. Just repeatable.
-            </p>
-
-            <p className="text-[var(--text-secondary)] text-base md:text-lg leading-[1.9]">
-              I ran a crypto mining farm in 2019. Scaled it up, watched it collapse. Tried to recover through day trading - lost more. Paid $15,000 across multiple courses chasing strategies from 20-year-olds posting PnL screenshots. What I eventually learned: a realistic return is 3-5% per month. If you&apos;re not making 11% per year, you&apos;re losing to inflation. The answer wasn&apos;t a hot strategy. It was a boring, conservative wheel strategy on quality stocks, managed by VIX, compounded over time.
-            </p>
-
-            <p className="text-[var(--text-secondary)] text-base md:text-lg leading-[1.9]">
-              During COVID I hit a wall I couldn&apos;t lift or trade my way out of. I started journaling, meditating, reading - Eckhart Tolle, Alan Watts, Aaron Abke, Neville Goddard. For the first time I looked directly at how I was wired instead of running from it. What I found: almost everything I was chasing was fear in disguise. The mindset section is my complete notes from that period - what actually shifted things, not what sounds good.
-            </p>
-
-            <div className="pt-6 border-t border-[var(--border)]">
-              <p className="text-[var(--text-primary)] text-base md:text-lg leading-relaxed font-medium">
-                The Compound System is what I built after all of that. Three pillars that reinforce each other - because they did in real life.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ───── WHAT YOU GET ───── */}
-      <section id="what-you-get" className="px-6 py-20 md:py-28 bg-[var(--sidebar-bg)]">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] text-center mb-4">
-            What you get inside Compound OS
-          </h2>
-          <p className="text-[var(--text-secondary)] text-center mb-12 max-w-lg mx-auto">
-            Every framework, checklist, and protocol - structured and ready to use.
+          <p className="mt-3.5 text-sm text-[var(--text-muted)]">
+            One-time payment. Instant access. Free updates forever.
           </p>
+        </div>
 
-          <div className="grid gap-4">
-            {deliverables.map((item, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-4 p-5 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl hover:border-[var(--accent)]/30 transition-colors"
-              >
-                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] text-sm font-bold font-mono mt-0.5">
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-                <p className="text-[var(--text-primary)] text-base leading-relaxed">
-                  {item}
+        {/* Trust strip */}
+        <div className="relative mt-12 flex flex-wrap justify-center gap-x-6 gap-y-2.5 text-xs text-[var(--text-muted)]">
+          <span className="flex items-center gap-1.5">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
+            32 sections across 3 pillars
+          </span>
+          <span className="flex items-center gap-1.5">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
+            Use on any device
+          </span>
+          <span className="flex items-center gap-1.5">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
+            Built from 7+ years of execution
+          </span>
+        </div>
+      </section>
+
+      {/* ───── SEE INSIDE ───── */}
+      <section className="px-6 pt-4 pb-16 md:pb-24">
+        <div className="text-center mb-8">
+          <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-medium">
+            See what&apos;s inside
+          </p>
+        </div>
+        <ProductPreview />
+      </section>
+
+      {/* ───── PROBLEM ───── */}
+      <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-8 tracking-tight">
+            You don&apos;t need more information.<br className="hidden sm:block" />
+            You need a system that runs.
+          </h2>
+          <div className="space-y-4 text-left">
+            {[
+              "You've saved the posts, watched the videos, read the threads — and still feel scattered when it's time to execute.",
+              "You start strong on Monday and lose structure by Wednesday.",
+              "You know what to do in theory but don't have concrete rules for practice.",
+              "You're burning energy deciding what to do instead of just doing it.",
+            ].map((line, i) => (
+              <div key={i} className="flex items-start gap-3.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--text-muted)] mt-2.5 shrink-0" />
+                <p className="text-[var(--text-secondary)] text-[15px] md:text-base leading-relaxed">
+                  {line}
                 </p>
               </div>
             ))}
           </div>
+          <p className="mt-10 text-[var(--text-primary)] text-[15px] md:text-base font-medium leading-relaxed max-w-lg mx-auto">
+            Compound OS replaces the chaos with clear rules, structured frameworks, and repeatable protocols — across the three areas that actually compound.
+          </p>
         </div>
       </section>
 
-      {/* ───── SECTION PILLARS ───── */}
-      <section className="px-6 py-20 md:py-28">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] text-center mb-4">
-            Three pillars. One system.
-          </h2>
-          <p className="text-[var(--text-secondary)] text-center mb-12 max-w-lg mx-auto">
-            Each section is built to stand alone, but they compound together.
-          </p>
+      {/* ───── WHAT'S INSIDE ───── */}
+      <section id="whats-inside" className="px-6 py-16 md:py-24">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4 tracking-tight">
+              What you get
+            </h2>
+            <p className="text-[var(--text-secondary)] max-w-lg mx-auto text-[15px]">
+              Three pillars. 32 sections. Every framework structured, searchable, and ready to execute from day one.
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {sections.map((s) => (
-              <Link
-                key={s.href}
-                href={s.href}
-                className="group bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-8 transition-all hover:border-[var(--text-muted)] hover:-translate-y-1 hover:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.5)]"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {systemIncludes.map((pillar) => (
+              <div
+                key={pillar.pillar}
+                className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-6 md:p-7"
               >
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-3 mb-5">
                   <div
-                    className="text-2xl w-12 h-12 rounded-xl flex items-center justify-center"
+                    className="w-10 h-10 rounded-xl flex items-center justify-center text-lg"
                     style={{
-                      background: `color-mix(in srgb, ${s.accent} 12%, transparent)`,
-                      color: s.accent,
+                      background: `color-mix(in srgb, ${pillar.accent} 12%, transparent)`,
+                      color: pillar.accent,
                     }}
                   >
-                    {s.icon}
+                    {pillar.icon}
                   </div>
-                  <span
-                    className="text-xs uppercase tracking-wider font-medium"
-                    style={{ color: s.accent }}
+                  <h3
+                    className="text-lg font-bold tracking-tight"
+                    style={{ color: pillar.accent }}
                   >
-                    {s.tag}
-                  </span>
+                    {pillar.pillar}
+                  </h3>
                 </div>
-                <h3
-                  className="text-xl font-bold mb-2"
-                  style={{ color: s.accent }}
-                >
-                  {s.title}
-                </h3>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                  {s.description}
-                </p>
-              </Link>
+                <ul className="space-y-2.5">
+                  {pillar.items.map((item, i) => (
+                    <li key={i} className="flex items-start gap-2.5">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={pillar.accent} strokeWidth="2.5" className="mt-[3px] shrink-0 opacity-50">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      <span className="text-[13px] text-[var(--text-secondary)] leading-relaxed">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ───── WHO THIS IS FOR / NOT FOR ───── */}
-      <section className="px-6 py-20 md:py-28 bg-[var(--sidebar-bg)]">
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* FOR */}
-          <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--accent)]/12 flex items-center justify-center text-[var(--accent)] text-lg">
-                ✓
-              </div>
-              <h3 className="text-xl font-bold text-[var(--text-primary)]">
-                This is for you if:
-              </h3>
-            </div>
-            <ul className="space-y-4">
-              {forYou.map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="text-[var(--accent)] mt-1 flex-shrink-0">●</span>
-                  <span className="text-[var(--text-secondary)] leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* NOT FOR */}
-          <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[#ef4444]/12 flex items-center justify-center text-[#ef4444] text-lg">
-                ✕
-              </div>
-              <h3 className="text-xl font-bold text-[var(--text-primary)]">
-                This is NOT for you if:
-              </h3>
-            </div>
-            <ul className="space-y-4">
-              {notForYou.map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="text-[#ef4444] mt-1 flex-shrink-0">●</span>
-                  <span className="text-[var(--text-secondary)] leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
 
       {/* ───── HOW IT WORKS ───── */}
-      <section className="px-6 py-20 md:py-28">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-12">
+      <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] text-center mb-12 tracking-tight">
             How it works
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
                 step: "01",
-                title: "Instant access",
-                desc: "Get access immediately after purchase. No waiting, no drip content.",
+                title: "Buy once",
+                desc: "One payment. No subscription, no upsells, no drip. You own lifetime access immediately.",
               },
               {
                 step: "02",
-                title: "Structured dashboard",
-                desc: "Everything organized in a Notion-style system. Navigate by section, not by guesswork.",
+                title: "Open and execute",
+                desc: "Navigate to the section you need. Follow the framework. Use the checklist. Close the tab. Repeat weekly.",
               },
               {
                 step: "03",
-                title: "A living document",
-                desc: "Refined as the system evolves. This is a living document, not a static course.",
+                title: "Stay current",
+                desc: "The system gets refined over time. New sections, sharper protocols — all included in your access, forever.",
               },
             ].map((item) => (
-              <div
-                key={item.step}
-                className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-8 text-left"
-              >
-                <span className="text-sm font-mono text-[var(--accent)] mb-3 block">
+              <div key={item.step} className="text-center md:text-left">
+                <span className="inline-block text-sm font-mono text-[var(--accent)] mb-3 px-2.5 py-1 rounded-md bg-[var(--accent)]/8">
                   {item.step}
                 </span>
                 <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">
@@ -291,107 +375,202 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ───── PRICING ───── */}
-      <section id="pricing" className="px-6 py-20 md:py-28 bg-[var(--sidebar-bg)]">
+      {/* ───── WHO IT'S FOR / NOT FOR ───── */}
+      <section className="px-6 py-16 md:py-24">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-7">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-9 h-9 rounded-lg bg-[var(--accent)]/12 flex items-center justify-center">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
+              </div>
+              <h3 className="text-base font-bold text-[var(--text-primary)]">
+                Built for you if
+              </h3>
+            </div>
+            <ul className="space-y-3.5">
+              {forYou.map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="text-[var(--accent)] mt-1.5 shrink-0 text-[8px]">●</span>
+                  <span className="text-[var(--text-secondary)] text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-7">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-9 h-9 rounded-lg bg-[#ef4444]/12 flex items-center justify-center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5"><path d="M18 6 6 18M6 6l12 12" /></svg>
+              </div>
+              <h3 className="text-base font-bold text-[var(--text-primary)]">
+                Not for you if
+              </h3>
+            </div>
+            <ul className="space-y-3.5">
+              {notForYou.map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="text-[#ef4444] mt-1.5 shrink-0 text-[8px]">●</span>
+                  <span className="text-[var(--text-secondary)] text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ───── WHY THIS EXISTS ───── */}
+      <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-xs uppercase tracking-widest text-[var(--accent)] font-medium mb-8 text-center">
+            Why this exists
+          </h2>
+          <p className="text-[var(--text-secondary)] text-[15px] leading-[1.9] mb-6">
+            I spent over $20,000 on trading courses from people who were better at marketing than executing. I ego-lifted until I broke my shoulder and back. I swung between extremes in every domain — crypto to day trading, powerlifting to triathlons, hustle culture to withdrawal — until I stopped chasing and started building systems that actually worked. The trading framework came from blowing up accounts. The fitness system came from injuries. The mindset protocols came from years of forced self-examination.
+          </p>
+          <div className="pt-5 border-t border-[var(--border)]">
+            <p className="text-[var(--text-primary)] text-[15px] leading-relaxed font-medium">
+              Compound OS is what I wish existed when I started. I built it for myself. Now it&apos;s available to anyone serious enough to use it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ───── OFFER STACK ───── */}
+      <section id="pricing" className="px-6 py-16 md:py-24">
         <div className="max-w-xl mx-auto">
-          <div className="relative bg-[var(--card-bg)] border border-[var(--accent)]/20 rounded-2xl p-10 md:p-14 text-center overflow-hidden">
+          <div className="relative bg-[var(--card-bg)] border border-[var(--accent)]/20 rounded-2xl p-8 md:p-12 overflow-hidden">
             {/* Glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-[var(--accent)]/8 rounded-full blur-[80px] pointer-events-none" />
 
-            <h2 className="relative text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-8">
-              One-time access. No subscription.
-            </h2>
-
-            <div className="relative mb-2">
-              <span className="text-6xl md:text-7xl font-bold text-[var(--accent)]">$29</span>
+            <div className="relative text-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-2 tracking-tight">
+                Full system. One price.
+              </h2>
+              <p className="text-[var(--text-secondary)] text-sm mb-8 max-w-sm mx-auto">
+                All three pillars, all 32 sections, all future updates.
+              </p>
             </div>
-            <p className="relative text-sm text-[var(--text-muted)] mb-8">
-              one-time payment
-            </p>
 
-            <p className="relative text-[var(--text-secondary)] text-base leading-relaxed mb-10 max-w-md mx-auto">
-              Lifetime access to all three pillars - trading, fitness, and mindset. Updated as the system evolves.
-            </p>
+            {/* Value anchoring */}
+            <div className="relative space-y-0 mb-8">
+              {[
+                { label: "Trading courses & coaching", crossed: "$2,000+" },
+                { label: "Personal training & nutrition plans", crossed: "$1,500+" },
+                { label: "Mindset coaching & programs", crossed: "$500+" },
+              ].map((row, i) => (
+                <div key={i} className="flex items-center justify-between py-2.5 border-b border-[var(--border)]">
+                  <span className="text-sm text-[var(--text-secondary)]">{row.label}</span>
+                  <span className="text-sm text-[var(--text-muted)] line-through">{row.crossed}</span>
+                </div>
+              ))}
+            </div>
 
-            <ul className="relative space-y-4 text-left max-w-sm mx-auto mb-10">
-              {pricingChecklist.map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="text-[var(--accent)] mt-0.5 flex-shrink-0">✓</span>
-                  <span className="text-[var(--text-secondary)] leading-relaxed">{item}</span>
+            <div className="relative text-center mb-8">
+              <div className="mb-1">
+                <span className="text-6xl md:text-7xl font-bold text-[var(--accent)]">$29</span>
+              </div>
+              <p className="text-sm text-[var(--text-muted)]">
+                one-time &middot; lifetime access &middot; no subscription
+              </p>
+            </div>
+
+            {/* Checklist */}
+            <ul className="relative space-y-3 max-w-sm mx-auto mb-10">
+              {[
+                "Full options trading framework with checklists",
+                "VIX allocation model & macro playbooks",
+                "Complete hybrid athlete training system",
+                "Nutrition, recovery, and supplement protocols",
+                "Mindset frameworks and daily execution system",
+                "Progress tracking across all pillars",
+                "Every future update — forever",
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-2.5">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5" className="mt-0.5 shrink-0"><polyline points="20 6 9 17 4 12" /></svg>
+                  <span className="text-sm text-[var(--text-secondary)] leading-relaxed">{item}</span>
                 </li>
               ))}
             </ul>
 
-            <CheckoutButton className="relative inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] w-full sm:w-auto cursor-pointer">
-              Get the System
-            </CheckoutButton>
+            <div className="relative text-center">
+              <CheckoutButton className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] w-full sm:w-auto cursor-pointer">
+                Get Compound OS — $29
+              </CheckoutButton>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ───── SIGN IN / CREATE ACCOUNT ───── */}
-      <section id="login" className="px-6 py-20 md:py-28">
-        <div className="max-w-md mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-3">
-              Member Access
-            </h2>
-            <p className="text-[var(--text-secondary)] text-sm">
-              Sign in to your account or create one after purchasing.
-            </p>
+      {/* ───── FAQ ───── */}
+      <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] text-center mb-10 tracking-tight">
+            Questions
+          </h2>
+
+          <div className="space-y-0">
+            {faqs.map((faq, i) => (
+              <details
+                key={i}
+                className="group border-b border-[var(--border)] [&:first-child]:border-t"
+              >
+                <summary className="flex items-center justify-between py-5 cursor-pointer list-none text-[var(--text-primary)] font-medium text-[15px] hover:text-[var(--accent)] transition-colors">
+                  {faq.q}
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="shrink-0 ml-4 transition-transform duration-200 group-open:rotate-45 text-[var(--text-muted)]"
+                  >
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                </summary>
+                <p className="pb-5 text-sm text-[var(--text-secondary)] leading-relaxed pr-8">
+                  {faq.a}
+                </p>
+              </details>
+            ))}
           </div>
-
-          <LoginForm />
-
-          <p className="text-center text-sm text-[var(--text-muted)] mt-6">
-            No password needed - we&apos;ll email you a secure link.
-          </p>
         </div>
       </section>
 
       {/* ───── FINAL CTA ───── */}
-      <section className="px-6 py-20 md:py-28">
+      <section className="px-6 py-16 md:py-24">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
-            Stop guessing. Start executing.
+          <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4 tracking-tight">
+            Your system is ready.
           </h2>
-          <p className="text-[var(--text-secondary)] mb-10 text-lg">
-            One system. Full control.
+          <p className="text-[var(--text-secondary)] mb-10 text-base md:text-lg max-w-md mx-auto">
+            One purchase. Instant access. Start executing today.
           </p>
 
           <CheckoutButton className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] cursor-pointer">
-            Get the System — $29
+            Get Compound OS — $29
           </CheckoutButton>
 
-          <div className="mt-14 flex justify-center gap-4">
-            <a
-              href="https://wa.me/971585658488"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] text-sm font-medium transition-all hover:bg-[#25D366]/20 hover:-translate-y-0.5"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-              </svg>
-              WhatsApp
-            </a>
-            <a
-              href="mailto:tarekshaar22@gmail.com"
-              className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-sm font-medium transition-all hover:bg-[var(--accent)]/20 hover:-translate-y-0.5"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect width="20" height="16" x="2" y="4" rx="2" />
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-              </svg>
-              Email
-            </a>
-          </div>
-
-          <p className="mt-10 text-xs text-[var(--text-muted)]">
-            Built by someone still in the process. Not a guru. Just a system.
+          <p className="mt-5 text-xs text-[var(--text-muted)]">
+            One-time payment &middot; No subscription &middot; No upsells
           </p>
         </div>
       </section>
+
+      {/* ───── FOOTER ───── */}
+      <footer className="px-6 py-8 border-t border-[var(--border)]">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <span className="text-sm text-[var(--text-muted)]">
+            Compound OS
+          </span>
+          <span className="text-xs text-[var(--text-muted)]">
+            &copy; {new Date().getFullYear()} The Compound System. All rights reserved.
+          </span>
+        </div>
+      </footer>
+
+      {/* Sticky mobile CTA */}
+      <MobileCTA />
     </div>
   );
 }
