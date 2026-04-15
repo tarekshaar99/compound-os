@@ -3,8 +3,21 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
+interface PricingLite {
+  display: string;
+  isFounding: boolean;
+}
+
 function CheckoutButton({ className }: { className?: string }) {
   const [loading, setLoading] = useState(false);
+  const [pricing, setPricing] = useState<PricingLite | null>(null);
+
+  useEffect(() => {
+    fetch("/api/pricing", { credentials: "same-origin" })
+      .then((r) => r.json())
+      .then((d) => setPricing(d))
+      .catch(() => {});
+  }, []);
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -19,6 +32,12 @@ function CheckoutButton({ className }: { className?: string }) {
     }
   };
 
+  const label = pricing
+    ? pricing.isFounding
+      ? `Get full access — ${pricing.display} (founding price)`
+      : `Get full access — ${pricing.display} one-time`
+    : "Get full access";
+
   return (
     <button
       onClick={handleCheckout}
@@ -28,7 +47,7 @@ function CheckoutButton({ className }: { className?: string }) {
         "px-8 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 disabled:opacity-50 cursor-pointer"
       }
     >
-      {loading ? "Redirecting..." : "Get full access — $49 (founding price)"}
+      {loading ? "Redirecting..." : label}
     </button>
   );
 }

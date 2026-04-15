@@ -3,9 +3,16 @@
 import { useState, useEffect } from "react";
 import CheckoutButton from "./CheckoutButton";
 
+interface PricingLite {
+  display: string;
+  standardDisplay: string;
+  isFounding: boolean;
+}
+
 export default function MobileCTA() {
   const [visible, setVisible] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [pricing, setPricing] = useState<PricingLite | null>(null);
 
   useEffect(() => {
     // Real auth state comes from the httpOnly cos_session cookie,
@@ -17,6 +24,12 @@ export default function MobileCTA() {
           setIsLoggedIn(true);
         }
       })
+      .catch(() => {});
+
+    // Live pricing — reflects whether founding spots remain.
+    fetch("/api/pricing", { credentials: "same-origin" })
+      .then((r) => r.json())
+      .then((d) => setPricing(d))
       .catch(() => {});
 
     const onScroll = () => {
@@ -40,9 +53,17 @@ export default function MobileCTA() {
         <div className="min-w-0">
           <div className="text-sm font-bold text-[var(--text-primary)]">Compound OS</div>
           <div className="text-xs text-[var(--text-muted)]">
-            <span className="line-through text-[var(--text-muted)]/60 mr-1.5">$99</span>
-            <span className="text-[var(--accent)] font-semibold">$49</span>
-            <span className="ml-1.5">founding price</span>
+            {pricing?.isFounding && (
+              <span className="line-through text-[var(--text-muted)]/60 mr-1.5">
+                {pricing.standardDisplay}
+              </span>
+            )}
+            <span className="text-[var(--accent)] font-semibold">
+              {pricing?.display ?? "$49"}
+            </span>
+            <span className="ml-1.5">
+              {pricing?.isFounding ? "founding price" : "one-time"}
+            </span>
           </div>
         </div>
         <CheckoutButton className="shrink-0 px-6 py-2.5 rounded-lg bg-[var(--accent)] text-[#0a0b0f] font-bold text-sm transition-all hover:opacity-90 cursor-pointer">

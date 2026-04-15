@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { getPricing } from "../../lib/pricing";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -44,6 +45,18 @@ export async function POST(req: NextRequest) {
     const origin = getOrigin(req);
     const stripe = getStripe();
 
+    // Authoritative price lookup — counts paid users in DB. If < 100,
+    // charge $49 founding; otherwise $99 standard. On DB failure this
+    // defaults to $99 (see getPricing() fail-safe).
+    const pricing = await getPricing();
+
+    const productName = pricing.isFounding
+      ? "Compound OS - Lifetime Access (Founding Member)"
+      : "Compound OS - Lifetime Access";
+    const productDescription = pricing.isFounding
+      ? `Founding-member early access (${pricing.foundingSold} of 100 claimed). Full access to all three pillars: Markets, Fitness, and Mindset. All future updates included.`
+      : "Full access to all three pillars: Markets, Fitness, and Mindset. All future updates included.";
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
@@ -54,11 +67,10 @@ export async function POST(req: NextRequest) {
           price_data: {
             currency: "usd",
             product_data: {
-              name: "Compound OS - Lifetime Access (Founding Member)",
-              description:
-                "Founding-member early access. Full access to all three pillars: Markets, Fitness, and Mindset. All future updates included.",
+              name: productName,
+              description: productDescription,
             },
-            unit_amount: 4900,
+            unit_amount: pricing.cents,
           },
           quantity: 1,
         },

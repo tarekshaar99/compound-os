@@ -1,6 +1,11 @@
 import CheckoutButton from "./components/CheckoutButton";
 import Header from "./components/Header";
 import MobileCTA from "./components/MobileCTA";
+import { getPricing, FOUNDING_LIMIT } from "./lib/pricing";
+
+// Render fresh every 30s so the founding-spots counter stays current
+// without hammering the DB on every request.
+export const revalidate = 30;
 
 /* ────────────────────── DATA ────────────────────── */
 
@@ -61,36 +66,45 @@ const notForYou = [
   "You need hand-holding or a coach to function",
 ];
 
-const faqs = [
-  {
-    q: "Is this a course?",
-    a: "No. No videos, no modules, no drip content. Compound OS is a structured reference system — frameworks, checklists, and protocols organized into sections you open and use. Think operating manual, not lecture series.",
-  },
-  {
-    q: "Do I need trading or investing experience?",
-    a: "The Markets pillar starts from first principles — investing foundations, wealth stages, the 6-step analysis framework. If you know what a stock is, you can follow it. If you're already trading, the VIX framework, Wheel Strategy, and risk management will sharpen your execution immediately.",
-  },
-  {
-    q: "Will this be updated?",
-    a: "Yes. As the frameworks get refined, your access stays current. One payment covers everything — now and every future update.",
-  },
-  {
-    q: "What if it's not for me?",
-    a: "Reach out. I'm not interested in taking money from people who won't use it.",
-  },
-  {
-    q: "Why is it only $49?",
-    a: "$49 is the founding-member price for the first 100 members. After that the price goes to $99. I built this for myself before I ever sold it — the system already exists, I'm not creating content to fill a product. The price reflects access, not production, and it's deliberately low at launch to reward early members.",
-  },
-  {
-    q: "What format is the content in?",
-    a: "A private web app you access from any device. Structured sections with a sidebar, search, and progress tracking. It's designed to be used weekly, not read once.",
-  },
-  {
-    q: "Can I access it on my phone?",
-    a: "Yes. The system is fully responsive. Most members use it on mobile during their market session, at the gym, or during their morning routine.",
-  },
-];
+function buildFaqs(isFounding: boolean, spotsRemaining: number) {
+  const pricingFaq = isFounding
+    ? {
+        q: "Why is it only $49?",
+        a: `$49 is the founding-member price for the first 100 members — ${spotsRemaining} spots remaining as of now. After that the price goes to $99. I built this for myself before I ever sold it; the system already exists, so the price reflects access, not production.`,
+      }
+    : {
+        q: "How much is it?",
+        a: "$99, one-time. Lifetime access and every future update included. The $49 founding-member window closed at 100 members.",
+      };
+
+  return [
+    {
+      q: "Is this a course?",
+      a: "No. No videos, no modules, no drip content. Compound OS is a structured reference system — frameworks, checklists, and protocols organized into sections you open and use. Think operating manual, not lecture series.",
+    },
+    {
+      q: "Do I need trading or investing experience?",
+      a: "The Markets pillar starts from first principles — investing foundations, wealth stages, the 6-step analysis framework. If you know what a stock is, you can follow it. If you're already trading, the VIX framework, Wheel Strategy, and risk management will sharpen your execution immediately.",
+    },
+    {
+      q: "Will this be updated?",
+      a: "Yes. As the frameworks get refined, your access stays current. One payment covers everything — now and every future update.",
+    },
+    {
+      q: "What if it's not for me?",
+      a: "Reach out. I'm not interested in taking money from people who won't use it.",
+    },
+    pricingFaq,
+    {
+      q: "What format is the content in?",
+      a: "A private web app you access from any device. Structured sections with a sidebar, search, and progress tracking. It's designed to be used weekly, not read once.",
+    },
+    {
+      q: "Can I access it on my phone?",
+      a: "Yes. The system is fully responsive. Most members use it on mobile during their market session, at the gym, or during their morning routine.",
+    },
+  ];
+}
 
 /* ────────────────────── PRODUCT PREVIEW ────────────────────── */
 
@@ -200,7 +214,31 @@ function ProductPreview() {
 
 /* ────────────────────── PAGE ────────────────────── */
 
-export default function Home() {
+export default async function Home() {
+  const pricing = await getPricing();
+  const faqs = buildFaqs(pricing.isFounding, pricing.spotsRemaining);
+  // Dynamic copy snippets
+  const priceBig = pricing.display; // "$49" or "$99"
+  const anchorPrice = pricing.standardDisplay; // always "$99"
+  const foundingTag = pricing.isFounding
+    ? `Founding Member — only ${pricing.spotsRemaining} of ${FOUNDING_LIMIT} spots left`
+    : `Standard pricing — founding spots sold out`;
+  const foundingNote = pricing.isFounding
+    ? `Locked in for the first ${FOUNDING_LIMIT} members. Price goes to ${anchorPrice} after.`
+    : `The founding price is closed. ${anchorPrice} gets you lifetime access and every future update.`;
+  const heroSubcopy = pricing.isFounding
+    ? `First ${FOUNDING_LIMIT} members only — ${pricing.spotsRemaining} spots remaining. Price goes to ${anchorPrice} after.`
+    : `Lifetime access. Every future update included.`;
+  const primaryCtaLabel = pricing.isFounding
+    ? `Get Compound OS — ${priceBig}`
+    : `Get Compound OS — ${priceBig}`;
+  const stackedCtaLabel = pricing.isFounding
+    ? `Claim Founding Price — ${priceBig}`
+    : `Get Compound OS — ${priceBig}`;
+  const finalCtaSubcopy = pricing.isFounding
+    ? `First ${FOUNDING_LIMIT} members \u00b7 Then ${anchorPrice} \u00b7 No subscription`
+    : `One-time payment \u00b7 No subscription \u00b7 No upsells`;
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -219,11 +257,13 @@ export default function Home() {
 
         <div className="relative mt-8 md:mt-10">
           <CheckoutButton className="px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] cursor-pointer">
-            Get Compound OS — $49
+            {primaryCtaLabel}
           </CheckoutButton>
           <p className="mt-3.5 text-sm text-[var(--text-muted)]">
-            <span className="text-[var(--accent)] font-semibold">Founding price.</span>{" "}
-            First 100 members only — price goes to $99 after.
+            {pricing.isFounding && (
+              <span className="text-[var(--accent)] font-semibold">Founding price.{" "}</span>
+            )}
+            {heroSubcopy}
           </p>
         </div>
 
@@ -447,7 +487,7 @@ export default function Home() {
             <div className="relative flex justify-center mb-5">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/8 text-[11px] font-semibold text-[var(--accent)] uppercase tracking-wider">
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
-                Founding Member — First 100 only
+                {foundingTag}
               </span>
             </div>
 
@@ -476,18 +516,20 @@ export default function Home() {
 
             <div className="relative text-center mb-8">
               <div className="mb-1 flex items-baseline justify-center gap-3">
-                <span className="text-3xl md:text-4xl font-bold text-[var(--text-muted)] line-through decoration-2">
-                  $99
-                </span>
+                {pricing.isFounding && (
+                  <span className="text-3xl md:text-4xl font-bold text-[var(--text-muted)] line-through decoration-2">
+                    {anchorPrice}
+                  </span>
+                )}
                 <span className="text-6xl md:text-7xl font-bold text-[var(--accent)]">
-                  $49
+                  {priceBig}
                 </span>
               </div>
               <p className="text-sm text-[var(--text-muted)] mt-2">
                 one-time &middot; lifetime access &middot; no subscription
               </p>
               <p className="text-xs text-[var(--accent)]/90 font-medium mt-3">
-                Locked in for the first 100 members. Price goes to $99 after.
+                {foundingNote}
               </p>
             </div>
 
@@ -511,7 +553,7 @@ export default function Home() {
 
             <div className="relative text-center">
               <CheckoutButton className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] w-full sm:w-auto cursor-pointer">
-                Claim Founding Price — $49
+                {stackedCtaLabel}
               </CheckoutButton>
               <p className="mt-3 text-xs text-[var(--text-muted)]">
                 Instant access. No subscription. Every future update included.
@@ -568,11 +610,12 @@ export default function Home() {
           </p>
 
           <CheckoutButton className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] cursor-pointer">
-            Claim Founding Price — $49
+            {stackedCtaLabel}
           </CheckoutButton>
 
           <p className="mt-5 text-xs text-[var(--text-muted)]">
-            First 100 members &middot; Then $99 &middot; No subscription</p>
+            {finalCtaSubcopy}
+          </p>
         </div>
       </section>
 
