@@ -1,4 +1,5 @@
 import CheckoutButton from "./components/CheckoutButton";
+import EmailCaptureCTA from "./components/EmailCaptureCTA";
 import Header from "./components/Header";
 import MobileCTA from "./components/MobileCTA";
 import { getPricing, FOUNDING_LIMIT } from "./lib/pricing";
@@ -551,11 +552,9 @@ export default async function Home() {
               ))}
             </ul>
 
-            <div className="relative text-center">
-              <CheckoutButton className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] w-full sm:w-auto cursor-pointer">
-                {stackedCtaLabel}
-              </CheckoutButton>
-              <p className="mt-3 text-xs text-[var(--text-muted)]">
+            <div className="relative">
+              <EmailCaptureCTA label={stackedCtaLabel} />
+              <p className="mt-4 text-xs text-[var(--text-muted)] text-center">
                 Instant access. No subscription. Every future update included.
               </p>
             </div>
