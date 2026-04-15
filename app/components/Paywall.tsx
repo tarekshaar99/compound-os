@@ -28,7 +28,7 @@ function CheckoutButton({ className }: { className?: string }) {
         "px-8 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 disabled:opacity-50 cursor-pointer"
       }
     >
-      {loading ? "Redirecting..." : "Get full access - $29 one-time"}
+      {loading ? "Redirecting..." : "Get full access — $49 (founding price)"}
     </button>
   );
 }
