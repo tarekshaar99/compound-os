@@ -79,8 +79,8 @@ const faqs = [
     a: "Reach out. I'm not interested in taking money from people who won't use it.",
   },
   {
-    q: "Why is it only $29?",
-    a: "Because I built this for myself before I ever sold it. The system already exists — I'm not creating content to fill a product. The price reflects access, not production. It won't stay at $29.",
+    q: "Why is it only $49?",
+    a: "$49 is the founding-member price for the first 100 members. After that the price goes to $99. I built this for myself before I ever sold it — the system already exists, I'm not creating content to fill a product. The price reflects access, not production, and it's deliberately low at launch to reward early members.",
   },
   {
     q: "What format is the content in?",
@@ -219,10 +219,11 @@ export default function Home() {
 
         <div className="relative mt-8 md:mt-10">
           <CheckoutButton className="px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] cursor-pointer">
-            Get Compound OS — $29
+            Get Compound OS — $49
           </CheckoutButton>
           <p className="mt-3.5 text-sm text-[var(--text-muted)]">
-            One-time payment. Instant access. Free updates forever.
+            <span className="text-[var(--accent)] font-semibold">Founding price.</span>{" "}
+            First 100 members only — price goes to $99 after.
           </p>
         </div>
 
@@ -442,6 +443,14 @@ export default function Home() {
             {/* Glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-[var(--accent)]/8 rounded-full blur-[80px] pointer-events-none" />
 
+            {/* Founding member tag */}
+            <div className="relative flex justify-center mb-5">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/8 text-[11px] font-semibold text-[var(--accent)] uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
+                Founding Member — First 100 only
+              </span>
+            </div>
+
             <div className="relative text-center">
               <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-2 tracking-tight">
                 Full system. One price.
@@ -466,11 +475,19 @@ export default function Home() {
             </div>
 
             <div className="relative text-center mb-8">
-              <div className="mb-1">
-                <span className="text-6xl md:text-7xl font-bold text-[var(--accent)]">$29</span>
+              <div className="mb-1 flex items-baseline justify-center gap-3">
+                <span className="text-3xl md:text-4xl font-bold text-[var(--text-muted)] line-through decoration-2">
+                  $99
+                </span>
+                <span className="text-6xl md:text-7xl font-bold text-[var(--accent)]">
+                  $49
+                </span>
               </div>
-              <p className="text-sm text-[var(--text-muted)]">
+              <p className="text-sm text-[var(--text-muted)] mt-2">
                 one-time &middot; lifetime access &middot; no subscription
+              </p>
+              <p className="text-xs text-[var(--accent)]/90 font-medium mt-3">
+                Locked in for the first 100 members. Price goes to $99 after.
               </p>
             </div>
 
@@ -494,8 +511,11 @@ export default function Home() {
 
             <div className="relative text-center">
               <CheckoutButton className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] w-full sm:w-auto cursor-pointer">
-                Get Compound OS — $29
+                Claim Founding Price — $49
               </CheckoutButton>
+              <p className="mt-3 text-xs text-[var(--text-muted)]">
+                Instant access. No subscription. Every future update included.
+              </p>
             </div>
           </div>
         </div>
@@ -548,12 +568,11 @@ export default function Home() {
           </p>
 
           <CheckoutButton className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] cursor-pointer">
-            Get Compound OS — $29
+            Claim Founding Price — $49
           </CheckoutButton>
 
           <p className="mt-5 text-xs text-[var(--text-muted)]">
-            One-time payment &middot; No subscription &middot; No upsells
-          </p>
+            First 100 members &middot; Then $99 &middot; No subscription</p>
         </div>
       </section>
 

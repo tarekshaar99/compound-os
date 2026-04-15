@@ -54,11 +54,11 @@ export async function POST(req: NextRequest) {
           price_data: {
             currency: "usd",
             product_data: {
-              name: "Compound OS - Lifetime Access",
+              name: "Compound OS - Lifetime Access (Founding Member)",
               description:
-                "Full access to all three pillars: Markets, Fitness, and Mindset. All future updates included.",
+                "Founding-member early access. Full access to all three pillars: Markets, Fitness, and Mindset. All future updates included.",
             },
-            unit_amount: 2900,
+            unit_amount: 4900,
           },
           quantity: 1,
         },
