@@ -21,21 +21,18 @@ function SuccessContent() {
       return;
     }
 
+    // /api/verify mints the signed httpOnly cos_session cookie on success.
+    // We don't touch localStorage — the cookie is the trust boundary.
     fetch("/api/verify", {
       method: "POST",
+      credentials: "same-origin",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ session_id: sessionId }),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.valid) {
-          // Access is granted server-side by the Stripe webhook (source of truth).
-          // Phase 3 replaces this localStorage flag with an httpOnly signed cookie.
-          localStorage.setItem("cos_access", "1");
-          if (data.email) {
-            setEmail(data.email);
-            localStorage.setItem("cos_email", data.email);
-          }
+          if (data.email) setEmail(data.email);
           setStatus("success");
         } else {
           setStatus("error");

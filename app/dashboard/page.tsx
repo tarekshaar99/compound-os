@@ -252,34 +252,20 @@ export default function DashboardPage() {
 
   useEffect(() => {
     async function init() {
-      // Check auth — redirect if not logged in
-      const token = localStorage.getItem("cos_access");
+      // Middleware already gated this route behind a valid cos_session cookie.
+      // /api/me returns the email so we can personalize the greeting.
       let email: string | null = null;
-
-      if (!token) {
-        try {
-          const { data: { session } } = await getSupabase().auth.getSession();
-          if (session?.user?.email) {
-            email = session.user.email;
-            // Verify they have access
-            const res = await fetch("/api/access", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ email }),
-            });
-            const data = await res.json();
-            if (!data.access) {
-              router.push("/");
-              return;
-            }
-          } else {
-            router.push("/");
-            return;
-          }
-        } catch {
+      try {
+        const res = await fetch("/api/me", { credentials: "same-origin" });
+        const data = await res.json();
+        if (!data?.authenticated || !(data.paid || data.admin)) {
           router.push("/");
           return;
         }
+        email = typeof data.email === "string" ? data.email : null;
+      } catch {
+        router.push("/");
+        return;
       }
 
       // Load progress

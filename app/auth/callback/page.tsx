@@ -10,41 +10,53 @@ function CallbackHandler() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    async function syncCookieAndRoute(accessToken: string) {
+      const res = await fetch("/api/session/sync", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      if (res.ok) {
+        router.push("/dashboard");
+      } else if (res.status === 402) {
+        // Logged in but not paid — send to pricing.
+        router.push("/#pricing");
+      } else {
+        setError(true);
+      }
+    }
+
     async function handleCallback() {
       const supabase = getSupabase();
 
       // Method 1: PKCE flow — exchange code for session
       const code = searchParams.get("code");
       if (code) {
-        const { error } = await supabase.auth.exchangeCodeForSession(code);
-        if (!error) {
-          router.push("/dashboard");
+        const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+        if (!error && data.session) {
+          await syncCookieAndRoute(data.session.access_token);
           return;
         }
         console.error("Auth callback code exchange error:", error);
       }
 
-      // Method 2: Check URL hash for implicit flow tokens
-      // (Supabase may put access_token in the hash fragment)
+      // Method 2: Implicit flow (hash token) — the client auto-detects it.
       if (typeof window !== "undefined" && window.location.hash) {
-        // Supabase client auto-detects hash tokens when detectSessionInUrl is true
-        // Give it a moment to process
         await new Promise((r) => setTimeout(r, 500));
         const { data: { session } } = await supabase.auth.getSession();
         if (session) {
-          router.push("/dashboard");
+          await syncCookieAndRoute(session.access_token);
           return;
         }
       }
 
-      // Method 3: Maybe session was already established
+      // Method 3: Session already established.
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        router.push("/dashboard");
+        await syncCookieAndRoute(session.access_token);
         return;
       }
 
-      // All methods failed
       setError(true);
     }
 
