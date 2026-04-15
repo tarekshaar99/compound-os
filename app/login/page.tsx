@@ -15,10 +15,11 @@ export default function LoginPage() {
             &larr; Compound OS
           </Link>
           <h1 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mt-8 mb-2">
-            Member Access
+            Sign in
           </h1>
-          <p className="text-[var(--text-secondary)] text-sm">
-            Sign in or create your account below.
+          <p className="text-[var(--text-secondary)] text-sm max-w-sm mx-auto leading-relaxed">
+            Already purchased? Enter the email you used and we&apos;ll send a
+            6-digit code. Works from any device.
           </p>
         </div>
 

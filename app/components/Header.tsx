@@ -87,6 +87,12 @@ export default function Header() {
                 >
                   Mindset
                 </Link>
+                <Link
+                  href="/account"
+                  className="hidden sm:block px-3 py-2 rounded-lg text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
+                >
+                  Account
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="px-3 py-2 rounded-lg text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"

@@ -28,12 +28,13 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(dashUrl);
   }
 
-  // Paywalled routes.
+  // Paywalled / private routes.
   const isPaywalled =
     pathname.startsWith("/trading") ||
     pathname.startsWith("/fitness") ||
     pathname.startsWith("/mindset") ||
-    pathname.startsWith("/dashboard");
+    pathname.startsWith("/dashboard") ||
+    pathname.startsWith("/account");
 
   if (isPaywalled) {
     if (authed) return NextResponse.next();
@@ -53,5 +54,6 @@ export const config = {
     "/fitness/:path*",
     "/mindset/:path*",
     "/dashboard/:path*",
+    "/account/:path*",
   ],
 };
