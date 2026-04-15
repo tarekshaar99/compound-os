@@ -83,9 +83,29 @@ export default function LoginForm({
         setOtpCode(Array(OTP_LENGTH).fill(""));
         setTimeout(() => inputRefs.current[0]?.focus(), 100);
       } else if (data.session) {
-        setStatus("success");
-        // Small delay so user sees success state
-        setTimeout(() => router.push("/dashboard"), 600);
+        // Supabase authenticated. Now sync into a cos_session cookie so
+        // middleware will allow pillar routes. If the user has no paid record,
+        // /api/session/sync returns 402 and we route them to the pricing page.
+        try {
+          const sync = await fetch("/api/session/sync", {
+            method: "POST",
+            credentials: "same-origin",
+            headers: { Authorization: `Bearer ${data.session.access_token}` },
+          });
+          if (sync.ok) {
+            setStatus("success");
+            setTimeout(() => router.push("/dashboard"), 600);
+          } else if (sync.status === 402) {
+            // Logged in but no purchase. Route to checkout.
+            router.push("/#pricing");
+          } else {
+            setErrorMsg("Session sync failed. Please try again.");
+            setStatus("code_sent");
+          }
+        } catch {
+          setErrorMsg("Connection error during session sync.");
+          setStatus("code_sent");
+        }
       } else {
         setErrorMsg("Verification failed. Please request a new code.");
         setStatus("code_sent");

@@ -4,6 +4,23 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getSupabase } from "../lib/supabase";
 
+async function handleLogout() {
+  // Clear cos_session cookie server-side.
+  try {
+    await fetch("/api/logout", { method: "POST", credentials: "same-origin" });
+  } catch {
+    // Ignore — worst case the cookie expires in 30d.
+  }
+  // Clear Supabase session from localStorage.
+  try {
+    await getSupabase().auth.signOut();
+  } catch {
+    // Ignore.
+  }
+  // Hard redirect clears all in-memory state.
+  window.location.href = "/";
+}
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,27 +30,15 @@ export default function Header() {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
 
-    // Check auth state
-    async function checkAuth() {
-      // Check localStorage token first (Stripe flow)
-      const token = localStorage.getItem("cos_access");
-      if (token) {
-        setIsLoggedIn(true);
-        setChecking(false);
-        return;
-      }
-      // Check Supabase session
-      try {
-        const { data: { session } } = await getSupabase().auth.getSession();
-        if (session?.user) {
-          setIsLoggedIn(true);
-        }
-      } catch {
-        // Silent fail
-      }
-      setChecking(false);
-    }
-    checkAuth();
+    // Real auth state comes from the httpOnly cos_session cookie,
+    // queried via /api/me (which reads the cookie server-side).
+    fetch("/api/me", { credentials: "same-origin" })
+      .then((r) => r.json())
+      .then((d) => {
+        setIsLoggedIn(Boolean(d?.authenticated && (d.paid || d.admin)));
+      })
+      .catch(() => {})
+      .finally(() => setChecking(false));
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -82,6 +87,12 @@ export default function Header() {
                 >
                   Mindset
                 </Link>
+                <button
+                  onClick={handleLogout}
+                  className="px-3 py-2 rounded-lg text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+                >
+                  Log out
+                </button>
               </>
             ) : (
               <>

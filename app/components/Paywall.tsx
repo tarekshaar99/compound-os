@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { getSupabase } from "../lib/supabase";
 
 function CheckoutButton({ className }: { className?: string }) {
   const [loading, setLoading] = useState(false);
@@ -46,38 +45,24 @@ export default function Paywall({
   const [hasAccess, setHasAccess] = useState<boolean | null>(null);
 
   useEffect(() => {
-    async function checkAccess() {
-      // 1. Check localStorage (Stripe-only flow)
-      const token = localStorage.getItem("cos_access");
-      if (token) {
-        setHasAccess(true);
-        return;
-      }
-
-      // 2. Check Supabase auth session
-      const { data: { session } } = await getSupabase().auth.getSession();
-      if (session?.user?.email) {
-        // 3. Check if user is paid or admin in our users table
-        try {
-          const res = await fetch("/api/access", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: session.user.email }),
-          });
-          const data = await res.json();
-          if (data.access) {
-            setHasAccess(true);
-            return;
-          }
-        } catch {
-          // Fall through to no access
-        }
-      }
-
-      setHasAccess(false);
-    }
-
-    checkAccess();
+    // Middleware is the real gate — if this component renders, the cookie
+    // was already validated server-side. This check is only for the edge case
+    // where Paywall is used on a route that middleware doesn't cover (e.g.,
+    // an embedded preview on a marketing page). It hits /api/me which reads
+    // the httpOnly cookie server-side.
+    let cancelled = false;
+    fetch("/api/me", { credentials: "same-origin" })
+      .then((r) => r.json())
+      .then((data) => {
+        if (cancelled) return;
+        setHasAccess(Boolean(data?.authenticated && (data.paid || data.admin)));
+      })
+      .catch(() => {
+        if (!cancelled) setHasAccess(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   // Still checking - show nothing to avoid flash
