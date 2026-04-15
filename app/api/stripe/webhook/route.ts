@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getServiceSupabase } from "../../../lib/supabase";
+import { sendWelcomeEmail } from "../../../lib/email";
+import { FOUNDING_LIMIT } from "../../../lib/pricing";
 
 // Webhook must run on Node.js (not Edge) — needs raw body + stripe SDK.
 export const runtime = "nodejs";
@@ -142,6 +144,24 @@ async function grantAccess(session: Stripe.Checkout.Session) {
   }
 
   console.log(`[stripe-webhook] granted access: ${normalizedEmail} (${session.id})`);
+
+  // Best-effort welcome email. Failures here must NOT propagate — the
+  // DB write already succeeded and the webhook must return 2xx to Stripe.
+  // If RESEND_API_KEY / EMAIL_FROM are unset, this silently skips.
+  try {
+    // We consider anyone who made it in while the founding window was
+    // still open a founding member. Count again to decide phrasing; we've
+    // already inserted them, so they're included in this count.
+    const { count } = await supabase
+      .from("users")
+      .select("*", { count: "exact", head: true })
+      .eq("paid", true);
+    const isFounding = (count ?? FOUNDING_LIMIT + 1) <= FOUNDING_LIMIT;
+    await sendWelcomeEmail({ to: normalizedEmail, isFounding });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "unknown";
+    console.error("[stripe-webhook] welcome email failed (non-fatal):", msg);
+  }
 }
 
 async function revokeAccess(charge: Stripe.Charge) {
