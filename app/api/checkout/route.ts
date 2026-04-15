@@ -1,5 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 function getStripe() {
   const key = process.env.STRIPE_SECRET_KEY;
@@ -7,13 +10,38 @@ function getStripe() {
   return new Stripe(key);
 }
 
-export async function POST() {
+function getOrigin(req: NextRequest): string {
+  // Prefer explicit env in prod, fall back to request origin (preview deploys, local dev).
+  return (
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    process.env.NEXT_PUBLIC_BASE_URL ??
+    req.headers.get("origin") ??
+    `https://${req.headers.get("host") ?? "thecompoundsystem.com"}`
+  );
+}
+
+export async function POST(req: NextRequest) {
   try {
+    // Email is optional here — Stripe collects it on the checkout page.
+    // If the client passes it (from the pricing CTA in Phase 5), we lock identity.
+    let prefillEmail: string | undefined;
+    try {
+      const body = await req.json();
+      if (typeof body?.email === "string" && body.email.includes("@")) {
+        prefillEmail = body.email.trim().toLowerCase();
+      }
+    } catch {
+      // No body is fine.
+    }
+
+    const origin = getOrigin(req);
     const stripe = getStripe();
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
+      // Locks the email for the session — user cannot change it on the Stripe page.
+      ...(prefillEmail ? { customer_email: prefillEmail } : {}),
       line_items: [
         {
           price_data: {
@@ -21,20 +49,22 @@ export async function POST() {
             product_data: {
               name: "Compound OS - Lifetime Access",
               description:
-                "Full access to all three pillars: Trading, Fitness, and Mindset. All future updates included.",
+                "Full access to all three pillars: Markets, Fitness, and Mindset. All future updates included.",
             },
             unit_amount: 2900,
           },
           quantity: 1,
         },
       ],
-      success_url: "https://thecompoundsystem.com/success?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "https://thecompoundsystem.com/#pricing",
+      client_reference_id: prefillEmail ?? undefined,
+      success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/#pricing`,
     });
 
     return NextResponse.json({ url: session.url });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Unknown error";
+    console.error("[checkout] failed:", message);
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
