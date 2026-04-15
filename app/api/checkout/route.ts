@@ -10,13 +10,20 @@ function getStripe() {
   return new Stripe(key);
 }
 
+function cleanUrl(v: string | null | undefined): string | null {
+  if (!v) return null;
+  // Defensive: trim whitespace/newlines sometimes saved in env vars.
+  const t = v.trim().replace(/\/+$/, "");
+  return t.length > 0 ? t : null;
+}
+
 function getOrigin(req: NextRequest): string {
   // Prefer explicit env in prod, fall back to request origin (preview deploys, local dev).
   return (
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    process.env.NEXT_PUBLIC_BASE_URL ??
-    req.headers.get("origin") ??
-    `https://${req.headers.get("host") ?? "thecompoundsystem.com"}`
+    cleanUrl(process.env.NEXT_PUBLIC_SITE_URL) ??
+    cleanUrl(process.env.NEXT_PUBLIC_BASE_URL) ??
+    cleanUrl(req.headers.get("origin")) ??
+    `https://${cleanUrl(req.headers.get("host")) ?? "thecompoundsystem.com"}`
   );
 }
 
