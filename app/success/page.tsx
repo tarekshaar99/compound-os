@@ -28,9 +28,14 @@ function SuccessContent() {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.valid && data.token) {
-          localStorage.setItem("cos_access", data.token);
-          if (data.email) setEmail(data.email);
+        if (data.valid) {
+          // Access is granted server-side by the Stripe webhook (source of truth).
+          // Phase 3 replaces this localStorage flag with an httpOnly signed cookie.
+          localStorage.setItem("cos_access", "1");
+          if (data.email) {
+            setEmail(data.email);
+            localStorage.setItem("cos_email", data.email);
+          }
           setStatus("success");
         } else {
           setStatus("error");
