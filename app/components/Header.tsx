@@ -3,8 +3,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getSupabase } from "../lib/supabase";
+import { track } from "../lib/track";
 
 async function handleLogout() {
+  // Fire-and-forget telemetry before we tear down auth.
+  track("signout", {}, null);
   // Clear cos_session cookie server-side.
   try {
     await fetch("/api/logout", { method: "POST", credentials: "same-origin" });

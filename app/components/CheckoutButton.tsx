@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "../lib/track";
 
 export default function CheckoutButton({
   children,
@@ -32,6 +33,7 @@ export default function CheckoutButton({
         emailToSend = collected.trim();
       }
 
+      track("checkout_initiated", { source: "checkout_button" }, emailToSend || null);
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { getSupabase } from "../lib/supabase";
+import { track } from "../lib/track";
 
 export default function LoginForm({
   defaultEmail = "",
@@ -43,6 +44,7 @@ export default function LoginForm({
 
       if (error) {
         console.error("Supabase OTP error:", error);
+        track("login_failed", { stage: "otp_send", reason: error.message }, email);
         if (error.message?.toLowerCase().includes("rate") || error.status === 429) {
           setErrorMsg("Too many attempts. Please wait a few minutes and try again.");
         } else {
@@ -50,6 +52,7 @@ export default function LoginForm({
         }
         setStatus("error");
       } else {
+        track("login_otp_requested", { tab: activeTab }, email);
         setStatus("code_sent");
         // Focus first input
         setTimeout(() => inputRefs.current[0]?.focus(), 100);
@@ -93,12 +96,15 @@ export default function LoginForm({
             headers: { Authorization: `Bearer ${data.session.access_token}` },
           });
           if (sync.ok) {
+            track("login_otp_verified", { outcome: "paid" }, email);
             setStatus("success");
             setTimeout(() => router.push("/dashboard"), 600);
           } else if (sync.status === 402) {
             // Logged in but no purchase. Route to checkout.
+            track("login_otp_verified", { outcome: "unpaid" }, email);
             router.push("/#pricing");
           } else {
+            track("login_failed", { stage: "session_sync", status: sync.status }, email);
             setErrorMsg("Session sync failed. Please try again.");
             setStatus("code_sent");
           }

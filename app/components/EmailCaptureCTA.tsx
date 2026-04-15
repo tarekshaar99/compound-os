@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "../lib/track";
 
 /**
  * Inline email + CTA pair for the homepage pricing block.
@@ -34,6 +35,7 @@ export default function EmailCaptureCTA({
     }
     setError(null);
     setLoading(true);
+    track("checkout_initiated", { source: "email_capture_cta" }, cleaned);
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
