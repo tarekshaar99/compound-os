@@ -2,7 +2,7 @@ import CheckoutButton from "./components/CheckoutButton";
 import EmailCaptureCTA from "./components/EmailCaptureCTA";
 import Header from "./components/Header";
 import MobileCTA from "./components/MobileCTA";
-import { getPricing, FOUNDING_LIMIT } from "./lib/pricing";
+import { getPricing } from "./lib/pricing";
 
 // Render fresh every 30s so the founding-spots counter stays current
 // without hammering the DB on every request.
@@ -67,15 +67,15 @@ const notForYou = [
   "You need hand-holding or a coach to function",
 ];
 
-function buildFaqs(isFounding: boolean, spotsRemaining: number) {
+function buildFaqs(isFounding: boolean) {
   const pricingFaq = isFounding
     ? {
         q: "Why is it only $49?",
-        a: `$49 is the founding-member price for the first 100 members — ${spotsRemaining} spots remaining as of now. After that the price goes to $99. I built this for myself before I ever sold it; the system already exists, so the price reflects access, not production.`,
+        a: "$49 is the founding-member price for early access. After the founding window closes, the price goes to $99. I built this for myself before I ever sold it; the system already exists, so the price reflects access, not production.",
       }
     : {
         q: "How much is it?",
-        a: "$99, one-time. Lifetime access and every future update included. The $49 founding-member window closed at 100 members.",
+        a: "$99, one-time. Lifetime access and every future update included. The $49 founding-member window has closed.",
       };
 
   return [
@@ -217,27 +217,27 @@ function ProductPreview() {
 
 export default async function Home() {
   const pricing = await getPricing();
-  const faqs = buildFaqs(pricing.isFounding, pricing.spotsRemaining);
-  // Dynamic copy snippets
+  const faqs = buildFaqs(pricing.isFounding);
+  // Dynamic copy snippets. Deliberately no public counts — we keep
+  // `spotsRemaining` server-side for the auto-flip at 100 sales, but don't
+  // ever leak the running tally to the public.
   const priceBig = pricing.display; // "$49" or "$99"
   const anchorPrice = pricing.standardDisplay; // always "$99"
   const foundingTag = pricing.isFounding
-    ? `Founding Member — only ${pricing.spotsRemaining} of ${FOUNDING_LIMIT} spots left`
-    : `Standard pricing — founding spots sold out`;
+    ? `Founding Member — early access pricing`
+    : `Standard pricing — founding window closed`;
   const foundingNote = pricing.isFounding
-    ? `Locked in for the first ${FOUNDING_LIMIT} members. Price goes to ${anchorPrice} after.`
-    : `The founding price is closed. ${anchorPrice} gets you lifetime access and every future update.`;
+    ? `Locked in for founding members. Price goes to ${anchorPrice} after the early-access window closes.`
+    : `The founding window is closed. ${anchorPrice} gets you lifetime access and every future update.`;
   const heroSubcopy = pricing.isFounding
-    ? `First ${FOUNDING_LIMIT} members only — ${pricing.spotsRemaining} spots remaining. Price goes to ${anchorPrice} after.`
+    ? `Founding-member early access. Price goes to ${anchorPrice} after.`
     : `Lifetime access. Every future update included.`;
-  const primaryCtaLabel = pricing.isFounding
-    ? `Get Compound OS — ${priceBig}`
-    : `Get Compound OS — ${priceBig}`;
+  const primaryCtaLabel = `Get Compound OS — ${priceBig}`;
   const stackedCtaLabel = pricing.isFounding
     ? `Claim Founding Price — ${priceBig}`
     : `Get Compound OS — ${priceBig}`;
   const finalCtaSubcopy = pricing.isFounding
-    ? `First ${FOUNDING_LIMIT} members \u00b7 Then ${anchorPrice} \u00b7 No subscription`
+    ? `Founding-member pricing \u00b7 Then ${anchorPrice} \u00b7 No subscription`
     : `One-time payment \u00b7 No subscription \u00b7 No upsells`;
 
   return (

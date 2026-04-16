@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getPricing } from "../../lib/pricing";
+import { getServiceSupabase } from "../../lib/supabase";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -43,6 +44,36 @@ export async function POST(req: NextRequest) {
     }
 
     const origin = getOrigin(req);
+
+    // Block duplicate signups: if this email already has paid access, don't
+    // create a new Stripe session — tell the client to route them to /login.
+    // Refunded users (paid=false, refunded_at set) are allowed to repurchase.
+    if (prefillEmail) {
+      try {
+        const svc = getServiceSupabase();
+        const { data } = await svc
+          .from("users")
+          .select("paid, admin")
+          .eq("email", prefillEmail)
+          .maybeSingle();
+        if (data && (data.paid || data.admin)) {
+          return NextResponse.json(
+            {
+              alreadyPaid: true,
+              email: prefillEmail,
+              message: "This email already has access. Sign in to continue.",
+            },
+            { status: 409 }
+          );
+        }
+      } catch (err) {
+        // DB down? Fail open and let them pay — webhook idempotency handles
+        // the case where they somehow double-charge. Don't block revenue on
+        // a transient DB blip.
+        console.warn("[checkout] duplicate-check failed, allowing:", err);
+      }
+    }
+
     const stripe = getStripe();
 
     // Authoritative price lookup — counts paid users in DB. If < 100,
@@ -53,9 +84,10 @@ export async function POST(req: NextRequest) {
     const productName = pricing.isFounding
       ? "Compound OS - Lifetime Access (Founding Member)"
       : "Compound OS - Lifetime Access";
-    const productDescription = pricing.isFounding
-      ? `Founding-member early access (${pricing.foundingSold} of 100 claimed). Full access to all three pillars: Markets, Fitness, and Mindset. All future updates included.`
-      : "Full access to all three pillars: Markets, Fitness, and Mindset. All future updates included.";
+    // Description intentionally does not leak the founding-member count — we
+    // don't want the Stripe page showing "X of 100 claimed" to the public.
+    const productDescription =
+      "Full access to all three pillars: Markets, Fitness, and Mindset. All future updates included.";
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
