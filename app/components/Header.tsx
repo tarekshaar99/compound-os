@@ -12,7 +12,7 @@ async function handleLogout() {
   try {
     await fetch("/api/logout", { method: "POST", credentials: "same-origin" });
   } catch {
-    // Ignore — worst case the cookie expires in 30d.
+    // Ignore - worst case the cookie expires in 30d.
   }
   // Clear Supabase session from localStorage.
   try {

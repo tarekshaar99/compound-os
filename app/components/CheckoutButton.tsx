@@ -11,7 +11,7 @@ export default function CheckoutButton({
 }: {
   children: React.ReactNode;
   className?: string;
-  /** Optional email prefill — locks customer_email on the Stripe session. */
+  /** Optional email prefill - locks customer_email on the Stripe session. */
   email?: string;
   /** If provided, called when the button is clicked without an email so the
    *  parent can surface an inline form. Returning a string resolves to the
@@ -41,7 +41,7 @@ export default function CheckoutButton({
       });
       const data = await res.json();
       if (res.status === 409 && data.alreadyPaid && emailToSend) {
-        // Already has access — route to login with email prefilled.
+        // Already has access - route to login with email prefilled.
         window.location.href = `/login?email=${encodeURIComponent(emailToSend)}&existing=1`;
         return;
       }

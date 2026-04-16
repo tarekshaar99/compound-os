@@ -26,7 +26,7 @@ function LoginPageInner() {
           </h1>
           <p className="text-[var(--text-secondary)] text-sm max-w-sm mx-auto leading-relaxed">
             {existing
-              ? "This email is already a member. We'll send you a 6-digit sign-in code — no new purchase needed."
+              ? "This email is already a member. We'll send you a 6-digit sign-in code - no new purchase needed."
               : "Already purchased? Enter the email you used and we'll send a 6-digit code. Works from any device."}
           </p>
         </div>

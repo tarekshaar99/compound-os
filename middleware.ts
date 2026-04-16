@@ -34,7 +34,8 @@ export async function middleware(req: NextRequest) {
     pathname.startsWith("/fitness") ||
     pathname.startsWith("/mindset") ||
     pathname.startsWith("/dashboard") ||
-    pathname.startsWith("/account");
+    pathname.startsWith("/account") ||
+    pathname.startsWith("/onboarding");
 
   if (isPaywalled) {
     if (authed) return NextResponse.next();
@@ -55,5 +56,6 @@ export const config = {
     "/mindset/:path*",
     "/dashboard/:path*",
     "/account/:path*",
+    "/onboarding/:path*",
   ],
 };

@@ -81,15 +81,15 @@ function buildFaqs(isFounding: boolean) {
   return [
     {
       q: "Is this a course?",
-      a: "No. No videos, no modules, no drip content. Compound OS is a structured reference system — frameworks, checklists, and protocols organized into sections you open and use. Think operating manual, not lecture series.",
+      a: "No. No videos, no modules, no drip content. Compound OS is a structured reference system - frameworks, checklists, and protocols organized into sections you open and use. Think operating manual, not lecture series.",
     },
     {
       q: "Do I need trading or investing experience?",
-      a: "The Markets pillar starts from first principles — investing foundations, wealth stages, the 6-step analysis framework. If you know what a stock is, you can follow it. If you're already trading, the VIX framework, Wheel Strategy, and risk management will sharpen your execution immediately.",
+      a: "The Markets pillar starts from first principles - investing foundations, wealth stages, the 6-step analysis framework. If you know what a stock is, you can follow it. If you're already trading, the VIX framework, Wheel Strategy, and risk management will sharpen your execution immediately.",
     },
     {
       q: "Will this be updated?",
-      a: "Yes. As the frameworks get refined, your access stays current. One payment covers everything — now and every future update.",
+      a: "Yes. As the frameworks get refined, your access stays current. One payment covers everything - now and every future update.",
     },
     {
       q: "What if it's not for me?",
@@ -185,13 +185,13 @@ function ProductPreview() {
 
             {/* Content preview */}
             <div className="bg-[var(--sidebar-bg)] border border-[var(--border)] rounded-lg p-4">
-              <div className="text-xs font-semibold text-[var(--text-primary)] mb-2">Quick Reference — The Wheel Strategy</div>
+              <div className="text-xs font-semibold text-[var(--text-primary)] mb-2">Quick Reference - The Wheel Strategy</div>
               <div className="space-y-1.5">
                 {[
                   "1. Sell Cash-Secured Puts on stocks you believe in at 20-25 delta",
-                  "2. Get Assigned — this is the plan, not a failure",
+                  "2. Get Assigned - this is the plan, not a failure",
                   "3. Sell Covered Calls at cost basis or above",
-                  "4. Manage by VIX — adjust allocation per regime",
+                  "4. Manage by VIX - adjust allocation per regime",
                 ].map((line, i) => (
                   <div key={i} className="text-[10px] md:text-[11px] text-[var(--text-secondary)] leading-relaxed">{line}</div>
                 ))}
@@ -218,24 +218,24 @@ function ProductPreview() {
 export default async function Home() {
   const pricing = await getPricing();
   const faqs = buildFaqs(pricing.isFounding);
-  // Dynamic copy snippets. Deliberately no public counts — we keep
+  // Dynamic copy snippets. Deliberately no public counts - we keep
   // `spotsRemaining` server-side for the auto-flip at 100 sales, but don't
   // ever leak the running tally to the public.
   const priceBig = pricing.display; // "$49" or "$99"
   const anchorPrice = pricing.standardDisplay; // always "$99"
   const foundingTag = pricing.isFounding
-    ? `Founding Member — early access pricing`
-    : `Standard pricing — founding window closed`;
+    ? `Founding Member - early access pricing`
+    : `Standard pricing - founding window closed`;
   const foundingNote = pricing.isFounding
     ? `Locked in for founding members. Price goes to ${anchorPrice} after the early-access window closes.`
     : `The founding window is closed. ${anchorPrice} gets you lifetime access and every future update.`;
   const heroSubcopy = pricing.isFounding
     ? `Founding-member early access. Price goes to ${anchorPrice} after.`
     : `Lifetime access. Every future update included.`;
-  const primaryCtaLabel = `Get Compound OS — ${priceBig}`;
+  const primaryCtaLabel = `Get Compound OS - ${priceBig}`;
   const stackedCtaLabel = pricing.isFounding
-    ? `Claim Founding Price — ${priceBig}`
-    : `Get Compound OS — ${priceBig}`;
+    ? `Claim Founding Price - ${priceBig}`
+    : `Get Compound OS - ${priceBig}`;
   const finalCtaSubcopy = pricing.isFounding
     ? `Founding-member pricing \u00b7 Then ${anchorPrice} \u00b7 No subscription`
     : `One-time payment \u00b7 No subscription \u00b7 No upsells`;
@@ -253,7 +253,7 @@ export default async function Home() {
           The complete system for how you trade, train, and operate.
         </h1>
         <p className="relative mt-5 text-[var(--text-secondary)] text-base md:text-xl max-w-xl mx-auto leading-relaxed">
-          32 structured sections. Rules, checklists, and frameworks for your money, body, and discipline — built to use, not to consume.
+          32 structured sections. Rules, checklists, and frameworks for your money, body, and discipline - built to use, not to consume.
         </p>
 
         <div className="relative mt-8 md:mt-10">
@@ -304,7 +304,7 @@ export default async function Home() {
           </h2>
           <div className="space-y-4 text-left">
             {[
-              "You've saved the posts, watched the videos, read the threads — and still feel scattered when it's time to execute.",
+              "You've saved the posts, watched the videos, read the threads - and still feel scattered when it's time to execute.",
               "You start strong on Monday and lose structure by Wednesday.",
               "You know what to do in theory but don't have concrete rules for practice.",
               "You're burning energy deciding what to do instead of just doing it.",
@@ -318,7 +318,7 @@ export default async function Home() {
             ))}
           </div>
           <p className="mt-10 text-[var(--text-primary)] text-[15px] md:text-base font-medium leading-relaxed max-w-lg mx-auto">
-            Compound OS replaces the chaos with clear rules, structured frameworks, and repeatable protocols — across the three areas that actually compound.
+            Compound OS replaces the chaos with clear rules, structured frameworks, and repeatable protocols - across the three areas that actually compound.
           </p>
         </div>
       </section>
@@ -398,7 +398,7 @@ export default async function Home() {
               {
                 step: "03",
                 title: "Stay current",
-                desc: "The system gets refined over time. New sections, sharper protocols — all included in your access, forever.",
+                desc: "The system gets refined over time. New sections, sharper protocols - all included in your access, forever.",
               },
             ].map((item) => (
               <div key={item.step} className="text-center md:text-left">
@@ -467,7 +467,7 @@ export default async function Home() {
             Why this exists
           </h2>
           <p className="text-[var(--text-secondary)] text-[15px] leading-[1.9] mb-6">
-            I spent over $20,000 on trading courses from people who were better at marketing than executing. I ego-lifted until I broke my shoulder and back. I swung between extremes in every domain — crypto to day trading, powerlifting to triathlons, hustle culture to withdrawal — until I stopped chasing and started building systems that actually worked. The trading framework came from blowing up accounts. The fitness system came from injuries. The mindset protocols came from years of forced self-examination.
+            I spent over $20,000 on trading courses from people who were better at marketing than executing. I ego-lifted my way into a bad shoulder injury and a wrecked lower back. I swung between extremes in every domain: crypto to day trading, powerlifting to triathlons, hustle culture to withdrawal. Eventually I stopped chasing and started building systems that actually worked. The trading framework came from blowing up accounts. The fitness system came from injuries. The mindset protocols came from years of forced self-examination.
           </p>
           <div className="pt-5 border-t border-[var(--border)]">
             <p className="text-[var(--text-primary)] text-[15px] leading-relaxed font-medium">
@@ -543,7 +543,7 @@ export default async function Home() {
                 "Nutrition, recovery, and supplement protocols",
                 "Mindset frameworks and daily execution system",
                 "Progress tracking across all pillars",
-                "Every future update — forever",
+                "Every future update - forever",
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-2.5">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5" className="mt-0.5 shrink-0"><polyline points="20 6 9 17 4 12" /></svg>
