@@ -26,7 +26,7 @@ export default function MobileCTA() {
       })
       .catch(() => {});
 
-    // Live pricing — reflects whether founding spots remain.
+    // Live pricing - reflects whether founding spots remain.
     fetch("/api/pricing", { credentials: "same-origin" })
       .then((r) => r.json())
       .then((d) => setPricing(d))

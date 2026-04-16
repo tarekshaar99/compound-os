@@ -19,7 +19,7 @@ function CallbackHandler() {
       if (res.ok) {
         router.push("/dashboard");
       } else if (res.status === 402) {
-        // Logged in but not paid — send to pricing.
+        // Logged in but not paid - send to pricing.
         router.push("/#pricing");
       } else {
         setError(true);
@@ -29,7 +29,7 @@ function CallbackHandler() {
     async function handleCallback() {
       const supabase = getSupabase();
 
-      // Method 1: PKCE flow — exchange code for session
+      // Method 1: PKCE flow - exchange code for session
       const code = searchParams.get("code");
       if (code) {
         const { data, error } = await supabase.auth.exchangeCodeForSession(code);
@@ -40,7 +40,7 @@ function CallbackHandler() {
         console.error("Auth callback code exchange error:", error);
       }
 
-      // Method 2: Implicit flow (hash token) — the client auto-detects it.
+      // Method 2: Implicit flow (hash token) - the client auto-detects it.
       if (typeof window !== "undefined" && window.location.hash) {
         await new Promise((r) => setTimeout(r, 500));
         const { data: { session } } = await supabase.auth.getSession();

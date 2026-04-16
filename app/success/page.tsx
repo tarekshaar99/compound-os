@@ -22,7 +22,7 @@ function SuccessContent() {
     }
 
     // /api/verify mints the signed httpOnly cos_session cookie on success.
-    // We don't touch localStorage — the cookie is the trust boundary.
+    // We don't touch localStorage - the cookie is the trust boundary.
     fetch("/api/verify", {
       method: "POST",
       credentials: "same-origin",
@@ -116,7 +116,7 @@ function SuccessContent() {
             </h2>
           </div>
           <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5 pl-10">
-            Create your account so you can log in from any device. We&apos;ll send a magic link — no password needed.
+            Create your account so you can log in from any device. We&apos;ll send a magic link - no password needed.
           </p>
           <div className="pl-10">
             <LoginForm defaultEmail={email} mode="signup" compact />

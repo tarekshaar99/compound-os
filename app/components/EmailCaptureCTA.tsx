@@ -8,10 +8,10 @@ import { track } from "../lib/track";
  *
  * Why: collecting email BEFORE Stripe improves conversion (email prefilled,
  * one fewer field on Stripe page) and gives us the customer's address even
- * if they drop out of Stripe — useful for future abandoned-checkout flows.
+ * if they drop out of Stripe - useful for future abandoned-checkout flows.
  *
  * Submit → POST /api/checkout with {email} → redirect to Stripe.
- * Never stores the email locally — Stripe + the webhook handle that.
+ * Never stores the email locally - Stripe + the webhook handle that.
  */
 export default function EmailCaptureCTA({
   label,
@@ -44,7 +44,7 @@ export default function EmailCaptureCTA({
       });
       const data = await res.json();
       if (res.status === 409 && data.alreadyPaid) {
-        // This email already has access — send them to /login with email prefilled.
+        // This email already has access - send them to /login with email prefilled.
         window.location.href = `/login?email=${encodeURIComponent(cleaned)}&existing=1`;
         return;
       }

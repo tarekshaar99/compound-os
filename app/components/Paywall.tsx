@@ -34,8 +34,8 @@ function CheckoutButton({ className }: { className?: string }) {
 
   const label = pricing
     ? pricing.isFounding
-      ? `Get full access — ${pricing.display} (founding price)`
-      : `Get full access — ${pricing.display} one-time`
+      ? `Get full access - ${pricing.display} (founding price)`
+      : `Get full access - ${pricing.display} one-time`
     : "Get full access";
 
   return (
@@ -64,7 +64,7 @@ export default function Paywall({
   const [hasAccess, setHasAccess] = useState<boolean | null>(null);
 
   useEffect(() => {
-    // Middleware is the real gate — if this component renders, the cookie
+    // Middleware is the real gate - if this component renders, the cookie
     // was already validated server-side. This check is only for the edge case
     // where Paywall is used on a route that middleware doesn't cover (e.g.,
     // an embedded preview on a marketing page). It hits /api/me which reads
@@ -129,7 +129,7 @@ export default function Paywall({
             You&apos;re seeing a preview
           </h2>
           <p className="text-[var(--text-secondary)] text-base md:text-lg max-w-lg mb-3 leading-relaxed">
-            The full system includes structured frameworks, checklists, and protocols across Trading, Fitness, and Mindset — built from years of real execution.
+            The full system includes structured frameworks, checklists, and protocols across Trading, Fitness, and Mindset - built from years of real execution.
           </p>
           <p className="text-[var(--text-muted)] text-sm max-w-md mb-8 leading-relaxed">
             One purchase. Lifetime access. Every future update included.

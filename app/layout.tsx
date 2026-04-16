@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Compound OS",
-  description: "Trading, Mindset & Fitness — your personal operating system.",
+  description: "Trading, Mindset & Fitness - your personal operating system.",
 };
 
 export default function RootLayout({

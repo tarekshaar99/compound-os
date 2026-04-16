@@ -17,7 +17,7 @@ interface AccountInfo {
 }
 
 function formatDate(iso: string | null | undefined): string {
-  if (!iso) return "—";
+  if (!iso) return "-";
   try {
     const d = new Date(iso);
     return d.toLocaleDateString(undefined, {
@@ -26,7 +26,7 @@ function formatDate(iso: string | null | undefined): string {
       day: "numeric",
     });
   } catch {
-    return "—";
+    return "-";
   }
 }
 
@@ -92,7 +92,7 @@ export default function AccountPage() {
         </div>
 
         <div className="rounded-2xl border border-[var(--border)] bg-[var(--card-bg)] p-6 md:p-7 mb-6">
-          <Row label="Email" value={info.email ?? "—"} />
+          <Row label="Email" value={info.email ?? "-"} />
           <Row
             label="Status"
             value={
