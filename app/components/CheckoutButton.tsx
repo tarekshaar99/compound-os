@@ -40,6 +40,11 @@ export default function CheckoutButton({
         body: JSON.stringify(emailToSend ? { email: emailToSend } : {}),
       });
       const data = await res.json();
+      if (res.status === 409 && data.alreadyPaid && emailToSend) {
+        // Already has access — route to login with email prefilled.
+        window.location.href = `/login?email=${encodeURIComponent(emailToSend)}&existing=1`;
+        return;
+      }
       if (data.url) {
         window.location.href = data.url;
       } else {

@@ -43,6 +43,11 @@ export default function EmailCaptureCTA({
         body: JSON.stringify({ email: cleaned }),
       });
       const data = await res.json();
+      if (res.status === 409 && data.alreadyPaid) {
+        // This email already has access — send them to /login with email prefilled.
+        window.location.href = `/login?email=${encodeURIComponent(cleaned)}&existing=1`;
+        return;
+      }
       if (data.url) {
         window.location.href = data.url;
       } else {
