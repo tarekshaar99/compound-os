@@ -10,6 +10,7 @@ function LoginPageInner() {
   // Set when /api/checkout bounces a user who already has access.
   const existing = params.get("existing") === "1";
   const emailParam = params.get("email") ?? "";
+  const returnParam = params.get("return") ?? undefined;
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6">
@@ -31,7 +32,7 @@ function LoginPageInner() {
           </p>
         </div>
 
-        <LoginForm defaultEmail={emailParam} />
+        <LoginForm defaultEmail={emailParam} redirectTo={returnParam} />
 
         <p className="text-center text-sm text-[var(--text-muted)] mt-6">
           {existing ? (

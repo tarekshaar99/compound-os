@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface PricingLite {
   display: string;
@@ -62,6 +63,10 @@ export default function Paywall({
   accent?: string;
 }) {
   const [hasAccess, setHasAccess] = useState<boolean | null>(null);
+  const pathname = usePathname();
+  const loginHref = pathname
+    ? `/login?return=${encodeURIComponent(pathname)}`
+    : "/login";
 
   useEffect(() => {
     // Middleware is the real gate - if this component renders, the cookie
@@ -159,7 +164,7 @@ export default function Paywall({
           </div>
 
           <Link
-            href="/login"
+            href={loginHref}
             className="mt-8 text-sm text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors"
           >
             Already have access? Sign in &rarr;

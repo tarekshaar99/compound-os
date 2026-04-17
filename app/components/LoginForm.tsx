@@ -9,11 +9,18 @@ export default function LoginForm({
   defaultEmail = "",
   mode = "signin",
   compact = false,
+  redirectTo,
 }: {
   defaultEmail?: string;
   mode?: "signin" | "signup";
   compact?: boolean;
+  /** Optional path to redirect to on successful sign-in. Must start with "/"
+   *  to prevent open-redirect. Defaults to /dashboard. */
+  redirectTo?: string;
 }) {
+  // Whitelist: only accept internal paths. Anything else falls back to dashboard.
+  const safeRedirect =
+    redirectTo && /^\/[^/]/.test(redirectTo) ? redirectTo : "/dashboard";
   const router = useRouter();
   const [email, setEmail] = useState(defaultEmail);
   const [activeTab, setActiveTab] = useState<"signin" | "signup">(mode);
@@ -98,7 +105,7 @@ export default function LoginForm({
           if (sync.ok) {
             track("login_otp_verified", { outcome: "paid" }, email);
             setStatus("success");
-            setTimeout(() => router.push("/dashboard"), 600);
+            setTimeout(() => router.push(safeRedirect), 600);
           } else if (sync.status === 402) {
             // Logged in but no purchase. Route to checkout.
             track("login_otp_verified", { outcome: "unpaid" }, email);
