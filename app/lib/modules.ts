@@ -237,6 +237,23 @@ export const MODULES: ModuleDef[] = [
     unlockBy: ["mindset.discipline", "mindset.emotional-regulation"],
     estMinutes: 11,
   },
+
+  /* ───────── CAPSTONE (housed in Mindset as the integrator) ───────── */
+  {
+    id: "mindset.operators-week",
+    pillar: "mindset",
+    tier: "advanced",
+    title: "The Operator's Week",
+    blurb:
+      "How the three pillars interlock in a real Monday to Sunday. The capstone that turns three tracks into one system.",
+    path: "/mindset/m/operators-week",
+    unlockBy: [
+      "mindset.discipline",
+      "fitness.weekly-split",
+      "trading.weekly-review",
+    ],
+    estMinutes: 15,
+  },
 ];
 
 export function getModule(id: string): ModuleDef | undefined {

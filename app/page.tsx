@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import MobileCTA from "./components/MobileCTA";
 import ProductPreview from "./components/ProductPreview";
 import { getPricing } from "./lib/pricing";
+import { MODULES } from "./lib/modules";
 
 // Render fresh every 30s so the founding-spots counter stays current
 // without hammering the DB on every request.
@@ -12,68 +13,81 @@ export const revalidate = 30;
 
 /* ────────────────────── DATA ────────────────────── */
 
+/**
+ * Public "what's in the product" feature list.
+ *
+ * Every bullet here maps to an actual module in `app/lib/modules.ts`.
+ * If a bullet isn't backed by a real module, it does not belong on the
+ * homepage. That rule is the whole reason this list looks short and
+ * specific instead of puffy and long.
+ */
 const systemIncludes = [
   {
     pillar: "Markets",
     accent: "#00d4aa",
-    icon: "◈",
+    icon: "\u25C8",
+    tagline: "Capital-building without the gambling.",
     items: [
-      "Investing foundations, 4 wealth stages & the 6-step analysis framework",
-      "Complete Wheel Strategy (CSPs, covered calls, spreads, LEAPS)",
-      "VIX-based capital allocation model",
-      "3-tier portfolio allocation & position sizing math",
-      "Technical analysis, Elliott Waves, Fibonacci framework",
-      "Macro regimes, key indicators, and 11 mistakes to avoid",
+      "Markets 101: the vocabulary and the five free tools that replace paid subscriptions",
+      "Investing Foundations: the investing, speculating, and gambling framework",
+      "Capital Preservation: position sizing math, drawdown rules, cash targets",
+      "Pre-Trade Checklist: nine questions that filter the trades you shouldn't take",
+      "The Wheel Strategy: cash-secured puts into covered calls, with strike-selection math",
+      "VIX Regime Framework: four zones and the capital deployment ladder",
+      "Weekly Review Ritual: the thirty-minute Sunday process that compounds",
     ],
   },
   {
     pillar: "Fitness",
     accent: "#f97316",
-    icon: "⚡",
+    icon: "\u26A1",
+    tagline: "Strong, fit, mobile. For decades.",
     items: [
-      "Full hybrid athlete program (3x strength + 2-3x cardio)",
-      "Time-under-tension protocols with progression rules",
-      "Zone 2 and interval cardio programming",
-      "Nutrition framework with macro targets",
-      "Mobility, recovery, and supplement stack",
-      "Nervous system regulation: breathwork, fasting, cold exposure",
+      "Training Philosophy: hybrid athlete, not gym rat",
+      "The Weekly Split: three strength days, two to three cardio, mobility daily",
+      "Time Under Tension: why tempo matters more than weight",
+      "Zone 2 and Intervals: the cardio structure most people get wrong",
+      "Recovery and Sleep: deload logic and five signs you're cooked",
+      "Peptides: An Honest Note: what they are, the real risks, what to check first",
     ],
   },
   {
     pillar: "Mindset",
     accent: "#a78bfa",
-    icon: "◉",
+    icon: "\u25C9",
+    tagline: "Execute on days you don't feel like it.",
     items: [
-      "Identity mapping & ego pattern recognition",
-      "Emotional regulation and trigger response system",
-      "Habit and addiction pattern-breaking protocols",
-      "Wealth psychology, money beliefs, the $500K tipping point",
-      "Decision-making and relationship frameworks",
-      "Daily execution routine and journaling system",
+      "Identity and Self-Image: the story that drives your behavior, and how to rewrite it",
+      "Emotional Regulation: the three-step protocol for not acting on tilt",
+      "Daily Discipline: the four anchors that make willpower unnecessary",
+      "Trigger Awareness: catching the pattern mid-run and installing friction",
+      "Structured Journaling: three prompts that surface the pattern you're running",
+      "Decision-Making Under Pressure: binary framing, sleep-on-it, pre-mortem",
+      "The Operator's Week: how the three pillars interlock in a real schedule",
     ],
   },
 ];
 
 const forYou = [
   "You want structure, not motivation",
-  "You keep starting but can't stay consistent",
+  "You have income and ambition but scattered execution",
   "You've bought courses that collected dust",
   "You want rules you can follow, not content to consume",
-  "You're building something and need your systems dialed in",
+  "You're building something real and need your systems dialed in",
 ];
 
 const notForYou = [
-  "You want quick wins or get-rich signals",
+  "You want quick wins, signal groups, or get-rich setups",
   "You want to be told what to think instead of how to think",
-  "You avoid accountability and blame circumstances",
-  "You need hand-holding or a coach to function",
+  "You need a coach or hand-holding to function",
+  "You think the problem is information, not execution",
 ];
 
 function buildFaqs(isFounding: boolean) {
   const pricingFaq = isFounding
     ? {
-        q: "Why is it only $49?",
-        a: "$49 is the founding-member price for early access. After the founding window closes, the price goes to $99. I built this for myself before I ever sold it; the system already exists, so the price reflects access, not production.",
+        q: "Why is it $49?",
+        a: "$49 is the founding-member price for early access. After the founding window closes, the price goes to $99. I built this for myself before I ever sold it, so the price reflects access, not production.",
       }
     : {
         q: "How much is it?",
@@ -83,28 +97,28 @@ function buildFaqs(isFounding: boolean) {
   return [
     {
       q: "Is this a course?",
-      a: "No. No videos, no modules, no drip content. Compound OS is a structured reference system - frameworks, checklists, and protocols organized into sections you open and use. Think operating manual, not lecture series.",
+      a: "No. No videos, no drip. Compound OS is a structured reference system: frameworks, checklists, and weekly protocols organized into short modules you open and use. Think operating manual, not lecture series.",
     },
     {
       q: "Do I need trading or investing experience?",
-      a: "The Markets pillar starts from first principles - investing foundations, wealth stages, the 6-step analysis framework. If you know what a stock is, you can follow it. If you're already trading, the VIX framework, Wheel Strategy, and risk management will sharpen your execution immediately.",
+      a: "No. The Markets pillar opens with Markets 101: the vocabulary (VIX, delta, strike, DTE), the free tools that replace paid subscriptions, and the framework for telling investing apart from speculating and gambling. From there, everything builds in order.",
     },
     {
       q: "Will this be updated?",
-      a: "Yes. As the frameworks get refined, your access stays current. One payment covers everything - now and every future update.",
+      a: "Yes. As frameworks get sharper or a new section is useful, it goes in. One payment covers everything, now and going forward.",
     },
     {
       q: "What if it's not for me?",
-      a: "Reach out. I'm not interested in taking money from people who won't use it.",
+      a: "Email within fourteen days and you get a full refund, no questions. Past fourteen days the purchase is final, because the product is designed to be opened and used, not collected.",
     },
     pricingFaq,
     {
       q: "What format is the content in?",
-      a: "A private web app you access from any device. Structured sections with a sidebar, search, and progress tracking. It's designed to be used weekly, not read once.",
+      a: "A private web app you access from any device. Each module is a short read with a principle, a worked example, common mistakes, a checklist that tracks what you've actually done, a quick quiz, and a reflection prompt. Progress is saved to your account.",
     },
     {
       q: "Can I access it on my phone?",
-      a: "Yes. The system is fully responsive. Most members use it on mobile during their market session, at the gym, or during their morning routine.",
+      a: "Yes. Fully responsive. Most members use it on mobile during their market session, at the gym, or during their morning routine.",
     },
   ];
 }
@@ -114,27 +128,34 @@ function buildFaqs(isFounding: boolean) {
 export default async function Home() {
   const pricing = await getPricing();
   const faqs = buildFaqs(pricing.isFounding);
-  // Dynamic copy snippets. Deliberately no public counts - we keep
-  // `spotsRemaining` server-side for the auto-flip at 100 sales, but don't
-  // ever leak the running tally to the public.
+  const moduleCount = MODULES.length; // single source of truth
+  const totalMinutes = MODULES.reduce((a, m) => a + m.estMinutes, 0);
+
   const priceBig = pricing.display; // "$49" or "$99"
   const anchorPrice = pricing.standardDisplay; // always "$99"
   const foundingTag = pricing.isFounding
-    ? `Founding Member - early access pricing`
-    : `Standard pricing - founding window closed`;
+    ? `Founding Member \u00b7 early access pricing`
+    : `Standard pricing \u00b7 founding window closed`;
   const foundingNote = pricing.isFounding
     ? `Locked in for founding members. Price goes to ${anchorPrice} after the early-access window closes.`
     : `The founding window is closed. ${anchorPrice} gets you lifetime access and every future update.`;
   const heroSubcopy = pricing.isFounding
     ? `Founding-member early access. Price goes to ${anchorPrice} after.`
     : `Lifetime access. Every future update included.`;
-  const primaryCtaLabel = `Get Compound OS - ${priceBig}`;
+  const primaryCtaLabel = `Get Compound OS \u00b7 ${priceBig}`;
   const stackedCtaLabel = pricing.isFounding
-    ? `Claim Founding Price - ${priceBig}`
-    : `Get Compound OS - ${priceBig}`;
+    ? `Claim Founding Price \u00b7 ${priceBig}`
+    : `Get Compound OS \u00b7 ${priceBig}`;
   const finalCtaSubcopy = pricing.isFounding
     ? `Founding-member pricing \u00b7 Then ${anchorPrice} \u00b7 No subscription`
     : `One-time payment \u00b7 No subscription \u00b7 No upsells`;
+
+  // Module list, grouped by pillar, for the transparent TOC section.
+  const pillarOrder: Array<{ key: "trading" | "fitness" | "mindset"; label: string; accent: string }> = [
+    { key: "trading", label: "Markets", accent: "#00d4aa" },
+    { key: "fitness", label: "Fitness", accent: "#f97316" },
+    { key: "mindset", label: "Mindset", accent: "#a78bfa" },
+  ];
 
   return (
     <div className="min-h-screen">
@@ -142,14 +163,14 @@ export default async function Home() {
 
       {/* ───── HERO ───── */}
       <section className="relative flex flex-col items-center justify-center text-center px-6 pt-28 pb-14 md:pt-36 md:pb-20 overflow-hidden">
-        {/* Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[var(--accent)]/5 rounded-full blur-[120px] pointer-events-none" />
 
         <h1 className="relative text-[1.75rem] md:text-5xl lg:text-[3.25rem] font-bold tracking-tight text-[var(--text-primary)] leading-[1.15] max-w-3xl">
-          The complete system for how you trade, train, and operate.
+          The operating manual for how you trade, train, and operate.
         </h1>
         <p className="relative mt-5 text-[var(--text-secondary)] text-base md:text-xl max-w-xl mx-auto leading-relaxed">
-          32 structured sections. Rules, checklists, and frameworks for your money, body, and discipline - built to use, not to consume.
+          {moduleCount} focused modules across Markets, Fitness, and Mindset.
+          Rules, checklists, and weekly protocols, built to run, not to read.
         </p>
 
         <div className="relative mt-8 md:mt-10">
@@ -158,7 +179,7 @@ export default async function Home() {
           </CheckoutButton>
           <p className="mt-3.5 text-sm text-[var(--text-muted)]">
             {pricing.isFounding && (
-              <span className="text-[var(--accent)] font-semibold">Founding price.{" "}</span>
+              <span className="text-[var(--accent)] font-semibold">Founding price. </span>
             )}
             {heroSubcopy}
           </p>
@@ -168,15 +189,15 @@ export default async function Home() {
         <div className="relative mt-12 flex flex-wrap justify-center gap-x-6 gap-y-2.5 text-xs text-[var(--text-muted)]">
           <span className="flex items-center gap-1.5">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
-            32 sections across 3 pillars
+            {moduleCount} modules across 3 pillars
           </span>
           <span className="flex items-center gap-1.5">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
-            Use on any device
+            Roughly {Math.round(totalMinutes / 60 * 10) / 10} hours of applied content
           </span>
           <span className="flex items-center gap-1.5">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
-            Built from 7+ years of execution
+            One payment, lifetime access
           </span>
         </div>
       </section>
@@ -185,13 +206,12 @@ export default async function Home() {
       <section className="px-6 pt-4 pb-16 md:pb-24">
         <div className="text-center mb-3">
           <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-medium">
-            See what's inside
+            See what&apos;s inside
           </p>
         </div>
         <div className="text-center mb-8">
           <p className="text-sm text-[var(--text-secondary)] max-w-md mx-auto">
-            Switch pillars to preview the actual sidebar, content, and
-            checklists you&apos;ll be using.
+            Switch pillars to preview the sidebar, content, and checklists you&apos;ll actually be using.
           </p>
         </div>
         <ProductPreview />
@@ -201,15 +221,15 @@ export default async function Home() {
       <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-8 tracking-tight">
-            You don't need more information.<br className="hidden sm:block" />
+            You don&apos;t need more information.<br className="hidden sm:block" />
             You need a system that runs.
           </h2>
           <div className="space-y-4 text-left">
             {[
-              "You've saved the posts, watched the videos, read the threads - and still feel scattered when it's time to execute.",
+              "You\u2019ve saved the posts, watched the videos, read the threads, and still feel scattered when it\u2019s time to execute.",
               "You start strong on Monday and lose structure by Wednesday.",
-              "You know what to do in theory but don't have concrete rules for practice.",
-              "You're burning energy deciding what to do instead of just doing it.",
+              "You know what to do in theory but don\u2019t have concrete rules for practice.",
+              "You\u2019re burning energy deciding what to do instead of just doing it.",
             ].map((line, i) => (
               <div key={i} className="flex items-start gap-3.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--text-muted)] mt-2.5 shrink-0" />
@@ -220,7 +240,7 @@ export default async function Home() {
             ))}
           </div>
           <p className="mt-10 text-[var(--text-primary)] text-[15px] md:text-base font-medium leading-relaxed max-w-lg mx-auto">
-            Compound OS replaces the chaos with clear rules, structured frameworks, and repeatable protocols - across the three areas that actually compound.
+            Compound OS replaces the chaos with clear rules, structured frameworks, and repeatable protocols across the three areas that actually compound.
           </p>
         </div>
       </section>
@@ -233,7 +253,7 @@ export default async function Home() {
               What you get
             </h2>
             <p className="text-[var(--text-secondary)] max-w-lg mx-auto text-[15px]">
-              Three pillars. 32 sections. Every framework structured, searchable, and ready to execute from day one.
+              Three pillars. {moduleCount} modules. Every framework structured, searchable, and ready to execute from day one.
             </p>
           </div>
 
@@ -243,7 +263,7 @@ export default async function Home() {
                 key={pillar.pillar}
                 className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-6 md:p-7"
               >
-                <div className="flex items-center gap-3 mb-5">
+                <div className="flex items-center gap-3 mb-2">
                   <div
                     className="w-10 h-10 rounded-xl flex items-center justify-center text-lg"
                     style={{
@@ -260,6 +280,9 @@ export default async function Home() {
                     {pillar.pillar}
                   </h3>
                 </div>
+                <p className="text-[12px] text-[var(--text-muted)] mb-5 leading-relaxed">
+                  {pillar.tagline}
+                </p>
                 <ul className="space-y-2.5">
                   {pillar.items.map((item, i) => (
                     <li key={i} className="flex items-start gap-2.5">
@@ -278,8 +301,64 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ───── HOW IT WORKS ───── */}
+      {/* ───── THE FULL TABLE OF CONTENTS ───── */}
       <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-medium mb-3">
+              Full table of contents
+            </p>
+            <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] tracking-tight">
+              Every module, every minute.
+            </h2>
+            <p className="mt-3 text-[var(--text-secondary)] text-[15px] max-w-md mx-auto">
+              Nothing hidden. This is the complete list.
+            </p>
+          </div>
+
+          <div className="space-y-10">
+            {pillarOrder.map((po) => {
+              const pillarMods = MODULES.filter((m) => m.pillar === po.key);
+              return (
+                <div key={po.key}>
+                  <div className="flex items-baseline justify-between mb-4 pb-3 border-b border-[var(--border)]">
+                    <h3 className="text-sm font-bold uppercase tracking-widest" style={{ color: po.accent }}>
+                      {po.label}
+                    </h3>
+                    <span className="text-[11px] text-[var(--text-muted)]">
+                      {pillarMods.length} modules
+                    </span>
+                  </div>
+                  <ul className="divide-y divide-[var(--border)]">
+                    {pillarMods.map((m) => (
+                      <li key={m.id} className="flex items-center justify-between py-2.5 gap-4">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <span className="text-[10px] uppercase tracking-wider text-[var(--text-muted)] w-20 shrink-0">
+                            {m.tier === "core" ? "Core" : "Advanced"}
+                          </span>
+                          <span className="text-[14px] text-[var(--text-secondary)] truncate">
+                            {m.title}
+                          </span>
+                        </div>
+                        <span className="text-[11px] text-[var(--text-muted)] shrink-0 whitespace-nowrap">
+                          {m.estMinutes} min
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+
+          <p className="mt-10 text-center text-xs text-[var(--text-muted)]">
+            Plus reference playbooks with templates and quick-access cheat sheets for each pillar.
+          </p>
+        </div>
+      </section>
+
+      {/* ───── HOW IT WORKS ───── */}
+      <section className="px-6 py-16 md:py-24">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] text-center mb-12 tracking-tight">
             How it works
@@ -295,12 +374,12 @@ export default async function Home() {
               {
                 step: "02",
                 title: "Open and execute",
-                desc: "Navigate to the section you need. Follow the framework. Use the checklist. Close the tab. Repeat weekly.",
+                desc: "Navigate to the module you need. Read the principle, run the checklist, mark it done. Close the tab. Repeat weekly.",
               },
               {
                 step: "03",
                 title: "Stay current",
-                desc: "The system gets refined over time. New sections, sharper protocols - all included in your access, forever.",
+                desc: "The system gets refined over time. New modules, sharper protocols, all included in your access forever.",
               },
             ].map((item) => (
               <div key={item.step} className="text-center md:text-left">
@@ -320,7 +399,7 @@ export default async function Home() {
       </section>
 
       {/* ───── WHO IT'S FOR / NOT FOR ───── */}
-      <section className="px-6 py-16 md:py-24">
+      <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-7">
             <div className="flex items-center gap-3 mb-5">
@@ -363,30 +442,28 @@ export default async function Home() {
       </section>
 
       {/* ───── WHY THIS EXISTS ───── */}
-      <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
+      <section className="px-6 py-16 md:py-24">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-xs uppercase tracking-widest text-[var(--accent)] font-medium mb-8 text-center">
             Why this exists
           </h2>
           <p className="text-[var(--text-secondary)] text-[15px] leading-[1.9] mb-6">
-            I spent over $20,000 on trading courses from people who were better at marketing than executing. I ego-lifted my way into a bad shoulder injury and a wrecked lower back. I swung between extremes in every domain: crypto to day trading, powerlifting to triathlons, hustle culture to withdrawal. Eventually I stopped chasing and started building systems that actually worked. The trading framework came from blowing up accounts. The fitness system came from injuries. The mindset protocols came from years of forced self-examination.
+            I spent over twenty thousand dollars on trading courses from people who were better at marketing than executing. I ego-lifted my way into a bad shoulder and a wrecked lower back. I swung between extremes in every domain: crypto to day trading, powerlifting to triathlons, hustle culture to withdrawal. Eventually I stopped chasing and started building systems that actually worked. The trading framework came from blowing up accounts. The fitness system came from injuries. The mindset protocols came from years of forced self-examination.
           </p>
           <div className="pt-5 border-t border-[var(--border)]">
             <p className="text-[var(--text-primary)] text-[15px] leading-relaxed font-medium">
-              Compound OS is what I wish existed when I started. I built it for myself. Now it's available to anyone serious enough to use it.
+              Compound OS is what I wish existed when I started. I built it for myself first. It lives here now because the tools held up and asking people to rebuild them one by one is a waste of their years.
             </p>
           </div>
         </div>
       </section>
 
       {/* ───── OFFER STACK ───── */}
-      <section id="pricing" className="px-6 py-16 md:py-24">
+      <section id="pricing" className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
         <div className="max-w-xl mx-auto">
           <div className="relative bg-[var(--card-bg)] border border-[var(--accent)]/20 rounded-2xl p-8 md:p-12 overflow-hidden">
-            {/* Glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-[var(--accent)]/8 rounded-full blur-[80px] pointer-events-none" />
 
-            {/* Founding member tag */}
             <div className="relative flex justify-center mb-5">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/8 text-[11px] font-semibold text-[var(--accent)] uppercase tracking-wider">
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
@@ -399,22 +476,8 @@ export default async function Home() {
                 Full system. One price.
               </h2>
               <p className="text-[var(--text-secondary)] text-sm mb-8 max-w-sm mx-auto">
-                All three pillars, all 32 sections, all future updates.
+                All three pillars, all {moduleCount} modules, every future update.
               </p>
-            </div>
-
-            {/* Value anchoring */}
-            <div className="relative space-y-0 mb-8">
-              {[
-                { label: "Trading courses & coaching", crossed: "$2,000+" },
-                { label: "Personal training & nutrition plans", crossed: "$1,500+" },
-                { label: "Mindset coaching & programs", crossed: "$500+" },
-              ].map((row, i) => (
-                <div key={i} className="flex items-center justify-between py-2.5 border-b border-[var(--border)]">
-                  <span className="text-sm text-[var(--text-secondary)]">{row.label}</span>
-                  <span className="text-sm text-[var(--text-muted)] line-through">{row.crossed}</span>
-                </div>
-              ))}
             </div>
 
             <div className="relative text-center mb-8">
@@ -436,20 +499,21 @@ export default async function Home() {
               </p>
             </div>
 
-            {/* Checklist */}
+            {/* What you actually get */}
             <ul className="relative space-y-3 max-w-sm mx-auto mb-10">
               {[
-                "Full options trading framework with checklists",
-                "VIX allocation model & macro playbooks",
-                "Complete hybrid athlete training system",
-                "Nutrition, recovery, and supplement protocols",
-                "Mindset frameworks and daily execution system",
-                "Progress tracking across all pillars",
-                "Every future update - forever",
+                `${moduleCount} structured modules across Markets, Fitness, and Mindset`,
+                "Checklists that track what you\u2019ve actually done",
+                "Reference playbooks with templates and cheat sheets",
+                "Progress saved to your account, any device",
+                "Every future module and refinement, forever",
+                "Fourteen-day refund, no questions",
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-2.5">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5" className="mt-0.5 shrink-0"><polyline points="20 6 9 17 4 12" /></svg>
-                  <span className="text-sm text-[var(--text-secondary)] leading-relaxed">{item}</span>
+                  <span className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                    {item}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -465,7 +529,7 @@ export default async function Home() {
       </section>
 
       {/* ───── FAQ ───── */}
-      <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
+      <section className="px-6 py-16 md:py-24">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] text-center mb-10 tracking-tight">
             Questions
@@ -501,7 +565,7 @@ export default async function Home() {
       </section>
 
       {/* ───── FINAL CTA ───── */}
-      <section className="px-6 py-16 md:py-24">
+      <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4 tracking-tight">
             Your system is ready.
@@ -520,10 +584,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ───── FOOTER ───── */}
       <Footer />
 
-      {/* Sticky mobile CTA */}
       <MobileCTA />
     </div>
   );

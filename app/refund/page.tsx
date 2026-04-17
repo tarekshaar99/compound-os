@@ -56,11 +56,12 @@ export default function RefundPage() {
                 After the window
               </h2>
               <p>
-                Past {REFUND_WINDOW_DAYS} days, the purchase is final. We
-                keep this rule simple because Compound OS is designed to be
-                opened and used immediately. If you could not get started
-                within two weeks, odds are high the product is not the
-                bottleneck and a refund will not fix it.
+                Past {REFUND_WINDOW_DAYS} days, the purchase is final.
+                Two weeks is enough time to open the product, work through
+                the start-here modules in each pillar, and decide if it is
+                for you. If something unusual comes up (a family emergency,
+                an illness, a charge you do not recognize), email us anyway.
+                We will look at it case by case.
               </p>
             </section>
 
