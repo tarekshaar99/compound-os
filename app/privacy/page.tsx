@@ -54,10 +54,10 @@ export default function PrivacyPage() {
                 Compound OS is operated by Tarek Shaar, an independent
                 operator based in the UAE. Reach us any time at{" "}
                 <a
-                  href="mailto:hi@thecompoundsystem.com"
+                  href="mailto:hello@thecompoundsystem.com"
                   className="text-[var(--text-primary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)]"
                 >
-                  hi@thecompoundsystem.com
+                  hello@thecompoundsystem.com
                 </a>
                 .
               </p>
@@ -170,10 +170,10 @@ export default function PrivacyPage() {
                 corrections, or ask us to delete your account and associated
                 data entirely. Email{" "}
                 <a
-                  href="mailto:hi@thecompoundsystem.com"
+                  href="mailto:hello@thecompoundsystem.com"
                   className="text-[var(--text-primary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)]"
                 >
-                  hi@thecompoundsystem.com
+                  hello@thecompoundsystem.com
                 </a>{" "}
                 and we will respond within a reasonable window, usually a
                 few business days.

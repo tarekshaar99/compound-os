@@ -71,10 +71,10 @@ export default function RefundPage() {
               <p>
                 Send an email to{" "}
                 <a
-                  href="mailto:hi@thecompoundsystem.com"
+                  href="mailto:hello@thecompoundsystem.com"
                   className="text-[var(--text-primary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)]"
                 >
-                  hi@thecompoundsystem.com
+                  hello@thecompoundsystem.com
                 </a>{" "}
                 from the same email address you used to purchase. Include
                 your name or order reference if you have it. We will process

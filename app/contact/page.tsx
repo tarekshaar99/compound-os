@@ -29,11 +29,11 @@ export default function ContactPage() {
             I usually reply within a business day.
           </p>
 
-          {/* Contact cards */}
-          <div className="mt-10 space-y-4">
+          {/* Contact card */}
+          <div className="mt-10">
             {/* Email */}
             <a
-              href="mailto:hi@thecompoundsystem.com"
+              href="mailto:hello@thecompoundsystem.com"
               className="block bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-6 transition-all hover:border-[var(--accent)]/40 hover:-translate-y-0.5"
             >
               <div className="flex items-center gap-4">
@@ -57,48 +57,11 @@ export default function ContactPage() {
                     Email
                   </div>
                   <div className="text-base font-semibold text-[var(--text-primary)] truncate">
-                    hi@thecompoundsystem.com
+                    hello@thecompoundsystem.com
                   </div>
                   <div className="text-xs text-[var(--text-muted)] mt-1">
-                    Best for anything requiring a trail: billing, refunds,
-                    account issues.
-                  </div>
-                </div>
-              </div>
-            </a>
-
-            {/* WhatsApp */}
-            <a
-              href="https://wa.me/971585658488"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-6 transition-all hover:border-[#25D366]/40 hover:-translate-y-0.5"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-11 h-11 rounded-xl bg-[#25D366]/10 flex items-center justify-center shrink-0">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#25D366"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                  </svg>
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="text-[11px] uppercase tracking-widest text-[var(--text-muted)] font-semibold mb-1">
-                    WhatsApp
-                  </div>
-                  <div className="text-base font-semibold text-[var(--text-primary)]">
-                    +971 58 565 8488
-                  </div>
-                  <div className="text-xs text-[var(--text-muted)] mt-1">
-                    Fast questions about access or the product. Please do
-                    not send trade ideas or medical questions.
+                    Access, billing, refunds, bug reports, partnerships. I
+                    usually reply within a business day.
                   </div>
                 </div>
               </div>

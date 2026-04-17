@@ -5,7 +5,7 @@ import { Resend } from "resend";
  *
  * Env required:
  *   RESEND_API_KEY      - Resend API key (server-side only)
- *   EMAIL_FROM          - e.g. "Compound OS <hi@thecompoundsystem.com>"
+ *   EMAIL_FROM          - e.g. "Compound OS <hello@thecompoundsystem.com>"
  *
  * If either is missing, all send* functions become no-ops that log a
  * warning and return false. The caller must treat email as best-effort —
