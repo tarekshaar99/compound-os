@@ -43,7 +43,7 @@ function LoginPageInner() {
             </>
           ) : (
             <>
-              Don&apos;t have access yet?{" "}
+              Don't have access yet?{" "}
               <Link href="/#pricing" className="text-[var(--accent)] hover:underline">
                 Get the System
               </Link>

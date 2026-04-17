@@ -67,7 +67,7 @@ function Dashboard() {
   return (
     <>
       <SectionTitle>Markets Dashboard</SectionTitle>
-      <Sub>Your complete investing, trading, and macro reference. Start at Foundations if you&apos;re new. Jump to the Wheel Strategy if you&apos;re here to run the income engine.</Sub>
+      <Sub>Your complete investing, trading, and macro reference. Start at Foundations if you're new. Jump to the Wheel Strategy if you're here to run the income engine.</Sub>
       <div className="flex flex-wrap gap-3.5 mb-7">
         <StatBox label="Core Strategy" value="The Wheel" sub="CSPs → Assignment → Covered Calls" />
         <StatBox label="Max Allocation" value="10-12%" sub="Per individual stock" />
@@ -75,7 +75,7 @@ function Dashboard() {
         <StatBox label="CC Duration" value="25-45d" sub="Optimal income & flexibility" />
       </div>
       <Card title="How This Pillar Is Organized" accent="#4ecdc4">
-        <P><B>1. Foundations</B> - investing principles, the 4 wealth stages, how to think about risk and money. Start here if you&apos;re building your first portfolio.</P>
+        <P><B>1. Foundations</B> - investing principles, the 4 wealth stages, how to think about risk and money. Start here if you're building your first portfolio.</P>
         <P><B>2. Analysis</B> - the 6-step framework, macro, technical analysis, Elliott Waves, and the 11 mistakes that kill most investors.</P>
         <P><B>3. Portfolio</B> - the 3-tier allocation system, position sizing math, and a real sample portfolio.</P>
         <P><B>4. Wheel Strategy</B> - the mechanical options income engine. CSPs, covered calls, spreads, LEAPS, and the VIX-based deployment framework.</P>
@@ -89,9 +89,9 @@ function Dashboard() {
         <P last><B>5. Add Bear Call Spreads</B> monthly on indices for short-delta income (5-8% of portfolio).</P>
       </Card>
       <Card title="Key Behavioral Rules" accent="#ff6b6b">
-        <P>• Don&apos;t react to news - capitalize on the fear it creates</P>
+        <P>• Don't react to news - capitalize on the fear it creates</P>
         <P>• Paper losses are temporary if fundamentals are intact</P>
-        <P>• Stay mechanical - don&apos;t let individual losses change overall strategy</P>
+        <P>• Stay mechanical - don't let individual losses change overall strategy</P>
         <P>• Expected moves are typically mispriced on the put side - this is your edge</P>
         <P last>• Patience is the most profitable skill in volatile markets</P>
       </Card>
@@ -105,11 +105,11 @@ function Foundations() {
       <SectionTitle>Investing Foundations</SectionTitle>
       <Sub>The beliefs and principles that separate wealth builders from the people still saving their way to retirement.</Sub>
       <Card title="Core Beliefs" accent="#4ecdc4">
-        <P>• <B>You don&apos;t need a lot of money to start.</B> Waiting until you have &quot;enough&quot; is how decades pass with nothing to show for them.</P>
+        <P>• <B>You don't need a lot of money to start.</B> Waiting until you have "enough" is how decades pass with nothing to show for them.</P>
         <P>• <B>Savers lose.</B> Keeping money in cash is not safe - inflation is a guaranteed loss. Investing is the only way to preserve purchasing power.</P>
-        <P>• <B>Buy and hold isn&apos;t enough.</B> The wealthy use leverage to compound faster. The middle class avoids it and compounds slower.</P>
+        <P>• <B>Buy and hold isn't enough.</B> The wealthy use leverage to compound faster. The middle class avoids it and compounds slower.</P>
         <P>• <B>OPM is how you skip the savings grind.</B> Borrowing $100K can take a week. Saving it takes a decade. Debt used correctly is an instrument for wealth.</P>
-        <P>• <B>Ideas make money.</B> It doesn&apos;t take money to make money - it takes capability.</P>
+        <P>• <B>Ideas make money.</B> It doesn't take money to make money - it takes capability.</P>
         <P>• <B>Your first $100K is the hardest.</B> Prioritize getting liquid to six figures. After that it snowballs.</P>
         <P last>• <B>True wealth is knowledge + freedom, not a number.</B> The number is just how you measure whether you bought back your time.</P>
       </Card>
@@ -117,10 +117,10 @@ function Foundations() {
         <P><B>Stage 1 - Make money.</B> Increase income. Cash flow is the raw material for everything else.</P>
         <P><B>Stage 2 - Multiply it.</B> Build an investing skillset. Compounding starts here.</P>
         <P><B>Stage 3 - Detach income from time.</B> Income-producing assets. Residual streams. Systems that run without you.</P>
-        <P last><B>Stage 4 - Protect and structure.</B> Entities, trusts, tax strategy. The wealth you don&apos;t defend is wealth you don&apos;t keep.</P>
+        <P last><B>Stage 4 - Protect and structure.</B> Entities, trusts, tax strategy. The wealth you don't defend is wealth you don't keep.</P>
       </Card>
       <Card title="Leverage & Debt">
-        <P>Leverage = borrowed capital to amplify ROI. Used correctly, it&apos;s the highest-impact tool in the wealth toolkit. Used recklessly, it blows you up.</P>
+        <P>Leverage = borrowed capital to amplify ROI. Used correctly, it's the highest-impact tool in the wealth toolkit. Used recklessly, it blows you up.</P>
         <P>Saving will never make you rich. Only investing and leveraging can.</P>
         <P>The wealthy want MORE debt. The middle class wants to live debt-free. These are fundamentally different operating systems.</P>
         <P last>Educate yourself on how to leverage OPM with minimal risk before you deploy it.</P>
@@ -139,26 +139,26 @@ function SmartRisk() {
   return (
     <>
       <SectionTitle>The Smart Risk Formula</SectionTitle>
-      <Sub>Risk isn&apos;t volatility. Risk is what you don&apos;t understand.</Sub>
+      <Sub>Risk isn't volatility. Risk is what you don't understand.</Sub>
       <Card title="The Formula" accent="#4ecdc4">
         <p className="text-[var(--text-primary)] text-center text-lg font-semibold my-4">
           SMART RISK = (SKILL + PREPARATION) × ACTION
         </p>
-        <P>Take calculated risks - the kind you&apos;ve studied, stress-tested, and prepared for.</P>
-        <P>Recklessness isn&apos;t bold. It&apos;s just broke in slow motion.</P>
-        <P last>The only risks worth taking are the ones where you understand exactly what you&apos;re risking and why.</P>
+        <P>Take calculated risks - the kind you've studied, stress-tested, and prepared for.</P>
+        <P>Recklessness isn't bold. It's just broke in slow motion.</P>
+        <P last>The only risks worth taking are the ones where you understand exactly what you're risking and why.</P>
       </Card>
       <Card title="Risk Is Inversely Proportional to Research" accent="#ffd93d">
         <P>At a first-principles level, risk is a simple question: will I lose my money or not?</P>
-        <P>The more hours you&apos;ve spent understanding an investment, the lower your actual risk - regardless of what Wall Street calls &quot;risky.&quot;</P>
+        <P>The more hours you've spent understanding an investment, the lower your actual risk - regardless of what Wall Street calls "risky."</P>
         <P>Volatility is short-term noise. It is not risk.</P>
-        <P last>The investment Wall Street labels &quot;risky&quot; is often the one where the researcher has a massive edge and the ignorant get smoked.</P>
+        <P last>The investment Wall Street labels "risky" is often the one where the researcher has a massive edge and the ignorant get smoked.</P>
       </Card>
       <Card title="The Asymmetric Question">
         <P className="italic">
-          &quot;If I have a ~25% chance of losing 50%+ of my net worth in a once-every-20-year bear market, but a ~75% chance of adding an extra 0 to my net worth in the next few years - how can I position myself so I win in EITHER outcome?&quot;
+          "If I have a ~25% chance of losing 50%+ of my net worth in a once-every-20-year bear market, but a ~75% chance of adding an extra 0 to my net worth in the next few years - how can I position myself so I win in EITHER outcome?"
         </P>
-        <P last>That&apos;s the only question that matters for long-term positioning.</P>
+        <P last>That's the only question that matters for long-term positioning.</P>
       </Card>
     </>
   );
@@ -177,7 +177,7 @@ function WealthStages() {
         <P last><B>Bottleneck:</B> Your identity. The first $100K is harder than going from $100K to $1M.</P>
       </Card>
       <Card title="Stage 2 - Momentum ($500K – $1.5M)" accent="#ffd93d">
-        <P><B>Mindset:</B> You&apos;ve broken inertia. Now refine entries and protect the compounder.</P>
+        <P><B>Mindset:</B> You've broken inertia. Now refine entries and protect the compounder.</P>
         <P><B>Positions:</B> 5-10 high-conviction holdings with 3-10x potential over 5-7 years.</P>
         <P><B>Crypto:</B> Concentrate toward Bitcoin.</P>
         <P><B>Leverage:</B> Scale back.</P>
@@ -210,24 +210,24 @@ function MoneyBeliefs() {
   return (
     <>
       <SectionTitle>Beliefs About Money</SectionTitle>
-      <Sub>Your unconscious money scripts set the ceiling. Identifying and rewriting them is the highest-leverage work you&apos;ll do.</Sub>
+      <Sub>Your unconscious money scripts set the ceiling. Identifying and rewriting them is the highest-leverage work you'll do.</Sub>
       <Card title="Limiting Beliefs to Audit" accent="#ff6b6b">
-        <P>• &quot;Money is hard to earn.&quot;</P>
-        <P>• &quot;Money comes and goes.&quot; (impermanence)</P>
-        <P>• &quot;Money should be spent with care.&quot; (scarcity)</P>
-        <P>• &quot;I deserve to spend on expensive things because why not.&quot; (waste)</P>
-        <P last>• &quot;Spending is fine because money always comes back.&quot; (denial)</P>
+        <P>• "Money is hard to earn."</P>
+        <P>• "Money comes and goes." (impermanence)</P>
+        <P>• "Money should be spent with care." (scarcity)</P>
+        <P>• "I deserve to spend on expensive things because why not." (waste)</P>
+        <P last>• "Spending is fine because money always comes back." (denial)</P>
       </Card>
       <Card title="The Reprogramming Principles" accent="#4ecdc4">
         <P>• Money is energy. It circulates to people who value it.</P>
         <P>• Celebrate spending on assets, education, and experiences - neutral emotion around outflow.</P>
-        <P>• &quot;I am not the victim. I am the creator.&quot; Outcomes are a product of identity, not luck.</P>
+        <P>• "I am not the victim. I am the creator." Outcomes are a product of identity, not luck.</P>
         <P>• Your net worth will follow how you perceive yourself and the people around you.</P>
         <P last>• 95% of financial behavior runs from subconscious programming installed before age 7. Reprogramming is not optional.</P>
       </Card>
       <Card title="The Identity-Wealth Link">
-        <P>If $1M was wired to your account tomorrow, you&apos;d still dress, think, associate, and behave the same way. Money alone doesn&apos;t change you.</P>
-        <P>That&apos;s why lottery winners go broke. Their internal operating system is calibrated for scarcity. Any reality that conflicts with it gets auto-corrected.</P>
+        <P>If $1M was wired to your account tomorrow, you'd still dress, think, associate, and behave the same way. Money alone doesn't change you.</P>
+        <P>That's why lottery winners go broke. Their internal operating system is calibrated for scarcity. Any reality that conflicts with it gets auto-corrected.</P>
         <P last>Wealth is inside-out. Rewrite identity first. Reality follows.</P>
       </Card>
     </>
@@ -238,9 +238,9 @@ function AnalysisFramework() {
   return (
     <>
       <SectionTitle>The 6-Step Analysis Framework</SectionTitle>
-      <Sub>How to research an investment from zero to conviction. Skip a step and you&apos;re gambling with extra steps.</Sub>
+      <Sub>How to research an investment from zero to conviction. Skip a step and you're gambling with extra steps.</Sub>
       <Card title="Step 1 - In-Depth Analysis (5 Levels)" accent="#4ecdc4">
-        <P><B>Level 1: Macro.</B> Always start here. If the landscape is bearish, even great companies won&apos;t do well. If bullish, even mediocre companies float. Five questions: rates direction, GDP growth, global liquidity (M2), business cycle (ISM), policy tailwinds.</P>
+        <P><B>Level 1: Macro.</B> Always start here. If the landscape is bearish, even great companies won't do well. If bullish, even mediocre companies float. Five questions: rates direction, GDP growth, global liquidity (M2), business cycle (ISM), policy tailwinds.</P>
         <P><B>Level 2: Microeconomic.</B> 2+ annual shareholder letters. 3+ quarterly transcripts. Know the mission, model, differentiators, revenue segments, top 5 opportunities, top 5 threats.</P>
         <P><B>Level 3: Qualitative.</B> Founder-led? Executive track record? Management: capital allocation, culture, long-term focus, shareholder friendliness. Structural: talent density, decentralized decisions, meritocracy.</P>
         <P><B>Level 4: Quantitative.</B> FCF, revenue growth, margin expansion, P/E and P/S vs. industry, share count trend, working capital ratio, CAGR, operating leverage, cash vs. debt.</P>
@@ -249,18 +249,18 @@ function AnalysisFramework() {
       <Card title="Step 2 - Synthesize & Rate" accent="#ffd93d">
         <P><B>Score operational traits 0-10.</B> Management, operations (customer focus, iteration pace, failure tolerance), structure (talent density, meritocracy).</P>
         <P><B>Score the moat 0-10.</B> Has it survived disruption? Is operational efficiency improving? Are economies of scale being shared with customers?</P>
-        <P last><B>Average 9+</B> = Tier 1 candidate. Extract deeper KPIs specific to the industry. Look for what Wall Street doesn&apos;t see yet.</P>
+        <P last><B>Average 9+</B> = Tier 1 candidate. Extract deeper KPIs specific to the industry. Look for what Wall Street doesn't see yet.</P>
       </Card>
       <Card title="Step 3 - Write Your Investment Thesis" accent="#ff6b6b">
         <P>Build three cases: <B>Base, Bear, Bull.</B></P>
-        <P>Cover: dominant narratives benefiting the company, TAM and asymmetric upside, core value creation mechanism, scaling story, moat vs. competition, key financial trajectory, real risks in depth, 3/5/10-year price targets, final conclusion and your &quot;why.&quot;</P>
-        <P last>If you can&apos;t write it in clear prose, you don&apos;t understand the investment well enough to size it.</P>
+        <P>Cover: dominant narratives benefiting the company, TAM and asymmetric upside, core value creation mechanism, scaling story, moat vs. competition, key financial trajectory, real risks in depth, 3/5/10-year price targets, final conclusion and your "why."</P>
+        <P last>If you can't write it in clear prose, you don't understand the investment well enough to size it.</P>
       </Card>
       <Card title="Steps 4-6: Entries, Exits, Quarterly Reviews">
         <P><B>Step 4: Entry plan.</B> Scale in, rarely starting more than 50% of intended allocation. Usually 20% or less.</P>
         <P><B>Step 5: Exit plan.</B> Scale out in 3-4 waves of 25-35% each - unless the thesis has broken.</P>
         <P><B>Step 6: Quarterly due diligence.</B> Reread the thesis. Has anything changed? Is the thesis intact? If broken, cut fast.</P>
-        <P last><B>Bonus:</B> Annual portfolio review. What worked, what didn&apos;t, what do you need to learn.</P>
+        <P last><B>Bonus:</B> Annual portfolio review. What worked, what didn't, what do you need to learn.</P>
       </Card>
       <Card title="The Fantastic Four Mental Model" accent="#4ecdc4">
         <P><B>Macro</B> (economy as a system) + <B>Qualitative</B> (your crystal ball on the company) + <B>Quantitative</B> (the numbers) + <B>Technical</B> (entry timing).</P>
@@ -303,8 +303,8 @@ function Macro() {
         <P><B>Leading Indicators</B> change before the economy (stock prices, PMIs, building permits).</P>
         <P><B>Coincident Indicators</B> change with the economy (payrolls, industrial production).</P>
         <P><B>Lagging Indicators</B> change after the economy (unemployment rate, CPI).</P>
-        <P><B>Credit</B> is more important than money - most &quot;money&quot; is created by bank lending.</P>
-        <P last><B>Don&apos;t Fight the Fed</B> - anticipating the central bank pivot is a core macro skill.</P>
+        <P><B>Credit</B> is more important than money - most "money" is created by bank lending.</P>
+        <P last><B>Don't Fight the Fed</B> - anticipating the central bank pivot is a core macro skill.</P>
       </Card>
       <Card title="Rule of Thumb" accent="#ff6b6b">
         <P>If the economy is in EXPANSION - most investments perform well short-term.</P>
@@ -374,7 +374,7 @@ function Regimes() {
         <p className="text-[var(--text-primary)] font-semibold text-center text-sm my-3">
           Disinflationary Bust → Disinflationary Boom → Inflationary Boom → Stagflation → Disinflationary Bust
         </p>
-        <P last>Your job: identify the current regime AND where we&apos;re headed next. Position ahead of the crowd.</P>
+        <P last>Your job: identify the current regime AND where we're headed next. Position ahead of the crowd.</P>
       </Card>
       <Card title="Correlation Shifts" accent="#ff6b6b">
         <P><B>Disinflationary regimes:</B> Stock-bond correlation is negative (bonds hedge stocks).</P>
@@ -388,12 +388,12 @@ function TechnicalAnalysis() {
   return (
     <>
       <SectionTitle>Technical Analysis</SectionTitle>
-      <Sub>Not a crystal ball. A way to time entries and exits when you&apos;ve already decided what&apos;s worth owning.</Sub>
+      <Sub>Not a crystal ball. A way to time entries and exits when you've already decided what's worth owning.</Sub>
       <Card title="Support & Resistance" accent="#4ecdc4">
         <P>• Traders buy at support, sell at resistance. That is literally what drives price.</P>
         <P>• Resistance becomes support when price breaks through it in an uptrend.</P>
         <P>• Support becomes resistance when price breaks down through it in a downtrend.</P>
-        <P>• Mark S&R on HIGH timeframes (daily and weekly) - they&apos;re more meaningful.</P>
+        <P>• Mark S&R on HIGH timeframes (daily and weekly) - they're more meaningful.</P>
         <P last>• S&R levels are more important than trendlines. 4-5 touches = strong zone.</P>
       </Card>
       <Card title="Trends & Patterns" accent="#ffd93d">
@@ -421,7 +421,7 @@ function TechnicalAnalysis() {
       <Card title="Seasonality & Timing" accent="#4ecdc4">
         <P>• <B>Best months:</B> November through April (Q4 + Q1).</P>
         <P>• <B>Worst months:</B> May through October.</P>
-        <P>• <B>Q4</B> is tech&apos;s best quarter historically.</P>
+        <P>• <B>Q4</B> is tech's best quarter historically.</P>
         <P>• <B>Quad Witching</B> (3rd Friday of 3rd month each quarter) - classic LEAPS entry.</P>
         <P last>• Every company has peak-demand quarters. Every sector has seasonal tilts. Learn the ones you trade.</P>
       </Card>
@@ -451,7 +451,7 @@ function ElliottWaves() {
         <P>• <B>Wave 2 can never fall below the start of Wave 1.</B> If it does, the impulse pattern is invalidated.</P>
         <P>• <B>Wave 3 is typically the largest and longest</B> impulse wave. This is where you want to make your money.</P>
         <P>• <B>Wave 3 can be shorter than Wave 1 or Wave 5, but cannot be shorter than both.</B></P>
-        <P>• <B>Wave 4 cannot retrace below Wave 1&apos;s peak</B> without invalidating the pattern.</P>
+        <P>• <B>Wave 4 cannot retrace below Wave 1's peak</B> without invalidating the pattern.</P>
         <P>• <B>Waves 2 and 4 retrace in inverse</B> - if Wave 2 is deep (.5+ fib), Wave 4 is shallow (.382), and vice versa.</P>
         <P last>• <B>Wave 5 is vertical and aggressive.</B> Euphoria enters. Can extend from 2.618 to 3.618 Fib or higher.</P>
       </Card>
@@ -476,32 +476,32 @@ function CaseStudies() {
   return (
     <>
       <SectionTitle>Historical Case Studies</SectionTitle>
-      <Sub>Pattern recognition from major market episodes. History rhymes even when it doesn&apos;t repeat.</Sub>
+      <Sub>Pattern recognition from major market episodes. History rhymes even when it doesn't repeat.</Sub>
       <Card title="1970s Stagflation" accent="#ff6b6b">
         <P><B>What happened:</B> Oil embargo + loose monetary policy → a decade of high inflation + weak growth.</P>
         <P><B>Winners:</B> Commodities, Gold. <B>Losers:</B> Stocks (negative real returns), Bonds.</P>
         <P last><B>Lesson:</B> Inflation is the ultimate destroyer of wealth. Supply shocks create the worst macro environment.</P>
       </Card>
       <Card title="2000 Dot-Com Bubble" accent="#ffd93d">
-        <P><B>What happened:</B> &quot;New Economy&quot; narrative + speculative excess → NASDAQ fell 80%.</P>
+        <P><B>What happened:</B> "New Economy" narrative + speculative excess → NASDAQ fell 80%.</P>
         <P><B>Winners:</B> Value stocks, Bonds, USD. <B>Losers:</B> Growth/tech stocks.</P>
-        <P last><B>Lesson:</B> Valuation matters eventually. &quot;This time is different&quot; is always wrong.</P>
+        <P last><B>Lesson:</B> Valuation matters eventually. "This time is different" is always wrong.</P>
       </Card>
       <Card title="2008 Global Financial Crisis" accent="#4ecdc4">
-        <P><B>What happened:</B> Housing bubble + leverage + subprime → S&amp;P fell 57%. Lehman collapse.</P>
+        <P><B>What happened:</B> Housing bubble + leverage + subprime → S&P fell 57%. Lehman collapse.</P>
         <P><B>Winners:</B> Treasury bonds, USD. <B>Losers:</B> Everything risky.</P>
         <P last><B>Lesson:</B> Credit is the key - watch spreads. In a crisis, all correlations go to 1.</P>
       </Card>
       <Card title="2010-2012 Eurozone Crisis">
         <P><B>What happened:</B> PIIGS debt crisis. Doom loop between banks and sovereigns.</P>
-        <P><B>Ended by:</B> Draghi&apos;s &quot;whatever it takes&quot; - credible verbal intervention.</P>
+        <P><B>Ended by:</B> Draghi's "whatever it takes" - credible verbal intervention.</P>
         <P last><B>Lesson:</B> Politics dominate markets more than people want to admit. Credible verbal intervention works.</P>
       </Card>
-      <Card title="Deemer&apos;s 11 Timeless Rules" accent="#4ecdc4">
+      <Card title="Deemer's 11 Timeless Rules" accent="#4ecdc4">
         <P>• Markets return to the mean over time.</P>
         <P>• Excesses in one direction lead to opposite excesses.</P>
         <P>• There are no new eras. Excesses are never permanent.</P>
-        <P>• Rapidly rising or falling markets usually go further than you think - but they don&apos;t correct by going sideways.</P>
+        <P>• Rapidly rising or falling markets usually go further than you think - but they don't correct by going sideways.</P>
         <P>• The public buys the most at tops and the least at bottoms.</P>
         <P>• Fear and greed are stronger than long-term resolve.</P>
         <P>• Markets are strongest when broad, weakest when narrow.</P>
@@ -524,20 +524,20 @@ function Allocation() {
         <P><B>Requirements:</B> Full qualitative + quantitative framework. Written investment thesis.</P>
         <P><B>Conviction:</B> 7-10x growth potential over 5-10 years AND extremely low risk of not returning capital.</P>
         <P><B>Frequency:</B> Only 1-3 assets per decade earn this allocation.</P>
-        <P><B>Edge:</B> Information asymmetry - you see what the market doesn&apos;t see yet.</P>
-        <P last><B>Critical rule:</B> A Tier 1 is not about upside - it&apos;s about the most RESISTANCE TO DOWNSIDE baked into the price.</P>
+        <P><B>Edge:</B> Information asymmetry - you see what the market doesn't see yet.</P>
+        <P last><B>Critical rule:</B> A Tier 1 is not about upside - it's about the most RESISTANCE TO DOWNSIDE baked into the price.</P>
       </Card>
       <Card title="Tier 2 - 10-15% Allocation" accent="#ffd93d">
         <P><B>Research:</B> 25-50 hours of targeted analysis.</P>
         <P><B>Requirements:</B> Full framework completed. Written thesis.</P>
-        <P><B>Conviction:</B> 5x+ growth over 5-10 years the market hasn&apos;t recognized.</P>
+        <P><B>Conviction:</B> 5x+ growth over 5-10 years the market hasn't recognized.</P>
         <P last><B>Moat:</B> Irrefutable. No real competition. Flywheel + network effects.</P>
       </Card>
       <Card title="Tier 3 - 1-8% Allocation" accent="#ff6b6b">
         <P><B>Research:</B> &lt;25 hours.</P>
         <P><B>Profile:</B> Cyclical, slower growth, swing trades, speculative plays.</P>
         <P><B>Purpose:</B> Smaller bets while learning, or highly asymmetric speculative exposure.</P>
-        <P last><B>Warning:</B> Don&apos;t fill your portfolio with Tier 3 positions. Fake diversification - no concentration, no strategy.</P>
+        <P last><B>Warning:</B> Don't fill your portfolio with Tier 3 positions. Fake diversification - no concentration, no strategy.</P>
       </Card>
       <Card title="Bear vs. Bull Market Rules">
         <P><B>Bear market posture:</B></P>
@@ -579,16 +579,16 @@ function PositionSizing() {
       </Card>
       <Card title="Avoiding Over-Diversification" accent="#ff6b6b">
         <P>• A portfolio of 20 stocks at 5% each = no concentration, no strategy.</P>
-        <P>• That structure assumes all picks are equal in risk/reward. They&apos;re not.</P>
+        <P>• That structure assumes all picks are equal in risk/reward. They're not.</P>
         <P>• Your biggest winners should have the highest allocation.</P>
-        <P>• Some diversification hedges being wrong - but it&apos;s a tax you pay, not an achievement.</P>
+        <P>• Some diversification hedges being wrong - but it's a tax you pay, not an achievement.</P>
         <P last>• Concentration builds wealth. Diversification keeps wealth. Stage 1 investors need the first, not the second.</P>
       </Card>
       <Card title="The Laddering System" accent="#ffd93d">
         <P><B>Scale in (entries):</B> Rarely start with more than 50% of intended allocation. Often 20% or less.</P>
-        <P><B>Scale up:</B> If the thesis is playing out, add to winners on pullbacks. Double down - don&apos;t rotate out of what&apos;s working.</P>
+        <P><B>Scale up:</B> If the thesis is playing out, add to winners on pullbacks. Double down - don't rotate out of what's working.</P>
         <P><B>Scale out (exits):</B> Always ladder in 3-4 waves of 25-35% per sale - unless cutting a loser or the thesis has changed.</P>
-        <P last>Laddering works because your best information about an investment arrives AFTER you&apos;ve bought it.</P>
+        <P last>Laddering works because your best information about an investment arrives AFTER you've bought it.</P>
       </Card>
     </>
   );
@@ -624,12 +624,12 @@ function SamplePortfolio() {
         />
       </Card>
       <Card title="Key Observations" accent="#ffd93d">
-        <P>• 8 different companies - NOT equally weighted. That&apos;s the point.</P>
+        <P>• 8 different companies - NOT equally weighted. That's the point.</P>
         <P>• 3 positions hold both stock AND options (stacked conviction).</P>
         <P>• 4 positions: stock only. 1 position: options only (speculative).</P>
         <P>• Stock 1 gets 26% of deployable capital. That level of allocation requires massive certainty that this is a generational opportunity.</P>
-        <P>• If your portfolio looks evenly distributed, you likely don&apos;t know what you&apos;re doing - or you don&apos;t have enough conviction to concentrate.</P>
-        <P last>• Don&apos;t fill with Tier 3 positions. Find your 2-3 Tier 1 investments. Use the other tiers to balance around them.</P>
+        <P>• If your portfolio looks evenly distributed, you likely don't know what you're doing - or you don't have enough conviction to concentrate.</P>
+        <P last>• Don't fill with Tier 3 positions. Find your 2-3 Tier 1 investments. Use the other tiers to balance around them.</P>
       </Card>
     </>
   );
@@ -637,22 +637,22 @@ function SamplePortfolio() {
 
 function Mistakes() {
   const items = [
-    { title: "Failing to Look Under the Hood", body: "Price action is lagging. Don&apos;t conflate price with whether it&apos;s a good investment. If you can&apos;t teach a 10-year-old how to find winners in any asset class, you don&apos;t understand investing. Bull markets make everyone feel like a genius - bears give you the real feedback." },
+    { title: "Failing to Look Under the Hood", body: "Price action is lagging. Don't conflate price with whether it's a good investment. If you can't teach a 10-year-old how to find winners in any asset class, you don't understand investing. Bull markets make everyone feel like a genius - bears give you the real feedback." },
     { title: "The Diversification Myth", body: "First question: am I investing to not lose, or to be FREE? Concentration builds wealth. Diversification keeps it. They serve different stages of the journey." },
     { title: "Following the Herd", body: "The Alpha Cycle: alpha → outperformance → mainstream attention → edge is lost → repeat. By the time something is mainstream, the edge is gone." },
     { title: "Lack of Nuance in Wealth Stages", body: "Running a $50K portfolio like a $5M portfolio guarantees you never get to $5M. Every stage has different rules. See the Wealth Stages section." },
     { title: "Being Dogmatic About Your Investments", body: "When an investment becomes a religion, be careful. Cut losing positions when the thesis changes. Would you rather be right or wealthy?" },
-    { title: "Investing Based on the Past", body: "Dividend stocks, oil/gas, commodities, value stocks, broad indexes - these are investing in the past. Historical P/E and S&P averages are lagging indicators. Outsized returns come from spotting what the market doesn&apos;t yet see. Study 5, 10, 20 years out. The market operates quarter to quarter." },
+    { title: "Investing Based on the Past", body: "Dividend stocks, oil/gas, commodities, value stocks, broad indexes - these are investing in the past. Historical P/E and S&P averages are lagging indicators. Outsized returns come from spotting what the market doesn't yet see. Study 5, 10, 20 years out. The market operates quarter to quarter." },
     { title: "Being Too Zoomed In (ZTFO)", body: "Look at decades, not months. The longer the timeframe, the better the returns. People who want to get rich overnight end up day trading and losing." },
-    { title: "Inaccurately Defining Risk", body: "Risk is NOT volatility - that&apos;s short-term noise. Risk is proportional to how deeply you&apos;ve researched. More hours = lower actual risk. At first principles: will I lose my money or not?" },
+    { title: "Inaccurately Defining Risk", body: "Risk is NOT volatility - that's short-term noise. Risk is proportional to how deeply you've researched. More hours = lower actual risk. At first principles: will I lose my money or not?" },
     { title: "Not Laddering Positions", body: "Scale in (20-50% of intended allocation to start). Scale up into winners on pullbacks. Scale out in 3-4 waves of 25-35% - unless the thesis breaks." },
     { title: "Overlooking Seasonality", body: "History rhymes. Learn the months and quarters that tend to under- or over-perform. 4-year election cycles. Each company has peak-demand quarters. Each sector has seasonal tilts." },
-    { title: "Overtrading in the Bull", body: "Quality over quantity. Don&apos;t buy every dip and chase every rally - it dilutes concentration. FOMO is real in bull markets. Wait for rotation back into your positions. After taking profits, sit on them. Don&apos;t immediately redeploy. That&apos;s greed." },
+    { title: "Overtrading in the Bull", body: "Quality over quantity. Don't buy every dip and chase every rally - it dilutes concentration. FOMO is real in bull markets. Wait for rotation back into your positions. After taking profits, sit on them. Don't immediately redeploy. That's greed." },
   ];
   return (
     <>
       <SectionTitle>11 Investing Mistakes to Avoid</SectionTitle>
-      <Sub>In a bull market, discipline is the #1 requirement. In a bear market, it&apos;s courage. Most mistakes are just one of those two missing.</Sub>
+      <Sub>In a bull market, discipline is the #1 requirement. In a bear market, it's courage. Most mistakes are just one of those two missing.</Sub>
       {items.map((item, i) => (
         <Card key={i} title={`${i + 1}. ${item.title}`} accent={i % 3 === 0 ? "#4ecdc4" : i % 3 === 1 ? "#ffd93d" : "#ff6b6b"}>
           <P last>
@@ -662,7 +662,7 @@ function Mistakes() {
       ))}
       <Card title="The Asymmetric Risk Question" accent="#4ecdc4">
         <P className="italic">
-          &quot;If I have a ~25% chance of losing 50%+ of my net worth in a once-every-20-year bear market, but a ~75% chance of adding an extra 0 to my net worth in the next few years - how can I position myself so I win in EITHER outcome?&quot;
+          "If I have a ~25% chance of losing 50%+ of my net worth in a once-every-20-year bear market, but a ~75% chance of adding an extra 0 to my net worth in the next few years - how can I position myself so I win in EITHER outcome?"
         </P>
         <P last>Answer that question, and most of the 11 mistakes solve themselves.</P>
       </Card>
@@ -679,7 +679,7 @@ function Wheel() {
         <P>• Multiple trades expiring every week = predictable income range.</P>
         <P>• Target win rate: 85-90% per month.</P>
         <P>• Time commitment: 3-5 hours/week for analysis, setup, and management.</P>
-        <P>• You&apos;re not trying to predict where the stock WILL go - you&apos;re predicting where it WON&apos;T go.</P>
+        <P>• You're not trying to predict where the stock WILL go - you're predicting where it WON'T go.</P>
         <P last>• Time decay works in your favor as a seller. Option buyers lose value daily - you collect it.</P>
       </Card>
       <Card title="Phase 1: Sell Cash-Secured Puts" accent="#4ecdc4">
@@ -690,7 +690,7 @@ function Wheel() {
         <P last><B>Management:</B> Close at 80% profit, or manage Monday of expiration week.</P>
       </Card>
       <Card title="Phase 2: Get Assigned (This Is The Plan)" accent="#ffd93d">
-        <P>Assignment is not a failure - it&apos;s the expected outcome of the wheel.</P>
+        <P>Assignment is not a failure - it's the expected outcome of the wheel.</P>
         <P>Your cost basis = Strike Price − Premium Collected.</P>
         <P last>Immediately move to Phase 3 upon assignment.</P>
       </Card>
@@ -733,7 +733,7 @@ function Vix() {
       />
       <Card title="Key VIX Principles" accent="#ff6b6b">
         <P>• VIX $18-$20 is a gray area - wait for break above $21 to deploy remaining capital</P>
-        <P>• VIX above 30 historically signals market bottoms - deploy capital, don&apos;t panic</P>
+        <P>• VIX above 30 historically signals market bottoms - deploy capital, don't panic</P>
         <P>• Low VIX = compressed premiums, so hold more cash for when volatility returns</P>
         <P>• High VIX = sell further OTM for the same or better premium returns</P>
         <P last>• Avoid bear call spreads when VIX is elevated - use CSPs instead</P>
@@ -800,7 +800,7 @@ function CSPs() {
         <P><B>Aggressive Account:</B> 25-30 delta, 25-45 DTE. Target 2%+ return.</P>
         <P><B>Best entries:</B> Stock at lower Bollinger Band, VIX above 15, red day.</P>
         <P><B>Management:</B> Close at 80% profit. Roll Monday of expiration week if needed.</P>
-        <P last><B>Layering:</B> Don&apos;t sell all contracts at one strike. Layer in to average down if assigned.</P>
+        <P last><B>Layering:</B> Don't sell all contracts at one strike. Layer in to average down if assigned.</P>
       </Card>
       <Card title="Optimal Trade Parameters" accent="#ffd93d">
         <P><B>Implied Volatility Rank (IVR):</B> Look for 20+ - high IVR = better risk:reward as a seller.</P>
@@ -825,7 +825,7 @@ function CSPs() {
         <P>• Stock is near upper Bollinger Band (wait for pullback)</P>
         <P>• Earnings within the expiration window</P>
         <P>• VIX is extremely low (premiums are too thin)</P>
-        <P>• You&apos;re already at 10%+ allocation in that stock</P>
+        <P>• You're already at 10%+ allocation in that stock</P>
         <P last>• The stock has a negative PE, declining earnings, or broken chart</P>
       </Card>
     </>
@@ -992,7 +992,7 @@ function Principles() {
       ))}
       <Card title="Additional Principles from Coaching Calls" accent="#ffd93d">
         <P>• Sell covered calls on Wednesday for Friday (or following Friday) expiration for optimal time premium</P>
-        <P>• Don&apos;t sell covered calls on red days - wait for green days for better premiums</P>
+        <P>• Don't sell covered calls on red days - wait for green days for better premiums</P>
         <P>• Uncover positions before Fed meetings to capture potential upside moves</P>
         <P>• Avoid selling covered calls through earnings - assignment risk is too high</P>
         <P>• Roll puts down/out only once - after that, take assignment and switch to covered calls</P>
@@ -1025,7 +1025,7 @@ function Risk() {
       </Card>
       <Card title="When To Increase Cash" accent="#ffd93d">
         <P>• VIX drops below 15 - premiums compress, hold more cash</P>
-        <P>• Let covered calls get called away naturally (don&apos;t fight it)</P>
+        <P>• Let covered calls get called away naturally (don't fight it)</P>
         <P>• Sell portions of profitable premium positions to maintain liquidity</P>
         <P>• Before earnings season - reduce exposure to avoid gap risk</P>
         <P last>• When geopolitical uncertainty is elevated</P>
@@ -1047,16 +1047,16 @@ function WeeklyRoutine() {
       <SectionTitle>Weekly Macro Routine</SectionTitle>
       <Sub>A 5-step weekend process for staying ahead of markets.</Sub>
       <Card title="Step 1: Data Sweep (The 'What')" accent="#4ecdc4">
-        <P last>Update your dashboard with the week&apos;s data. Note surprises vs. consensus. Record policy announcements.</P>
+        <P last>Update your dashboard with the week's data. Note surprises vs. consensus. Record policy announcements.</P>
       </Card>
       <Card title="Step 2: Narrative Review (The 'Why')" accent="#ffd93d">
-        <P last>Read weekly summaries. Identify the market&apos;s focus. Compare narrative to actual data - disconnects are opportunities.</P>
+        <P last>Read weekly summaries. Identify the market's focus. Compare narrative to actual data - disconnects are opportunities.</P>
       </Card>
       <Card title="Step 3: Cross-Asset Check (The 'How')" accent="#ff6b6b">
-        <P last>Review S&amp;P, 10Y yield, yield curve, USD, Gold, Oil. Are they telling a consistent story?</P>
+        <P last>Review S&P, 10Y yield, yield curve, USD, Gold, Oil. Are they telling a consistent story?</P>
       </Card>
       <Card title="Step 4: Formulate Your View (The 'So What')">
-        <P last>Where are we in the cycle? What&apos;s the likely path for growth, inflation, policy over 1-3 months? Write it down in 2-3 sentences.</P>
+        <P last>Where are we in the cycle? What's the likely path for growth, inflation, policy over 1-3 months? Write it down in 2-3 sentences.</P>
       </Card>
       <Card title="Step 5: Trade Ideas & Risk (The 'Now What')" accent="#4ecdc4">
         <P last>Which assets align with your view? Find specific entries using technicals. Generate 1-3 high-conviction ideas with entry, stop, and target.</P>
@@ -1069,7 +1069,7 @@ function Checklist() {
   return (
     <>
       <SectionTitle>Pre-Trade Checklist</SectionTitle>
-      <Sub>Run through this before every trade. If you can&apos;t answer clearly, don&apos;t trade.</Sub>
+      <Sub>Run through this before every trade. If you can't answer clearly, don't trade.</Sub>
       <Card title="The Thesis" accent="#4ecdc4">
         <P>□ What is my current macro view?</P>
         <P>□ How does this trade express that view?</P>

@@ -32,6 +32,17 @@ export interface ModuleDef {
 export const MODULES: ModuleDef[] = [
   /* ───────── TRADING ───────── */
   {
+    id: "trading.basics",
+    pillar: "trading",
+    tier: "core",
+    title: "Markets 101: Terms and Tools",
+    blurb:
+      "The vocabulary everything else assumes you already know, plus the five websites that replace 90% of paid tools. Start here if trading is new.",
+    path: "/trading/m/basics",
+    estMinutes: 12,
+    startHere: true,
+  },
+  {
     id: "trading.foundations",
     pillar: "trading",
     tier: "core",
@@ -40,7 +51,6 @@ export const MODULES: ModuleDef[] = [
       "The mental model behind every position. Capital preservation, time horizons, and the difference between speculation and investing.",
     path: "/trading/m/foundations",
     estMinutes: 18,
-    startHere: true,
   },
   {
     id: "trading.capital-preservation",

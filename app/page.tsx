@@ -1,7 +1,9 @@
 import CheckoutButton from "./components/CheckoutButton";
 import EmailCaptureCTA from "./components/EmailCaptureCTA";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import MobileCTA from "./components/MobileCTA";
+import ProductPreview from "./components/ProductPreview";
 import { getPricing } from "./lib/pricing";
 
 // Render fresh every 30s so the founding-spots counter stays current
@@ -107,112 +109,6 @@ function buildFaqs(isFounding: boolean) {
   ];
 }
 
-/* ────────────────────── PRODUCT PREVIEW ────────────────────── */
-
-function ProductPreview() {
-  return (
-    <div className="relative max-w-4xl mx-auto">
-      {/* Browser chrome mockup */}
-      <div className="rounded-xl border border-[var(--border)] overflow-hidden bg-[var(--card-bg)] shadow-2xl shadow-black/40">
-        {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)] bg-[var(--sidebar-bg)]">
-          <div className="flex gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-          </div>
-          <div className="flex-1 mx-8">
-            <div className="bg-[var(--bg)] rounded-md px-3 py-1 text-xs text-[var(--text-muted)] text-center max-w-xs mx-auto">
-              thecompoundsystem.com/markets
-            </div>
-          </div>
-        </div>
-
-        {/* App layout mockup */}
-        <div className="flex min-h-[340px] md:min-h-[400px]">
-          {/* Sidebar */}
-          <div className="hidden sm:block w-56 border-r border-[var(--border)] bg-[var(--sidebar-bg)] p-4">
-            <div className="text-sm font-bold text-[#00d4aa] mb-1">Markets</div>
-            <div className="text-[10px] text-[var(--text-muted)] mb-4">Investing, Trading &amp; Macro</div>
-            {/* Progress bar */}
-            <div className="w-full h-1 rounded-full bg-white/[0.06] mb-4">
-              <div className="h-full rounded-full bg-[#00d4aa] w-[35%]" />
-            </div>
-            {[
-              { icon: "✓", label: "Dashboard", active: false, done: true },
-              { icon: "✓", label: "Investing Foundations", active: false, done: true },
-              { icon: "⟳", label: "The Wheel Strategy", active: true, done: false },
-              { icon: "📊", label: "VIX Framework", active: false, done: false },
-              { icon: "📞", label: "Covered Calls", active: false, done: false },
-              { icon: "📉", label: "Cash-Secured Puts", active: false, done: false },
-              { icon: "🐻", label: "Bear Call Spreads", active: false, done: false },
-              { icon: "✅", label: "Stock Criteria", active: false, done: false },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-[11px] mb-0.5"
-                style={{
-                  background: item.active ? "rgba(0,212,170,0.08)" : "transparent",
-                  color: item.done ? "#00d4aa" : item.active ? "#00d4aa" : "var(--text-muted)",
-                  fontWeight: item.active ? 600 : 400,
-                }}
-              >
-                <span className="min-w-[16px] text-center text-[10px]">{item.done ? "✓" : item.icon}</span>
-                {item.label}
-              </div>
-            ))}
-          </div>
-
-          {/* Content area */}
-          <div className="flex-1 p-5 md:p-8">
-            <div className="text-lg md:text-xl font-bold text-[var(--text-primary)] mb-1">The Wheel Strategy</div>
-            <div className="text-xs text-[var(--text-secondary)] mb-5">The core income engine behind the Markets system.</div>
-
-            {/* Stat boxes */}
-            <div className="flex flex-wrap gap-2.5 mb-5">
-              {[
-                { label: "Core Strategy", value: "The Wheel", sub: "CSPs → Assignment → CCs" },
-                { label: "Target Delta", value: "20-25δ", sub: "Safe baseline" },
-                { label: "Duration", value: "25-45d", sub: "Optimal range" },
-              ].map((stat, i) => (
-                <div key={i} className="flex-1 min-w-[100px] bg-[var(--sidebar-bg)] border border-[var(--border)] rounded-lg p-3">
-                  <div className="text-[9px] text-[var(--text-muted)] uppercase tracking-wider">{stat.label}</div>
-                  <div className="text-sm font-bold text-[#00d4aa] mt-1">{stat.value}</div>
-                  <div className="text-[9px] text-[var(--text-muted)] mt-0.5">{stat.sub}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Content preview */}
-            <div className="bg-[var(--sidebar-bg)] border border-[var(--border)] rounded-lg p-4">
-              <div className="text-xs font-semibold text-[var(--text-primary)] mb-2">Quick Reference - The Wheel Strategy</div>
-              <div className="space-y-1.5">
-                {[
-                  "1. Sell Cash-Secured Puts on stocks you believe in at 20-25 delta",
-                  "2. Get Assigned - this is the plan, not a failure",
-                  "3. Sell Covered Calls at cost basis or above",
-                  "4. Manage by VIX - adjust allocation per regime",
-                ].map((line, i) => (
-                  <div key={i} className="text-[10px] md:text-[11px] text-[var(--text-secondary)] leading-relaxed">{line}</div>
-                ))}
-              </div>
-            </div>
-
-            {/* Mark complete button */}
-            <div className="mt-5 flex items-center gap-2">
-              <div className="w-4 h-4 rounded border-2 border-[var(--text-muted)]" />
-              <span className="text-[11px] text-[var(--text-muted)]">Mark as complete</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Fade at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[var(--bg)] to-transparent rounded-b-xl pointer-events-none" />
-    </div>
-  );
-}
-
 /* ────────────────────── PAGE ────────────────────── */
 
 export default async function Home() {
@@ -287,9 +183,15 @@ export default async function Home() {
 
       {/* ───── SEE INSIDE ───── */}
       <section className="px-6 pt-4 pb-16 md:pb-24">
-        <div className="text-center mb-8">
+        <div className="text-center mb-3">
           <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-medium">
-            See what&apos;s inside
+            See what's inside
+          </p>
+        </div>
+        <div className="text-center mb-8">
+          <p className="text-sm text-[var(--text-secondary)] max-w-md mx-auto">
+            Switch pillars to preview the actual sidebar, content, and
+            checklists you&apos;ll be using.
           </p>
         </div>
         <ProductPreview />
@@ -299,7 +201,7 @@ export default async function Home() {
       <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-8 tracking-tight">
-            You don&apos;t need more information.<br className="hidden sm:block" />
+            You don't need more information.<br className="hidden sm:block" />
             You need a system that runs.
           </h2>
           <div className="space-y-4 text-left">
@@ -471,7 +373,7 @@ export default async function Home() {
           </p>
           <div className="pt-5 border-t border-[var(--border)]">
             <p className="text-[var(--text-primary)] text-[15px] leading-relaxed font-medium">
-              Compound OS is what I wish existed when I started. I built it for myself. Now it&apos;s available to anyone serious enough to use it.
+              Compound OS is what I wish existed when I started. I built it for myself. Now it's available to anyone serious enough to use it.
             </p>
           </div>
         </div>
@@ -619,16 +521,7 @@ export default async function Home() {
       </section>
 
       {/* ───── FOOTER ───── */}
-      <footer className="px-6 py-8 border-t border-[var(--border)]">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span className="text-sm text-[var(--text-muted)]">
-            Compound OS
-          </span>
-          <span className="text-xs text-[var(--text-muted)]">
-            &copy; {new Date().getFullYear()} The Compound System. All rights reserved.
-          </span>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Sticky mobile CTA */}
       <MobileCTA />

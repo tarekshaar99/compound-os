@@ -33,14 +33,14 @@ export default async function Page() {
     >
       <LessonSection title="What this is">
         <P>
-          A training week that honors all five hybrid rules. You don&apos;t
+          A training week that honors all five hybrid rules. You don't
           need more sessions than this. You need these sessions, done well,
           for years.
         </P>
       </LessonSection>
 
       <Principle>
-        The best split is the one you&apos;ll still be running in 52 weeks.
+        The best split is the one you'll still be running in 52 weeks.
         Sustainable structure beats ambitious structure every time.
       </Principle>
 
@@ -116,17 +116,17 @@ export default async function Page() {
           3x12, plank 3x45s.
         </P>
         <P>
-          Done. 50 minutes. You&apos;re walking out stronger, not
+          Done. 50 minutes. You're walking out stronger, not
           destroyed.
         </P>
       </Example>
 
       <Mistakes
         items={[
-          "Stacking strength back-to-back without Zone 2 in between. You&apos;ll burn out your central nervous system and miss the aerobic base that lets you recover.",
+          "Stacking strength back-to-back without Zone 2 in between. You'll burn out your central nervous system and miss the aerobic base that lets you recover.",
           "Making every strength session a max-effort day. The 5-8 rep range at 8 RPE is where long-term strength lives.",
-          "Skipping intervals because they&apos;re unpleasant. Intervals are the one session that moves V02max, which correlates directly with how long you live well.",
-          "Adding a sixth and seventh session because you feel good. &apos;Feel good&apos; weeks are where you consolidate, not pile on.",
+          "Skipping intervals because they're unpleasant. Intervals are the one session that moves V02max, which correlates directly with how long you live well.",
+          "Adding a sixth and seventh session because you feel good. 'Feel good' weeks are where you consolidate, not pile on.",
           "Doing the split but ignoring the 10 min daily mobility. It is not optional. It is the insurance premium.",
         ]}
       />
@@ -147,7 +147,7 @@ export default async function Page() {
           },
           {
             id: "write-first",
-            label: "Write out this week&apos;s first strength session in full: warm-up, main, secondary, accessories.",
+            label: "Write out this week's first strength session in full: warm-up, main, secondary, accessories.",
             hint: "You are 10x more likely to train well if you walk in with the session already written.",
           },
         ]}
@@ -157,9 +157,9 @@ export default async function Page() {
         questions={[
           {
             id: "q1",
-            prompt: "You&apos;re short on time and can only do one cardio session this week. Which one?",
+            prompt: "You're short on time and can only do one cardio session this week. Which one?",
             options: [
-              "Zone 2, because it&apos;s easier and you&apos;re tired.",
+              "Zone 2, because it's easier and you're tired.",
               "Intervals, because they give the most V02max benefit per minute.",
               "A long hike.",
               "Skip cardio entirely.",
@@ -170,7 +170,7 @@ export default async function Page() {
           },
           {
             id: "q2",
-            prompt: "You feel great Friday morning. Your session calls for &apos;Strength C, lighter, skill-focused.&apos; What should you do?",
+            prompt: "You feel great Friday morning. Your session calls for 'Strength C, lighter, skill-focused.' What should you do?",
             options: [
               "Go heavy because you feel good.",
               "Stick to the plan. Feeling good on Friday is the result of planned Friday volume, not an invitation to escalate.",
@@ -179,7 +179,7 @@ export default async function Page() {
             ],
             correct: 1,
             explain:
-              "The feel-good-so-go-heavy pattern is the most common path to the mid-cycle injury. The split is working; don&apos;t break it.",
+              "The feel-good-so-go-heavy pattern is the most common path to the mid-cycle injury. The split is working; don't break it.",
           },
           {
             id: "q3",
@@ -198,7 +198,7 @@ export default async function Page() {
       />
 
       <Reflection
-        prompt="Which day of this split are you most likely to skip? Be honest. What&apos;s the specific friction, and what&apos;s one change that would eliminate 80% of the friction?"
+        prompt="Which day of this split are you most likely to skip? Be honest. What's the specific friction, and what's one change that would eliminate 80% of the friction?"
         minChars={120}
       />
 

@@ -28,7 +28,7 @@ export default async function Page() {
       moduleId="trading.capital-preservation"
       pillar="trading"
       title="Capital Preservation"
-      subtitle="Rule one: don&apos;t blow up. Rule two: remember rule one."
+      subtitle="Rule one: don't blow up. Rule two: remember rule one."
       estMinutes={14}
     >
       <LessonSection title="What this is">
@@ -65,9 +65,9 @@ export default async function Page() {
       <LessonSection title="The three numbers">
         <P>
           <strong>Max per-trade risk: 1% of portfolio.</strong> This is the
-          dollar amount you&apos;re willing to lose if a trade hits stop.
+          dollar amount you're willing to lose if a trade hits stop.
           Not the position size. The loss. If your portfolio is 50K and
-          you&apos;re willing to risk 500 dollars per trade, your stop
+          you're willing to risk 500 dollars per trade, your stop
           placement determines your size.
         </P>
         <P>
@@ -95,15 +95,15 @@ export default async function Page() {
         <P>
           Notice: the position size came out of the risk rule, not the
           other way around. Never pick a size first and back into a stop.
-          That&apos;s how stops quietly become suggestions.
+          That's how stops quietly become suggestions.
         </P>
       </Example>
 
       <Mistakes
         items={[
-          "Sizing by conviction. Your high-conviction idea is still a single position in an uncertain world. Conviction doesn&apos;t change the risk rule.",
-          "Averaging down without a plan. Adding to a loser because it got cheaper means your risk per trade just went up. You&apos;re now breaking rule one to rescue a position that already broke rule two.",
-          "Running no stop because &apos;I&apos;ll just watch it.&apos; You will not. Stops exist because your attention is a depleting resource.",
+          "Sizing by conviction. Your high-conviction idea is still a single position in an uncertain world. Conviction doesn't change the risk rule.",
+          "Averaging down without a plan. Adding to a loser because it got cheaper means your risk per trade just went up. You're now breaking rule one to rescue a position that already broke rule two.",
+          "Running no stop because 'I'll just watch it.' You will not. Stops exist because your attention is a depleting resource.",
           "Treating cash as dead capital. Cash is optionality. Optionality is the most valuable asset you can hold going into a dislocation.",
         ]}
       />
@@ -115,7 +115,7 @@ export default async function Page() {
           {
             id: "calc",
             label: "Calculate your 1% dollar risk and write it at the top of your trade journal.",
-            hint: "If you don&apos;t have a journal, a text file works. The point is having one number you stare at before every entry.",
+            hint: "If you don't have a journal, a text file works. The point is having one number you stare at before every entry.",
           },
           {
             id: "audit",
@@ -124,13 +124,13 @@ export default async function Page() {
           },
           {
             id: "cash",
-            label: "Check your cash percentage. If it&apos;s below 20%, trim the weakest position to get back above.",
-            hint: "&apos;Weakest&apos; means lowest conviction or worst setup, not &apos;biggest loser.&apos;",
+            label: "Check your cash percentage. If it's below 20%, trim the weakest position to get back above.",
+            hint: "'Weakest' means lowest conviction or worst setup, not 'biggest loser.'",
           },
           {
             id: "drawdown-rule",
-            label: "Write down your 10% drawdown rule somewhere you&apos;ll see it before trading.",
-            hint: "Phone note, sticky on the monitor, trade journal first page. Doesn&apos;t matter where. Matters that it&apos;s there.",
+            label: "Write down your 10% drawdown rule somewhere you'll see it before trading.",
+            hint: "Phone note, sticky on the monitor, trade journal first page. Doesn't matter where. Matters that it's there.",
           },
         ]}
       />
@@ -149,12 +149,12 @@ export default async function Page() {
             ],
             correct: 0,
             explain:
-              "The 10% rule is not &apos;panic.&apos; It&apos;s &apos;pause and diagnose.&apos; Half size afterward is the seatbelt while you verify the process is intact.",
+              "The 10% rule is not 'panic.' It's 'pause and diagnose.' Half size afterward is the seatbelt while you verify the process is intact.",
           },
           {
             id: "q2",
             prompt:
-              "A $50k account. You want to enter a position at $20 with a stop at $19. What&apos;s the correct number of shares at 1% risk?",
+              "A $50k account. You want to enter a position at $20 with a stop at $19. What's the correct number of shares at 1% risk?",
             options: [
               "500 shares ($10,000 position).",
               "250 shares ($5,000 position).",
@@ -182,7 +182,7 @@ export default async function Page() {
       />
 
       <Reflection
-        prompt="What is the biggest single-day drawdown you&apos;ve ever taken? What broke that day: the market, or a rule you didn&apos;t have in place?"
+        prompt="What is the biggest single-day drawdown you've ever taken? What broke that day: the market, or a rule you didn't have in place?"
         minChars={120}
       />
 

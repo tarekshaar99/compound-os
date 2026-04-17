@@ -33,7 +33,7 @@ export default async function Page() {
     >
       <LessonSection title="What this is">
         <P>
-          Emotional regulation isn&apos;t about feeling less. It&apos;s
+          Emotional regulation isn't about feeling less. It's
           about not being hijacked. The operator feels the fear, names
           it, lets it move through the body, and then makes the decision
           from a clear place. The reactor skips the middle two steps.
@@ -41,15 +41,15 @@ export default async function Page() {
       </LessonSection>
 
       <Principle>
-        You don&apos;t choose what you feel. You choose what you do next.
+        You don't choose what you feel. You choose what you do next.
         The whole skill lives in the gap between those two things.
       </Principle>
 
       <LessonSection title="The three-part protocol">
         <P>
-          <strong>1. Name it.</strong> Out loud or in writing. &quot;I&apos;m
-          angry right now.&quot; &quot;I&apos;m afraid of looking
-          stupid.&quot; Naming an emotion measurably reduces its intensity.
+          <strong>1. Name it.</strong> Out loud or in writing. "I'm
+          angry right now." "I'm afraid of looking
+          stupid." Naming an emotion measurably reduces its intensity.
           It moves the feeling from the amygdala into language, which is
           the first step toward actually responding instead of reacting.
         </P>
@@ -77,7 +77,7 @@ export default async function Page() {
           fifteen minutes later.
         </P>
         <P>
-          Operator: names it (&quot;I&apos;m panicking&quot;), breathes
+          Operator: names it ("I'm panicking"), breathes
           through it (30 seconds, slow exhale), then asks the honest
           question: did my thesis actually break, or am I just
           uncomfortable? If thesis intact, hold. If broken, sell for real
@@ -87,10 +87,10 @@ export default async function Page() {
 
       <Mistakes
         items={[
-          "Trying to think your way out of feelings. The body&apos;s first. Skip the body and you&apos;re running decisions on compromised hardware.",
-          "Using &apos;I&apos;m fine&apos; as the first-level answer. You&apos;re never just fine. The willingness to name what&apos;s actually happening is the whole skill.",
-          "Acting from the emotion while telling yourself you&apos;re being rational. Rationalization is the most common cover story for reactive behavior.",
-          "Suppressing the emotion to look composed. It doesn&apos;t go away. It just runs silently in the background and picks a worse moment to drive the car.",
+          "Trying to think your way out of feelings. The body's first. Skip the body and you're running decisions on compromised hardware.",
+          "Using 'I'm fine' as the first-level answer. You're never just fine. The willingness to name what's actually happening is the whole skill.",
+          "Acting from the emotion while telling yourself you're being rational. Rationalization is the most common cover story for reactive behavior.",
+          "Suppressing the emotion to look composed. It doesn't go away. It just runs silently in the background and picks a worse moment to drive the car.",
         ]}
       />
 
@@ -100,18 +100,18 @@ export default async function Page() {
         items={[
           {
             id: "identify",
-            label: "Identify the emotional trigger you&apos;re most vulnerable to in your trading, training, or work.",
-            hint: "For most traders it&apos;s watching green turn red. For most trainees it&apos;s feeling weak in the gym. For most workers it&apos;s a sharp email.",
+            label: "Identify the emotional trigger you're most vulnerable to in your trading, training, or work.",
+            hint: "For most traders it's watching green turn red. For most trainees it's feeling weak in the gym. For most workers it's a sharp email.",
           },
           {
             id: "rehearse",
             label: "Practice the three-part protocol on a mild emotion today before you need it in a real one.",
-            hint: "Get frustrated at traffic. Name it. Breathe through it. Drive normally. That&apos;s the rep.",
+            hint: "Get frustrated at traffic. Name it. Breathe through it. Drive normally. That's the rep.",
           },
           {
             id: "rule",
             label: "Write one rule: when I notice [trigger], I pause for 90 seconds before I act. Put it somewhere visible.",
-            hint: "Phone wallpaper, sticky note, journal. The rule only works if it&apos;s in front of you when you&apos;re hijacked.",
+            hint: "Phone wallpaper, sticky note, journal. The rule only works if it's in front of you when you're hijacked.",
           },
         ]}
       />
@@ -120,11 +120,11 @@ export default async function Page() {
         questions={[
           {
             id: "q1",
-            prompt: "You&apos;re angry at a colleague. What&apos;s the operator first step?",
+            prompt: "You're angry at a colleague. What's the operator first step?",
             options: [
-              "Tell them off immediately while it&apos;s fresh.",
+              "Tell them off immediately while it's fresh.",
               "Suppress it and act normal.",
-              "Name it to yourself (&apos;I&apos;m angry&apos;), feel where it lives in the body, breathe through it, then decide.",
+              "Name it to yourself ('I'm angry'), feel where it lives in the body, breathe through it, then decide.",
               "Post about it online.",
             ],
             correct: 2,
@@ -133,7 +133,7 @@ export default async function Page() {
           },
           {
             id: "q2",
-            prompt: "What&apos;s the difference between suppressing an emotion and regulating it?",
+            prompt: "What's the difference between suppressing an emotion and regulating it?",
             options: [
               "No difference. Both end with not acting on it.",
               "Suppression hides it, regulation metabolizes it. Suppressed emotions pick worse moments to surface.",
@@ -146,16 +146,16 @@ export default async function Page() {
           },
           {
             id: "q3",
-            prompt: "You&apos;ve named the emotion and breathed through it. The feeling is still there but softer. What now?",
+            prompt: "You've named the emotion and breathed through it. The feeling is still there but softer. What now?",
             options: [
               "Wait for it to fully go away.",
-              "Make the decision. Residual signal is fine; it&apos;s just no longer driving.",
+              "Make the decision. Residual signal is fine; it's just no longer driving.",
               "Suppress and move on.",
               "Call someone.",
             ],
             correct: 1,
             explain:
-              "You don&apos;t need the feeling gone. You need to not be driven by it. Making the call from the calmer side is the whole point.",
+              "You don't need the feeling gone. You need to not be driven by it. Making the call from the calmer side is the whole point.",
           },
         ]}
       />

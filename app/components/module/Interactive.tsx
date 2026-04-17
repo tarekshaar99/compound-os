@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useModule } from "./ModuleContext";
+import { decodeEntities } from "../../lib/text";
 
 /* ────────────────── Checklist ────────────────── */
 
@@ -81,11 +82,11 @@ export function Checklist({
                         : "text-[var(--text-secondary)]"
                     }`}
                   >
-                    {it.label}
+                    {decodeEntities(it.label)}
                   </span>
                   {it.hint && (
                     <span className="block mt-1 text-[13px] text-[var(--text-muted)] leading-relaxed">
-                      {it.hint}
+                      {decodeEntities(it.hint)}
                     </span>
                   )}
                 </span>
@@ -139,7 +140,7 @@ export function Quiz({
           return (
             <div key={q.id} className="p-5 rounded-xl border border-[var(--border)] bg-[var(--card-bg)]">
               <p className="text-[15px] text-[var(--text-primary)] font-medium leading-snug mb-4">
-                {q.prompt}
+                {decodeEntities(q.prompt)}
               </p>
               <div className="space-y-2">
                 {q.options.map((opt, i) => {
@@ -170,14 +171,14 @@ export function Quiz({
                         answered ? "cursor-default" : "cursor-pointer"
                       }`}
                     >
-                      {opt}
+                      {decodeEntities(opt)}
                     </button>
                   );
                 })}
               </div>
               {answered && q.explain && (
                 <p className="mt-4 text-[13px] text-[var(--text-muted)] leading-relaxed">
-                  {q.explain}
+                  {decodeEntities(q.explain)}
                 </p>
               )}
             </div>
@@ -213,7 +214,7 @@ export function Reflection({
       </h2>
       <div className="p-5 rounded-xl border border-[var(--border)] bg-[var(--card-bg)]">
         <p className="text-[15px] text-[var(--text-primary)] font-medium leading-snug mb-3">
-          {prompt}
+          {decodeEntities(prompt)}
         </p>
         <textarea
           value={value}

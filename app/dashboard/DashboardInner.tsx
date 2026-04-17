@@ -133,7 +133,7 @@ export default function DashboardInner({
       {nextModule && (
         <section className="mb-10">
           <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)] mb-3">
-            Today&apos;s priority
+            Today's priority
           </h2>
           <Link
             href={nextModule.path}

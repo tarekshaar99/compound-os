@@ -593,7 +593,7 @@ function MindsetContent({ lockedPreview = false }: { lockedPreview?: boolean }) 
         <p className="text-lg leading-[1.7] text-white/55 max-w-[600px] m-0">
           Years of spiritual study distilled into a practical framework for
           understanding your psyche, recognizing the patterns that run your
-          life, and freeing yourself from the ego&apos;s grip. Not theory  -
+          life, and freeing yourself from the ego's grip. Not theory  -
           lived experience.
         </p>
       </div>

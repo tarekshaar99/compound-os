@@ -28,15 +28,15 @@ export default async function Page() {
       moduleId="mindset.decision-making"
       pillar="mindset"
       title="Decision-Making Under Pressure"
-      subtitle="Binary thinking, sleep-on-it rules, and the pre-mortem. How to choose when you can&apos;t think straight."
+      subtitle="Binary thinking, sleep-on-it rules, and the pre-mortem. How to choose when you can't think straight."
       estMinutes={11}
     >
       <LessonSection title="What this is">
         <P>
-          Most bad decisions are not the result of bad thinking. They&apos;re
+          Most bad decisions are not the result of bad thinking. They're
           the result of thinking at the wrong time, from the wrong state.
           This module gives you three tools that collectively handle 80
-          percent of the high-pressure decisions you&apos;ll face.
+          percent of the high-pressure decisions you'll face.
         </P>
       </LessonSection>
 
@@ -48,14 +48,14 @@ export default async function Page() {
 
       <LessonSection title="Tool one: the binary frame">
         <P>
-          When you&apos;re overwhelmed by options, collapse to two: do it
-          or don&apos;t. Yes or no. Enter or skip. Most indecision is a
+          When you're overwhelmed by options, collapse to two: do it
+          or don't. Yes or no. Enter or skip. Most indecision is a
           false option count. Clarity usually lives in the binary, not
           the spectrum.
         </P>
         <P>
-          If the binary answer is &quot;I don&apos;t know,&quot; that IS
-          the answer. &quot;I don&apos;t know&quot; means no.
+          If the binary answer is "I don't know," that IS
+          the answer. "I don't know" means no.
         </P>
       </LessonSection>
 
@@ -75,7 +75,7 @@ export default async function Page() {
       <LessonSection title="Tool three: the pre-mortem">
         <P>
           Before committing to a non-trivial decision, spend two minutes
-          imagining it&apos;s a year from now and it has gone badly. Write
+          imagining it's a year from now and it has gone badly. Write
           down the three most likely reasons.
         </P>
         <P>
@@ -92,8 +92,8 @@ export default async function Page() {
           Offer: a big career move with 40% more money but a relocation.
         </P>
         <P>
-          Binary frame: take it or don&apos;t. Not &quot;take it with
-          conditions&quot; yet.
+          Binary frame: take it or don't. Not "take it with
+          conditions" yet.
         </P>
         <P>
           Sleep rule: no response before 24 hours, ideally 48.
@@ -101,7 +101,7 @@ export default async function Page() {
         <P>
           Pre-mortem: year from now, this went badly. Why? Most likely:
           spouse was miserable, I underestimated cost of living, or the
-          role wasn&apos;t what was pitched.
+          role wasn't what was pitched.
         </P>
         <P>
           Now you have three specific risks to check before yes. You just
@@ -113,8 +113,8 @@ export default async function Page() {
       <Mistakes
         items={[
           "Making big calls while emotionally activated. Anger, fear, euphoria, jealousy. The state writes the decision, the decision cashes the check.",
-          "Treating the sleep-on-it rule as optional &apos;when it&apos;s obvious.&apos; The obvious calls are exactly when you&apos;re most likely to be in a compromised state.",
-          "Running the pre-mortem half-heartedly. If the three &apos;why it went bad&apos; reasons are generic (&apos;bad luck,&apos; &apos;timing&apos;), you haven&apos;t done it right. Push until you have three real risks.",
+          "Treating the sleep-on-it rule as optional 'when it's obvious.' The obvious calls are exactly when you're most likely to be in a compromised state.",
+          "Running the pre-mortem half-heartedly. If the three 'why it went bad' reasons are generic ('bad luck,' 'timing'), you haven't done it right. Push until you have three real risks.",
           "Using the binary frame to avoid depth. The point is to collapse false optionality, not to skip the thinking that belongs at stage two.",
         ]}
       />
@@ -135,7 +135,7 @@ export default async function Page() {
           },
           {
             id: "journal",
-            label: "When the decision is made (yours or someone else&apos;s), write the three pre-mortem risks and revisit in six months.",
+            label: "When the decision is made (yours or someone else's), write the three pre-mortem risks and revisit in six months.",
             hint: "Your pre-mortems calibrate with practice. You get dramatically better at spotting risks that matter.",
           },
         ]}
@@ -150,7 +150,7 @@ export default async function Page() {
               "Act immediately. Faster is usually better.",
               "Sleep on it. No irreversible action within six hours of a strong emotion.",
               "Call a friend and ask what to do.",
-              "Do half of what you&apos;re considering.",
+              "Do half of what you're considering.",
             ],
             correct: 1,
             explain:
@@ -158,7 +158,7 @@ export default async function Page() {
           },
           {
             id: "q2",
-            prompt: "You&apos;re debating five possible strategies and can&apos;t pick. What&apos;s the first move?",
+            prompt: "You're debating five possible strategies and can't pick. What's the first move?",
             options: [
               "Research more.",
               "Collapse the decision to binary: is any one of these a clear yes, or are they all unclear? If all unclear, the answer is no.",
@@ -171,10 +171,10 @@ export default async function Page() {
           },
           {
             id: "q3",
-            prompt: "Your pre-mortem output is &quot;it went badly because of bad luck.&quot; What does that tell you?",
+            prompt: "Your pre-mortem output is \u201Cit went badly because of bad luck.\u201D What does that tell you?",
             options: [
               "The decision is low-risk.",
-              "You haven&apos;t actually done the pre-mortem. Push until you have three specific, concrete failure modes.",
+              "You haven't actually done the pre-mortem. Push until you have three specific, concrete failure modes.",
               "Bad luck is a real risk.",
               "You should do the decision anyway.",
             ],
@@ -186,7 +186,7 @@ export default async function Page() {
       />
 
       <Reflection
-        prompt="Pick one decision you made in the last year that went badly. Run the pre-mortem on it now, retroactively. Which of the risks would you have actually seen if you&apos;d done the exercise before committing?"
+        prompt="Pick one decision you made in the last year that went badly. Run the pre-mortem on it now, retroactively. Which of the risks would you have actually seen if you'd done the exercise before committing?"
         minChars={200}
       />
 

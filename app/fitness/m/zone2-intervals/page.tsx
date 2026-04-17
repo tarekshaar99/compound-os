@@ -34,7 +34,7 @@ export default async function Page() {
       <LessonSection title="What this is">
         <P>
           Cardio gets confused in most fitness circles because people treat
-          it as one thing. It&apos;s two. Low intensity (Zone 2) builds the
+          it as one thing. It's two. Low intensity (Zone 2) builds the
           aerobic base that lets you recover between everything else. High
           intensity (intervals) moves V02max, which is the single
           best-validated metric for healthspan.
@@ -53,7 +53,7 @@ export default async function Page() {
 
       <LessonSection title="Zone 2: the base">
         <P>
-          <strong>Definition:</strong> aerobic intensity where you&apos;re
+          <strong>Definition:</strong> aerobic intensity where you're
           breathing through your nose, or can speak full sentences without
           gasping. Heart rate roughly 60-70% of max, though nasal-breath
           test is more reliable than any formula.
@@ -77,12 +77,12 @@ export default async function Page() {
         </P>
         <P>
           <strong>Effort:</strong> during the hard interval, you can say
-          maybe 3 words without gasping. It&apos;s meant to be
-          uncomfortable. If you&apos;re chatting, you&apos;re not in
+          maybe 3 words without gasping. It's meant to be
+          uncomfortable. If you're chatting, you're not in
           interval pace.
         </P>
         <P>
-          <strong>Dose:</strong> once per week. Twice if you&apos;re
+          <strong>Dose:</strong> once per week. Twice if you're
           specifically chasing fitness gains and not in a heavy strength
           cycle.
         </P>
@@ -93,8 +93,8 @@ export default async function Page() {
           10-minute easy warm-up on the bike.
         </P>
         <P>
-          5 rounds of: 3 minutes at ~85% max effort (&quot;hard enough that
-          you can&apos;t hold it much longer than 3 minutes&quot;), 3
+          5 rounds of: 3 minutes at ~85% max effort ("hard enough that
+          you can't hold it much longer than 3 minutes"), 3
           minutes easy.
         </P>
         <P>
@@ -109,10 +109,10 @@ export default async function Page() {
       <Mistakes
         items={[
           "Running Zone 2 too hard. The most common mistake. Wearing a heart rate strap once is the cheapest education you can buy.",
-          "Running intervals too soft. If it&apos;s comfortable, it&apos;s not intervals. The hard interval needs to be honestly hard.",
+          "Running intervals too soft. If it's comfortable, it's not intervals. The hard interval needs to be honestly hard.",
           "Doing intervals twice a week while also doing 5 strength days. Stacked stress. Either the strength program suffers or a knee/hip gives up.",
-          "Chasing distance or speed in Zone 2. The point is time in zone. A slow Zone 2 session is not a failed run, it&apos;s the point.",
-          "Treating a steady jog that&apos;s neither Zone 2 nor intervals as &apos;the workout.&apos; Call it recovery if you must, but don&apos;t count it as either.",
+          "Chasing distance or speed in Zone 2. The point is time in zone. A slow Zone 2 session is not a failed run, it's the point.",
+          "Treating a steady jog that's neither Zone 2 nor intervals as 'the workout.' Call it recovery if you must, but don't count it as either.",
         ]}
       />
 
@@ -123,7 +123,7 @@ export default async function Page() {
           {
             id: "plan",
             label: "Pick the day for Zone 2 and the day for intervals for the next 4 weeks.",
-            hint: "Put them on the calendar. Anything without a scheduled slot doesn&apos;t happen.",
+            hint: "Put them on the calendar. Anything without a scheduled slot doesn't happen.",
           },
           {
             id: "hr-or-nose",
@@ -133,7 +133,7 @@ export default async function Page() {
           {
             id: "first-session",
             label: "Run one Zone 2 session this week at the correct pace. It will probably feel almost embarrassingly easy.",
-            hint: "If you finish and you&apos;re barely breathing hard, that&apos;s Zone 2. Congrats.",
+            hint: "If you finish and you're barely breathing hard, that's Zone 2. Congrats.",
           },
         ]}
       />
@@ -142,10 +142,10 @@ export default async function Page() {
         questions={[
           {
             id: "q1",
-            prompt: "How do you know in real time that you&apos;re in Zone 2?",
+            prompt: "How do you know in real time that you're in Zone 2?",
             options: [
               "You feel exhausted afterward.",
-              "You can&apos;t speak.",
+              "You can't speak.",
               "You can speak full sentences, or breathe through your nose the entire session.",
               "You burn at least 500 calories.",
             ],
@@ -155,12 +155,12 @@ export default async function Page() {
           },
           {
             id: "q2",
-            prompt: "You&apos;re running 3-minute hard intervals and you find yourself chatting with a partner during the hard block. What&apos;s happening?",
+            prompt: "You're running 3-minute hard intervals and you find yourself chatting with a partner during the hard block. What's happening?",
             options: [
               "Your V02max is excellent.",
-              "You&apos;re not actually at interval effort. Increase the hard block until conversation is not possible.",
+              "You're not actually at interval effort. Increase the hard block until conversation is not possible.",
               "The interval is fine, just shorter recovery.",
-              "You&apos;re over-trained.",
+              "You're over-trained.",
             ],
             correct: 1,
             explain:
@@ -183,7 +183,7 @@ export default async function Page() {
       />
 
       <Reflection
-        prompt="Which of your past &apos;cardio&apos; sessions were actually Zone 2, and which were middle-zone tiredness? What&apos;s the session you&apos;re going to stop doing?"
+        prompt="Which of your past 'cardio' sessions were actually Zone 2, and which were middle-zone tiredness? What's the session you're going to stop doing?"
         minChars={100}
       />
 

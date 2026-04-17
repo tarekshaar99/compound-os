@@ -28,14 +28,14 @@ export default async function Page() {
       moduleId="trading.pre-trade-checklist"
       pillar="trading"
       title="The Pre-Trade Checklist"
-      subtitle="Nine questions you answer out loud before any position. If you can&apos;t answer one, you don&apos;t trade."
+      subtitle="Nine questions you answer out loud before any position. If you can't answer one, you don't trade."
       estMinutes={10}
     >
       <LessonSection title="What this is">
         <P>
           The single most effective edge a retail trader can build is a
           friction layer between the impulse to trade and the act of
-          trading. This module is that layer. It&apos;s nine questions.
+          trading. This module is that layer. It's nine questions.
           Answer them out loud or in writing. If any answer is fuzzy, you
           skip the trade.
         </P>
@@ -54,20 +54,20 @@ export default async function Page() {
       <LessonSection title="The nine questions">
         <P>1. What regime am I in? Bull, bear, chop, high vol, low vol?</P>
         <P>
-          2. What&apos;s my thesis in one sentence? If it takes a paragraph,
-          it isn&apos;t a thesis, it&apos;s a rationalization.
+          2. What's my thesis in one sentence? If it takes a paragraph,
+          it isn't a thesis, it's a rationalization.
         </P>
         <P>3. What is the exact invalidation level or thesis-break event?</P>
-        <P>4. What&apos;s my risk per trade in dollars?</P>
+        <P>4. What's my risk per trade in dollars?</P>
         <P>
-          5. What&apos;s my size, given that risk and the stop distance?
+          5. What's my size, given that risk and the stop distance?
         </P>
         <P>
-          6. What&apos;s the reward-to-risk ratio if I&apos;m right?
+          6. What's the reward-to-risk ratio if I'm right?
           (Below 1.5, think twice. Below 1.0, skip.)
         </P>
         <P>
-          7. What&apos;s my time horizon? Am I managing this hourly, daily,
+          7. What's my time horizon? Am I managing this hourly, daily,
           weekly?
         </P>
         <P>
@@ -91,16 +91,16 @@ export default async function Page() {
           low vs existing book. Would I hold if market closed: yes.
         </P>
         <P>
-          That&apos;s a trade. Every answer fits on a single line.
+          That's a trade. Every answer fits on a single line.
         </P>
       </Example>
 
       <Mistakes
         items={[
-          "Skipping the checklist for &apos;easy&apos; setups. The ones that feel easy are exactly where confirmation bias is strongest.",
-          "Answering the questions after entering. You&apos;re now auditing a position, not evaluating a trade. Different job, worse outcome.",
-          "Treating the checklist as a bureaucratic formality. If you&apos;re writing &apos;good&apos; on every line, you&apos;re not using it. The point is to find reasons to say no.",
-          "Not tracking which answers were wrong. Your edge is in the review: which questions does the market keep telling you you&apos;re bad at answering?",
+          "Skipping the checklist for 'easy' setups. The ones that feel easy are exactly where confirmation bias is strongest.",
+          "Answering the questions after entering. You're now auditing a position, not evaluating a trade. Different job, worse outcome.",
+          "Treating the checklist as a bureaucratic formality. If you're writing 'good' on every line, you're not using it. The point is to find reasons to say no.",
+          "Not tracking which answers were wrong. Your edge is in the review: which questions does the market keep telling you you're bad at answering?",
         ]}
       />
 
@@ -110,18 +110,18 @@ export default async function Page() {
         items={[
           {
             id: "template",
-            label: "Create a text/notes file titled &quot;Pre-Trade Checklist&quot; with the nine questions as a template.",
+            label: "Create a text/notes file titled \u201CPre-Trade Checklist\u201D with the nine questions as a template.",
             hint: "Copy-paste a blank version each time. Takes 30 seconds to fill out. Saves you from dozens of bad trades a year.",
           },
           {
             id: "run-one",
-            label: "Run the checklist against one position you&apos;re currently holding or thinking about.",
-            hint: "Find the question you can&apos;t answer cleanly. That&apos;s the weak point of the idea.",
+            label: "Run the checklist against one position you're currently holding or thinking about.",
+            hint: "Find the question you can't answer cleanly. That's the weak point of the idea.",
           },
           {
             id: "no-skip",
             label: "Commit in writing: no entry without a completed checklist for the next 30 days.",
-            hint: "One sentence in your journal. It&apos;s the commitment device that makes the habit stick.",
+            hint: "One sentence in your journal. It's the commitment device that makes the habit stick.",
           },
         ]}
       />
@@ -130,7 +130,7 @@ export default async function Page() {
         questions={[
           {
             id: "q1",
-            prompt: "Your checklist answer to &quot;invalidation level&quot; is &quot;probably around $90, maybe lower.&quot; What should you do?",
+            prompt: "Your checklist answer to \u201Cinvalidation level\u201D is \u201Cprobably around $90, maybe lower.\u201D What should you do?",
             options: [
               "Take the trade. Markets are fuzzy.",
               "Skip the trade. Fuzzy invalidation = no invalidation.",
@@ -139,17 +139,17 @@ export default async function Page() {
             ],
             correct: 1,
             explain:
-              "Fuzzy exits are the main way stops disappear in real time. A &apos;maybe&apos; becomes a &apos;let&apos;s see&apos; becomes a hold-and-hope. Skip the trade.",
+              "Fuzzy exits are the main way stops disappear in real time. A 'maybe' becomes a 'let's see' becomes a hold-and-hope. Skip the trade.",
           },
           {
             id: "q2",
             prompt:
               "You own 4 tech stocks and are considering a fifth. Which checklist question is the most important to answer honestly?",
             options: [
-              "What&apos;s my thesis?",
-              "What&apos;s my size?",
+              "What's my thesis?",
+              "What's my size?",
               "How does this correlate with what I already hold?",
-              "What&apos;s my time horizon?",
+              "What's my time horizon?",
             ],
             correct: 2,
             explain:
@@ -166,7 +166,7 @@ export default async function Page() {
             ],
             correct: 2,
             explain:
-              "A checklist that never disqualifies trades isn&apos;t doing its job. The whole value is friction.",
+              "A checklist that never disqualifies trades isn't doing its job. The whole value is friction.",
           },
         ]}
       />
