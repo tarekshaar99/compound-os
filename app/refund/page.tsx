@@ -85,21 +85,21 @@ export default function RefundPage() {
 
             <section>
               <h2 className="text-lg font-bold text-[var(--text-primary)] mb-3">
-                Abuse
+                Edge cases
               </h2>
               <p>
-                We reserve the right to refuse refunds in cases of clear
-                abuse: repeated purchases and refunds, chargebacks filed
-                without contacting us first, or use of the content in ways
-                that violate our{" "}
+                The 14-day window is for genuine &quot;not for me&quot;
+                decisions. The only cases we push back on are repeated
+                buy-refund cycles, chargebacks filed without emailing us
+                first, or use of the content in ways that violate our{" "}
                 <a
                   href="/terms"
                   className="text-[var(--text-primary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)]"
                 >
                   Terms of Service
                 </a>
-                . Outside of those cases, the default answer inside the
-                window is yes.
+                . Outside of those, the default answer inside the window is
+                yes.
               </p>
             </section>
 

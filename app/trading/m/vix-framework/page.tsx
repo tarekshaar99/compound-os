@@ -195,8 +195,8 @@ export default async function Page() {
       />
 
       <CompleteModule
-        nextPath="/trading"
-        nextLabel="Back to Markets"
+        nextPath="/trading/m/weekly-review"
+        nextLabel="Next: The Weekly Review"
         requireChecklistKey={CHECKLIST_KEY}
         requireChecklistCount={CHECKLIST_COUNT}
       />

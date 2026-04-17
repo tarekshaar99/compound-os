@@ -58,7 +58,10 @@ export default function OnboardingClient({ email }: { email: string }) {
       MODULES.find((m) => m.pillar === choice && m.tier === "core")
     : null;
 
-  const firstName = email.split("@")[0].split(/[._-]/)[0];
+  // Best-effort first name from email local part. Strip trailing digits
+  // (tarekshaar22 → tarekshaar) and split on common separators.
+  const rawFirst = email.split("@")[0].split(/[._-]/)[0];
+  const firstName = rawFirst.replace(/\d+$/, "") || rawFirst;
   const greeting = firstName.charAt(0).toUpperCase() + firstName.slice(1);
 
   const finish = async (andGo: "module" | "dashboard") => {
@@ -127,7 +130,7 @@ export default function OnboardingClient({ email }: { email: string }) {
           <div>
             <div className="text-center mb-8">
               <p className="text-xs uppercase tracking-[0.18em] text-[var(--text-muted)] font-medium mb-3">
-                Step 2 of 3
+                Pick your anchor pillar
               </p>
               <h1 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] tracking-tight leading-[1.15] mb-3">
                 What are you here to solve first?

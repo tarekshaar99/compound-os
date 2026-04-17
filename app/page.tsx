@@ -118,7 +118,7 @@ function buildFaqs(isFounding: boolean) {
     },
     {
       q: "Can I access it on my phone?",
-      a: "Yes. Fully responsive. Most members use it on mobile during their market session, at the gym, or during their morning routine.",
+      a: "Yes. Fully responsive. Built to open on the phone during your market session, at the gym, or in the first ten minutes of your morning.",
     },
   ];
 }
@@ -166,7 +166,7 @@ export default async function Home() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[var(--accent)]/5 rounded-full blur-[120px] pointer-events-none" />
 
         <h1 className="relative text-[1.75rem] md:text-5xl lg:text-[3.25rem] font-bold tracking-tight text-[var(--text-primary)] leading-[1.15] max-w-3xl">
-          The operating manual for how you trade, train, and operate.
+          The operating manual for how you trade, train, and live.
         </h1>
         <p className="relative mt-5 text-[var(--text-secondary)] text-base md:text-xl max-w-xl mx-auto leading-relaxed">
           {moduleCount} focused modules across Markets, Fitness, and Mindset.
@@ -568,7 +568,7 @@ export default async function Home() {
       <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4 tracking-tight">
-            Your system is ready.
+            The system is ready.
           </h2>
           <p className="text-[var(--text-secondary)] mb-10 text-base md:text-lg max-w-md mx-auto">
             One purchase. Instant access. Start executing today.

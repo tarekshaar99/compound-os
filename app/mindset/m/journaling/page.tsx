@@ -9,6 +9,7 @@ import {
 } from "../../../components/module/Lesson";
 import {
   Checklist,
+  Quiz,
   Reflection,
   CompleteModule,
 } from "../../../components/module/Interactive";
@@ -111,6 +112,50 @@ export default async function Page() {
             id: "first",
             label: "Write today's entry right now. Three prompts. Five minutes.",
             hint: "Starting today is the entire point. Tomorrow doesn't exist yet.",
+          },
+        ]}
+      />
+
+      <Quiz
+        questions={[
+          {
+            id: "q1",
+            prompt: "You skip the journal on hard days because you don't want to sit with the discomfort. What's the cost?",
+            options: [
+              "Nothing. The good days give you enough data.",
+              "You lose your highest-signal entries. The patterns are loudest under stress, so skipping hard days biases the log toward noise.",
+              "Nothing, as long as you journal twice as long on the easy days.",
+              "You save willpower for harder tasks.",
+            ],
+            correct: 1,
+            explain:
+              "The journal is a feedback loop. Skipping hard days strips out the data points where the pattern is loudest. That's exactly when you need the entry.",
+          },
+          {
+            id: "q2",
+            prompt: "Which of these is the right length for a structured journal entry?",
+            options: [
+              "A full page of stream of consciousness.",
+              "Three prompts, specific answers, five minutes. High signal, low time cost.",
+              "Whatever you can manage once a week.",
+              "A paragraph per prompt, expanding on feelings.",
+            ],
+            correct: 1,
+            explain:
+              "Brevity is the point. Three prompts, five minutes, daily. Frequency and specificity beat length. A page of vague feelings is worse than three specific sentences.",
+          },
+          {
+            id: "q3",
+            prompt: "What is the review practice that makes the journal actually useful?",
+            options: [
+              "Re-reading last year's entries on your birthday.",
+              "A weekly skim of the past seven days to spot the repeating pattern.",
+              "Never re-reading, to stay present.",
+              "Sharing entries with a friend for accountability.",
+            ],
+            correct: 1,
+            explain:
+              "Without a weekly review, the entries are just noise. The pattern only pops when you read seven days in a row side-by-side. That is where the calibration happens.",
           },
         ]}
       />
