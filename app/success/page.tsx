@@ -68,12 +68,10 @@ function SuccessContent() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://wa.me/971585658488"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 rounded-xl bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] text-sm font-medium transition-all hover:bg-[#25D366]/20"
+              href="mailto:hello@thecompoundsystem.com"
+              className="px-6 py-3 rounded-xl bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-sm font-medium transition-all hover:bg-[var(--accent)]/20"
             >
-              Contact via WhatsApp
+              Email support
             </a>
             <Link
               href="/"

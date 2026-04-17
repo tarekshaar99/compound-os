@@ -228,10 +228,10 @@ export default function TermsPage() {
               <p>
                 Questions about these terms can be sent to{" "}
                 <a
-                  href="mailto:hi@thecompoundsystem.com"
+                  href="mailto:hello@thecompoundsystem.com"
                   className="text-[var(--text-primary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)]"
                 >
-                  hi@thecompoundsystem.com
+                  hello@thecompoundsystem.com
                 </a>
                 .
               </p>

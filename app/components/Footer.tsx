@@ -125,22 +125,12 @@ export default function Footer() {
           <p className="text-xs text-[var(--text-muted)]">
             &copy; {year} The Compound System. All rights reserved.
           </p>
-          <div className="flex items-center gap-5">
-            <a
-              href="mailto:hi@thecompoundsystem.com"
-              className="text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
-            >
-              hi@thecompoundsystem.com
-            </a>
-            <a
-              href="https://wa.me/971585658488"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-[#25D366]/80 hover:text-[#25D366] transition-colors"
-            >
-              WhatsApp
-            </a>
-          </div>
+          <a
+            href="mailto:hello@thecompoundsystem.com"
+            className="text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
+          >
+            hello@thecompoundsystem.com
+          </a>
         </div>
       </div>
     </footer>
