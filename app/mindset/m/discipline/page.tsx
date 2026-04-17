@@ -28,22 +28,22 @@ export default async function Page() {
       moduleId="mindset.discipline"
       pillar="mindset"
       title="Daily Discipline"
-      subtitle="Motivation is unreliable. Systems aren&apos;t. The habits that hold everything else up."
+      subtitle="Motivation is unreliable. Systems aren't. The habits that hold everything else up."
       estMinutes={10}
     >
       <LessonSection title="What this is">
         <P>
-          Discipline isn&apos;t white-knuckling every morning. It&apos;s
+          Discipline isn't white-knuckling every morning. It's
           the set of systems that let you consistently do the work without
           needing to be motivated. If the only thing between you and a
-          good day is whether you feel like it, you&apos;re already in
+          good day is whether you feel like it, you're already in
           trouble.
         </P>
       </LessonSection>
 
       <Principle>
-        You don&apos;t need more willpower. You need fewer decisions.
-        Every default you set in advance is one decision you don&apos;t
+        You don't need more willpower. You need fewer decisions.
+        Every default you set in advance is one decision you don't
         have to win under fatigue.
       </Principle>
 
@@ -56,25 +56,25 @@ export default async function Page() {
         </P>
         <P>
           <strong>2. Ship the hardest thing first.</strong> Whatever
-          you&apos;re most avoiding goes first, before email, before
+          you're most avoiding goes first, before email, before
           scrolling, before meetings. Your best energy should touch your
           highest-leverage work.
         </P>
         <P>
           <strong>3. Protect the physical.</strong> Training session
           blocked in the calendar like a meeting. Sleep window defended
-          like a meeting. If you don&apos;t protect these, everything
+          like a meeting. If you don't protect these, everything
           else decays within weeks.
         </P>
         <P>
           <strong>4. Evening shutdown.</strong> Three minutes to close
-          open loops: what happened today, what&apos;s tomorrow&apos;s
+          open loops: what happened today, what's tomorrow's
           hardest thing, is my calendar set. Without this, you sleep
           worse and start the next day reactive.
         </P>
       </LessonSection>
 
-      <Example title="A real operator&apos;s day">
+      <Example title="A real operator's day">
         <P>
           6:30 alarm. No snooze. Water, sunlight, 10-minute mobility.
         </P>
@@ -95,7 +95,7 @@ export default async function Page() {
           22:00 three-minute review, phone in another room, lights down.
         </P>
         <P>
-          This is not heroic. It&apos;s just pre-decided. That&apos;s the
+          This is not heroic. It's just pre-decided. That's the
           whole point.
         </P>
       </Example>
@@ -105,7 +105,7 @@ export default async function Page() {
           "Grading yourself on whether you felt motivated. Motivation is weather. Discipline is climate. Stop checking the weather.",
           "Bundling too many habits into one morning. Five new habits at once is how people quit by Thursday. Install one, run it for four weeks, then add the next.",
           "Leaving phone access to chance. The phone breaks mornings, training, sleep, and deep work. It is the single biggest leverage point for most people.",
-          "Grinding through when the system breaks instead of fixing the system. If you&apos;re fighting the same battle every day, the system is wrong, not your willpower.",
+          "Grinding through when the system breaks instead of fixing the system. If you're fighting the same battle every day, the system is wrong, not your willpower.",
         ]}
       />
 
@@ -115,8 +115,8 @@ export default async function Page() {
         items={[
           {
             id: "morning",
-            label: "Design and write down your ideal first 60 minutes. Put it where you&apos;ll see it when you wake up.",
-            hint: "It doesn&apos;t need to be complicated. Wake, water, move, one real task before phone.",
+            label: "Design and write down your ideal first 60 minutes. Put it where you'll see it when you wake up.",
+            hint: "It doesn't need to be complicated. Wake, water, move, one real task before phone.",
           },
           {
             id: "phone",
@@ -125,8 +125,8 @@ export default async function Page() {
           },
           {
             id: "shutdown",
-            label: "Block 3 minutes at end of workday for a shutdown review and tomorrow&apos;s top priority.",
-            hint: "Write: what got done, what&apos;s tomorrow&apos;s one thing, is the calendar right. That&apos;s it.",
+            label: "Block 3 minutes at end of workday for a shutdown review and tomorrow's top priority.",
+            hint: "Write: what got done, what's tomorrow's one thing, is the calendar right. That's it.",
           },
         ]}
       />
@@ -149,12 +149,12 @@ export default async function Page() {
           {
             id: "q2",
             prompt:
-              "You&apos;re busy this week. Which pillar do you sacrifice first?",
+              "You're busy this week. Which pillar do you sacrifice first?",
             options: [
               "Skip the morning anchor.",
               "Skip training.",
               "Skip the shutdown.",
-              "None. Busy weeks are exactly why these exist. Shrink the rituals, don&apos;t skip them.",
+              "None. Busy weeks are exactly why these exist. Shrink the rituals, don't skip them.",
             ],
             correct: 3,
             explain:
@@ -166,7 +166,7 @@ export default async function Page() {
             options: [
               "To feel productive.",
               "Because it requires the highest-quality cognitive resources, and those deplete throughout the day.",
-              "Because it&apos;s unpleasant.",
+              "Because it's unpleasant.",
               "Because meetings happen in the afternoon.",
             ],
             correct: 1,
@@ -177,7 +177,7 @@ export default async function Page() {
       />
 
       <Reflection
-        prompt="Which of the four pillars is weakest in your current week? What&apos;s the smallest possible version you could install tomorrow to start repairing it?"
+        prompt="Which of the four pillars is weakest in your current week? What's the smallest possible version you could install tomorrow to start repairing it?"
         minChars={120}
       />
 

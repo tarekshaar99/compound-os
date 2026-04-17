@@ -126,7 +126,7 @@ export default function Paywall({
           </div>
 
           <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-3 tracking-tight">
-            You&apos;re seeing a preview
+            You're seeing a preview
           </h2>
           <p className="text-[var(--text-secondary)] text-base md:text-lg max-w-lg mb-3 leading-relaxed">
             The full system includes structured frameworks, checklists, and protocols across Trading, Fitness, and Mindset - built from years of real execution.

@@ -28,7 +28,7 @@ export default async function Page() {
       moduleId="fitness.recovery"
       pillar="fitness"
       title="Recovery and Sleep"
-      subtitle="The part most people skip. Sleep targets, deload logic, and how to read when you&apos;re cooked."
+      subtitle="The part most people skip. Sleep targets, deload logic, and how to read when you're cooked."
       estMinutes={11}
     >
       <LessonSection title="What this is">
@@ -36,13 +36,13 @@ export default async function Page() {
           Training is the stimulus. Recovery is the adaptation. Skip the
           second half and you accumulated all the cost and none of the
           benefit. This module gives you the four levers and a simple
-          decision tree for when you&apos;re fried.
+          decision tree for when you're fried.
         </P>
       </LessonSection>
 
       <Principle>
         You are as strong as your worst recovery week. Chronic
-        under-recovery doesn&apos;t show up as one bad day. It shows up as
+        under-recovery doesn't show up as one bad day. It shows up as
         an injury you never saw coming.
       </Principle>
 
@@ -69,22 +69,22 @@ export default async function Page() {
         </P>
       </LessonSection>
 
-      <LessonSection title="How to know you&apos;re cooked">
+      <LessonSection title="How to know you're cooked">
         <P>
           Five signals. Two or more showing at once means a deload week,
-          not a &quot;push through&quot; week:
+          not a "push through" week:
         </P>
         <P>
           1. Resting heart rate elevated 5+ bpm over baseline for 3+ days.
         </P>
         <P>
-          2. Sleep duration holding steady but you&apos;re still tired.
+          2. Sleep duration holding steady but you're still tired.
         </P>
         <P>
-          3. Irritability that&apos;s out of character.
+          3. Irritability that's out of character.
         </P>
         <P>
-          4. Warm-up weights feeling heavy that shouldn&apos;t.
+          4. Warm-up weights feeling heavy that shouldn't.
         </P>
         <P>
           5. Minor tweaks (elbow, knee, low back) flaring up that were
@@ -110,10 +110,10 @@ export default async function Page() {
 
       <Mistakes
         items={[
-          "Treating sleep as the adjustable variable when life gets busy. It&apos;s the least adjustable. Work, social, scrolling all flex before sleep does.",
-          "Skipping deloads because &apos;I&apos;m not tired yet.&apos; Deloads that happen before you need them are called training plans. Deloads forced on you are called injuries.",
+          "Treating sleep as the adjustable variable when life gets busy. It's the least adjustable. Work, social, scrolling all flex before sleep does.",
+          "Skipping deloads because 'I'm not tired yet.' Deloads that happen before you need them are called training plans. Deloads forced on you are called injuries.",
           "Confusing rest days with recovery. Rest days are part of the week. Recovery is the whole system: food, sleep, stress. You can have 2 rest days and still be massively under-recovered.",
-          "Using caffeine to paper over accumulated fatigue. That&apos;s a loan, not a solution. The interest is real and compounds.",
+          "Using caffeine to paper over accumulated fatigue. That's a loan, not a solution. The interest is real and compounds.",
           "Ignoring small joint tweaks. A 4-day low-intensity reset on a minor tweak saves a 6-week full rehab down the line.",
         ]}
       />
@@ -135,7 +135,7 @@ export default async function Page() {
           {
             id: "tracking",
             label: "Pick one recovery metric to track daily: resting HR on waking, or subjective 1-10 readiness.",
-            hint: "Doesn&apos;t matter which. Matters that you have a trend line when signals start flashing.",
+            hint: "Doesn't matter which. Matters that you have a trend line when signals start flashing.",
           },
         ]}
       />
@@ -148,7 +148,7 @@ export default async function Page() {
             options: [
               "Push through. Training state is adaptive.",
               "Skip entirely.",
-              "Downshift today&apos;s session: same movements, drop working weight 20-30%, same technique focus.",
+              "Downshift today's session: same movements, drop working weight 20-30%, same technique focus.",
               "Double your caffeine.",
             ],
             correct: 2,
@@ -157,7 +157,7 @@ export default async function Page() {
           },
           {
             id: "q2",
-            prompt: "Three of the five &apos;cooked&apos; signals are flashing this week. What&apos;s the call?",
+            prompt: "Three of the five 'cooked' signals are flashing this week. What's the call?",
             options: [
               "One hard session to see if you can break through.",
               "Deload week: 60-65% of working weight, reps unchanged, Zone 2 instead of intervals.",
@@ -170,7 +170,7 @@ export default async function Page() {
           },
           {
             id: "q3",
-            prompt: "What&apos;s the single highest-leverage recovery lever for most people?",
+            prompt: "What's the single highest-leverage recovery lever for most people?",
             options: [
               "Ice baths.",
               "Massage gun.",
@@ -185,7 +185,7 @@ export default async function Page() {
       />
 
       <Reflection
-        prompt="Which of the four recovery levers is your current weakest link? What&apos;s one specific change you&apos;ll make this week to fix it?"
+        prompt="Which of the four recovery levers is your current weakest link? What's one specific change you'll make this week to fix it?"
         minChars={100}
       />
 

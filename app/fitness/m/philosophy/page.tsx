@@ -34,7 +34,7 @@ export default async function Page() {
       <LessonSection title="What this is">
         <P>
           Most fitness content is sold by people optimizing for one thing.
-          Bodybuilders who don&apos;t run. Runners who can&apos;t squat.
+          Bodybuilders who don't run. Runners who can't squat.
           CrossFit boxes full of shoulder injuries. The hybrid athlete
           philosophy rejects all of it. You want to be strong, conditioned,
           mobile, and durable at forty and at sixty.
@@ -60,7 +60,7 @@ export default async function Page() {
         <P>
           <strong>2. Tempo over weight.</strong> Controlled eccentrics
           build more muscle, fewer injuries, and better joints than ego
-          numbers. If you can&apos;t control it down, you don&apos;t own
+          numbers. If you can't control it down, you don't own
           the weight.
         </P>
         <P>
@@ -70,8 +70,8 @@ export default async function Page() {
         </P>
         <P>
           <strong>4. Recovery is training.</strong> Sleep, food, and off
-          days aren&apos;t interruptions to the plan. They are the plan.
-          You don&apos;t get stronger in the gym, you get stronger
+          days aren't interruptions to the plan. They are the plan.
+          You don't get stronger in the gym, you get stronger
           recovering from the gym.
         </P>
         <P>
@@ -89,7 +89,7 @@ export default async function Page() {
         </P>
         <P>
           No single day is extreme. No week is extreme. But year over
-          year, you&apos;re stronger, leaner, and moving better than 99
+          year, you're stronger, leaner, and moving better than 99
           percent of your peers.
         </P>
       </Example>
@@ -110,17 +110,17 @@ export default async function Page() {
           {
             id: "audit",
             label: "Audit your last 4 weeks of training. Count sessions by type: strength, Zone 2, intervals, mobility, full rest.",
-            hint: "The honest count tells you which of the five rules you&apos;re already living and which you&apos;re pretending to.",
+            hint: "The honest count tells you which of the five rules you're already living and which you're pretending to.",
           },
           {
             id: "sleep",
             label: "Write down your average sleep hours for the last 7 days.",
-            hint: "If it&apos;s under 7, the fastest training upgrade available to you is sleep, not a new program.",
+            hint: "If it's under 7, the fastest training upgrade available to you is sleep, not a new program.",
           },
           {
             id: "stop",
-            label: "Identify one thing you&apos;re going to STOP doing that violates one of the five rules.",
-            hint: "&apos;Less volume, more intent&apos; usually means one specific workout you can&apos;t justify anymore.",
+            label: "Identify one thing you're going to STOP doing that violates one of the five rules.",
+            hint: "'Less volume, more intent' usually means one specific workout you can't justify anymore.",
           },
         ]}
       />
@@ -130,11 +130,11 @@ export default async function Page() {
           {
             id: "q1",
             prompt:
-              "You&apos;re 35, strong but inflexible. A coach offers a program with 5 strength days per week and no mobility work. What&apos;s the philosophy answer?",
+              "You're 35, strong but inflexible. A coach offers a program with 5 strength days per week and no mobility work. What's the philosophy answer?",
             options: [
               "Take it. More strength days is more progress.",
               "Take it but add cardio.",
-              "Pass. It violates &apos;train the whole envelope&apos; and will compound your inflexibility.",
+              "Pass. It violates 'train the whole envelope' and will compound your inflexibility.",
               "Take it for one cycle only.",
             ],
             correct: 2,
@@ -143,11 +143,11 @@ export default async function Page() {
           },
           {
             id: "q2",
-            prompt: "Which of these is a sign you&apos;re violating &apos;less volume, more intent&apos;?",
+            prompt: "Which of these is a sign you're violating 'less volume, more intent'?",
             options: [
-              "You&apos;re hitting PRs every few weeks.",
+              "You're hitting PRs every few weeks.",
               "Your sessions are 45-60 minutes.",
-              "You&apos;re chronically sore but progress has stalled.",
+              "You're chronically sore but progress has stalled.",
               "You take a full rest day per week.",
             ],
             correct: 2,
@@ -156,12 +156,12 @@ export default async function Page() {
           },
           {
             id: "q3",
-            prompt: "What&apos;s the strongest argument for &apos;consistency over peaks&apos;?",
+            prompt: "What's the strongest argument for 'consistency over peaks'?",
             options: [
-              "Peaks aren&apos;t fun.",
+              "Peaks aren't fun.",
               "Durability compounds; peaks usually precede injuries or burnout.",
               "Coaches prefer consistency.",
-              "It&apos;s easier.",
+              "It's easier.",
             ],
             correct: 1,
             explain:

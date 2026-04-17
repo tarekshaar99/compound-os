@@ -175,7 +175,7 @@ export default function LoginForm({
         <h3
           className={`${compact ? "text-lg" : "text-xl"} font-bold text-[var(--text-primary)] mb-2`}
         >
-          You&apos;re in
+          You're in
         </h3>
         <p className="text-[var(--text-secondary)] text-sm">
           Redirecting to your dashboard...

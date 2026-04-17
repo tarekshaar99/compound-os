@@ -67,14 +67,14 @@ export default async function Page() {
           strength.
         </P>
         <P>
-          <strong>3. Own the concentric, don&apos;t explode it unless the
+          <strong>3. Own the concentric, don't explode it unless the
           program calls for it.</strong> Controlled concentric = better
           bar path = fewer injuries. Speed work is a tool for a specific
           cycle, not a default.
         </P>
         <P>
           <strong>4. Target 40-70 seconds of total TUT per working set for
-          hypertrophy.</strong> That&apos;s the window where mechanical
+          hypertrophy.</strong> That's the window where mechanical
           tension meets metabolic stress.
         </P>
       </LessonSection>
@@ -141,11 +141,11 @@ export default async function Page() {
           },
           {
             id: "q2",
-            prompt: "You used to squat 225x8. You&apos;re now doing 185x8 with a 3-second eccentric and 1-second pause. Are you weaker?",
+            prompt: "You used to squat 225x8. You're now doing 185x8 with a 3-second eccentric and 1-second pause. Are you weaker?",
             options: [
               "Yes.",
               "No, the second stimulus is significantly harder and builds more tissue. Your strength across all rep tempos is improving.",
-              "It&apos;s identical.",
+              "It's identical.",
               "Depends on body weight.",
             ],
             correct: 1,

@@ -34,8 +34,8 @@ export default async function Page() {
       <LessonSection title="What this is">
         <P>
           Most retail traders look at price. Price is lagging. VIX, the
-          market&apos;s 30-day implied volatility index, is the fastest
-          public tell for what kind of environment you&apos;re in.
+          market's 30-day implied volatility index, is the fastest
+          public tell for what kind of environment you're in.
         </P>
         <P>
           This module gives you a four-zone deployment ladder based on VIX
@@ -45,10 +45,10 @@ export default async function Page() {
       </LessonSection>
 
       <Principle>
-        Volatility is not a thing to be feared. It&apos;s a price signal
+        Volatility is not a thing to be feared. It's a price signal
         for risk, and risk is where returns come from. The question is
-        never &apos;is vol high?&apos; It&apos;s &apos;is vol being priced
-        correctly?&apos;
+        never 'is vol high?' It's 'is vol being priced
+        correctly?'
       </Principle>
 
       <LessonSection title="The four zones">
@@ -92,8 +92,8 @@ export default async function Page() {
           <strong>At VIX 40+:</strong> deploy the final 25%.
         </P>
         <P>
-          The point is pre-committing to the ladder before you&apos;re in
-          the fear. If you wait to feel brave, you&apos;ll deploy at VIX
+          The point is pre-committing to the ladder before you're in
+          the fear. If you wait to feel brave, you'll deploy at VIX
           16 on the way back down.
         </P>
       </LessonSection>
@@ -102,7 +102,7 @@ export default async function Page() {
         <P>
           In March 2020, VIX spiked to 82. Anyone on this ladder was fully
           deployed by VIX 40. Quality names were down 40 to 60 percent.
-          The &quot;hard part&quot; was holding your nerve with a plan you&apos;d
+          The "hard part" was holding your nerve with a plan you'd
           already written.
         </P>
         <P>
@@ -115,9 +115,9 @@ export default async function Page() {
 
       <Mistakes
         items={[
-          "Waiting for &apos;the&apos; bottom before deploying. You will never see it in real time. The ladder exists so you don&apos;t have to.",
-          "Deploying the whole cash reserve at VIX 25 because it &apos;feels like a lot.&apos; VIX can go much higher. The whole point of tranches is respecting the tail.",
-          "Buying leveraged ETFs as your vol play. Leveraged products have decay built in. You don&apos;t need leverage when vol is already giving you asymmetric entries.",
+          "Waiting for 'the' bottom before deploying. You will never see it in real time. The ladder exists so you don't have to.",
+          "Deploying the whole cash reserve at VIX 25 because it 'feels like a lot.' VIX can go much higher. The whole point of tranches is respecting the tail.",
+          "Buying leveraged ETFs as your vol play. Leveraged products have decay built in. You don't need leverage when vol is already giving you asymmetric entries.",
           "Treating VIX level as the only signal. VIX trending up at 20 is different from VIX trending down at 20. The ladder activates on level; the decision on what to buy still needs a setup.",
         ]}
       />
@@ -128,18 +128,18 @@ export default async function Page() {
         items={[
           {
             id: "watchlist",
-            label: "Build a dislocation watchlist: 10 quality names you&apos;d buy aggressively at a 30% discount.",
-            hint: "If VIX ever spikes to 35+, this list is what you execute against. Build it when you&apos;re calm.",
+            label: "Build a dislocation watchlist: 10 quality names you'd buy aggressively at a 30% discount.",
+            hint: "If VIX ever spikes to 35+, this list is what you execute against. Build it when you're calm.",
           },
           {
             id: "cash-target",
             label: "Set your cash reserve target as a percentage of portfolio and write the ladder math for your account size.",
-            hint: "If you&apos;re holding 30% cash on a $100k portfolio, each ladder rung is $7.5k of deployment.",
+            hint: "If you're holding 30% cash on a $100k portfolio, each ladder rung is $7.5k of deployment.",
           },
           {
             id: "alert",
             label: "Set a VIX alert at 20, 25, 30 in your broker or phone.",
-            hint: "You don&apos;t want to be refreshing. You want to be notified and then act on the pre-written plan.",
+            hint: "You don't want to be refreshing. You want to be notified and then act on the pre-written plan.",
           },
         ]}
       />
@@ -162,7 +162,7 @@ export default async function Page() {
           {
             id: "q2",
             prompt:
-              "VIX spikes from 18 to 32 in three days. You&apos;re still at full cash reserve. What do you do?",
+              "VIX spikes from 18 to 32 in three days. You're still at full cash reserve. What do you do?",
             options: [
               "Wait for VIX to come back down.",
               "Deploy everything immediately.",
@@ -178,13 +178,13 @@ export default async function Page() {
             prompt: "Why is deploying via ladder better than trying to buy the bottom?",
             options: [
               "Ladders make more money on average.",
-              "You can&apos;t see the bottom in real time. Ladders guarantee you&apos;re buying into the dislocation rather than missing it waiting for perfect.",
+              "You can't see the bottom in real time. Ladders guarantee you're buying into the dislocation rather than missing it waiting for perfect.",
               "Ladders are tax-efficient.",
               "Ladders avoid commissions.",
             ],
             correct: 1,
             explain:
-              "It&apos;s not about optimal. It&apos;s about being in the trade at all. Perfect is the enemy of executed.",
+              "It's not about optimal. It's about being in the trade at all. Perfect is the enemy of executed.",
           },
         ]}
       />

@@ -34,19 +34,19 @@ export default async function Page() {
       <LessonSection title="What this is">
         <P>
           Every pro has a review cadence. Retail traders almost never do.
-          The weekly review is not about P&amp;L. It&apos;s about process:
+          The weekly review is not about P&L. It's about process:
           which rules did you follow, which did you break, and what does
           that tell you about your next week.
         </P>
         <P>
-          Thirty minutes, every Sunday, same time, same template. That&apos;s
+          Thirty minutes, every Sunday, same time, same template. That's
           the whole ritual.
         </P>
       </LessonSection>
 
       <Principle>
-        Results lie in the short run. Process doesn&apos;t. The weekly
-        review is where you see which one you&apos;re actually running.
+        Results lie in the short run. Process doesn't. The weekly
+        review is where you see which one you're actually running.
       </Principle>
 
       <LessonSection title="The six-question template">
@@ -61,11 +61,11 @@ export default async function Page() {
           3. Which trades were in my edge? Which were not?
         </P>
         <P>
-          4. What&apos;s the current regime? Has it changed in the last
+          4. What's the current regime? Has it changed in the last
           week?
         </P>
         <P>
-          5. What&apos;s one adjustment I&apos;ll make next week, in
+          5. What's one adjustment I'll make next week, in
           writing?
         </P>
         <P>
@@ -88,7 +88,7 @@ export default async function Page() {
           setup, clean execution.
         </P>
         <P>
-          <strong>Out of edge:</strong> the afternoon SPY scalp. Shouldn&apos;t
+          <strong>Out of edge:</strong> the afternoon SPY scalp. Shouldn't
           even be trading intraday SPY with my horizon.
         </P>
         <P>
@@ -106,10 +106,10 @@ export default async function Page() {
 
       <Mistakes
         items={[
-          "Reviewing P&amp;L only. &apos;Up 3%&apos; tells you nothing about whether you followed your rules. You can lose money doing everything right and make money doing everything wrong. Grade the process.",
+          "Reviewing P&L only. 'Up 3%' tells you nothing about whether you followed your rules. You can lose money doing everything right and make money doing everything wrong. Grade the process.",
           "Skipping the review in a bad week. That is exactly the week you need it most.",
-          "Making the review a ritual of self-congratulation. If every answer to &apos;what did I do poorly&apos; is &apos;nothing,&apos; you&apos;re not reviewing.",
-          "Not writing the adjustment down. Mental notes don&apos;t compound. Written adjustments, revisited the following Sunday, do.",
+          "Making the review a ritual of self-congratulation. If every answer to 'what did I do poorly' is 'nothing,' you're not reviewing.",
+          "Not writing the adjustment down. Mental notes don't compound. Written adjustments, revisited the following Sunday, do.",
         ]}
       />
 
@@ -130,12 +130,12 @@ export default async function Page() {
           {
             id: "first-review",
             label: "Do the review for the week that just passed. Today.",
-            hint: "You are not waiting for the &apos;right&apos; week to start. This one counts.",
+            hint: "You are not waiting for the 'right' week to start. This one counts.",
           },
           {
             id: "commit",
-            label: "Write the single most honest &apos;adjustment&apos; you can think of for next week.",
-            hint: "If it stings a little, it&apos;s the right one.",
+            label: "Write the single most honest 'adjustment' you can think of for next week.",
+            hint: "If it stings a little, it's the right one.",
           },
         ]}
       />
@@ -145,10 +145,10 @@ export default async function Page() {
           {
             id: "q1",
             prompt:
-              "You had your best P&amp;L week of the year, but you broke three of your own rules to get there. What does the framework say?",
+              "You had your best P&L week of the year, but you broke three of your own rules to get there. What does the framework say?",
             options: [
               "Celebrate the win.",
-              "Ignore the rules you broke since they clearly weren&apos;t needed.",
+              "Ignore the rules you broke since they clearly weren't needed.",
               "Flag the rule breaks. You just got lucky, and the pattern will cost you later.",
               "Stop trading.",
             ],
@@ -158,22 +158,22 @@ export default async function Page() {
           },
           {
             id: "q2",
-            prompt: "You&apos;re on a three-week losing streak. You&apos;re tempted to skip the review because it&apos;ll be depressing. What&apos;s the right call?",
+            prompt: "You're on a three-week losing streak. You're tempted to skip the review because it'll be depressing. What's the right call?",
             options: [
               "Skip it. You need a break.",
               "Do it anyway. The pattern is almost certainly in the process, and the review is the only way to find it.",
-              "Do a P&amp;L-only review.",
+              "Do a P&L-only review.",
               "Outsource the review to someone else.",
             ],
             correct: 1,
             explain:
-              "Drawdowns are where reviews earn their keep. Skip the review and you&apos;ll be in a drawdown twice as long.",
+              "Drawdowns are where reviews earn their keep. Skip the review and you'll be in a drawdown twice as long.",
           },
           {
             id: "q3",
-            prompt: "What&apos;s the most important output of the weekly review?",
+            prompt: "What's the most important output of the weekly review?",
             options: [
-              "Updated P&amp;L spreadsheet.",
+              "Updated P&L spreadsheet.",
               "A single written adjustment for next week.",
               "A watchlist.",
               "A feeling of closure on the week.",

@@ -27,36 +27,36 @@ export default async function Page() {
       moduleId="mindset.journaling"
       pillar="mindset"
       title="Structured Journaling"
-      subtitle="Not a diary. A feedback loop. The three prompts that surface the pattern you&apos;re running."
+      subtitle="Not a diary. A feedback loop. The three prompts that surface the pattern you're running."
       estMinutes={9}
     >
       <LessonSection title="What this is">
         <P>
-          Diary journaling is fine. It&apos;s just not the same product.
+          Diary journaling is fine. It's just not the same product.
           Structured journaling is a tool for surfacing patterns you
-          can&apos;t see from inside the week. Three prompts, five
+          can't see from inside the week. Three prompts, five
           minutes, high signal.
         </P>
       </LessonSection>
 
       <Principle>
-        You don&apos;t need to write more. You need to write the questions
+        You don't need to write more. You need to write the questions
         that force an honest answer.
       </Principle>
 
       <LessonSection title="The three prompts">
         <P>
           <strong>1. What did I do today that my future self will be glad
-          about?</strong> This forces you to rank today&apos;s actions by
+          about?</strong> This forces you to rank today's actions by
           long-term value rather than immediate comfort.
         </P>
         <P>
           <strong>2. What did I do today that my future self will resent?</strong>
-          This is the prompt no one wants to answer. It&apos;s also the
+          This is the prompt no one wants to answer. It's also the
           one that produces the most change. Be specific.
         </P>
         <P>
-          <strong>3. What&apos;s the smallest lever I could pull
+          <strong>3. What's the smallest lever I could pull
           tomorrow?</strong> Not the transformational one. The smallest
           one that moves the needle at all. Small levers, pulled daily,
           compound harder than big levers pulled occasionally.
@@ -66,13 +66,13 @@ export default async function Page() {
       <Example title="A real entry">
         <P>
           <strong>Glad about:</strong> did the hard workout even though I
-          didn&apos;t want to. Said no to the meeting that wasn&apos;t
+          didn't want to. Said no to the meeting that wasn't
           mine. Put phone away at 9 PM.
         </P>
         <P>
           <strong>Resent:</strong> spent 40 minutes on social media
           between 3 and 4 PM. Avoided the difficult conversation with M
-          again. Had a drink I didn&apos;t need.
+          again. Had a drink I didn't need.
         </P>
         <P>
           <strong>Smallest lever tomorrow:</strong> put phone in other
@@ -86,7 +86,7 @@ export default async function Page() {
 
       <Mistakes
         items={[
-          "Writing to sound good. The journal only works if you&apos;re the only reader. If you&apos;re performing for a future self, a therapist, or anyone else, the data gets corrupted fast.",
+          "Writing to sound good. The journal only works if you're the only reader. If you're performing for a future self, a therapist, or anyone else, the data gets corrupted fast.",
           "Skipping on hard days. Hard days are the highest-value entries. The pattern is always louder under stress.",
           "Reading entries back only occasionally. Weekly skim of the past seven days is where the patterns actually pop. Without review, the entries are noise.",
           "Trying to journal for an hour. Five minutes daily beats an hour weekly. Compounding is frequency-dependent.",
@@ -109,8 +109,8 @@ export default async function Page() {
           },
           {
             id: "first",
-            label: "Write today&apos;s entry right now. Three prompts. Five minutes.",
-            hint: "Starting today is the entire point. Tomorrow doesn&apos;t exist yet.",
+            label: "Write today's entry right now. Three prompts. Five minutes.",
+            hint: "Starting today is the entire point. Tomorrow doesn't exist yet.",
           },
         ]}
       />

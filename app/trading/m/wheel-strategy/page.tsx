@@ -40,7 +40,7 @@ export default async function Page() {
         </P>
         <P>
           Done right, this is a patient income strategy on companies you
-          already want exposure to. Done wrong, it&apos;s a slow way to
+          already want exposure to. Done wrong, it's a slow way to
           bagholding.
         </P>
       </LessonSection>
@@ -60,7 +60,7 @@ export default async function Page() {
       </LessonSection>
 
       <Principle>
-        Only wheel stocks you would genuinely buy at the strike you&apos;re
+        Only wheel stocks you would genuinely buy at the strike you're
         selling. Every put sold is a conditional buy order you just got
         paid for.
       </Principle>
@@ -98,13 +98,13 @@ export default async function Page() {
         <P>
           <strong>Never sell calls below your cost basis.</strong> That
           locks in a loss to collect pennies. Just because the stock
-          dropped doesn&apos;t mean the setup is still valid.
+          dropped doesn't mean the setup is still valid.
         </P>
       </LessonSection>
 
       <Example title="A realistic wheel cycle">
         <P>
-          Stock XYZ trading at $52. You&apos;d buy at $45.
+          Stock XYZ trading at $52. You'd buy at $45.
         </P>
         <P>
           Sell 1 put at $45 strike, 35 DTE, collect $1.20 premium = $120.
@@ -129,11 +129,11 @@ export default async function Page() {
 
       <Mistakes
         items={[
-          "Wheeling stocks you&apos;d never actually buy. This is the classic way the wheel blows up: assignment on a name you now hate holding, where even selling calls feels lose-lose.",
+          "Wheeling stocks you'd never actually buy. This is the classic way the wheel blows up: assignment on a name you now hate holding, where even selling calls feels lose-lose.",
           "Chasing premium by selling too close to the money. Higher premium means higher assignment probability means more capital tied up. The whole game is capital turnover.",
           "Holding through earnings without a plan. Vol crush is why people sell options into earnings. Owning naked short options through a print is a thesis bet, not an income strategy.",
-          "Selling calls below cost basis to &apos;generate income&apos; on a losing position. This turns a drawdown into a locked loss.",
-          "Letting one position consume more than 10% of the portfolio&apos;s cash-secured capacity. Diversification matters as much in options as in shares.",
+          "Selling calls below cost basis to 'generate income' on a losing position. This turns a drawdown into a locked loss.",
+          "Letting one position consume more than 10% of the portfolio's cash-secured capacity. Diversification matters as much in options as in shares.",
         ]}
       />
 
@@ -143,8 +143,8 @@ export default async function Page() {
         items={[
           {
             id: "watchlist",
-            label: "Build a watchlist of 5 to 10 stocks you&apos;d genuinely buy at 10-15% below current price.",
-            hint: "If the list is hard to assemble, the market probably isn&apos;t cheap enough to wheel aggressively yet. Cash is fine.",
+            label: "Build a watchlist of 5 to 10 stocks you'd genuinely buy at 10-15% below current price.",
+            hint: "If the list is hard to assemble, the market probably isn't cheap enough to wheel aggressively yet. Cash is fine.",
           },
           {
             id: "strike-rules",
@@ -154,12 +154,12 @@ export default async function Page() {
           {
             id: "size-cap",
             label: "Set a per-position cap: no single wheel can tie up more than 10% of cash-secured capacity.",
-            hint: "&apos;Cash-secured capacity&apos; is the total cash you&apos;re willing to have assigned across all wheels.",
+            hint: "'Cash-secured capacity' is the total cash you're willing to have assigned across all wheels.",
           },
           {
             id: "paper-one",
             label: "Paper-trade or live-size-small one wheel cycle before running it full size.",
-            hint: "You&apos;re not testing the idea, you&apos;re testing the mechanics: rolls, early closes, assignment handling.",
+            hint: "You're not testing the idea, you're testing the mechanics: rolls, early closes, assignment handling.",
           },
         ]}
       />
@@ -171,18 +171,18 @@ export default async function Page() {
             prompt:
               "You sold a put at $45 strike for $1.20. Stock drops to $44 three days before expiry. What does the framework suggest?",
             options: [
-              "Let it expire. You&apos;ll get assigned.",
+              "Let it expire. You'll get assigned.",
               "Buy it back at a loss to avoid assignment.",
               "Roll it down and out to a lower strike, later date.",
-              "Either take assignment (if you still want the shares at $45) or roll out and down for a credit to stay in premium. The decision is &apos;do I still want these shares here?&apos;",
+              "Either take assignment (if you still want the shares at $45) or roll out and down for a credit to stay in premium. The decision is 'do I still want these shares here?'",
             ],
             correct: 3,
             explain:
-              "The question is never &apos;assignment good or bad.&apos; It&apos;s &apos;do I still want to own these shares at this strike?&apos; If yes, take it. If no, roll or close.",
+              "The question is never 'assignment good or bad.' It's 'do I still want to own these shares at this strike?' If yes, take it. If no, roll or close.",
           },
           {
             id: "q2",
-            prompt: "You&apos;re assigned at $45 cost basis (after premium: $43.80). Stock is now at $40. What call should you NOT sell?",
+            prompt: "You're assigned at $45 cost basis (after premium: $43.80). Stock is now at $40. What call should you NOT sell?",
             options: [
               "$46 strike, 35 DTE.",
               "$42 strike, 14 DTE.",
@@ -200,18 +200,18 @@ export default async function Page() {
             options: [
               "To avoid assignment at all costs.",
               "Capital efficiency: you release collateral sooner and can deploy on the next cycle.",
-              "It&apos;s safer.",
+              "It's safer.",
               "The math says 50% is the perfect number.",
             ],
             correct: 1,
             explain:
-              "Wheel returns compound through turnover. 50% is a pragmatic balance between locking profit and letting theta keep working. It&apos;s a heuristic, not a law.",
+              "Wheel returns compound through turnover. 50% is a pragmatic balance between locking profit and letting theta keep working. It's a heuristic, not a law.",
           },
         ]}
       />
 
       <Reflection
-        prompt="List 3 stocks you&apos;d actually be happy to own at 10-15% below current price. For each, what&apos;s the strike you&apos;d sell the first put at, and why that strike?"
+        prompt="List 3 stocks you'd actually be happy to own at 10-15% below current price. For each, what's the strike you'd sell the first put at, and why that strike?"
         minChars={150}
       />
 

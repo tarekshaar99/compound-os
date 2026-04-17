@@ -33,15 +33,15 @@ export default async function Page() {
     >
       <LessonSection title="What this is">
         <P>
-          Most losing traders don&apos;t lose because their strategy is wrong.
-          They lose because they never decided what they&apos;re actually doing.
+          Most losing traders don't lose because their strategy is wrong.
+          They lose because they never decided what they're actually doing.
           Are you investing, speculating, or gambling? Each has different
           rules. Mixing them up is the single fastest way to blow up an
           account.
         </P>
         <P>
           This module gives you the scaffolding every trade sits on top of.
-          Once it&apos;s in place, strategy becomes a matter of execution
+          Once it's in place, strategy becomes a matter of execution
           rather than improvisation.
         </P>
       </LessonSection>
@@ -57,8 +57,8 @@ export default async function Page() {
 
       <Principle>
         Every position is an answer to one question: am I being paid enough
-        for the risk I&apos;m actually taking? If you can&apos;t say the risk
-        out loud, you&apos;re not investing, you&apos;re guessing.
+        for the risk I'm actually taking? If you can't say the risk
+        out loud, you're not investing, you're guessing.
       </Principle>
 
       <LessonSection title="The three modes of capital deployment">
@@ -79,7 +79,7 @@ export default async function Page() {
         </P>
         <P>
           There is nothing wrong with speculation. There is everything
-          wrong with doing it while telling yourself you&apos;re investing.
+          wrong with doing it while telling yourself you're investing.
         </P>
       </LessonSection>
 
@@ -92,21 +92,21 @@ export default async function Page() {
         <P>
           <strong>Speculating example.</strong> VIX is at 40, credit
           spreads blowing out, you sell a cash-secured put on a company
-          you&apos;d be happy to own at that strike. You defined the worst
+          you'd be happy to own at that strike. You defined the worst
           case before entering.
         </P>
         <P>
           <strong>Gambling example.</strong> A ticker is trending on
           social media. You buy 0-day options because it feels like
-          it&apos;s going up. No thesis, no stop, no size rule. That&apos;s
-          not a trade, it&apos;s a donation.
+          it's going up. No thesis, no stop, no size rule. That's
+          not a trade, it's a donation.
         </P>
       </Example>
 
       <Mistakes
         items={[
           "Starting with a ticker. A ticker is the last thing you pick, not the first. Start with the regime, then the strategy, then size, then the ticker.",
-          "Letting a bad speculation turn into a long-term investment by lowering your standards after you&apos;re underwater.",
+          "Letting a bad speculation turn into a long-term investment by lowering your standards after you're underwater.",
           "Confusing being early with being wrong, or being lucky with being right. The market will pay you for both mistakes eventually.",
           "Measuring yourself on individual trades instead of the process. One trade means nothing. A hundred trades tell you everything.",
         ]}
@@ -119,12 +119,12 @@ export default async function Page() {
           {
             id: "classify",
             label: "Classify every open position as investing, speculating, or gambling.",
-            hint: "Be honest. If a position doesn&apos;t fit any category cleanly, that&apos;s the answer.",
+            hint: "Be honest. If a position doesn't fit any category cleanly, that's the answer.",
           },
           {
             id: "thesis",
             label: "For every open position, write one sentence stating the exit trigger.",
-            hint: "Thesis break for investments. Invalidation level for speculation. If you can&apos;t write it, close it.",
+            hint: "Thesis break for investments. Invalidation level for speculation. If you can't write it, close it.",
           },
           {
             id: "size",
@@ -134,7 +134,7 @@ export default async function Page() {
           {
             id: "close-gambles",
             label: "Close anything you classified as gambling before the next market open.",
-            hint: "The loss you&apos;ve already taken is sunk. The cost of keeping a gambling position is the slot it occupies.",
+            hint: "The loss you've already taken is sunk. The cost of keeping a gambling position is the slot it occupies.",
           },
         ]}
       />
@@ -144,10 +144,10 @@ export default async function Page() {
           {
             id: "q1",
             prompt:
-              "A stock you bought as a three-year hold drops 40% in a month. The business fundamentals are unchanged. What&apos;s the right move?",
+              "A stock you bought as a three-year hold drops 40% in a month. The business fundamentals are unchanged. What's the right move?",
             options: [
               "Sell immediately to preserve capital.",
-              "Hold. The thesis hasn&apos;t broken. A 40% drawdown on an investment is normal.",
+              "Hold. The thesis hasn't broken. A 40% drawdown on an investment is normal.",
               "Average down aggressively to lower your basis.",
               "Sell half to feel better.",
             ],
@@ -172,11 +172,11 @@ export default async function Page() {
           {
             id: "q3",
             prompt:
-              "Which of these is the clearest sign you&apos;re gambling rather than speculating?",
+              "Which of these is the clearest sign you're gambling rather than speculating?",
             options: [
               "The holding period is short.",
-              "You&apos;re using options instead of shares.",
-              "You can&apos;t state the exit rule out loud before entering.",
+              "You're using options instead of shares.",
+              "You can't state the exit rule out loud before entering.",
               "The position is down.",
             ],
             correct: 2,

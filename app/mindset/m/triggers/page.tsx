@@ -34,7 +34,7 @@ export default async function Page() {
       <LessonSection title="What this is">
         <P>
           Most self-sabotage is patterned. Same trigger, same reaction,
-          same regret. You don&apos;t change the pattern by trying
+          same regret. You don't change the pattern by trying
           harder. You change it by catching it earlier. This module
           teaches you the three-step protocol that creates enough space
           between trigger and response for a different choice to exist.
@@ -43,7 +43,7 @@ export default async function Page() {
 
       <Principle>
         Every unwanted pattern has an early warning system. You just have
-        to learn to listen to it before it&apos;s too late to act on it.
+        to learn to listen to it before it's too late to act on it.
       </Principle>
 
       <LessonSection title="The three steps">
@@ -53,9 +53,9 @@ export default async function Page() {
           Write it out for one specific pattern you know well.
         </P>
         <P>
-          <strong>2. Name the earliest tell.</strong> There&apos;s always
+          <strong>2. Name the earliest tell.</strong> There's always
           a body signal or thought that appears before the urge fully
-          arrives. Maybe it&apos;s jaw tension. Maybe it&apos;s a specific
+          arrives. Maybe it's jaw tension. Maybe it's a specific
           phrase in your head. That signal is your alarm.
         </P>
         <P>
@@ -70,12 +70,12 @@ export default async function Page() {
       <Example title="A trader who revenge-trades">
         <P>
           <strong>Pattern:</strong> take a loss → chest tight, heat in face
-          → thought &quot;I can make it back&quot; → open random ticker →
+          → thought "I can make it back" → open random ticker →
           larger size than usual → bigger loss → spiral.
         </P>
         <P>
-          <strong>Earliest tell:</strong> the phrase &quot;I can make it
-          back&quot; appearing in the head.
+          <strong>Earliest tell:</strong> the phrase "I can make it
+          back" appearing in the head.
         </P>
         <P>
           <strong>Installed delay:</strong> when that phrase appears,
@@ -90,10 +90,10 @@ export default async function Page() {
 
       <Mistakes
         items={[
-          "Trying to spot the pattern at the action step. By the time you&apos;re clicking buy, the window closed 20 minutes ago. The whole point is to move the spotting earlier in the chain.",
-          "Making the installed delay too ambitious. &apos;I&apos;ll meditate for 20 minutes when the urge hits.&apos; You won&apos;t. Make it small enough that it actually happens under stress.",
-          "Shaming yourself for the pattern. Patterns are information. Every time one fires, you&apos;re learning about your system. Shame just makes you look away.",
-          "Working on ten patterns at once. Pick the single most costly one and get good at catching it. The others often improve on their own once you&apos;re practicing awareness.",
+          "Trying to spot the pattern at the action step. By the time you're clicking buy, the window closed 20 minutes ago. The whole point is to move the spotting earlier in the chain.",
+          "Making the installed delay too ambitious. 'I'll meditate for 20 minutes when the urge hits.' You won't. Make it small enough that it actually happens under stress.",
+          "Shaming yourself for the pattern. Patterns are information. Every time one fires, you're learning about your system. Shame just makes you look away.",
+          "Working on ten patterns at once. Pick the single most costly one and get good at catching it. The others often improve on their own once you're practicing awareness.",
         ]}
       />
 
@@ -109,7 +109,7 @@ export default async function Page() {
           {
             id: "tell",
             label: "Identify the earliest tell in that sequence: the first body signal or thought that reliably appears.",
-            hint: "If you can&apos;t find it, it&apos;s still there. Pay attention the next time the pattern runs and you&apos;ll catch it.",
+            hint: "If you can't find it, it's still there. Pay attention the next time the pattern runs and you'll catch it.",
           },
           {
             id: "install",
@@ -123,7 +123,7 @@ export default async function Page() {
         questions={[
           {
             id: "q1",
-            prompt: "What&apos;s the single most important step in the three-step protocol?",
+            prompt: "What's the single most important step in the three-step protocol?",
             options: [
               "The installed delay.",
               "Catching the earliest tell. Without that, the delay never triggers.",
@@ -132,20 +132,20 @@ export default async function Page() {
             ],
             correct: 1,
             explain:
-              "Late in the chain, willpower can&apos;t save you. Early in the chain, almost anything can. The whole game is where you catch it.",
+              "Late in the chain, willpower can't save you. Early in the chain, almost anything can. The whole game is where you catch it.",
           },
           {
             id: "q2",
-            prompt: "Your installed delay is &quot;meditate for 15 minutes.&quot; You haven&apos;t done it a single time in two weeks. What&apos;s the issue?",
+            prompt: "Your installed delay is \u201Cmeditate for 15 minutes.\u201D You haven't done it a single time in two weeks. What's the issue?",
             options: [
-              "You&apos;re not disciplined enough.",
-              "The delay is too ambitious for the state you&apos;re in when it fires. Make it smaller.",
+              "You're not disciplined enough.",
+              "The delay is too ambitious for the state you're in when it fires. Make it smaller.",
               "You need a better meditation app.",
               "The pattern is unchangeable.",
             ],
             correct: 1,
             explain:
-              "Delays that only work when you&apos;re already calm aren&apos;t useful. Three breaths or a two-minute walk work from any state.",
+              "Delays that only work when you're already calm aren't useful. Three breaths or a two-minute walk work from any state.",
           },
           {
             id: "q3",
@@ -153,7 +153,7 @@ export default async function Page() {
             options: [
               "Shame is always bad.",
               "Shame makes you avoid observing the pattern, which is the only way you can catch it earlier next time.",
-              "Patterns can&apos;t be changed.",
+              "Patterns can't be changed.",
               "You should feel nothing.",
             ],
             correct: 1,
@@ -164,7 +164,7 @@ export default async function Page() {
       />
 
       <Reflection
-        prompt="Describe one pattern in enough detail that you could spot it at step 2 next time it fires. What&apos;s the tell, and what&apos;s your installed delay?"
+        prompt="Describe one pattern in enough detail that you could spot it at step 2 next time it fires. What's the tell, and what's your installed delay?"
         minChars={150}
       />
 

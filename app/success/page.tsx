@@ -63,8 +63,8 @@ function SuccessContent() {
             Something went wrong
           </h1>
           <p className="text-[var(--text-secondary)] mb-8">
-            We couldn&apos;t verify your payment. If you were charged, please
-            contact us and we&apos;ll sort it out immediately.
+            We couldn't verify your payment. If you were charged, please
+            contact us and we'll sort it out immediately.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -98,7 +98,7 @@ function SuccessContent() {
             </svg>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-3 tracking-tight">
-            You&apos;re in. Welcome.
+            You're in. Welcome.
           </h1>
           <p className="text-[var(--text-secondary)] text-lg leading-relaxed max-w-md mx-auto">
             Payment confirmed. You now have lifetime access to the full Compound System.
@@ -116,7 +116,7 @@ function SuccessContent() {
             </h2>
           </div>
           <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5 pl-10">
-            Create your account so you can log in from any device. We&apos;ll send a magic link - no password needed.
+            Create your account so you can log in from any device. We'll send a magic link - no password needed.
           </p>
           <div className="pl-10">
             <LoginForm defaultEmail={email} mode="signup" compact />

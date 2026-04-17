@@ -29,14 +29,14 @@ export default async function Page() {
       subtitle="What they are, why people look into them, and the risks. Educational, conservative, not medical advice."
       estMinutes={8}
     >
-      <LessonSection title="What this is (and isn&apos;t)">
+      <LessonSection title="What this is (and isn't)">
         <P>
           This is not a protocol. It is not a recommendation. I am not
           your doctor. This module exists because peptides are a growing
-          grey-market category in fitness circles and most of what&apos;s
+          grey-market category in fitness circles and most of what's
           online is either hype from sellers or reflexive dismissal. You
           deserve a sober, conservative note on what they are, what
-          they&apos;re being used for, and why caution is the right
+          they're being used for, and why caution is the right
           default.
         </P>
         <P>
@@ -48,8 +48,8 @@ export default async function Page() {
 
       <Principle>
         The number one rule of anything injectable, prescription, or
-        research-grade is: if you wouldn&apos;t explain it out loud to
-        your doctor, you shouldn&apos;t be putting it in your body. The
+        research-grade is: if you wouldn't explain it out loud to
+        your doctor, you shouldn't be putting it in your body. The
         second rule: the marketing is always ahead of the evidence.
       </Principle>
 
@@ -58,11 +58,11 @@ export default async function Page() {
           Peptides are short chains of amino acids, shorter than proteins.
           Some are used in approved medicines (insulin, GLP-1 agonists like
           semaglutide). Many others are sold on grey markets as
-          &quot;research chemicals&quot; for use cases that are off-label
+          "research chemicals" for use cases that are off-label
           or entirely unstudied in humans.
         </P>
         <P>
-          The label &quot;peptide&quot; is broad. It includes things with
+          The label "peptide" is broad. It includes things with
           decades of human data and things with almost none. Lumping them
           together is the first trap.
         </P>
@@ -86,7 +86,7 @@ export default async function Page() {
         </P>
         <P>
           <strong>Data.</strong> Many popular peptides have zero long-term
-          human trials. You&apos;re the trial.
+          human trials. You're the trial.
         </P>
         <P>
           <strong>Interactions.</strong> Peptides can interact with
@@ -100,25 +100,25 @@ export default async function Page() {
           problem.
         </P>
         <P>
-          <strong>Psychology.</strong> The real risk isn&apos;t usually
-          the compound. It&apos;s the mindset shift from &quot;train and
-          recover hard&quot; to &quot;train and pharma hard.&quot; Once
+          <strong>Psychology.</strong> The real risk isn't usually
+          the compound. It's the mindset shift from "train and
+          recover hard" to "train and pharma hard." Once
           that mindset is installed, it rarely retreats to just one thing.
         </P>
       </LessonSection>
 
       <Mistakes
         items={[
-          "Treating &apos;peptides&apos; as one thing. GLP-1 meds prescribed by a doctor are different from a vial of something-GHRP from an online store. Different risk profiles entirely.",
+          "Treating 'peptides' as one thing. GLP-1 meds prescribed by a doctor are different from a vial of something-GHRP from an online store. Different risk profiles entirely.",
           "Using fitness influencers as your primary source. They are paid. Their protocols are their marketing.",
           "Chasing peptides before the free, zero-risk levers are handled. Sleep, food, consistency. If those are not dialed, there is no peptide that will rescue you.",
-          "Skipping bloodwork before and during. If you&apos;re going to do anything that alters biology, you track biology. Baseline labs, re-checked.",
-          "Self-diagnosing the problem peptides are supposedly solving. &apos;Low recovery&apos; or &apos;low energy&apos; are often sleep debt, not endocrine deficiency.",
+          "Skipping bloodwork before and during. If you're going to do anything that alters biology, you track biology. Baseline labs, re-checked.",
+          "Self-diagnosing the problem peptides are supposedly solving. 'Low recovery' or 'low energy' are often sleep debt, not endocrine deficiency.",
         ]}
       />
 
       <Checklist
-        title="If you&apos;re even considering this category"
+        title="If you're even considering this category"
         storageKey={CHECKLIST_KEY}
         items={[
           {
@@ -129,7 +129,7 @@ export default async function Page() {
           {
             id: "labs",
             label: "Get baseline bloodwork done: CBC, metabolic panel, lipids, hormones, inflammation markers.",
-            hint: "You cannot manage what you don&apos;t measure. This is useful data regardless of what you do next.",
+            hint: "You cannot manage what you don't measure. This is useful data regardless of what you do next.",
           },
           {
             id: "basics",
@@ -140,7 +140,7 @@ export default async function Page() {
       />
 
       <Reflection
-        prompt="What is the real problem you&apos;re trying to solve? Be specific. Then write which of the foundational levers (sleep, food, training consistency, stress) you haven&apos;t actually exhausted yet."
+        prompt="What is the real problem you're trying to solve? Be specific. Then write which of the foundational levers (sleep, food, training consistency, stress) you haven't actually exhausted yet."
         minChars={120}
       />
 
