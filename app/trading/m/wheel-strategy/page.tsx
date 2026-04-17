@@ -216,8 +216,8 @@ export default async function Page() {
       />
 
       <CompleteModule
-        nextPath="/trading"
-        nextLabel="Back to Markets"
+        nextPath="/trading/m/vix-framework"
+        nextLabel="Next: The VIX Framework"
         requireChecklistKey={CHECKLIST_KEY}
         requireChecklistCount={CHECKLIST_COUNT}
       />

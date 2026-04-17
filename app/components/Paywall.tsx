@@ -142,7 +142,7 @@ export default function Paywall({
 
           <CheckoutButton />
 
-          <div className="flex items-center gap-6 mt-6 text-xs text-[var(--text-muted)]">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6 text-xs text-[var(--text-muted)]">
             <span className="flex items-center gap-1.5">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[var(--accent)]">
                 <polyline points="20 6 9 17 4 12" />

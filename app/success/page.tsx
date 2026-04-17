@@ -142,7 +142,7 @@ function SuccessContent() {
               <span className="text-xl" style={{ color: "#00d4aa" }}>◈</span>
               <div className="flex-1">
                 <div className="text-sm font-semibold text-[var(--text-primary)]">Markets</div>
-                <div className="text-xs text-[var(--text-muted)]">Investing foundations, the Wheel Strategy, macro & portfolio</div>
+                <div className="text-xs text-[var(--text-muted)]">Investing foundations, the Wheel Strategy, VIX framework, weekly review</div>
               </div>
               <span className="text-xs font-semibold text-[var(--accent-trading)] opacity-0 group-hover:opacity-100 transition-opacity">
                 Start &rarr;
@@ -155,7 +155,7 @@ function SuccessContent() {
               <span className="text-xl" style={{ color: "#f97316" }}>⚡</span>
               <div className="flex-1">
                 <div className="text-sm font-semibold text-[var(--text-primary)]">Fitness</div>
-                <div className="text-xs text-[var(--text-muted)]">Hybrid athlete system, nutrition, recovery protocols</div>
+                <div className="text-xs text-[var(--text-muted)]">Hybrid athlete system, weekly split, Zone 2 & intervals, recovery</div>
               </div>
               <span className="text-xs font-semibold text-[var(--accent-fitness)] opacity-0 group-hover:opacity-100 transition-opacity">
                 Start &rarr;
@@ -168,7 +168,7 @@ function SuccessContent() {
               <span className="text-xl" style={{ color: "#a78bfa" }}>◉</span>
               <div className="flex-1">
                 <div className="text-sm font-semibold text-[var(--text-primary)]">Mindset</div>
-                <div className="text-xs text-[var(--text-muted)]">Identity work, emotional mastery, daily practice</div>
+                <div className="text-xs text-[var(--text-muted)]">Identity, emotional regulation, daily discipline, the operator&apos;s week</div>
               </div>
               <span className="text-xs font-semibold text-[var(--accent-mindset)] opacity-0 group-hover:opacity-100 transition-opacity">
                 Start &rarr;

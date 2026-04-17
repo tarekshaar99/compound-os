@@ -8,6 +8,7 @@ import {
 } from "../../../components/module/Lesson";
 import {
   Checklist,
+  Quiz,
   Reflection,
   CompleteModule,
 } from "../../../components/module/Interactive";
@@ -135,6 +136,50 @@ export default async function Page() {
             id: "basics",
             label: "Confirm the free levers (sleep, protein, consistency, deloads) are actually dialed for 90 days first.",
             hint: "If they are not, you are skipping the foundation for an advanced tool. The foundation is where 95% of the results live.",
+          },
+        ]}
+      />
+
+      <Quiz
+        questions={[
+          {
+            id: "q1",
+            prompt: "You are considering trying a peptide you saw on a fitness influencer's account. What is the correct first step?",
+            options: [
+              "Buy a small vial from a reputable-looking online research-chemicals store.",
+              "Book a consultation with a physician who is actually literate in this area, and get baseline bloodwork.",
+              "Post in a forum asking for dosing advice.",
+              "Try it for two weeks and decide based on how you feel.",
+            ],
+            correct: 1,
+            explain:
+              "Anything injectable or prescription-grade starts with a real physician and real labs. Everything else is gambling with your endocrine system based on marketing.",
+          },
+          {
+            id: "q2",
+            prompt: "You have been sleeping 5 hours a night, eating inconsistently, and missing training sessions. You feel wrecked and are considering peptides for \"recovery.\" What's the honest call?",
+            options: [
+              "Peptides will solve the recovery problem faster than fixing sleep.",
+              "The problem is almost certainly sleep and food, not endocrine. Fix the free levers for 90 days first.",
+              "Stack a peptide on top of the current habits and hope it compensates.",
+              "The peptide will force better recovery even with bad habits.",
+            ],
+            correct: 1,
+            explain:
+              "If the free, zero-risk levers aren't dialed, no peptide is rescuing you. Self-diagnosing low recovery as endocrine when it's actually sleep debt is the most common mistake in this category.",
+          },
+          {
+            id: "q3",
+            prompt: "What is the real, under-discussed risk of entering the peptide category?",
+            options: [
+              "A single bad injection.",
+              "The mindset shift from \"train and recover hard\" to \"train and pharma hard,\" which rarely retreats to one compound.",
+              "The cost of the peptides themselves.",
+              "The time it takes to learn injection technique.",
+            ],
+            correct: 1,
+            explain:
+              "The compound is not usually the long-term problem. The identity shift is. Once the \"pharma to solve a biology problem\" frame is installed, it expands. That's the cost most people don't price in.",
           },
         ]}
       />

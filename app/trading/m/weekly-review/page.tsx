@@ -191,8 +191,8 @@ export default async function Page() {
       />
 
       <CompleteModule
-        nextPath="/trading"
-        nextLabel="Back to Markets"
+        nextPath="/dashboard"
+        nextLabel="Back to Dashboard"
         requireChecklistKey={CHECKLIST_KEY}
         requireChecklistCount={CHECKLIST_COUNT}
       />
