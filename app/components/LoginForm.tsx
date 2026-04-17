@@ -32,6 +32,45 @@ export default function LoginForm({
   const [otpCode, setOtpCode] = useState<string[]>(Array(OTP_LENGTH).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
+  // Google OAuth: Supabase handles the round-trip through accounts.google.com
+  // and back to our /auth/callback page, which then calls /api/session/sync.
+  // We forward the safeRedirect as ?return= so the callback lands on the
+  // originally-requested path after sign-in.
+  const handleGoogleSignIn = async () => {
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      const supabase = getSupabase();
+      const origin =
+        typeof window !== "undefined" ? window.location.origin : "";
+      const redirectTo = `${origin}/auth/callback?return=${encodeURIComponent(
+        safeRedirect
+      )}`;
+      track("login_oauth_started", { provider: "google" }, email || "anon");
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo },
+      });
+      if (error) {
+        console.error("Google OAuth error:", error);
+        track(
+          "login_failed",
+          { stage: "oauth_start", provider: "google", reason: error.message },
+          email || "anon"
+        );
+        setErrorMsg(
+          "Couldn't start Google sign-in. Please try again or use email."
+        );
+        setStatus("error");
+      }
+      // On success, Supabase redirects the browser away. No further action.
+    } catch (err) {
+      console.error("Google OAuth error:", err);
+      setErrorMsg("Connection error. Please try again or use email.");
+      setStatus("error");
+    }
+  };
+
   // Step 1: Send OTP code to email
   const handleSendCode = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -292,18 +331,55 @@ export default function LoginForm({
         </div>
       )}
 
-      <form onSubmit={handleSendCode}>
-        <div
-          className={`bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl ${compact ? "p-5" : "p-7"}`}
+      <div
+        className={`bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl ${compact ? "p-5" : "p-7"}`}
+      >
+        <p
+          className={`text-[var(--text-secondary)] text-sm mb-5 leading-relaxed ${compact ? "" : "text-center"}`}
         >
-          <p
-            className={`text-[var(--text-secondary)] text-sm mb-5 leading-relaxed ${compact ? "" : "text-center"}`}
-          >
-            {activeTab === "signup"
-              ? "Create your account to access the system from any device."
-              : "Enter your email and we'll send you a verification code."}
-          </p>
+          {activeTab === "signup"
+            ? "Create your account to access the system from any device."
+            : "Enter your email and we'll send you a verification code."}
+        </p>
 
+        {/* Google OAuth button */}
+        <button
+          type="button"
+          onClick={handleGoogleSignIn}
+          disabled={status === "loading"}
+          className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl border border-[var(--border)] bg-[var(--bg)] text-[var(--text-primary)] text-sm font-medium transition-all hover:border-white/[0.15] hover:bg-white/[0.02] disabled:opacity-50 cursor-pointer"
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+            <path
+              fill="#4285F4"
+              d="M17.64 9.2045c0-.6381-.0573-1.2518-.1636-1.8409H9v3.4814h4.8436c-.2086 1.125-.8427 2.0782-1.7959 2.7164v2.2581h2.9086c1.7018-1.5668 2.6837-3.8741 2.6837-6.615z"
+            />
+            <path
+              fill="#34A853"
+              d="M9 18c2.43 0 4.4673-.806 5.9564-2.1805l-2.9086-2.2581c-.806.54-1.8373.8618-3.0478.8618-2.3441 0-4.3282-1.5831-5.0359-3.7104H.9573v2.3318C2.4382 15.9832 5.4818 18 9 18z"
+            />
+            <path
+              fill="#FBBC05"
+              d="M3.9641 10.71c-.18-.54-.2823-1.1168-.2823-1.71s.1023-1.17.2823-1.71V4.9582H.9573C.3477 6.1732 0 7.5477 0 9c0 1.4523.3477 2.8268.9573 4.0418L3.9641 10.71z"
+            />
+            <path
+              fill="#EA4335"
+              d="M9 3.5795c1.3214 0 2.5077.4541 3.4405 1.346l2.5813-2.5814C13.4632.8918 11.4259 0 9 0 5.4818 0 2.4382 2.0168.9573 4.9582L3.9641 7.29C4.6718 5.1627 6.6559 3.5795 9 3.5795z"
+            />
+          </svg>
+          Continue with Google
+        </button>
+
+        {/* Divider */}
+        <div className="flex items-center gap-3 my-5">
+          <div className="flex-1 h-px bg-[var(--border)]" />
+          <span className="text-xs uppercase tracking-wider text-[var(--text-muted)]">
+            or
+          </span>
+          <div className="flex-1 h-px bg-[var(--border)]" />
+        </div>
+
+        <form onSubmit={handleSendCode}>
           <label className="block text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider mb-2">
             Email address
           </label>
@@ -333,8 +409,8 @@ export default function LoginForm({
                 ? "Create Account"
                 : "Send Verification Code"}
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

@@ -10,6 +10,13 @@ function CallbackHandler() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    // Preserve the originally-requested path through the OAuth round-trip.
+    // Same internal-path allowlist used in LoginForm / login page to prevent
+    // open-redirect.
+    const returnParam = searchParams.get("return");
+    const safeReturn =
+      returnParam && /^\/[^/]/.test(returnParam) ? returnParam : "/dashboard";
+
     async function syncCookieAndRoute(accessToken: string) {
       const res = await fetch("/api/session/sync", {
         method: "POST",
@@ -17,7 +24,7 @@ function CallbackHandler() {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       if (res.ok) {
-        router.push("/dashboard");
+        router.push(safeReturn);
       } else if (res.status === 402) {
         // Logged in but not paid - send to pricing.
         router.push("/#pricing");
