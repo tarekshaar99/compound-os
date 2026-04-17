@@ -1,5 +1,5 @@
 import CheckoutButton from "./components/CheckoutButton";
-import EmailCaptureCTA from "./components/EmailCaptureCTA";
+import CheckoutCTA from "./components/CheckoutCTA";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MobileCTA from "./components/MobileCTA";
@@ -519,9 +519,18 @@ export default async function Home() {
             </ul>
 
             <div className="relative">
-              <EmailCaptureCTA label={stackedCtaLabel} />
+              <CheckoutCTA label={stackedCtaLabel} />
               <p className="mt-4 text-xs text-[var(--text-muted)] text-center">
                 Instant access. No subscription. Every future update included.
+              </p>
+              <p className="mt-3 text-xs text-[var(--text-muted)] text-center">
+                Already have access?{" "}
+                <a
+                  href="/login"
+                  className="text-[var(--text-secondary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)] transition-colors"
+                >
+                  Sign in &rarr;
+                </a>
               </p>
             </div>
           </div>
