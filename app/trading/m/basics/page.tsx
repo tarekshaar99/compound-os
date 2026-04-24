@@ -118,7 +118,7 @@ const TOOLS: {
     url: "https://www.interactivebrokers.com",
     role: "Broker (where you actually trade)",
     why:
-      "Low fees, global access, proper options chains. If you are outside the US and serious about trading, this is the default answer. Open an account, fund it, and keep it simple.",
+      "Low fees, global market access, and a proper options chain. Account setup takes a few days: you upload a passport, proof of address, and recent bank statements, then wait for approval. Once funded, it does everything you need and nothing you don't.",
     free: true,
   },
   {
@@ -138,11 +138,11 @@ const TOOLS: {
     free: true,
   },
   {
-    name: "SEC EDGAR",
-    url: "https://www.sec.gov/edgar",
-    role: "Company filings, unfiltered",
+    name: "Fiscal.ai",
+    url: "https://fiscal.ai/",
+    role: "AI-powered company analysis",
     why:
-      "Every 10-K, 10-Q, 8-K, and insider trade. Raw data, no analyst spin. When something is off about a company, this is where you find it.",
+      "The go-to AI tool for researching any company. It surfaces every financial number you need - revenue, margins, debt, cash flow, growth trends - in one clean interface, and summarizes the 10-K and 10-Q filings so you don't have to read them cold. Create a free account and start researching the companies you actually care about.",
     free: true,
   },
 ];
@@ -273,10 +273,11 @@ export default async function Page() {
           range. Those are the reference points every analyst uses.
         </P>
         <P>
-          Finally, open SEC EDGAR, search AAPL, and look at the most recent
-          10-Q. You do not have to read it. Just see that it exists, in
-          plain English, with everything the company has formally told
-          the public.
+          Finally, open Fiscal.ai, search AAPL, and skim the company page.
+          You get revenue, margins, debt, cash flow, and the key numbers
+          from the latest 10-K and 10-Q in one view. Read through the most
+          recent quarter to understand how the business actually makes
+          money, where it spends, and what is growing or shrinking.
         </P>
         <P>
           That is a full fluency lap. Three tabs, three lenses, one ticker.
@@ -316,7 +317,7 @@ export default async function Page() {
           {
             id: "broker",
             label: "Decide which broker you will use, and write it down. If you are already with one, confirm it supports options.",
-            hint: "Interactive Brokers is the default answer outside the US. In the US, Fidelity and Schwab are also fine. The worst choice is indecision.",
+            hint: "Interactive Brokers works globally and supports options. In the US, Fidelity and Schwab are also fine. The worst choice is indecision.",
           },
         ]}
       />
@@ -359,7 +360,7 @@ export default async function Page() {
               "You are handed a stock tip with a ticker you have never heard of. What is the smallest first move?",
             options: [
               "Buy a small amount and see what happens.",
-              "Look it up on TradingView and Finviz, check market cap, volume, and the 10-Q on SEC EDGAR.",
+              "Look it up on TradingView and Finviz, check market cap, volume, and read the latest quarter on Fiscal.ai.",
               "Ask the person for more details.",
               "Google the ticker and read the news.",
             ],
@@ -377,8 +378,8 @@ export default async function Page() {
       />
 
       <CompleteModule
-        nextPath="/trading/m/foundations"
-        nextLabel="On to Investing Foundations"
+        nextPath="/trading/m/finding-companies"
+        nextLabel="Next: Finding Good Companies"
         requireChecklistKey={CHECKLIST_KEY}
         requireChecklistCount={CHECKLIST_COUNT}
       />

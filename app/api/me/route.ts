@@ -16,7 +16,7 @@ export async function GET() {
   if (!s) {
     return NextResponse.json({ authenticated: false });
   }
-  // Only fetch meta for paid/admin — unauthed callers shouldn't cost a DB hit.
+  // Only fetch meta for paid/admin - unauthed callers shouldn't cost a DB hit.
   let onboardingComplete = false;
   let priorityPillar: string | null = null;
   let lastActiveModule: string | null = null;

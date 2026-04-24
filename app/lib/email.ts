@@ -5,10 +5,10 @@ import { Resend } from "resend";
  *
  * Env required:
  *   RESEND_API_KEY      - Resend API key (server-side only)
- *   EMAIL_FROM          - e.g. "Compound OS <hello@thecompoundsystem.com>"
+ *   EMAIL_FROM          - e.g. "Compound OS <tarek@thecompoundsystem.com>"
  *
  * If either is missing, all send* functions become no-ops that log a
- * warning and return false. The caller must treat email as best-effort —
+ * warning and return false. The caller must treat email as best-effort -
  * a failed send should never break a critical flow like the webhook.
  */
 
@@ -21,10 +21,26 @@ function getResend(): Resend | null {
   return _resend;
 }
 
+/**
+ * Returns the `from` header in RFC 5322 format: `Display Name <email@domain>`.
+ *
+ * Why this wrapper: if `EMAIL_FROM` is set to a bare email like
+ * `tarek@thecompoundsystem.com`, most inbox clients (Gmail, Apple Mail)
+ * render the sender as the local part - "hello" - which looks broken.
+ * Forcing a display name of "Compound OS" fixes the sender card.
+ *
+ * Accepts either format in the env var:
+ *   - "tarek@thecompoundsystem.com"            → normalized with display name
+ *   - "Compound OS <tarek@thecompoundsystem.com>" → returned as-is
+ */
 function getFrom(): string | null {
-  const from = process.env.EMAIL_FROM;
-  if (!from) return null;
-  return from;
+  const raw = process.env.EMAIL_FROM?.trim();
+  if (!raw) return null;
+  // Already has a display name (contains `<email>` syntax) - respect it.
+  if (raw.includes("<") && raw.includes(">")) return raw;
+  // Bare email - prefix a display name so inbox clients don't fall back
+  // to the local part.
+  return `Compound OS <${raw}>`;
 }
 
 function getSiteUrl(): string {
@@ -47,7 +63,7 @@ export async function sendWelcomeEmail(args: {
   const resend = getResend();
   const from = getFrom();
   if (!resend || !from) {
-    console.warn("[email] RESEND_API_KEY or EMAIL_FROM not set — skipping welcome email");
+    console.warn("[email] RESEND_API_KEY or EMAIL_FROM not set - skipping welcome email");
     return false;
   }
 
@@ -55,10 +71,10 @@ export async function sendWelcomeEmail(args: {
   const dashboardUrl = `${site}/dashboard`;
   const signInUrl = `${site}/login`;
   const foundingLine = args.isFounding
-    ? "You came in as a founding member. Your price is locked in — future updates included, always."
+    ? "You came in as a founding member. Your price is locked in - future updates included, always."
     : "You have lifetime access. Future updates included, always.";
 
-  const subject = "You're in — welcome to Compound OS";
+  const subject = "You're in - welcome to Compound OS";
 
   const text = [
     "Welcome to Compound OS.",
@@ -69,7 +85,7 @@ export async function sendWelcomeEmail(args: {
     "",
     `Signing in from a new device? Enter this email at ${signInUrl} and we'll send a 6-digit code.`,
     "",
-    "— Tarek",
+    "- Tarek",
     "Compound OS",
   ].join("\n");
 
@@ -99,7 +115,7 @@ export async function sendWelcomeEmail(args: {
             </p>
           </div>
           <p style="font-size:13px;line-height:1.6;color:#888;margin:28px 0 0 0;">
-            — Tarek<br/>Compound OS
+            - Tarek<br/>Compound OS
           </p>
         </td></tr>
       </table>

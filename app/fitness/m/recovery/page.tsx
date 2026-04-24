@@ -53,9 +53,10 @@ export default async function Page() {
           day. A bad week erases weeks of training adaptation.
         </P>
         <P>
-          <strong>Food:</strong> enough protein (0.8g per lb bodyweight
-          minimum), enough calories to support the work. Under-fueling
-          while training hard is a slow injury.
+          <strong>Food:</strong> enough protein (1.6g per kg of bodyweight
+          minimum, or about 0.8g per pound if you still think in pounds),
+          enough calories to support the work. Under-fueling while training
+          hard is a slow injury.
         </P>
         <P>
           <strong>Stress management:</strong> work stress and training

@@ -186,8 +186,8 @@ export default async function Page() {
       />
 
       <Reflection
-        prompt="Run the six-question review for the past seven days right now. Be brief but honest. Make sure you write a specific, testable adjustment for next week."
-        minChars={200}
+        prompt="Think about the last seven days of your life - not trades, your life. Where did you stick to what you said you would do, and where did you drift? If you traded, answer the six questions honestly. If you didn't trade yet, run the same six questions against the area you're trying to build (fitness, work, a side project). The point of the ritual is not the content of any single review. It is the habit of turning the lens on yourself once a week and writing one adjustment down. Write one specific, testable adjustment you'll make next week."
+        minChars={180}
       />
 
       <CompleteModule

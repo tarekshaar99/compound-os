@@ -31,7 +31,7 @@ function getOrigin(req: NextRequest): string {
 
 export async function POST(req: NextRequest) {
   try {
-    // Email is optional here — Stripe collects it on the checkout page.
+    // Email is optional here - Stripe collects it on the checkout page.
     // If the client passes it (from the pricing CTA in Phase 5), we lock identity.
     let prefillEmail: string | undefined;
     try {
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     const origin = getOrigin(req);
 
     // Block duplicate signups: if this email already has paid access, don't
-    // create a new Stripe session — tell the client to route them to /login.
+    // create a new Stripe session - tell the client to route them to /login.
     // Refunded users (paid=false, refunded_at set) are allowed to repurchase.
     if (prefillEmail) {
       try {
@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
           );
         }
       } catch (err) {
-        // DB down? Fail open and let them pay — webhook idempotency handles
+        // DB down? Fail open and let them pay - webhook idempotency handles
         // the case where they somehow double-charge. Don't block revenue on
         // a transient DB blip.
         console.warn("[checkout] duplicate-check failed, allowing:", err);
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
 
     const stripe = getStripe();
 
-    // Authoritative price lookup — counts paid users in DB. If < 100,
+    // Authoritative price lookup - counts paid users in DB. If < 100,
     // charge $49 founding; otherwise $99 standard. On DB failure this
     // defaults to $99 (see getPricing() fail-safe).
     const pricing = await getPricing();
@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
     const productName = pricing.isFounding
       ? "Compound OS - Lifetime Access (Founding Member)"
       : "Compound OS - Lifetime Access";
-    // Description intentionally does not leak the founding-member count — we
+    // Description intentionally does not leak the founding-member count - we
     // don't want the Stripe page showing "X of 100 claimed" to the public.
     const productDescription =
       "Full access to all three pillars: Markets, Fitness, and Mindset. All future updates included.";
@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
-      // Locks the email for the session — user cannot change it on the Stripe page.
+      // Locks the email for the session - user cannot change it on the Stripe page.
       ...(prefillEmail ? { customer_email: prefillEmail } : {}),
       line_items: [
         {

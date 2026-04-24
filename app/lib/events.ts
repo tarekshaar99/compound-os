@@ -44,7 +44,7 @@ export async function trackEvent(args: TrackArgs): Promise<void> {
     });
     if (error) {
       // Most common case: table doesn't exist yet (user hasn't run the SQL).
-      // Don't spam logs — one line at warn level is enough.
+      // Don't spam logs - one line at warn level is enough.
       console.warn(`[events] insert failed (${args.name}): ${error.message}`);
     }
   } catch (err) {

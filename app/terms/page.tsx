@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Compound OS",
+  title: "Terms of Service",
   description:
     "The terms that govern your use of Compound OS. Educational product, honest disclaimers, reasonable limits.",
 };
@@ -228,10 +228,10 @@ export default function TermsPage() {
               <p>
                 Questions about these terms can be sent to{" "}
                 <a
-                  href="mailto:hello@thecompoundsystem.com"
+                  href="mailto:tarek@thecompoundsystem.com"
                   className="text-[var(--text-primary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)]"
                 >
-                  hello@thecompoundsystem.com
+                  tarek@thecompoundsystem.com
                 </a>
                 .
               </p>

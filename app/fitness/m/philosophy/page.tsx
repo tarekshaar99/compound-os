@@ -45,6 +45,70 @@ export default async function Page() {
         </P>
       </LessonSection>
 
+      <LessonSection title="The vocabulary first">
+        <P>
+          A handful of terms show up in every fitness module. If any of
+          these are new, read this section slowly. The rest of the pillar
+          assumes you know them.
+        </P>
+        <dl className="mt-6 space-y-4">
+          {[
+            {
+              term: "RPE (Rate of Perceived Exertion)",
+              body:
+                "A 1 to 10 scale for how hard a set felt. RPE 8 means you could have done two more clean reps but not three. Most productive strength work lives at RPE 7 to 9. RPE 10 is failure, which you rarely need.",
+            },
+            {
+              term: "Tempo",
+              body:
+                "The speed of each phase of a rep, written as four digits. Example: a 3-1-2-0 squat means 3 seconds down (eccentric), 1 second pause at the bottom, 2 seconds up (concentric), 0 seconds at the top. Controlled tempo is the single fastest way to build muscle without wrecking joints.",
+            },
+            {
+              term: "Eccentric",
+              body:
+                "The lowering phase of a lift - lowering the bar in a bench press, or sitting into the bottom of a squat. This is where most muscle is built and most injuries happen. Controlling it is non-negotiable.",
+            },
+            {
+              term: "Concentric",
+              body:
+                "The lifting phase - pressing the bar up, standing out of the squat. Fast concentric is fine. Fast eccentric is not.",
+            },
+            {
+              term: "Heart rate zones",
+              body:
+                "Five rough bands of effort based on heart rate. Zone 1 is walking. Zone 2 is a steady effort you can hold a conversation in (roughly 60 to 70 percent of max heart rate) - the aerobic base builder. Zone 3 is uncomfortable steady. Zone 4 is hard (threshold). Zone 5 is all-out intervals. Most of your cardio should be Zone 2, with a smaller amount of Zone 4 and 5.",
+            },
+            {
+              term: "Intervals",
+              body:
+                "Short, hard efforts (30 seconds to 4 minutes) with rest in between. Builds VO2 max, anaerobic capacity, and raw engine. Used sparingly - one or two sessions a week on top of your Zone 2 base.",
+            },
+            {
+              term: "Accessories",
+              body:
+                "Secondary lifts done after the main compound movement. Example: after bench press, doing cable flies and tricep pushdowns. Accessories build muscle and fix weak points that the main lift alone can't address.",
+            },
+            {
+              term: "VO2 max",
+              body:
+                "The maximum amount of oxygen your body can use during hard exercise. It is one of the strongest predictors of long-term health and longevity. It drops with age unless you train it, and interval work is how you train it.",
+            },
+          ].map((t) => (
+            <div
+              key={t.term}
+              className="p-5 rounded-xl border border-[var(--border)] bg-[var(--card-bg)]"
+            >
+              <dt className="text-[15px] font-semibold text-[var(--text-primary)] tracking-tight mb-1.5">
+                {t.term}
+              </dt>
+              <dd className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
+                {t.body}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </LessonSection>
+
       <Principle>
         Train to be strong enough to be useful, fit enough to enjoy life,
         and durable enough to keep doing both for decades. Anything else is

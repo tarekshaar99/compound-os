@@ -182,7 +182,7 @@ export default async function Page() {
       />
 
       <Reflection
-        prompt="What is the biggest single-day drawdown you've ever taken? What broke that day: the market, or a rule you didn't have in place?"
+        prompt="Have you ever lost a meaningful amount of money - in the market, in a business, at a casino, on a bad decision? Write about what happened, and more importantly, how you felt the days after. Could you think clearly, or did you chase it to get even? If you have never lost money before, imagine your account is down 20 percent on a random Tuesday. Can you sit with that without touching the keyboard? Your honest answer here determines how aggressively you should size every position for the next twelve months."
         minChars={120}
       />
 

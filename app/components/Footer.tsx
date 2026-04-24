@@ -126,10 +126,10 @@ export default function Footer() {
             &copy; {year} The Compound System. All rights reserved.
           </p>
           <a
-            href="mailto:hello@thecompoundsystem.com"
+            href="mailto:tarek@thecompoundsystem.com"
             className="text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
           >
-            hello@thecompoundsystem.com
+            tarek@thecompoundsystem.com
           </a>
         </div>
       </div>

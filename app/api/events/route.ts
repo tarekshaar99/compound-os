@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
   }
 
   const userAgent = req.headers.get("user-agent");
-  // X-Forwarded-For — Vercel's edge prepends the real client IP.
+  // X-Forwarded-For - Vercel's edge prepends the real client IP.
   const fwd = req.headers.get("x-forwarded-for") ?? "";
   const ip = fwd.split(",")[0]?.trim() || null;
 

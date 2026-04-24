@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Compound OS",
+  title: "Privacy Policy",
   description:
     "What information Compound OS collects, how it is stored, and how you can reach us about your data.",
 };
@@ -54,10 +54,10 @@ export default function PrivacyPage() {
                 Compound OS is operated by Tarek Shaar, an independent
                 operator based in the UAE. Reach us any time at{" "}
                 <a
-                  href="mailto:hello@thecompoundsystem.com"
+                  href="mailto:tarek@thecompoundsystem.com"
                   className="text-[var(--text-primary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)]"
                 >
-                  hello@thecompoundsystem.com
+                  tarek@thecompoundsystem.com
                 </a>
                 .
               </p>
@@ -170,10 +170,10 @@ export default function PrivacyPage() {
                 corrections, or ask us to delete your account and associated
                 data entirely. Email{" "}
                 <a
-                  href="mailto:hello@thecompoundsystem.com"
+                  href="mailto:tarek@thecompoundsystem.com"
                   className="text-[var(--text-primary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)]"
                 >
-                  hello@thecompoundsystem.com
+                  tarek@thecompoundsystem.com
                 </a>{" "}
                 and we will respond within a reasonable window, usually a
                 few business days.

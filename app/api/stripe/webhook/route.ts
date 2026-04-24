@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import * as Sentry from "@sentry/nextjs";
 import { getServiceSupabase } from "../../../lib/supabase";
 import { sendWelcomeEmail } from "../../../lib/email";
 import { FOUNDING_LIMIT } from "../../../lib/pricing";
 
-// Webhook must run on Node.js (not Edge) — needs raw body + stripe SDK.
+// Webhook must run on Node.js (not Edge) - needs raw body + stripe SDK.
 export const runtime = "nodejs";
 // Never cache; every request is a unique event.
 export const dynamic = "force-dynamic";
@@ -41,6 +42,9 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     const msg = err instanceof Error ? err.message : "unknown";
     console.error("[stripe-webhook] signature verification failed:", msg);
+    // Signature failures are usually a config problem (wrong STRIPE_WEBHOOK_SECRET)
+    // or a spoofed request. Either way, we want to know about it in Sentry.
+    Sentry.captureException(err, { tags: { area: "stripe-webhook", stage: "signature" } });
     return NextResponse.json({ error: `Webhook Error: ${msg}` }, { status: 400 });
   }
 
@@ -74,6 +78,12 @@ export async function POST(req: NextRequest) {
     // Log + return 500 so Stripe retries. Do NOT swallow.
     const msg = err instanceof Error ? err.message : "unknown";
     console.error(`[stripe-webhook] handler failed for ${event.type}:`, msg);
+    // This is the critical path - failing to grant access means a customer
+    // paid and didn't get access. Tag heavily so we can triage fast.
+    Sentry.captureException(err, {
+      tags: { area: "stripe-webhook", stage: "handler", event_type: event.type },
+      extra: { event_id: event.id },
+    });
     return NextResponse.json({ error: "Handler failed" }, { status: 500 });
   }
 
@@ -137,7 +147,7 @@ async function grantAccess(session: Stripe.Checkout.Session) {
     // If the unique violation is on stripe_session_id, someone re-sent the same event.
     // Supabase returns error.code === "23505" for unique_violation.
     if (error.code === "23505") {
-      console.log(`[stripe-webhook] duplicate session ${session.id} — ignoring`);
+      console.log(`[stripe-webhook] duplicate session ${session.id} - ignoring`);
       return;
     }
     throw new Error(`Supabase upsert failed: ${error.message}`);
@@ -145,7 +155,7 @@ async function grantAccess(session: Stripe.Checkout.Session) {
 
   console.log(`[stripe-webhook] granted access: ${normalizedEmail} (${session.id})`);
 
-  // Best-effort welcome email. Failures here must NOT propagate — the
+  // Best-effort welcome email. Failures here must NOT propagate - the
   // DB write already succeeded and the webhook must return 2xx to Stripe.
   // If RESEND_API_KEY / EMAIL_FROM are unset, this silently skips.
   try {
@@ -161,6 +171,13 @@ async function grantAccess(session: Stripe.Checkout.Session) {
   } catch (err) {
     const msg = err instanceof Error ? err.message : "unknown";
     console.error("[stripe-webhook] welcome email failed (non-fatal):", msg);
+    // Non-fatal (user already has access) but still worth knowing about.
+    // If we see a pattern of these, Resend config or delivery is broken.
+    Sentry.captureException(err, {
+      level: "warning",
+      tags: { area: "stripe-webhook", stage: "welcome-email" },
+      extra: { email: normalizedEmail },
+    });
   }
 }
 

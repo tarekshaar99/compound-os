@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Contact | Compound OS",
+  title: "Contact",
   description:
     "Reach out about access, billing, refunds, partnerships, or anything else. Real human, usually back within a day.",
 };
@@ -33,7 +33,7 @@ export default function ContactPage() {
           <div className="mt-10">
             {/* Email */}
             <a
-              href="mailto:hello@thecompoundsystem.com"
+              href="mailto:tarek@thecompoundsystem.com"
               className="block bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-6 transition-all hover:border-[var(--accent)]/40 hover:-translate-y-0.5"
             >
               <div className="flex items-center gap-4">
@@ -57,7 +57,7 @@ export default function ContactPage() {
                     Email
                   </div>
                   <div className="text-base font-semibold text-[var(--text-primary)] truncate">
-                    hello@thecompoundsystem.com
+                    tarek@thecompoundsystem.com
                   </div>
                   <div className="text-xs text-[var(--text-muted)] mt-1">
                     Access, billing, refunds, bug reports, partnerships. I

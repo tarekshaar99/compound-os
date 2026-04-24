@@ -334,10 +334,7 @@ export default function DashboardInner({
         <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)] mb-3">
           Quick links
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <Link href="/account" className="p-4 rounded-xl border border-[var(--border)] bg-[var(--card-bg)] hover:border-white/[0.15] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-sm font-medium transition-all text-center">
-            Account
-          </Link>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-3">
           <Link href="/trading" className="p-4 rounded-xl border border-[var(--border)] bg-[var(--card-bg)] hover:border-white/[0.15] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-sm font-medium transition-all text-center">
             Markets
           </Link>
@@ -346,6 +343,14 @@ export default function DashboardInner({
           </Link>
           <Link href="/mindset" className="p-4 rounded-xl border border-[var(--border)] bg-[var(--card-bg)] hover:border-white/[0.15] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-sm font-medium transition-all text-center">
             Mindset
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <Link href="/reflections" className="p-4 rounded-xl border border-[var(--border)] bg-[var(--card-bg)] hover:border-white/[0.15] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-sm font-medium transition-all text-center">
+            Your reflections
+          </Link>
+          <Link href="/account" className="p-4 rounded-xl border border-[var(--border)] bg-[var(--card-bg)] hover:border-white/[0.15] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-sm font-medium transition-all text-center">
+            Account
           </Link>
         </div>
       </section>
