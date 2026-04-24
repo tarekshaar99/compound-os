@@ -1,0 +1,44 @@
+<!-- Stacked lockup
+     Canvas: 720 x 540
+     Mark: width 260 (same 13u ≈ 20), sits centered, top padding 90
+     Wordmark gap from mark = 2u = 40
+     Typography: Fraunces (free fallback for Canela Deck), 300 weight
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540" role="img" aria-label="The Compound System">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@144,300;144,400&amp;display=swap');
+      .primary {
+        font-family: 'Canela Deck', 'Fraunces', 'GT Sectra', 'Editorial New', Georgia, serif;
+        font-optical-sizing: auto;
+        font-variation-settings: 'opsz' 144;
+        font-weight: 300;
+        font-size: 48px;
+        letter-spacing: 6px;
+        fill: #F4ECD8;
+      }
+      .caption {
+        font-family: 'Canela Deck', 'Fraunces', 'GT Sectra', 'Editorial New', Georgia, serif;
+        font-weight: 300;
+        font-size: 12px;
+        letter-spacing: 10px;
+        fill: #BF9A62;
+      }
+    </style>
+  </defs>
+
+  <!-- MARK centered at x=360, top=130 -->
+  <g transform="translate(230,130)">
+    <rect x="100" y="0"  width="100" height="20" fill="#BF9A62"/>
+    <rect x="70"  y="30" width="160" height="20" fill="#BF9A62"/>
+    <rect x="20"  y="60" width="260" height="20" fill="#BF9A62"/>
+  </g>
+
+  <!-- Wordmark: gap = 2u = 40 below bottom of mark
+       Mark bottom = 130 + 80 = 210
+       Wordmark baseline = 210 + 40 + cap-height-adjust ≈ 280 -->
+  <text x="360" y="295" class="primary" text-anchor="middle">THE COMPOUND</text>
+
+  <!-- Caption demoted — quiet, spaced, 1u below wordmark -->
+  <text x="360" y="335" class="caption" text-anchor="middle">S Y S T E M</text>
+</svg>

@@ -28,44 +28,21 @@ const systemIncludes = [
     accent: "#00d4aa",
     icon: "\u25C8",
     tagline: "Capital-building without the gambling.",
-    items: [
-      "Markets 101: the vocabulary and the five free tools that replace paid subscriptions",
-      "Investing Foundations: the investing, speculating, and gambling framework",
-      "Capital Preservation: position sizing math, drawdown rules, cash targets",
-      "Pre-Trade Checklist: nine questions that filter the trades you shouldn't take",
-      "The Wheel Strategy: cash-secured puts into covered calls, with strike-selection math",
-      "VIX Regime Framework: four zones and the capital deployment ladder",
-      "Weekly Review Ritual: the thirty-minute Sunday process that compounds",
-    ],
+    body: "Clear rules for sizing, drawdown, and the trades you shouldn\u2019t take.",
   },
   {
     pillar: "Fitness",
     accent: "#f97316",
-    icon: "\u26A1",
-    tagline: "Strong, fit, mobile. For decades.",
-    items: [
-      "Training Philosophy: hybrid athlete, not gym rat",
-      "The Weekly Split: three strength days, two to three cardio, mobility daily",
-      "Time Under Tension: why tempo matters more than weight",
-      "Zone 2 and Intervals: the cardio structure most people get wrong",
-      "Recovery and Sleep: deload logic and five signs you're cooked",
-      "Peptides: An Honest Note: what they are, the real risks, what to check first",
-    ],
+    icon: "\u25B3",
+    tagline: "Strong, mobile, durable \u2014 for decades.",
+    body: "Hybrid training with honest answers on recovery and risk.",
   },
   {
     pillar: "Mindset",
     accent: "#a78bfa",
     icon: "\u25C9",
-    tagline: "Execute on days you don't feel like it.",
-    items: [
-      "Identity and Self-Image: the story that drives your behavior, and how to rewrite it",
-      "Emotional Regulation: the three-step protocol for not acting on tilt",
-      "Daily Discipline: the four anchors that make willpower unnecessary",
-      "Trigger Awareness: catching the pattern mid-run and installing friction",
-      "Structured Journaling: three prompts that surface the pattern you're running",
-      "Decision-Making Under Pressure: binary framing, sleep-on-it, pre-mortem",
-      "The Operator's Week: how the three pillars interlock in a real schedule",
-    ],
+    tagline: "Execute on days you don\u2019t feel like it.",
+    body: "Daily anchors and the structure that makes willpower unnecessary.",
   },
 ];
 
@@ -78,48 +55,48 @@ const forYou = [
 ];
 
 const notForYou = [
-  "You want quick wins, signal groups, or get-rich setups",
-  "You want to be told what to think instead of how to think",
-  "You need a coach or hand-holding to function",
-  "You think the problem is information, not execution",
+  "You\u2019re looking for signals, tips, or quick wins",
+  "You prefer prescriptions over frameworks",
+  "You want live coaching or ongoing accountability",
+  "You believe more information is the answer",
 ];
 
 function buildFaqs(isFounding: boolean) {
   const pricingFaq = isFounding
     ? {
         q: "Why is it $49?",
-        a: "$49 is the founding-member price for early access. After the founding window closes, the price goes to $99. I built this for myself before I ever sold it, so the price reflects access, not production.",
+        a: "Early-access price while the founding window is open. $99 after. Same product.",
       }
     : {
         q: "How much is it?",
-        a: "$99, one-time. Lifetime access and every future update included. The $49 founding-member window has closed.",
+        a: "$99, one-time. Every future update included.",
       };
 
   return [
     {
       q: "Is this a course?",
-      a: "No. No videos, no drip. Compound OS is a structured reference system: frameworks, checklists, and weekly protocols organized into short modules you open and use. Think operating manual, not lecture series.",
+      a: "No videos, no drip. A structured reference system of frameworks, checklists, and weekly protocols. An operating manual, not a lecture series.",
     },
     {
       q: "Do I need trading or investing experience?",
-      a: "No. The Markets pillar opens with Markets 101: the vocabulary (VIX, delta, strike, DTE), the free tools that replace paid subscriptions, and the framework for telling investing apart from speculating and gambling. From there, everything builds in order.",
+      a: "No. Markets opens with the vocabulary, the free tools that replace paid subscriptions, and the framework for telling investing apart from speculating.",
     },
     {
       q: "Will this be updated?",
-      a: "Yes. As frameworks get sharper or a new section is useful, it goes in. One payment covers everything, now and going forward.",
+      a: "Yes. New modules and refinements are added over time, covered by one payment.",
     },
     {
-      q: "What if it's not for me?",
-      a: "Email within fourteen days and you get a full refund, no questions. Past fourteen days the purchase is final, because the product is designed to be opened and used, not collected.",
+      q: "What if it\u2019s not for me?",
+      a: "Fourteen-day refund, no questions. Past that, the purchase is final.",
     },
     pricingFaq,
     {
       q: "What format is the content in?",
-      a: "A private web app you access from any device. Each module is a short read with a principle, a worked example, common mistakes, a checklist that tracks what you've actually done, a quick quiz, and a reflection prompt. Progress is saved to your account.",
+      a: "A private web app. Each module is a short read with a principle, a worked example, a checklist, a quick quiz, and a reflection prompt. Progress saves automatically.",
     },
     {
       q: "Can I access it on my phone?",
-      a: "Yes. Fully responsive. Built to open on the phone during your market session, at the gym, or in the first ten minutes of your morning.",
+      a: "Yes. Fully responsive. Built to open on the phone during your market session, at the gym, or in the morning.",
     },
   ];
 }
@@ -138,18 +115,16 @@ export default async function Home() {
     ? `Founding Member \u00b7 early access pricing`
     : `Standard pricing \u00b7 founding window closed`;
   const foundingNote = pricing.isFounding
-    ? `Locked in for founding members. Price goes to ${anchorPrice} after the early-access window closes.`
-    : `The founding window is closed. ${anchorPrice} gets you lifetime access and every future update.`;
+    ? `Every future update included.`
+    : `Every future update included.`;
   const heroSubcopy = pricing.isFounding
-    ? `Founding-member early access. Price goes to ${anchorPrice} after.`
-    : `Lifetime access. Every future update included.`;
+    ? `${anchorPrice} after the founding window.`
+    : `One-time. Every future update included.`;
   const primaryCtaLabel = `Get Compound OS \u00b7 ${priceBig}`;
-  const stackedCtaLabel = pricing.isFounding
-    ? `Claim Founding Price \u00b7 ${priceBig}`
-    : `Get Compound OS \u00b7 ${priceBig}`;
+  const stackedCtaLabel = `Get Compound OS \u00b7 ${priceBig}`;
   const finalCtaSubcopy = pricing.isFounding
-    ? `Founding-member pricing \u00b7 Then ${anchorPrice} \u00b7 No subscription`
-    : `One-time payment \u00b7 No subscription \u00b7 No upsells`;
+    ? `${anchorPrice} after the founding window`
+    : `No subscription. No upsells.`;
 
   // Module list, grouped by pillar, for the transparent TOC section.
   const pillarOrder: Array<{ key: "trading" | "fitness" | "mindset"; label: string; accent: string }> = [
@@ -167,11 +142,11 @@ export default async function Home() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[var(--accent)]/5 rounded-full blur-[120px] pointer-events-none" />
 
         <h1 className="relative text-[1.75rem] md:text-5xl lg:text-[3.25rem] font-bold tracking-tight text-[var(--text-primary)] leading-[1.15] max-w-3xl">
-          The operating manual for how you trade, train, and live.
+          A practical operating system for trading, fitness, and self-discipline.
         </h1>
         <p className="relative mt-5 text-[var(--text-secondary)] text-base md:text-xl max-w-xl mx-auto leading-relaxed">
           {moduleCount} focused modules across Markets, Fitness, and Mindset.
-          Rules, checklists, and weekly protocols, built to run, not to read.
+          Rules, checklists, and weekly protocols built to execute, not consume.
         </p>
 
         <div className="relative mt-8 md:mt-10">
@@ -179,9 +154,6 @@ export default async function Home() {
             {primaryCtaLabel}
           </CheckoutButton>
           <p className="mt-3.5 text-sm text-[var(--text-muted)]">
-            {pricing.isFounding && (
-              <span className="text-[var(--accent)] font-semibold">Founding price. </span>
-            )}
             {heroSubcopy}
           </p>
         </div>
@@ -196,23 +168,14 @@ export default async function Home() {
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
             Roughly {Math.round(totalMinutes / 60 * 10) / 10} hours of applied content
           </span>
-          <span className="flex items-center gap-1.5">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
-            One payment, lifetime access
-          </span>
         </div>
       </section>
 
       {/* ───── SEE INSIDE ───── */}
       <section className="px-6 pt-4 pb-16 md:pb-24">
-        <div className="text-center mb-3">
-          <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-medium">
-            See what&apos;s inside
-          </p>
-        </div>
         <div className="text-center mb-8">
-          <p className="text-sm text-[var(--text-secondary)] max-w-md mx-auto">
-            Switch pillars to preview the sidebar, content, and checklists you&apos;ll actually be using.
+          <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-medium">
+            Preview the product
           </p>
         </div>
         <ProductPreview />
@@ -227,10 +190,10 @@ export default async function Home() {
           </h2>
           <div className="space-y-4 text-left">
             {[
-              "You\u2019ve saved the posts, watched the videos, read the threads, and still feel scattered when it\u2019s time to execute.",
-              "You start strong on Monday and lose structure by Wednesday.",
-              "You know what to do in theory but don\u2019t have concrete rules for practice.",
-              "You\u2019re burning energy deciding what to do instead of just doing it.",
+              "You\u2019ve saved the posts and read the threads, and still feel scattered when it\u2019s time to execute.",
+              "You start strong Monday and lose structure by Wednesday.",
+              "You know what to do in theory but have no concrete rules for practice.",
+              "You\u2019re burning energy deciding what to do instead of doing it.",
             ].map((line, i) => (
               <div key={i} className="flex items-start gap-3.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--text-muted)] mt-2.5 shrink-0" />
@@ -241,7 +204,7 @@ export default async function Home() {
             ))}
           </div>
           <p className="mt-10 text-[var(--text-primary)] text-[15px] md:text-base font-medium leading-relaxed max-w-lg mx-auto">
-            Compound OS replaces the chaos with clear rules, structured frameworks, and repeatable protocols across the three areas that actually compound.
+            Compound OS replaces the noise with clear rules and repeatable protocols across the three areas that actually compound.
           </p>
         </div>
       </section>
@@ -254,7 +217,7 @@ export default async function Home() {
               What you get
             </h2>
             <p className="text-[var(--text-secondary)] max-w-lg mx-auto text-[15px]">
-              Three pillars. {moduleCount} modules. Every framework structured, searchable, and ready to execute from day one.
+              Three pillars. One system.
             </p>
           </div>
 
@@ -281,21 +244,12 @@ export default async function Home() {
                     {pillar.pillar}
                   </h3>
                 </div>
-                <p className="text-[12px] text-[var(--text-muted)] mb-5 leading-relaxed">
+                <p className="text-[13px] text-[var(--text-primary)] font-medium mb-2 leading-relaxed">
                   {pillar.tagline}
                 </p>
-                <ul className="space-y-2.5">
-                  {pillar.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2.5">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={pillar.accent} strokeWidth="2.5" className="mt-[3px] shrink-0 opacity-50">
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                      <span className="text-[13px] text-[var(--text-secondary)] leading-relaxed">
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">
+                  {pillar.body}
+                </p>
               </div>
             ))}
           </div>
@@ -312,9 +266,6 @@ export default async function Home() {
             <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] tracking-tight">
               Every module, every minute.
             </h2>
-            <p className="mt-3 text-[var(--text-secondary)] text-[15px] max-w-md mx-auto">
-              Nothing hidden. This is the complete list.
-            </p>
           </div>
 
           <div className="space-y-10">
@@ -411,11 +362,11 @@ export default async function Home() {
             Why this exists
           </h2>
           <p className="text-[var(--text-secondary)] text-[15px] leading-[1.9] mb-6">
-            I spent over twenty thousand dollars on trading courses from people who were better at marketing than executing. I ego-lifted my way into a bad shoulder and a wrecked lower back. I swung between extremes in every domain: crypto to day trading, powerlifting to triathlons, hustle culture to withdrawal. Eventually I stopped chasing and started building systems that actually worked. The trading framework came from blowing up accounts. The fitness system came from injuries. The mindset protocols came from years of forced self-examination.
+            I built Compound OS after years of learning the expensive way — courses that overpromised, injuries from ego-driven training, inconsistent execution. Eventually I stopped chasing information and started building systems.
           </p>
           <div className="pt-5 border-t border-[var(--border)]">
             <p className="text-[var(--text-primary)] text-[15px] leading-relaxed font-medium">
-              Compound OS is what I wish existed when I started. I built it for myself first. It lives here now because the tools held up and asking people to rebuild them one by one is a waste of their years.
+              This is the one I wish I had earlier. Built for myself first. Shared because it works better than scattered notes and half-finished courses.
             </p>
           </div>
         </div>
@@ -434,13 +385,10 @@ export default async function Home() {
               </span>
             </div>
 
-            <div className="relative text-center">
-              <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-2 tracking-tight">
+            <div className="relative text-center mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] tracking-tight">
                 Full system. One price.
               </h2>
-              <p className="text-[var(--text-secondary)] text-sm mb-8 max-w-sm mx-auto">
-                All three pillars, all {moduleCount} modules, every future update.
-              </p>
             </div>
 
             <div className="relative text-center mb-8">
@@ -455,7 +403,7 @@ export default async function Home() {
                 </span>
               </div>
               <p className="text-sm text-[var(--text-muted)] mt-2">
-                one-time &middot; lifetime access &middot; no subscription
+                one-time &middot; no subscription
               </p>
               <p className="text-xs text-[var(--accent)]/90 font-medium mt-3">
                 {foundingNote}
@@ -465,12 +413,10 @@ export default async function Home() {
             {/* What you actually get */}
             <ul className="relative space-y-3 max-w-sm mx-auto mb-10">
               {[
-                `${moduleCount} structured modules across Markets, Fitness, and Mindset`,
-                "Checklists that track what you\u2019ve actually done",
-                "Reference playbooks with templates and cheat sheets",
-                "Progress saved to your account, any device",
-                "Every future module and refinement, forever",
-                "Fourteen-day refund, no questions",
+                "All three pillars, every module",
+                "Checklists, templates, and weekly protocols",
+                "Progress saved to any device",
+                "Fourteen-day refund",
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-2.5">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5" className="mt-0.5 shrink-0"><polyline points="20 6 9 17 4 12" /></svg>
@@ -484,9 +430,6 @@ export default async function Home() {
             <div className="relative">
               <CheckoutCTA label={stackedCtaLabel} />
               <p className="mt-4 text-xs text-[var(--text-muted)] text-center">
-                Instant access. No subscription. Every future update included.
-              </p>
-              <p className="mt-3 text-xs text-[var(--text-muted)] text-center">
                 Already have access?{" "}
                 <a
                   href="/login"
@@ -540,10 +483,10 @@ export default async function Home() {
       <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4 tracking-tight">
-            The system is ready.
+            Start executing.
           </h2>
           <p className="text-[var(--text-secondary)] mb-10 text-base md:text-lg max-w-md mx-auto">
-            One purchase. Instant access. Start executing today.
+            One payment. Instant access.
           </p>
 
           <CheckoutButton className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] cursor-pointer">

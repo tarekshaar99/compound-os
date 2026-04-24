@@ -1,0 +1,14 @@
+<!-- Favicon version
+     At 16-32px the base proportions would become too thin.
+     Favicon adjustment: bars are proportionally taller (1.4u height)
+     and gaps slightly tighter (0.4u) — makes each bar readable at 16px.
+     Canvas is square, 100x100, symmetric padding 10 on each side.
+     Widths adjusted: 30 / 50 / 80 (same 5:8:13 ratio at smaller scale)
+     Heights: 14 each. Gaps: 6.
+     Total block height: 3*14 + 2*6 = 54. Centered vertically: (100-54)/2 = 23 top
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="The Compound System">
+  <rect x="35" y="23" width="30" height="14" fill="#BF9A62"/>
+  <rect x="25" y="43" width="50" height="14" fill="#BF9A62"/>
+  <rect x="10" y="63" width="80" height="14" fill="#BF9A62"/>
+</svg>
