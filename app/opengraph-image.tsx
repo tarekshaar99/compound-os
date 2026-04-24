@@ -66,37 +66,20 @@ export default async function OgImage() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 16,
+            gap: 18,
           }}
         >
-          <div
-            style={{
-              width: 52,
-              height: 52,
-              borderRadius: 14,
-              backgroundColor: "#00d4aa",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+          {/* Stack mark — three bars in champagne (5:8:13 Fibonacci) */}
+          <svg
+            width="52"
+            height="52"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            {/* Diamond mark as SVG - renders reliably in Satori */}
-            <svg
-              width="26"
-              height="26"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 2 L22 12 L12 22 L2 12 Z"
-                fill="#0a0b0f"
-              />
-              <path
-                d="M12 7 L17 12 L12 17 L7 12 Z"
-                fill="#00d4aa"
-              />
-            </svg>
-          </div>
+            <rect x="35" y="23" width="30" height="14" fill="#BF9A62" />
+            <rect x="25" y="43" width="50" height="14" fill="#BF9A62" />
+            <rect x="10" y="63" width="80" height="14" fill="#BF9A62" />
+          </svg>
           <div
             style={{
               fontSize: 32,

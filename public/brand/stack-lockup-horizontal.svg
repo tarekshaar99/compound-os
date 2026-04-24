@@ -1,0 +1,42 @@
+<!-- Horizontal lockup
+     Mark 260 wide, wordmark to the right
+     Separated by 3u = 60 of vertical-rule-aligned negative space
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 240" role="img" aria-label="The Compound System">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@144,300;144,400&amp;display=swap');
+      .primary {
+        font-family: 'Canela Deck', 'Fraunces', 'GT Sectra', 'Editorial New', Georgia, serif;
+        font-optical-sizing: auto;
+        font-variation-settings: 'opsz' 144;
+        font-weight: 300;
+        font-size: 42px;
+        letter-spacing: 5px;
+        fill: #F4ECD8;
+      }
+      .caption {
+        font-family: 'Canela Deck', 'Fraunces', 'GT Sectra', 'Editorial New', Georgia, serif;
+        font-weight: 300;
+        font-size: 10px;
+        letter-spacing: 8px;
+        fill: #BF9A62;
+      }
+    </style>
+  </defs>
+
+  <!-- MARK on the left, vertically centered on canvas (240/2=120, mark height 80 → y=80) -->
+  <g transform="translate(80,80)">
+    <rect x="100" y="0"  width="100" height="20" fill="#BF9A62"/>
+    <rect x="70"  y="30" width="160" height="20" fill="#BF9A62"/>
+    <rect x="20"  y="60" width="260" height="20" fill="#BF9A62"/>
+  </g>
+
+  <!-- Separator: hairline vertical rule, 1px, height 60 (= 3u), centered vertically
+       Mark right edge = 80 + 280 = 360; rule at x = 360 + 60 (3u clear) = 420 -->
+  <line x1="440" y1="90" x2="440" y2="150" stroke="#BF9A62" stroke-width="1" opacity="0.5"/>
+
+  <!-- Wordmark begins 3u = 60 after the rule -->
+  <text x="500" y="128" class="primary">THE COMPOUND</text>
+  <text x="500" y="158" class="caption">S Y S T E M</text>
+</svg>

@@ -19,9 +19,23 @@ export default function Footer() {
           <div className="md:col-span-1">
             <Link
               href="/"
-              className="inline-block text-base font-bold tracking-tight text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors"
+              className="inline-flex items-center gap-2.5 text-[var(--text-primary)] hover:opacity-90 transition-opacity"
+              aria-label="Compound OS home"
             >
-              Compound OS
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 100 100"
+                aria-hidden="true"
+                className="shrink-0"
+              >
+                <rect x="35" y="23" width="30" height="14" fill="#BF9A62" />
+                <rect x="25" y="43" width="50" height="14" fill="#BF9A62" />
+                <rect x="10" y="63" width="80" height="14" fill="#BF9A62" />
+              </svg>
+              <span className="text-base font-bold tracking-tight">
+                Compound OS
+              </span>
             </Link>
             <p className="mt-3 text-xs text-[var(--text-muted)] leading-relaxed max-w-[220px]">
               The complete system for how you trade, train, and operate.
