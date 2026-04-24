@@ -128,7 +128,7 @@ export default function Header() {
                 </a>
                 <a
                   href="#pricing"
-                  className="px-5 py-2 rounded-lg bg-[var(--accent)] text-[#0a0b0f] text-sm font-bold transition-all hover:opacity-90"
+                  className="hidden sm:inline-block px-5 py-2 rounded-lg bg-[var(--accent)] text-[#0a0b0f] text-sm font-bold transition-all hover:opacity-90"
                 >
                   Get the System
                 </a>
