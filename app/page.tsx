@@ -2,6 +2,7 @@ import CheckoutButton from "./components/CheckoutButton";
 import CheckoutCTA from "./components/CheckoutCTA";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import HowItWorks from "./components/HowItWorks";
 import MobileCTA from "./components/MobileCTA";
 import ProductPreview from "./components/ProductPreview";
 import { getPricing } from "./lib/pricing";
@@ -358,45 +359,7 @@ export default async function Home() {
       </section>
 
       {/* ───── HOW IT WORKS ───── */}
-      <section className="px-6 py-16 md:py-24">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] text-center mb-12 tracking-tight">
-            How it works
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Buy once",
-                desc: "One payment. No subscription, no upsells, no drip. You own lifetime access immediately.",
-              },
-              {
-                step: "02",
-                title: "Open and execute",
-                desc: "Navigate to the module you need. Read the principle, run the checklist, mark it done. Close the tab. Repeat weekly.",
-              },
-              {
-                step: "03",
-                title: "Stay current",
-                desc: "The system gets refined over time. New modules, sharper protocols, all included in your access forever.",
-              },
-            ].map((item) => (
-              <div key={item.step} className="text-center md:text-left">
-                <span className="inline-block text-sm font-mono text-[var(--accent)] mb-3 px-2.5 py-1 rounded-md bg-[var(--accent)]/8">
-                  {item.step}
-                </span>
-                <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HowItWorks label={stackedCtaLabel} />
 
       {/* ───── WHO IT'S FOR / NOT FOR ───── */}
       <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">

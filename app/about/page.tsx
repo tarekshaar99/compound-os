@@ -5,7 +5,7 @@ import CheckoutButton from "../components/CheckoutButton";
 import { getPricing } from "../lib/pricing";
 
 export const metadata: Metadata = {
-  title: "About | Compound OS",
+  title: "About",
   description:
     "Why Compound OS exists, who built it, and who it is for. A structured system for how you trade, train, and operate.",
 };

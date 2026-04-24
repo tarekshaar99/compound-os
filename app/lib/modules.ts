@@ -43,6 +43,16 @@ export const MODULES: ModuleDef[] = [
     startHere: true,
   },
   {
+    id: "trading.finding-companies",
+    pillar: "trading",
+    tier: "core",
+    title: "Finding Good Companies",
+    blurb:
+      "How to spot businesses worth owning, using AI and free tools. A beginner-friendly research workflow, six teaching cases, and the chart patterns worth knowing.",
+    path: "/trading/m/finding-companies",
+    estMinutes: 18,
+  },
+  {
     id: "trading.foundations",
     pillar: "trading",
     tier: "core",

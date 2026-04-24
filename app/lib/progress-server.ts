@@ -1,6 +1,6 @@
 /**
  * Server-side progress store. Backed by Supabase so progress persists across
- * devices — this is a paid product, localStorage would be a bad promise.
+ * devices - this is a paid product, localStorage would be a bad promise.
  *
  * The legacy client-side progress.ts still exists for backwards-compat on
  * the old long-form pillar pages. New modules should use this.
@@ -16,7 +16,7 @@ export interface ProgressRow {
 }
 
 /** Pull the set of completed module ids for a user. Returns empty set on any
- *  error — progress tracking should never break the app. */
+ *  error - progress tracking should never break the app. */
 export async function getCompleted(email: string): Promise<Set<string>> {
   try {
     const svc = getServiceSupabase();
@@ -86,7 +86,7 @@ export async function markComplete(
   }
 }
 
-/** Remove a completion — used if the user wants to retake a module. */
+/** Remove a completion - used if the user wants to retake a module. */
 export async function unmarkComplete(
   email: string,
   moduleId: string
@@ -117,7 +117,7 @@ export async function bumpLastActive(
       .update({ last_active_module: moduleId })
       .eq("email", email);
   } catch {
-    // Silent — this is a convenience field, never block on it.
+    // Silent - this is a convenience field, never block on it.
   }
 }
 

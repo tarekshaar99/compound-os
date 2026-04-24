@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
  * Returns the signed-in user's account details: email, paid flag,
  * purchase timestamps, refund timestamp (if any).
  *
- * Gated by the cos_session cookie — same auth surface as middleware.
+ * Gated by the cos_session cookie - same auth surface as middleware.
  * Does NOT return the Stripe session id or customer id externally;
  * those are server-private.
  */
@@ -32,7 +32,7 @@ export async function GET() {
   }
 
   if (!data) {
-    // Should never happen — the cookie exists but the user doesn't.
+    // Should never happen - the cookie exists but the user doesn't.
     return NextResponse.json({ authenticated: false }, { status: 401 });
   }
 

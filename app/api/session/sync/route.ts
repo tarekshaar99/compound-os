@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import * as Sentry from "@sentry/nextjs";
 import { getServiceSupabase } from "../../../lib/supabase";
 import { signSession, setSessionCookie } from "../../../lib/session";
 
@@ -12,10 +13,10 @@ export const dynamic = "force-dynamic";
  * Flow:
  *   1. Client sends its Supabase `access_token` in the Authorization header.
  *   2. We verify that token against Supabase's auth server (so no client can
- *      claim any email they want — we need a real Supabase session).
+ *      claim any email they want - we need a real Supabase session).
  *   3. If valid, we look up public.users by the authenticated email.
  *   4. If paid || admin, mint the cos_session cookie and return 200.
- *      Otherwise return 402 Payment Required — middleware will redirect.
+ *      Otherwise return 402 Payment Required - middleware will redirect.
  *
  * This is how a user on a NEW device gets access after signing in via email
  * OTP. No payment is required at this step; the user must have already paid
@@ -30,7 +31,7 @@ export async function POST(req: NextRequest) {
     }
     const accessToken = match[1];
 
-    // Verify the access token against Supabase using the anon key — Supabase
+    // Verify the access token against Supabase using the anon key - Supabase
     // will reject invalid/expired tokens. We don't trust anything the client
     // puts in the body.
     const anonUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -74,6 +75,11 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     const msg = err instanceof Error ? err.message : "unknown";
     console.error("[session/sync] failed:", msg);
+    // Session sync failures = user signed in but can't reach the product.
+    // Paid customers hitting this are a support fire - capture with context.
+    Sentry.captureException(err, {
+      tags: { area: "session-sync" },
+    });
     return NextResponse.json({ error: "server_error" }, { status: 500 });
   }
 }

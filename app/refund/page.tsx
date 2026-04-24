@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Refund Policy | Compound OS",
+  title: "Refund Policy",
   description:
     "A simple, fair refund window for Compound OS. Email us and we will sort it.",
 };
@@ -72,10 +72,10 @@ export default function RefundPage() {
               <p>
                 Send an email to{" "}
                 <a
-                  href="mailto:hello@thecompoundsystem.com"
+                  href="mailto:tarek@thecompoundsystem.com"
                   className="text-[var(--text-primary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)]"
                 >
-                  hello@thecompoundsystem.com
+                  tarek@thecompoundsystem.com
                 </a>{" "}
                 from the same email address you used to purchase. Include
                 your name or order reference if you have it. We will process

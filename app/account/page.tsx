@@ -165,10 +165,10 @@ export default function AccountPage() {
         <p className="mt-8 text-xs text-[var(--text-muted)] text-center">
           Questions or refund request? Reach out at{" "}
           <a
-            href="mailto:hello@thecompoundsystem.com"
+            href="mailto:tarek@thecompoundsystem.com"
             className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
           >
-            hello@thecompoundsystem.com
+            tarek@thecompoundsystem.com
           </a>
         </p>
       </div>

@@ -1,5 +1,5 @@
 /**
- * Client-side event tracker. Fire-and-forget — never awaited by UI.
+ * Client-side event tracker. Fire-and-forget - never awaited by UI.
  * Failures are silent.
  */
 export function track(

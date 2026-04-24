@@ -68,7 +68,7 @@ function SuccessContent() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="mailto:hello@thecompoundsystem.com"
+              href="mailto:tarek@thecompoundsystem.com"
               className="px-6 py-3 rounded-xl bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-sm font-medium transition-all hover:bg-[var(--accent)]/20"
             >
               Email support

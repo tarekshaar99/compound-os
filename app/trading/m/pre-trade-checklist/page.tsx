@@ -172,7 +172,7 @@ export default async function Page() {
       />
 
       <Reflection
-        prompt="Pick one of your losing trades from the past six months. Which of the nine questions could you not have answered cleanly before you entered? Be specific."
+        prompt="Read the nine questions again slowly. Which one would genuinely stop you from pulling the trigger on a ticker you are excited about right now? For most people it is the invalidation question - they have a price they want to buy at but no price they are willing to sell at if they are wrong. Pick the question that is hardest for you personally, and write why. This is the question you will have to slow down on every single time."
         minChars={120}
       />
 

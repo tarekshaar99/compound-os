@@ -190,7 +190,7 @@ export default async function Page() {
       />
 
       <Reflection
-        prompt="What did you do during the last VIX spike above 30? Be specific. What would the ladder have had you do instead?"
+        prompt="Open TradingView and pull up a 10-year chart of the VIX (ticker: VIX). Zoom out and look at the spikes: March 2020 (COVID), February 2018 (volmageddon), August 2024 (carry-trade unwind), the 2022 rate-hike cycle, any tariff or war shock. Notice how each spike looks violent in the moment, and how every single one reverted toward 15 within weeks or months. Write down one spike you remember living through - where were you, what did you feel, did you buy or panic - and what the ladder would have had you do instead. The point is to calibrate your future self against real history, not headlines."
         minChars={120}
       />
 

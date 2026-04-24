@@ -8,7 +8,7 @@ import { track } from "../lib/track";
  *
  * Why no email field: Stripe Checkout collects and validates email on its
  * own page. Forcing it here was extra friction on mobile. The "already
- * paid" duplicate-purchase guard now lives on /login instead — a small
+ * paid" duplicate-purchase guard now lives on /login instead - a small
  * "Already have access? Sign in" link below this button lets returning
  * customers self-route.
  *

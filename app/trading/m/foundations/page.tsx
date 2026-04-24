@@ -187,7 +187,7 @@ export default async function Page() {
       />
 
       <Reflection
-        prompt="Write one paragraph about the last trade you lost money on. Which of the three modes were you actually in? Not which one you told yourself you were in."
+        prompt="Think about how you operate in life outside the market. Are you patient, or do you want results immediately? Are you drawn to slow compounding, or do you chase big swings that could finally make you rich? Do you prefer the certainty of a known outcome, or the rush of not knowing? Write a paragraph honestly describing your natural tendency. The answer tells you whether investing, speculating, or gambling is the mode you will default to when the market gets loud - and that is the mode you have to manage against."
         minChars={120}
       />
 
