@@ -13,6 +13,7 @@ export const dynamic = "force-dynamic";
 const ALLOWED_NAMES = new Set([
   "page_view",
   "checkout_initiated",
+  "login_oauth_started",
   "login_otp_requested",
   "login_otp_verified",
   "login_failed",
