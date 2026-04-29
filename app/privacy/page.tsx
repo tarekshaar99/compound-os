@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Reveal from "../components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -17,198 +18,205 @@ export default function PrivacyPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <main className="flex-1 pt-28 md:pt-32 pb-20">
-        <article className="max-w-2xl mx-auto px-6">
-          {/* Heading */}
-          <p className="text-xs uppercase tracking-widest text-[var(--accent)] font-medium mb-4">
-            Legal
-          </p>
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--text-primary)] leading-[1.15]">
-            Privacy Policy
-          </h1>
-          <p className="mt-3 text-xs text-[var(--text-muted)]">
-            Last updated: {LAST_UPDATED}
-          </p>
+      <main className="flex-1 pt-32 md:pt-36 pb-24">
+        <article className="max-w-[680px] mx-auto px-6">
+          <Reveal>
+            <span className="label-caps text-[var(--accent)] block mb-6">
+              Legal &middot; Privacy
+            </span>
+            <h1 className="font-serif text-[44px] md:text-[56px] leading-[1.05] tracking-[-0.02em] text-[var(--text-primary)] font-light">
+              Privacy Policy
+            </h1>
+            <p className="mt-4 label-caps text-[var(--text-muted)]">
+              Last updated &middot; {LAST_UPDATED}
+            </p>
+          </Reveal>
 
-          <div className="mt-10 space-y-10 text-[var(--text-secondary)] text-[15px] leading-[1.85]">
-            <section>
-              <p>
-                This policy explains what information Compound OS collects
-                when you visit{" "}
-                <a
-                  href="https://thecompoundsystem.com"
-                  className="text-[var(--text-primary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)]"
-                >
-                  thecompoundsystem.com
-                </a>
-                , how we use it, and how you can reach us about it. We keep
-                the surface area as small as possible on purpose.
-              </p>
-            </section>
+          <Reveal delay={0.2}>
+            <div className="my-12 h-px w-12 bg-[var(--accent)]" />
+          </Reveal>
 
-            <section>
-              <h2 className="text-lg font-bold text-[var(--text-primary)] mb-3">
-                Who we are
-              </h2>
-              <p>
+          <Reveal delay={0.25}>
+            <p className="font-serif italic text-[18px] md:text-[20px] text-[var(--text-secondary)] leading-[1.65] mb-16">
+              This policy explains what information Compound OS collects
+              when you visit{" "}
+              <a
+                href="https://thecompoundsystem.com"
+                className="not-italic text-[var(--accent)] hover:opacity-80 border-b border-[var(--accent)]/30"
+              >
+                thecompoundsystem.com
+              </a>
+              , how we use it, and how you can reach us about it. We keep
+              the surface area as small as possible on purpose.
+            </p>
+          </Reveal>
+
+          <div className="space-y-12">
+            <Reveal as="section">
+              <SectionHeading>Who we are</SectionHeading>
+              <Body>
                 Compound OS is operated by Tarek Shaar, an independent
                 operator based in the UAE. Reach us any time at{" "}
                 <a
                   href="mailto:tarek@thecompoundsystem.com"
-                  className="text-[var(--text-primary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)]"
+                  className="text-[var(--accent)] hover:opacity-80 border-b border-[var(--accent)]/30"
                 >
                   tarek@thecompoundsystem.com
                 </a>
                 .
-              </p>
-            </section>
+              </Body>
+            </Reveal>
 
-            <section>
-              <h2 className="text-lg font-bold text-[var(--text-primary)] mb-3">
-                Information we collect
-              </h2>
-              <ul className="space-y-2.5 list-none">
+            <Reveal as="section" delay={0.05}>
+              <SectionHeading>Information we collect</SectionHeading>
+              <ul className="divide-y divide-[var(--border-soft)]">
                 {[
                   [
-                    "Email address.",
+                    "Email address",
                     "Required to create an account, receive the magic login link, and verify access after purchase.",
                   ],
                   [
-                    "Authentication metadata.",
+                    "Authentication metadata",
                     "When you log in, we store a signed session cookie in your browser so you do not have to re-authenticate on every page load.",
                   ],
                   [
-                    "Purchase metadata.",
+                    "Purchase metadata",
                     "When you buy, Stripe processes the payment and sends us confirmation, your email, and an internal customer identifier. We never see your card number or banking details.",
                   ],
                   [
-                    "Product usage.",
+                    "Product usage",
                     "We store which modules you have opened and completed so your progress persists across devices. We do not track your clicks, scroll depth, or session recordings.",
                   ],
                   [
-                    "Basic server logs.",
+                    "Basic server logs",
                     "Our hosting provider keeps request logs (IP address, user agent, timestamp) for security and debugging. These are short-lived and not joined to your account.",
                   ],
                 ].map(([title, body], i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2.5 shrink-0" />
-                    <span>
-                      <strong className="text-[var(--text-primary)] font-semibold">
-                        {title}
-                      </strong>{" "}
+                  <li key={i} className="py-4">
+                    <span className="label-caps text-[var(--accent)] block mb-2">
+                      {title}
+                    </span>
+                    <span className="font-serif text-[16px] text-[var(--text-secondary)] leading-[1.75]">
                       {body}
                     </span>
                   </li>
                 ))}
               </ul>
-            </section>
+            </Reveal>
 
-            <section>
-              <h2 className="text-lg font-bold text-[var(--text-primary)] mb-3">
-                How we use it
-              </h2>
-              <p>
+            <Reveal as="section" delay={0.05}>
+              <SectionHeading>How we use it</SectionHeading>
+              <Body>
                 We use the information above only to deliver the product
-                (give you access, track your progress, support your account)
-                and to communicate with you about it (receipts, important
-                service messages, the occasional update). We do not sell,
-                rent, or trade your data.
-              </p>
-            </section>
+                (give you access, track your progress, support your
+                account) and to communicate with you about it (receipts,
+                important service messages, the occasional update). We do
+                not sell, rent, or trade your data.
+              </Body>
+            </Reveal>
 
-            <section>
-              <h2 className="text-lg font-bold text-[var(--text-primary)] mb-3">
-                Third parties we rely on
-              </h2>
-              <p className="mb-3">
-                Compound OS is intentionally a small operation. We rely on a
-                handful of well-known vendors to run it:
-              </p>
-              <ul className="space-y-2 list-none">
+            <Reveal as="section" delay={0.05}>
+              <SectionHeading>Third parties we rely on</SectionHeading>
+              <Body>
+                Compound OS is intentionally a small operation. We rely on
+                a handful of well-known vendors to run it:
+              </Body>
+              <ul className="mt-6 divide-y divide-[var(--border-soft)]">
                 {[
-                  ["Stripe", "processes every payment and stores card details on our behalf."],
-                  ["Supabase", "stores your account email and progress data."],
-                  ["Resend", "delivers transactional and magic-link email."],
-                  ["Vercel", "hosts the site and handles request-level logging."],
+                  ["Stripe", "Processes every payment and stores card details on our behalf."],
+                  ["Supabase", "Stores your account email and progress data."],
+                  ["Resend", "Delivers transactional and magic-link email."],
+                  ["Vercel", "Hosts the site and handles request-level logging."],
                 ].map(([vendor, role], i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--text-muted)] mt-2.5 shrink-0" />
-                    <span>
-                      <strong className="text-[var(--text-primary)] font-semibold">
-                        {vendor}
-                      </strong>{" "}
+                  <li
+                    key={i}
+                    className="flex items-baseline gap-5 py-4"
+                  >
+                    <span className="label-caps text-[var(--text-muted)] w-20 shrink-0">
+                      {vendor}
+                    </span>
+                    <span className="font-serif text-[16px] text-[var(--text-secondary)] leading-[1.7]">
                       {role}
                     </span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-3">
-                Each of these providers has its own privacy posture. We share
-                only what is necessary for them to do their job.
+              <p className="mt-6 font-serif italic text-[15px] text-[var(--text-secondary)]">
+                Each provider has its own privacy posture. We share only
+                what is necessary for them to do their job.
               </p>
-            </section>
+            </Reveal>
 
-            <section>
-              <h2 className="text-lg font-bold text-[var(--text-primary)] mb-3">
-                Cookies and analytics
-              </h2>
-              <p>
-                We use one cookie: a signed session cookie that confirms you
-                are logged in. We do not run third-party advertising pixels
-                or cross-site trackers. If we ever add light product
-                analytics, we will list them here before turning them on and
-                will prefer tools that are privacy-respecting by default.
-              </p>
-            </section>
+            <Reveal as="section" delay={0.05}>
+              <SectionHeading>Cookies and analytics</SectionHeading>
+              <Body>
+                We use one cookie: a signed session cookie that confirms
+                you are logged in. We do not run third-party advertising
+                pixels or cross-site trackers. If we ever add light product
+                analytics, we will list them here before turning them on
+                and will prefer tools that are privacy-respecting by
+                default.
+              </Body>
+            </Reveal>
 
-            <section>
-              <h2 className="text-lg font-bold text-[var(--text-primary)] mb-3">
-                Your rights
-              </h2>
-              <p>
+            <Reveal as="section" delay={0.05}>
+              <SectionHeading>Your rights</SectionHeading>
+              <Body>
                 You can request a copy of the data we hold on you, request
-                corrections, or ask us to delete your account and associated
-                data entirely. Email{" "}
+                corrections, or ask us to delete your account and
+                associated data entirely. Email{" "}
                 <a
                   href="mailto:tarek@thecompoundsystem.com"
-                  className="text-[var(--text-primary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)]"
+                  className="text-[var(--accent)] hover:opacity-80 border-b border-[var(--accent)]/30"
                 >
                   tarek@thecompoundsystem.com
                 </a>{" "}
                 and we will respond within a reasonable window, usually a
                 few business days.
-              </p>
-            </section>
+              </Body>
+            </Reveal>
 
-            <section>
-              <h2 className="text-lg font-bold text-[var(--text-primary)] mb-3">
-                Retention
-              </h2>
-              <p>
+            <Reveal as="section" delay={0.05}>
+              <SectionHeading>Retention</SectionHeading>
+              <Body>
                 We keep your account data for as long as your account is
                 active. If you delete your account, we remove your profile
-                and progress within 30 days, except where we are required to
-                keep transactional records (receipts) for accounting and
+                and progress within 30 days, except where we are required
+                to keep transactional records (receipts) for accounting and
                 legal reasons.
-              </p>
-            </section>
+              </Body>
+            </Reveal>
 
-            <section>
-              <h2 className="text-lg font-bold text-[var(--text-primary)] mb-3">
-                Changes to this policy
-              </h2>
-              <p>
-                If we make material changes, we will update the &quot;last
-                updated&quot; date at the top of this page and, where
-                appropriate, email active members. Continued use of the site
-                after an update constitutes acceptance.
-              </p>
-            </section>
+            <Reveal as="section" delay={0.05}>
+              <SectionHeading>Changes to this policy</SectionHeading>
+              <Body>
+                If we make material changes, we will update the &ldquo;last
+                updated&rdquo; date at the top of this page and, where
+                appropriate, email active members. Continued use of the
+                site after an update constitutes acceptance.
+              </Body>
+            </Reveal>
           </div>
         </article>
       </main>
 
       <Footer />
     </div>
+  );
+}
+
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="label-caps text-[var(--accent)] mb-5 pb-3 border-b border-[var(--border)]">
+      {children}
+    </h2>
+  );
+}
+
+function Body({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="font-serif text-[16px] md:text-[17px] text-[var(--text-secondary)] leading-[1.85]">
+      {children}
+    </p>
   );
 }
