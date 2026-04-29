@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import BrandMark from "./BrandMark";
 import { getSupabase } from "../lib/supabase";
 import { track } from "../lib/track";
 
@@ -72,27 +73,14 @@ export default function Header() {
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 h-16 md:h-20 flex items-center justify-between">
-        {/* Brand mark — Fibonacci stack in champagne */}
+        {/* Brand lockup — three-tower mark + Cinzel wordmark */}
         <Link
           href={isLoggedIn ? "/dashboard" : "/"}
           className="group flex items-center gap-3 text-[var(--text-primary)] transition-opacity hover:opacity-90"
-          aria-label="Compound OS home"
+          aria-label="The Compound System home"
         >
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 100 100"
-            aria-hidden="true"
-            className="shrink-0"
-          >
-            <rect x="35" y="23" width="30" height="14" fill="#BF9A62" />
-            <rect x="25" y="43" width="50" height="14" fill="#BF9A62" />
-            <rect x="10" y="63" width="80" height="14" fill="#BF9A62" />
-          </svg>
-          <span
-            className="font-serif text-lg md:text-xl tracking-tight uppercase text-[var(--accent)]"
-            style={{ letterSpacing: "0.18em" }}
-          >
+          <BrandMark size={22} className="shrink-0" />
+          <span className="brand-text font-cinzel text-base md:text-lg text-[var(--accent)]">
             Compound OS
           </span>
         </Link>

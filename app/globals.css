@@ -1,42 +1,43 @@
 @import "tailwindcss";
 
 /* ───────────────────────────────────────────────────────────────────
-   COMPOUND OS — Editorial Quarterly design system
-   ports: imported/compound-os-design-system/raw/_design-systems.json
-   tokens: champagne accent, ink dark, hairlines, sharp corners
+   THE COMPOUND SYSTEM — Brand tokens
    ─────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* Surfaces (cool ink base — matches the actual brand bg per the design brief) */
-  --bg: #0a0b0f;                          /* base page bg, "ink" */
-  --sidebar-bg: #110e0a;                  /* sidebar / lowest container */
-  --card-bg: #1e1b17;                     /* surface-container-low */
-  --card-bg-2: #231f1b;                   /* surface-container */
-  --surface-high: #2d2925;                /* surface-container-high */
-  --surface-highest: #38342f;             /* surface-container-highest */
+  /* Surfaces — ink-first per the brand */
+  --bg: #0A0A0A;                          /* Ink — primary page bg */
+  --sidebar-bg: #050505;                  /* deeper ink for nested surfaces */
+  --card-bg: #141210;                     /* warm-tinted surface */
+  --card-bg-2: #1a1815;                   /* slightly lighter card */
+  --surface-high: #221f1b;
+  --surface-highest: #2a2622;
 
-  /* Hairlines (replace shadows entirely in this system) */
-  --border: #2d2925;                      /* default 1px hairline */
-  --border-soft: #1e1b17;                 /* subtler 0.5px hairline */
-  --outline: #4e453a;                     /* outline-variant for stronger separators */
+  /* Hairlines — subtle gold tint instead of pure neutral. Replaces shadows. */
+  --border: rgba(201, 163, 106, 0.15);    /* default 1px hairline (gold @ 15%) */
+  --border-soft: rgba(201, 163, 106, 0.08);
+  --outline: rgba(201, 163, 106, 0.3);
 
-  /* Primary — champagne. Used for brand moments + active states + CTAs. */
-  --accent: #BF9A62;                      /* "primary-container" — solid CTA bg */
-  --accent-bright: #e8c085;               /* "primary" — text on dark when accent is decorative */
-  --accent-fixed: #ffddaf;                /* "primary-fixed" — high-contrast accent text */
-  --on-accent: #432c00;                   /* text/icon on solid champagne button */
+  /* Brand gold — three-stop gradient distilled into accents.
+     Mirrors the tower mark's url(#gold) gradient: highlight → core → deep. */
+  --accent: #C9A36A;                      /* Gold Core — primary CTA bg */
+  --accent-bright: #E4C074;               /* Gold Highlight — accent text on dark */
+  --accent-deep: #9E7B3E;                 /* Gold Deep — pressed / shadow tone */
+  --accent-fixed: #E4C074;                /* high-contrast accent text */
+  --on-accent: #0A0A0A;                   /* text/icon on solid gold button */
 
-  /* Pillar colors — preserved from launch brand */
+  /* Pillar colors — preserved (the three modules retain their hue codes
+     across the brand refresh; gold is an additive brand layer). */
   --accent-trading: #00d4aa;              /* Markets / teal */
   --accent-fitness: #f97316;              /* Fitness / orange */
   --accent-mindset: #a78bfa;              /* Mindset / violet */
 
-  /* Text */
-  --text-primary: #e9e1da;                /* on-surface, body + headings */
-  --text-secondary: #d2c4b5;              /* on-surface-variant, secondary copy */
-  --text-muted: #9a8f81;                  /* "outline" text — captions, metadata */
+  /* Text — cream tones over ink */
+  --text-primary: #F4ECD8;                /* Cream — body + headings */
+  --text-secondary: #C7BCA0;              /* dimmer cream for secondary copy */
+  --text-muted: #8a8579;                  /* muted bone for captions */
 
-  /* Spacing rhythm (Editorial Quarterly modular scale) */
+  /* Spacing rhythm */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
@@ -51,13 +52,13 @@
   --radius-pill: 9999px;
 }
 
-/* Tailwind v4 inline theme — exposes our tokens to utility classes
-   like bg-background, text-foreground, font-serif, etc. */
+/* Tailwind v4 inline theme — exposes tokens to utility classes. */
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--text-primary);
   --color-accent: var(--accent);
   --color-accent-bright: var(--accent-bright);
+  --color-accent-deep: var(--accent-deep);
   --color-accent-trading: var(--accent-trading);
   --color-accent-fitness: var(--accent-fitness);
   --color-accent-mindset: var(--accent-mindset);
@@ -67,6 +68,7 @@
   --color-border: var(--border);
   --color-card: var(--card-bg);
 
+  --font-cinzel: var(--font-cinzel);
   --font-serif: var(--font-newsreader);
   --font-sans: var(--font-inter);
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
@@ -80,7 +82,6 @@
 
 html {
   scroll-behavior: smooth;
-  /* Prevent serif font swap from causing layout shift */
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -89,19 +90,28 @@ body {
   background: var(--bg);
   color: var(--text-primary);
   font-family: var(--font-inter), system-ui, sans-serif;
-  font-feature-settings: "ss01", "cv11"; /* Inter stylistic alternates */
+  font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Newsreader serif — used for headings + display only */
+/* Newsreader serif — used for editorial headings and display copy. */
 h1, h2, h3, .font-serif, .editorial-heading {
   font-family: var(--font-newsreader), Georgia, "Times New Roman", serif;
   font-feature-settings: "kern" 1, "ss01" 1;
 }
 
+/* Cinzel — reserved for the BRAND wordmark only (header / footer / OG /
+   email masthead). Don't apply to general headlines — keep its
+   inscription-style gravitas exclusive to the brand. */
+.font-cinzel,
+.brand-wordmark {
+  font-family: var(--font-cinzel), "Trajan Pro", "Cormorant Garamond", Georgia, serif;
+  font-feature-settings: "kern" 1;
+}
+
 ::selection {
-  background: rgba(191, 154, 98, 0.25);  /* champagne tint */
+  background: rgba(201, 163, 106, 0.25);  /* gold tint */
   color: var(--text-primary);
 }
 
@@ -111,16 +121,23 @@ h1, h2, h3, .font-serif, .editorial-heading {
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 /* ───────────────────────────────────────────────────────────────────
-   EDITORIAL UTILITIES
-   Used by ported pages for hairline rules, label-caps, etc.
+   UTILITIES
    ─────────────────────────────────────────────────────────────────── */
 
 .label-caps {
   font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1;
   letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Brand wordmark utility — applied to "Compound OS" / "THE COMPOUND" text */
+.brand-text {
+  font-family: var(--font-cinzel), Georgia, serif;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
@@ -129,7 +146,6 @@ h1, h2, h3, .font-serif, .editorial-heading {
 .hairline-l { border-left: 1px solid var(--border); }
 .hairline-r { border-right: 1px solid var(--border); }
 
-/* Cinematic grain overlay used on success/dashboard cards. */
 .grain {
   position: relative;
   isolation: isolate;
@@ -145,7 +161,6 @@ h1, h2, h3, .font-serif, .editorial-heading {
   z-index: 0;
 }
 
-/* Reduced-motion baseline — honored everywhere. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Suspense } from "react";
 import LoginForm from "../components/LoginForm";
+import BrandMark from "../components/BrandMark";
 import Reveal from "../components/motion/Reveal";
 import { trackPurchase } from "../lib/ads-client";
 
@@ -128,15 +129,9 @@ function SuccessContent() {
         {/* Brand mark + headline */}
         <Reveal>
           <div className="text-center mb-10">
-            {/* Fibonacci spiral mark */}
-            <div className="text-[var(--accent)] mx-auto mb-8 inline-block">
-              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M32 4C16.536 4 4 16.536 4 32C4 47.464 16.536 60 32 60C47.464 60 60 47.464 60 32" stroke="currentColor" strokeLinecap="round" strokeWidth="1" />
-                <path d="M32 12C20.9543 12 12 20.9543 12 32C12 43.0457 20.9543 52 32 52" stroke="currentColor" strokeLinecap="round" strokeWidth="1" />
-                <path d="M32 20C25.3726 20 20 25.3726 20 32C20 38.6274 25.3726 44 32 44" stroke="currentColor" strokeLinecap="round" strokeWidth="1" />
-                <path d="M32 28C29.7909 28 28 29.7909 28 32C28 34.2091 29.7909 36 32 36" stroke="currentColor" strokeLinecap="round" strokeWidth="1" />
-                <circle cx="32" cy="32" r="1" fill="currentColor" />
-              </svg>
+            {/* Brand mark — three-tower spire in gold gradient */}
+            <div className="mx-auto mb-8 inline-block">
+              <BrandMark size={72} />
             </div>
             <h1 className="font-serif text-[44px] md:text-[56px] leading-[1.05] tracking-[-0.02em] text-[var(--text-primary)] font-light">
               <span className="font-serif italic font-light text-[var(--accent)] mr-3">The</span>

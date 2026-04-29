@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BrandMark from "./BrandMark";
 
 /**
  * Site-wide footer in the Editorial Quarterly direction.
@@ -23,20 +24,10 @@ export default function Footer() {
             <Link
               href="/"
               className="inline-flex items-center gap-3 text-[var(--text-primary)] hover:opacity-90 transition-opacity"
-              aria-label="Compound OS home"
+              aria-label="The Compound System home"
             >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 100 100"
-                aria-hidden="true"
-                className="shrink-0"
-              >
-                <rect x="35" y="23" width="30" height="14" fill="#BF9A62" />
-                <rect x="25" y="43" width="50" height="14" fill="#BF9A62" />
-                <rect x="10" y="63" width="80" height="14" fill="#BF9A62" />
-              </svg>
-              <span className="font-serif text-base uppercase tracking-[0.18em] text-[var(--accent)]">
+              <BrandMark size={20} className="shrink-0" />
+              <span className="brand-text font-cinzel text-[15px] text-[var(--accent)]">
                 Compound OS
               </span>
             </Link>

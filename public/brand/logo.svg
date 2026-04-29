@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760" role="img" aria-label="The Compound System">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#E4C074"/>
+      <stop offset="45%" stop-color="#C9A36A"/>
+      <stop offset="100%" stop-color="#9E7B3E"/>
+    </linearGradient>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&amp;display=swap');
+      .wordmark { font-family: 'Cinzel', 'Trajan Pro', 'Cormorant Garamond', Georgia, serif; fill: #F4ECD8; }
+      .primary  { font-size: 72px; font-weight: 500; letter-spacing: 10px; }
+      .tagline  { font-size: 26px; font-weight: 400; letter-spacing: 14px; }
+    </style>
+  </defs>
+
+  <!-- === ICON MARK (centered: canvas 900 wide, icon 400 wide, offset = (900-400)/2 = 250) === -->
+  <g transform="translate(250,60)">
+    <path d="M 165,380 L 165,150 L 135,190 L 135,350 L 105,380 Z" fill="url(#gold)"/>
+    <path d="M 235,380 L 235,150 L 265,190 L 265,350 L 295,380 Z" fill="url(#gold)"/>
+    <path d="M 170,380 L 170,110 L 200,30 L 230,110 L 230,380 Z" fill="url(#gold)"/>
+  </g>
+
+  <!-- === "THE COMPOUND" === -->
+  <text x="450" y="595" class="wordmark primary" text-anchor="middle">THE COMPOUND</text>
+
+  <!-- === "— SYSTEM —" === -->
+  <line x1="275" y1="660" x2="355" y2="660" stroke="#C9A36A" stroke-width="2.5"/>
+  <text x="450" y="668" class="wordmark tagline" text-anchor="middle">SYSTEM</text>
+  <line x1="545" y1="660" x2="625" y2="660" stroke="#C9A36A" stroke-width="2.5"/>
+</svg>

@@ -1,19 +1,19 @@
 import { ImageResponse } from "next/og";
 
 /**
- * Editorial Quarterly Open Graph image.
+ * Open Graph image for social shares (WhatsApp, iMessage, Twitter, LinkedIn,
+ * etc.). Renders the brand lockup — three-tower mark in gold + Cinzel
+ * wordmark + Newsreader subtitle — over the brand's ink background.
  *
- * Notes on staying compatible with Satori (the engine behind ImageResponse):
- *   - Avoid complex CSS (multi-stop radial gradients, shadows) -> use plain
- *     colors and positioned divs for "glow" effects.
- *   - Newsreader is loaded explicitly via fetch() since Satori doesn't pull
- *     from next/font; if the fetch fails we fall back to plain serif.
- *   - Avoid `runtime = "edge"` — the Node runtime is more forgiving and
- *     renders identically.
+ * Satori notes:
+ *   - All divs with multiple children must declare `display: flex|none`
+ *   - Fonts fetched as woff2 binaries (Satori doesn't pull from next/font)
+ *   - SVGs render inline as long as paths are simple — gold gradient via
+ *     <linearGradient> works
  */
 
 export const alt =
-  "Compound OS — the operating system for a compounding life.";
+  "The Compound System — the operating system for a compounding life.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -28,35 +28,59 @@ async function fetchFontData(url: string): Promise<ArrayBuffer | null> {
 }
 
 export default async function OgImage() {
-  // Newsreader Light (300) for the headline + Regular (400) for body / mark.
-  // Hosted via Google Fonts CSS endpoint which 302s to woff2 binaries.
-  const [light, regular] = await Promise.all([
-    fetchFontData(
-      "https://fonts.gstatic.com/s/newsreader/v30/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438KizI.woff2"
-    ),
-    fetchFontData(
-      "https://fonts.gstatic.com/s/newsreader/v30/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438Ki1k.woff2"
-    ),
-  ]);
+  // Cinzel for the brand wordmark (the inscription-style gravitas).
+  // Newsreader for the editorial tagline.
+  // Inter for label-caps + chapter chips.
+  const [cinzelMedium, cinzelRegular, newsreaderLight, interMedium] =
+    await Promise.all([
+      // Cinzel 500
+      fetchFontData(
+        "https://fonts.gstatic.com/s/cinzel/v25/8vIK7ww63mVu7gtR-kwKxNvkNOjwytbnTYrvDE5ZdqU.woff2"
+      ),
+      // Cinzel 400
+      fetchFontData(
+        "https://fonts.gstatic.com/s/cinzel/v25/8vIK7ww63mVu7gtR-kwKxNvkNOjw-tbnTYrvDE4.woff2"
+      ),
+      // Newsreader Light 300
+      fetchFontData(
+        "https://fonts.gstatic.com/s/newsreader/v30/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438KizI.woff2"
+      ),
+      // Inter Medium 500
+      fetchFontData(
+        "https://fonts.gstatic.com/s/inter/v19/UcCO3FwrK3iLTeHuS_nVMrMxCp50ojIa1ZL7W0Q5nw.woff2"
+      ),
+    ]);
 
   const fonts = [
-    light && {
+    cinzelMedium && {
+      name: "Cinzel",
+      data: cinzelMedium,
+      style: "normal" as const,
+      weight: 500 as const,
+    },
+    cinzelRegular && {
+      name: "Cinzel",
+      data: cinzelRegular,
+      style: "normal" as const,
+      weight: 400 as const,
+    },
+    newsreaderLight && {
       name: "Newsreader",
-      data: light,
+      data: newsreaderLight,
       style: "normal" as const,
       weight: 300 as const,
     },
-    regular && {
-      name: "Newsreader",
-      data: regular,
+    interMedium && {
+      name: "Inter",
+      data: interMedium,
       style: "normal" as const,
-      weight: 400 as const,
+      weight: 500 as const,
     },
   ].filter(Boolean) as Array<{
     name: string;
     data: ArrayBuffer;
     style: "normal";
-    weight: 300 | 400;
+    weight: 300 | 400 | 500;
   }>;
 
   return new ImageResponse(
@@ -68,29 +92,43 @@ export default async function OgImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          padding: "72px 80px",
-          backgroundColor: "#0a0b0f",
-          color: "#e9e1da",
+          padding: "64px 72px",
+          backgroundColor: "#0A0A0A",
+          color: "#F4ECD8",
           position: "relative",
-          fontFamily: "Newsreader, Georgia, serif",
+          fontFamily: "Inter, sans-serif",
         }}
       >
-        {/* Soft champagne glow top-right (Editorial restraint — only one) */}
+        {/* Soft gold ambient glow top-right */}
         <div
           style={{
             position: "absolute",
-            top: -200,
-            right: -150,
-            width: 700,
-            height: 700,
+            top: -220,
+            right: -180,
+            width: 720,
+            height: 720,
             borderRadius: 9999,
-            backgroundColor: "#BF9A62",
-            opacity: 0.12,
-            filter: "blur(80px)",
+            backgroundColor: "#C9A36A",
+            opacity: 0.13,
+            filter: "blur(120px)",
+          }}
+        />
+        {/* Subtler echo glow bottom-left for editorial balance */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: -260,
+            left: -200,
+            width: 600,
+            height: 600,
+            borderRadius: 9999,
+            backgroundColor: "#9E7B3E",
+            opacity: 0.08,
+            filter: "blur(140px)",
           }}
         />
 
-        {/* Top: masthead */}
+        {/* Top row: tiny brand wordmark + issue indicator */}
         <div
           style={{
             display: "flex",
@@ -98,146 +136,174 @@ export default async function OgImage() {
             justifyContent: "space-between",
           }}
         >
-          {/* Brand mark + wordmark */}
           <div
             style={{
               display: "flex",
-              alignItems: "center",
-              gap: 18,
+              fontFamily: "Cinzel, serif",
+              fontSize: 16,
+              fontWeight: 500,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: "#C9A36A",
             }}
           >
-            <svg
-              width="44"
-              height="44"
-              viewBox="0 0 100 100"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect x="35" y="23" width="30" height="14" fill="#BF9A62" />
-              <rect x="25" y="43" width="50" height="14" fill="#BF9A62" />
-              <rect x="10" y="63" width="80" height="14" fill="#BF9A62" />
-            </svg>
-            <div
-              style={{
-                fontSize: 22,
-                fontWeight: 400,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "#BF9A62",
-              }}
-            >
-              Compound OS
-            </div>
+            Compound OS
           </div>
-
-          {/* Issue indicator */}
           <div
             style={{
-              fontSize: 14,
-              fontWeight: 400,
-              letterSpacing: "0.18em",
+              display: "flex",
+              fontFamily: "Inter, sans-serif",
+              fontSize: 13,
+              fontWeight: 500,
+              letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#9a8f81",
+              color: "#8a8579",
             }}
           >
             Vol. I · Issue 01
           </div>
         </div>
 
-        {/* Middle: serif display headline */}
+        {/* Center: large brand lockup — mark + Cinzel wordmark */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: 32,
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 28,
           }}
         >
+          {/* Three-tower mark in gold gradient */}
+          <svg
+            width="156"
+            height="164"
+            viewBox="0 0 400 420"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient id="cs-gold-og" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#E4C074" />
+                <stop offset="45%" stopColor="#C9A36A" />
+                <stop offset="100%" stopColor="#9E7B3E" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M 165,380 L 165,150 L 135,190 L 135,350 L 105,380 Z"
+              fill="url(#cs-gold-og)"
+            />
+            <path
+              d="M 235,380 L 235,150 L 265,190 L 265,350 L 295,380 Z"
+              fill="url(#cs-gold-og)"
+            />
+            <path
+              d="M 170,380 L 170,110 L 200,30 L 230,110 L 230,380 Z"
+              fill="url(#cs-gold-og)"
+            />
+          </svg>
+
+          {/* "THE COMPOUND" wordmark in Cinzel */}
           <div
             style={{
-              fontSize: 84,
-              fontWeight: 300,
-              lineHeight: 1.05,
-              letterSpacing: "-0.02em",
-              maxWidth: 1000,
-              color: "#e9e1da",
+              display: "flex",
+              fontFamily: "Cinzel, serif",
+              fontSize: 64,
+              fontWeight: 500,
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+              color: "#F4ECD8",
             }}
           >
-            The operating system for a compounding life.
+            The Compound
           </div>
+
+          {/* "— SYSTEM —" sub-wordmark with rules */}
           <div
             style={{
-              fontSize: 28,
-              fontStyle: "italic",
-              fontWeight: 400,
-              color: "#d2c4b5",
-              letterSpacing: "-0.005em",
-              maxWidth: 900,
-              lineHeight: 1.5,
+              display: "flex",
+              alignItems: "center",
+              gap: 24,
             }}
           >
-            Three pillars. One system. Markets. Fitness. Mindset.
+            <div
+              style={{
+                width: 80,
+                height: 1.5,
+                backgroundColor: "#C9A36A",
+              }}
+            />
+            <div
+              style={{
+                display: "flex",
+                fontFamily: "Cinzel, serif",
+                fontSize: 22,
+                fontWeight: 400,
+                letterSpacing: "0.4em",
+                textTransform: "uppercase",
+                color: "#F4ECD8",
+              }}
+            >
+              System
+            </div>
+            <div
+              style={{
+                width: 80,
+                height: 1.5,
+                backgroundColor: "#C9A36A",
+              }}
+            />
+          </div>
+
+          {/* Tagline in Newsreader italic */}
+          <div
+            style={{
+              display: "flex",
+              fontFamily: "Newsreader, Georgia, serif",
+              fontSize: 24,
+              fontWeight: 300,
+              fontStyle: "normal",
+              color: "#C7BCA0",
+              letterSpacing: "0.01em",
+              marginTop: 12,
+            }}
+          >
+            The operating system for a compounding life
           </div>
         </div>
 
-        {/* Bottom: pillar chapters + URL */}
+        {/* Bottom row: pillar virtues + URL */}
         <div
           style={{
             display: "flex",
             alignItems: "flex-end",
             justifyContent: "space-between",
             width: "100%",
-            paddingTop: 28,
-            borderTop: "1px solid #4e453a",
+            paddingTop: 24,
+            borderTop: "1px solid rgba(201,163,106,0.2)",
           }}
         >
           <div
             style={{
               display: "flex",
-              gap: 40,
+              fontFamily: "Inter, sans-serif",
+              fontSize: 12,
+              fontWeight: 500,
+              letterSpacing: "0.32em",
+              textTransform: "uppercase",
+              color: "#8a8579",
+              gap: 0,
             }}
           >
-            {[
-              { roman: "I", label: "Markets", color: "#00d4aa" },
-              { roman: "II", label: "Fitness", color: "#f97316" },
-              { roman: "III", label: "Mindset", color: "#a78bfa" },
-            ].map((p) => (
-              <div
-                key={p.label}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 4,
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    fontSize: 14,
-                    fontWeight: 400,
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
-                    color: p.color,
-                  }}
-                >
-                  {`Ch. ${p.roman}`}
-                </div>
-                <div
-                  style={{
-                    fontSize: 22,
-                    fontWeight: 300,
-                    color: "#e9e1da",
-                  }}
-                >
-                  {p.label}
-                </div>
-              </div>
-            ))}
+            Discipline &nbsp;·&nbsp; Alignment &nbsp;·&nbsp; Compound Power
           </div>
           <div
             style={{
+              display: "flex",
+              fontFamily: "Newsreader, Georgia, serif",
               fontSize: 16,
               fontStyle: "italic",
-              fontWeight: 400,
-              color: "#9a8f81",
+              fontWeight: 300,
+              color: "#8a8579",
             }}
           >
             thecompoundsystem.com

@@ -1,15 +1,26 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Newsreader, Inter } from "next/font/google";
+import { Newsreader, Inter, Cinzel } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import AdsPixels from "./components/AdsPixels";
 import PageViewTracker from "./components/PageViewTracker";
 import "./globals.css";
 
 /**
- * Newsreader — display serif for headlines + editorial pull-quotes.
- * Stand-in for GT Sectra per the design brief. Loaded with italic +
- * weight 300 (display) and 400/500 (h1–h3, body emphasis).
+ * Cinzel — Roman-inscription serif. Reserved for THE BRAND wordmark
+ * only (header logo, footer logo, OG image masthead, welcome email).
+ * Carries the gravitas of the gold tower mark; do NOT use it for
+ * generic headlines (those stay Newsreader).
+ */
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+/**
+ * Newsreader — display serif for editorial headlines + pull-quotes.
  */
 const newsreader = Newsreader({
   variable: "--font-newsreader",
@@ -20,7 +31,7 @@ const newsreader = Newsreader({
 });
 
 /**
- * Inter — body, labels, UI. Stand-in for Söhne.
+ * Inter — body, labels, UI.
  */
 const inter = Inter({
   variable: "--font-inter",
@@ -99,7 +110,7 @@ export const viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#0a0b0f",
+  themeColor: "#0A0A0A",
 };
 
 export default function RootLayout({
@@ -110,7 +121,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${newsreader.variable} ${inter.variable} antialiased`}
+        className={`${cinzel.variable} ${newsreader.variable} ${inter.variable} antialiased`}
       >
         {children}
         {/* Ad-platform conversion pixels (Meta, Google, TikTok). Each is

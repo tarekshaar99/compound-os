@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import LoginForm from "../components/LoginForm";
+import BrandMark from "../components/BrandMark";
 import Reveal from "../components/motion/Reveal";
 
 function LoginPageInner() {
@@ -15,13 +16,13 @@ function LoginPageInner() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-16">
-      {/* Soft champagne wash behind everything */}
+      {/* Soft gold wash behind everything */}
       <div
         aria-hidden
         className="absolute pointer-events-none top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] opacity-15"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(191,154,98,0.5), transparent 70%)",
+            "radial-gradient(ellipse at center, rgba(201,163,106,0.5), transparent 70%)",
           filter: "blur(120px)",
         }}
       />
@@ -32,20 +33,10 @@ function LoginPageInner() {
             <Link
               href="/"
               className="inline-flex items-center gap-3 group"
-              aria-label="Back to Compound OS home"
+              aria-label="Back to The Compound System home"
             >
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 100 100"
-                aria-hidden="true"
-                className="shrink-0"
-              >
-                <rect x="35" y="23" width="30" height="14" fill="#BF9A62" />
-                <rect x="25" y="43" width="50" height="14" fill="#BF9A62" />
-                <rect x="10" y="63" width="80" height="14" fill="#BF9A62" />
-              </svg>
-              <span className="font-serif text-base uppercase tracking-[0.18em] text-[var(--accent)] group-hover:opacity-80 transition-opacity">
+              <BrandMark size={22} className="shrink-0" />
+              <span className="brand-text font-cinzel text-[15px] text-[var(--accent)] group-hover:opacity-80 transition-opacity">
                 Compound OS
               </span>
             </Link>
