@@ -28,18 +28,11 @@ function getResend(): Resend | null {
  * `tarek@thecompoundsystem.com`, most inbox clients (Gmail, Apple Mail)
  * render the sender as the local part - "hello" - which looks broken.
  * Forcing a display name of "Compound OS" fixes the sender card.
- *
- * Accepts either format in the env var:
- *   - "tarek@thecompoundsystem.com"            → normalized with display name
- *   - "Compound OS <tarek@thecompoundsystem.com>" → returned as-is
  */
 function getFrom(): string | null {
   const raw = process.env.EMAIL_FROM?.trim();
   if (!raw) return null;
-  // Already has a display name (contains `<email>` syntax) - respect it.
   if (raw.includes("<") && raw.includes(">")) return raw;
-  // Bare email - prefix a display name so inbox clients don't fall back
-  // to the local part.
   return `Compound OS <${raw}>`;
 }
 
@@ -52,9 +45,15 @@ function getSiteUrl(): string {
 }
 
 /**
- * Sent after Stripe grants access. Goal: the customer has an email in
- * their inbox with a link they can click later (if they close the success
- * tab) that takes them through the OTP flow to /dashboard.
+ * Sent after Stripe grants access. Editorial Quarterly direction:
+ * Newsreader serif headline, champagne accent, hairline rules, sharp
+ * corners. Inline styles only (Outlook), table layout (Gmail/Outlook),
+ * Google Fonts link with serif fallbacks (handles clients that block
+ * web fonts).
+ *
+ * The dark palette is forced via inline `background` + a `color-scheme`
+ * meta — Gmail iOS' dark-mode-invert sometimes flips light backgrounds
+ * but will respect an already-dark email.
  */
 export async function sendWelcomeEmail(args: {
   to: string;
@@ -71,57 +70,173 @@ export async function sendWelcomeEmail(args: {
   const dashboardUrl = `${site}/dashboard`;
   const signInUrl = `${site}/login`;
   const foundingLine = args.isFounding
-    ? "You came in as a founding member. Your price is locked in - future updates included, always."
+    ? "You came in as a founding member. Your price is locked — future updates included, always."
     : "You have lifetime access. Future updates included, always.";
 
-  const subject = "You're in - welcome to Compound OS";
+  const subject = "You're in — welcome to Compound OS";
+  const year = new Date().getFullYear();
+  const yearRoman = toRoman(year);
 
+  // Plain-text version. Some clients (work email, security tools) only
+  // render this. Keep it editorial in tone, not a stripped log.
   const text = [
-    "Welcome to Compound OS.",
+    "VOL. I · WELCOME",
+    "",
+    "The system is yours.",
     "",
     foundingLine,
     "",
-    `Start here: ${dashboardUrl}`,
+    "The system is waiting. Open it, pick the pillar you want to start with, and execute.",
     "",
-    `Signing in from a new device? Enter this email at ${signInUrl} and we'll send a 6-digit code.`,
+    `Open your dashboard: ${dashboardUrl}`,
     "",
-    "- Tarek",
-    "Compound OS",
+    "—",
+    "Signing in from a new device?",
+    `Enter this email at ${signInUrl} and we'll send a 6-digit code.`,
+    "",
+    "— Tarek",
+    `Compound OS · ${yearRoman}`,
   ].join("\n");
 
+  // Editorial Quarterly direction:
+  //   - Newsreader serif headline (loaded via Google Fonts, falls back to
+  //     Georgia / Times New Roman where blocked)
+  //   - Inter body, with system-sans fallback chain
+  //   - Champagne accent (#BF9A62)
+  //   - Ink background (#0a0b0f), warm card (#1e1b17), hairline borders
+  //   - Sharp 0px corners on the card; the CTA is a ghost-bordered
+  //     champagne pill (rounded only because some clients re-square pills
+  //     anyway and a soft pill button reads as a clickable affordance)
   const html = `<!doctype html>
-<html><body style="margin:0;padding:0;background:#0a0b0f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#e5e5e5;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0a0b0f;padding:40px 20px;">
-    <tr><td align="center">
-      <table role="presentation" width="520" cellpadding="0" cellspacing="0" style="max-width:520px;background:#121317;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:36px 32px;">
-        <tr><td>
-          <div style="font-size:14px;color:#00d4aa;font-weight:700;letter-spacing:0.5px;margin-bottom:24px;">COMPOUND OS</div>
-          <h1 style="font-size:22px;font-weight:700;color:#fff;margin:0 0 16px 0;letter-spacing:-0.01em;">You're in.</h1>
-          <p style="font-size:15px;line-height:1.6;color:#c0c0c0;margin:0 0 20px 0;">
-            ${foundingLine}
-          </p>
-          <p style="font-size:15px;line-height:1.6;color:#c0c0c0;margin:0 0 28px 0;">
-            The system is waiting for you. Open it, pick the pillar you want to start with, and execute.
-          </p>
-          <div style="margin:0 0 32px 0;">
-            <a href="${dashboardUrl}" style="display:inline-block;background:#00d4aa;color:#0a0b0f;text-decoration:none;font-weight:700;font-size:15px;padding:14px 28px;border-radius:10px;">Open your dashboard →</a>
-          </div>
-          <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;margin-top:20px;">
-            <p style="font-size:13px;line-height:1.6;color:#888;margin:0 0 8px 0;">
-              <strong style="color:#c0c0c0;">Signing in from a new device?</strong>
-            </p>
-            <p style="font-size:13px;line-height:1.6;color:#888;margin:0;">
-              Enter this email at <a href="${signInUrl}" style="color:#00d4aa;text-decoration:none;">${signInUrl}</a> and we'll send a 6-digit code.
-            </p>
-          </div>
-          <p style="font-size:13px;line-height:1.6;color:#888;margin:28px 0 0 0;">
-            - Tarek<br/>Compound OS
-          </p>
-        </td></tr>
-      </table>
-    </td></tr>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark only">
+  <meta name="supported-color-schemes" content="dark">
+  <title>${subject}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body, table, td { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .serif { font-family: 'Newsreader', Georgia, 'Times New Roman', serif; }
+    a { text-decoration: none; }
+    @media (max-width: 540px) {
+      .card { padding: 32px 24px !important; }
+      .display { font-size: 32px !important; line-height: 1.1 !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background:#0a0b0f;color:#e9e1da;-webkit-font-smoothing:antialiased;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#0a0b0f;padding:48px 16px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;width:100%;">
+
+          <!-- Masthead: brand mark + issue indicator -->
+          <tr>
+            <td style="padding:0 0 32px 0;" align="center">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="left" valign="middle" style="padding:0;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td valign="middle" style="padding:0 12px 0 0;">
+                          <!-- Fibonacci stack mark -->
+                          <svg width="22" height="22" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="35" y="23" width="30" height="14" fill="#BF9A62"/>
+                            <rect x="25" y="43" width="50" height="14" fill="#BF9A62"/>
+                            <rect x="10" y="63" width="80" height="14" fill="#BF9A62"/>
+                          </svg>
+                        </td>
+                        <td valign="middle" class="serif" style="font-size:15px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:#BF9A62;">
+                          Compound OS
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td align="right" valign="middle" style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9a8f81;">
+                    Vol. I · Welcome
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Editorial card -->
+          <tr>
+            <td class="card" style="background:#1e1b17;border:1px solid #4e453a;padding:48px 44px;">
+
+              <!-- Section eyebrow -->
+              <p class="serif" style="margin:0 0 18px 0;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#BF9A62;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;">
+                Letter from the editor
+              </p>
+
+              <!-- Display headline -->
+              <h1 class="serif display" style="margin:0 0 24px 0;font-family:'Newsreader',Georgia,'Times New Roman',serif;font-size:42px;font-weight:300;line-height:1.05;letter-spacing:-0.02em;color:#e9e1da;">
+                The system is yours.
+              </h1>
+
+              <!-- Hairline rule in champagne -->
+              <div style="height:1px;width:48px;background:#BF9A62;margin:0 0 28px 0;line-height:1px;font-size:0;">&nbsp;</div>
+
+              <!-- Italic founding line -->
+              <p class="serif" style="margin:0 0 22px 0;font-family:'Newsreader',Georgia,'Times New Roman',serif;font-size:18px;font-style:italic;font-weight:400;line-height:1.55;color:#d2c4b5;">
+                ${foundingLine}
+              </p>
+
+              <!-- Roman body paragraph -->
+              <p class="serif" style="margin:0 0 36px 0;font-family:'Newsreader',Georgia,'Times New Roman',serif;font-size:17px;font-weight:400;line-height:1.7;color:#d2c4b5;">
+                The system is waiting. Open it, pick the pillar you want to start with, and execute.
+              </p>
+
+              <!-- CTA — champagne fill, sharp corners, label-caps -->
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 40px 0;">
+                <tr>
+                  <td style="background:#BF9A62;padding:0;">
+                    <a href="${dashboardUrl}" style="display:inline-block;padding:16px 32px;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#0a0b0f;text-decoration:none;">
+                      Open your dashboard &nbsp;→
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Hairline divider -->
+              <div style="height:1px;background:#4e453a;margin:32px 0;line-height:1px;font-size:0;">&nbsp;</div>
+
+              <!-- New device note -->
+              <p style="margin:0 0 6px 0;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9a8f81;">
+                Signing in from a new device
+              </p>
+              <p class="serif" style="margin:0;font-family:'Newsreader',Georgia,'Times New Roman',serif;font-size:15px;font-style:italic;font-weight:400;line-height:1.6;color:#d2c4b5;">
+                Enter this email at <a href="${signInUrl}" style="color:#BF9A62;text-decoration:underline;text-underline-offset:3px;">${signInUrl.replace(/^https?:\/\//, "")}</a> and we'll send a 6-digit code.
+              </p>
+
+              <!-- Hairline divider -->
+              <div style="height:1px;background:#4e453a;margin:36px 0 28px 0;line-height:1px;font-size:0;">&nbsp;</div>
+
+              <!-- Signature -->
+              <p class="serif" style="margin:0;font-family:'Newsreader',Georgia,'Times New Roman',serif;font-size:16px;font-style:italic;font-weight:400;line-height:1.5;color:#d2c4b5;">
+                — Tarek
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- Editorial footer -->
+          <tr>
+            <td align="center" style="padding:32px 0 0 0;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9a8f81;">
+              © ${yearRoman} Compound OS · Three pillars, one system
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
   </table>
-</body></html>`;
+</body>
+</html>`;
 
   try {
     const { error } = await resend.emails.send({
@@ -142,4 +257,26 @@ export async function sendWelcomeEmail(args: {
     console.error("[email] welcome threw:", msg);
     return false;
   }
+}
+
+/**
+ * Roman-numeral the year. Cap at 3999 (the conventional upper bound for
+ * standard roman numerals).
+ */
+function toRoman(num: number): string {
+  if (num <= 0 || num >= 4000) return String(num);
+  const map: Array<[number, string]> = [
+    [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"],
+    [100, "C"], [90, "XC"], [50, "L"], [40, "XL"],
+    [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"],
+  ];
+  let n = num;
+  let out = "";
+  for (const [val, sym] of map) {
+    while (n >= val) {
+      out += sym;
+      n -= val;
+    }
+  }
+  return out;
 }
