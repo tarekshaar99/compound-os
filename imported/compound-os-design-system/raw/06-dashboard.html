@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Compound OS Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#38342f",
+                        "surface-container-high": "#2d2925",
+                        "surface-container-lowest": "#110e0a",
+                        "surface": "#16130f",
+                        "error-container": "#93000a",
+                        "on-background": "#e9e1da",
+                        "surface-tint": "#e8c085",
+                        "on-primary": "#432c00",
+                        "tertiary-fixed-dim": "#ffb690",
+                        "on-tertiary": "#552100",
+                        "surface-dim": "#16130f",
+                        "secondary-fixed-dim": "#28dfb5",
+                        "on-tertiary-fixed": "#341100",
+                        "on-error-container": "#ffdad6",
+                        "inverse-on-surface": "#34302b",
+                        "on-primary-fixed-variant": "#5d4212",
+                        "background": "#16130f",
+                        "on-surface": "#e9e1da",
+                        "primary-container": "#bf9a62",
+                        "on-primary-container": "#4b3203",
+                        "secondary-container": "#00d1a7",
+                        "on-tertiary-fixed-variant": "#783200",
+                        "primary-fixed": "#ffddaf",
+                        "tertiary": "#ffb690",
+                        "on-tertiary-container": "#5f2600",
+                        "primary": "#e8c085",
+                        "outline-variant": "#4e453a",
+                        "on-secondary": "#00382b",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "surface-container": "#231f1b",
+                        "on-secondary-fixed": "#002118",
+                        "on-primary-fixed": "#281800",
+                        "primary-fixed-dim": "#e8c085",
+                        "on-secondary-container": "#005441",
+                        "secondary": "#41eec2",
+                        "outline": "#9a8f81",
+                        "surface-container-low": "#1e1b17",
+                        "inverse-primary": "#775928",
+                        "on-secondary-fixed-variant": "#00513f",
+                        "tertiary-fixed": "#ffdbca",
+                        "on-surface-variant": "#d2c4b5",
+                        "tertiary-container": "#ff7921",
+                        "inverse-surface": "#e9e1da",
+                        "surface-bright": "#3d3834",
+                        "secondary-fixed": "#55fcd0",
+                        "surface-container-highest": "#38342f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "lg": "32px",
+                        "unit": "4px",
+                        "margin": "48px",
+                        "md": "16px",
+                        "xl": "64px",
+                        "xxl": "128px",
+                        "gutter": "24px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Newsreader"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display-xl": ["Newsreader"],
+                        "h1": ["Newsreader"],
+                        "h3": ["Newsreader"],
+                        "caption": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h2": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "display-xl": ["80px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "300" }],
+                        "h1": ["48px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "caption": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #0a0b0f; color: #e9e1da; }
+        .hairline-b { border-bottom: 0.5px solid #2d2925; }
+        .hairline-r { border-right: 0.5px solid #2d2925; }
+        .hairline-t { border-top: 0.5px solid #2d2925; }
+        .hairline-l { border-left: 0.5px solid #2d2925; }
+        .hairline-border { border: 0.5px solid #2d2925; }
+    </style>
+</head>
+<body class="antialiased min-h-screen font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar -->
+<nav aria-label="Sidebar" class="fixed left-0 top-0 h-full w-20 border-r-[0.5px] border-stone-800 bg-[#0a0b0f] flex flex-col items-center py-8 z-50 flat no shadows hidden md:flex">
+<!-- Brand/Header -->
+<div class="mb-12 flex flex-col items-center">
+<span class="font-serif italic text-xl text-[#BF9A62]">C</span>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex-1 flex flex-col w-full gap-8 mt-4">
+<!-- Journal (Active assuming Dashboard/Home intent) -->
+<a class="w-full flex flex-col items-center group relative py-2 scale-95 active:scale-90 transition-transform" href="#">
+<div class="absolute inset-0 bg-stone-900/20 border-l-2 border-[#BF9A62]"></div>
+<span class="material-symbols-outlined text-[#BF9A62] z-10" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="mt-2 text-center font-['Newsreader'] uppercase tracking-[0.2em] text-[10px] text-[#BF9A62] z-10">Journal</span>
+</a>
+<!-- Markets -->
+<a class="w-full flex flex-col items-center group relative py-2 text-stone-500 opacity-60 hover:opacity-100 hover:text-[#BF9A62] transition-all duration-500 ease-in-out scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined z-10 group-hover:text-[#BF9A62]" style="font-variation-settings: 'FILL' 0;">monitoring</span>
+<span class="mt-2 text-center font-['Newsreader'] uppercase tracking-[0.2em] text-[10px] z-10 group-hover:text-[#BF9A62]">Markets</span>
+</a>
+<!-- Vitals -->
+<a class="w-full flex flex-col items-center group relative py-2 text-stone-500 opacity-60 hover:opacity-100 hover:text-[#BF9A62] transition-all duration-500 ease-in-out scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined z-10 group-hover:text-[#BF9A62]" style="font-variation-settings: 'FILL' 0;">fitness_center</span>
+<span class="mt-2 text-center font-['Newsreader'] uppercase tracking-[0.2em] text-[10px] z-10 group-hover:text-[#BF9A62]">Vitals</span>
+</a>
+<!-- Mindset -->
+<a class="w-full flex flex-col items-center group relative py-2 text-stone-500 opacity-60 hover:opacity-100 hover:text-[#BF9A62] transition-all duration-500 ease-in-out scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined z-10 group-hover:text-[#BF9A62]" style="font-variation-settings: 'FILL' 0;">psychology</span>
+<span class="mt-2 text-center font-['Newsreader'] uppercase tracking-[0.2em] text-[10px] z-10 group-hover:text-[#BF9A62]">Mindset</span>
+</a>
+</div>
+<!-- Footer -->
+<div class="mt-auto w-full">
+<a class="w-full flex flex-col items-center group relative py-2 text-stone-500 opacity-60 hover:opacity-100 hover:text-[#BF9A62] transition-all duration-500 ease-in-out scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined z-10 group-hover:text-[#BF9A62]" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="mt-2 text-center font-['Newsreader'] uppercase tracking-[0.2em] text-[10px] z-10 group-hover:text-[#BF9A62]">Settings</span>
+</a>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header aria-label="Top Navigation" class="fixed top-0 right-0 left-0 md:left-20 border-b-[0.5px] border-stone-800 bg-[#0a0b0f]/80 backdrop-blur-md flex justify-between items-center px-6 md:px-12 h-20 md:w-[calc(100%-5rem)] z-40 flat no shadows">
+<!-- Brand / Empty on Left if Logo is in side rail -->
+<div class="flex items-center">
+<span class="font-serif text-2xl italic tracking-tighter text-[#BF9A62] md:hidden">Compound</span>
+</div>
+<!-- Nav Links -->
+<nav class="hidden md:flex gap-8 items-center font-['Newsreader'] font-light tracking-tight">
+<a class="text-[#BF9A62] font-medium cursor-pointer" href="#">Archive</a>
+<a class="text-stone-400 hover:text-stone-100 hover:opacity-80 transition-opacity cursor-pointer" href="#">Library</a>
+<a class="text-stone-400 hover:text-stone-100 hover:opacity-80 transition-opacity cursor-pointer" href="#">Notes</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-6 text-[#BF9A62]">
+<button aria-label="Notifications" class="cursor-pointer hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications_none</span>
+</button>
+<button aria-label="Account" class="cursor-pointer hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 md:ml-20 min-h-screen flex flex-col">
+<!-- Stats Strip -->
+<section class="w-full hairline-b py-6 px-6 md:px-margin bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto flex flex-wrap gap-8 md:gap-16 items-center justify-start text-surface-tint font-mono text-sm tracking-wider uppercase">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+<span>7-DAY STREAK</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">view_module</span>
+<span>12 MODULES COMPLETED</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">group</span>
+<span>49 SPOTS REMAINING</span>
+</div>
+</div>
+</section>
+<!-- Content Canvas -->
+<div class="flex-1 w-full max-w-7xl mx-auto px-6 md:px-margin py-xl flex flex-col gap-xxl">
+<!-- Continue Module -->
+<section class="flex flex-col gap-lg relative">
+<header class="flex items-center gap-4">
+<h2 class="font-h3 text-h3 text-on-surface">Continue where you left off</h2>
+<div class="h-[0.5px] flex-1 bg-surface-variant mt-2"></div>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Prominent Module Card -->
+<article class="lg:col-span-8 group relative flex flex-col hairline-border p-8 hover:border-primary-container transition-colors duration-500 bg-surface">
+<div class="flex flex-col gap-4 flex-1 z-10 relative">
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-secondary-container">MARKETS</span>
+<span class="font-caption text-caption text-on-surface-variant bg-surface-container px-3 py-1 rounded-full hairline-border">12 min remaining</span>
+</div>
+<div class="mt-4">
+<h3 class="font-h2 text-h2 text-on-surface group-hover:text-primary-container transition-colors">Fibonacci Retracements</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-4 max-w-2xl">
+                                    Master the art of identifying potential support and resistance levels. Understanding the rhythm of price action through the lens of natural sequences.
+                                </p>
+</div>
+<div class="mt-12 flex flex-col gap-2">
+<div class="flex justify-between font-caption text-caption text-on-surface-variant">
+<span>Module Progress</span>
+<span>65%</span>
+</div>
+<div class="w-full h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[65%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Subtle Background Element -->
+<div class="absolute right-0 bottom-0 opacity-5 pointer-events-none w-64 h-64 overflow-hidden rounded-br-lg">
+<img alt="Abstract pattern" class="w-full h-full object-cover mix-blend-luminosity grayscale" data-alt="abstract geometric pattern resembling financial charts and fibonacci spirals in dark tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3YXkr9qxTVIYnPkgcgEfrXN_k1jzbssbC83iszsvtEF9USvkiS_5aYp8S4NP8FTdsPRd6AKHEOYhG78Vh3rIhXY4ldSgHvF75UXfnG5ZE1SLEKRLxDvTWzN91l6Qc7vLNgON3Mu2IO1f67ZQaswiiZtP7zN9TIsH_QN1U6Mh5Yk93RFs98RaheYQQfHhr-WzEbcntIlzS3nip12CiXPYmMEpsJJ4zbjvWfo0bCIG94IXZlBjdpZPbxP9A0ckWAHd1DCy2_tDlqT0"/>
+</div>
+</article>
+<!-- Side Note / Quote -->
+<aside class="lg:col-span-4 hairline-border p-8 flex flex-col justify-center relative bg-surface-container-lowest">
+<div class="absolute top-4 left-4 text-surface-variant">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+</div>
+<blockquote class="relative z-10">
+<p class="font-h3 text-h3 text-on-surface italic text-center leading-relaxed">
+                                 "The market is a pendulum that forever swings between an unsustainable optimism and an unjustified pessimism."
+                             </p>
+<footer class="mt-6 text-center font-label-caps text-label-caps text-on-surface-variant">
+                                 — Benjamin Graham
+                             </footer>
+</blockquote>
+</aside>
+</div>
+</section>
+<!-- Divider -->
+<div class="w-full hairline-b"></div>
+<!-- The Three Pillars -->
+<section class="flex flex-col gap-lg">
+<header class="flex items-center gap-4">
+<h2 class="font-h3 text-h3 text-on-surface">The Three Pillars</h2>
+<div class="h-[0.5px] flex-1 bg-surface-variant mt-2"></div>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Markets Pillar -->
+<a class="group relative flex flex-col aspect-[4/5] hairline-border hover:border-secondary-container transition-colors duration-500 overflow-hidden bg-surface" href="#">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-surface/80 to-surface z-10 pointer-events-none"></div>
+<img alt="Markets Background" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-700 grayscale mix-blend-overlay" data-alt="abstract dark architectural lines resembling financial charts and upward trends" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp1BETJJ-9BggjK6FJgN3Q9W0RyUOAeBzcUkW3RsBOg61PbTXVD0UHtZs__CSqragTCT7_gPa_b_oP3MUH38WLloYRRDuRTGLcGVGMHm8R0hfY2k8xZ8bYGL8j35AhBIfvpdWeop70n1C1Fvja-H7GdOonWyVEW-tkX_hNPX4MbvCYr8-1hVAuoVftFRacFcT7TkFb8912ESqSNUUsu45J7NjiOVcEsrIqykGIUAaqq6oGZCG-2eeMSq52pfwD6ePMp7WfujYujrI"/>
+<div class="relative z-20 flex flex-col h-full p-8 justify-between">
+<div class="w-12 h-12 rounded-full border border-secondary-container flex items-center justify-center text-secondary-container group-hover:bg-secondary-container/10 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">monitoring</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-h2 text-h2 text-on-surface group-hover:text-secondary-container transition-colors">Markets</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">
+                                    Understand the mechanics of capital flow, sentiment, and execution. Master the environment.
+                                </p>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-[1px] bg-secondary-container scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 z-30"></div>
+</a>
+<!-- Fitness Pillar -->
+<a class="group relative flex flex-col aspect-[4/5] hairline-border hover:border-tertiary-container transition-colors duration-500 overflow-hidden bg-surface" href="#">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-surface/80 to-surface z-10 pointer-events-none"></div>
+<img alt="Fitness Background" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-700 grayscale mix-blend-overlay" data-alt="close up of heavy cast iron weights in a dark moody gym environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjpFaQAOEmnJiXCbWU8O7z3-umEq2JncRL-PVtX0iB4Tc5VU3DlZxYvdJpsDN4dtclmTGxh3gxedZJ6YITnPu0EYcl8rndVNXr4ube8mJMJFLoQQs924_5H2GeL5R0_2psmSyCNBaWO2VQyilQZO4QVReUu5LFcQYRmlS6wmOtg0mBu_Np2ldIHyFTcZBjvGPfTtIj7u4IBcGrfGYoiHNMD2jv7x7gcm6WvereCxlT3kPtnCAj25iQH5N5M9nayJzgjvZ16R39Y-Y"/>
+<div class="relative z-20 flex flex-col h-full p-8 justify-between">
+<div class="w-12 h-12 rounded-full border border-tertiary-container flex items-center justify-center text-tertiary-container group-hover:bg-tertiary-container/10 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">fitness_center</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-h2 text-h2 text-on-surface group-hover:text-tertiary-container transition-colors">Vitals</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">
+                                    Optimize the biological machine. Longevity, performance, and physical resilience.
+                                </p>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-[1px] bg-tertiary-container scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 z-30"></div>
+</a>
+<!-- Mindset Pillar -->
+<a class="group relative flex flex-col aspect-[4/5] hairline-border hover:border-[#a78bfa] transition-colors duration-500 overflow-hidden bg-surface" href="#">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-surface/80 to-surface z-10 pointer-events-none"></div>
+<img alt="Mindset Background" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-700 grayscale mix-blend-overlay" data-alt="minimalist architectural concrete structure with light and shadow interplay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH4IReNQ8No3bhRXh5RAY_cdrlaQYVtBE-l0SgutcBudYbAvKoDf2RvHT338QDeYcjyeoTt-7U301sy45ySWjxoAG4nDMhN3lk8-RPmaF0cUJ0It7PRvdyKE955ma7z9p8SUeaWv3HZQA444LVCz-DX0_r6zHMihed4sEXkfl-Xw_Er2Y638xfNV2illpZf4LQdnN7LBNKeClnzwElnDn80oE3I6HLPmBcJSRIwaGHjp0MZZW0ELU5bFydZi8Odena28PYdujvpss"/>
+<div class="relative z-20 flex flex-col h-full p-8 justify-between">
+<div class="w-12 h-12 rounded-full border border-[#a78bfa] flex items-center justify-center text-[#a78bfa] group-hover:bg-[#a78bfa]/10 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">psychology</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-h2 text-h2 text-on-surface group-hover:text-[#a78bfa] transition-colors">Mindset</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">
+                                    Cultivate focus, discipline, and emotional regulation. The operating system of the self.
+                                </p>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-[1px] bg-[#a78bfa] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 z-30"></div>
+</a>
+</div>
+</section>
+</div>
+</main>
+</body></html>

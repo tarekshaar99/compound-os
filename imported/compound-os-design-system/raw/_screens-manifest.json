@@ -1,0 +1,150 @@
+{
+  "projectId": "3281912290993590496",
+  "projectName": "projects/3281912290993590496",
+  "title": "Compound OS Design System",
+  "createdAt": "2026-04-29T05:00:49.384625Z",
+  "updatedAt": "2026-04-29T05:13:19.197058Z",
+  "activeTheme": "Editorial Quarterly",
+  "screens": [
+    {
+      "file": "00-design-brief.md",
+      "id": "8c5b735640ae4566805035cb78d3fb77",
+      "title": "Compound OS Design Brief",
+      "type": "markdown",
+      "width": 600,
+      "height": 600,
+      "deviceType": "DESKTOP"
+    },
+    {
+      "file": "01-home-editorial.html",
+      "id": "0c4406f3c64e41d3b10e69acec2016b6",
+      "title": "Home: Editorial Quarterly",
+      "type": "html",
+      "width": 2560,
+      "height": 6964,
+      "deviceType": "DESKTOP",
+      "designSystem": "Editorial Quarterly",
+      "mapsToProductionRoute": "/"
+    },
+    {
+      "file": "02-login.html",
+      "id": "02cfc6f9ddd34c8684e047a71868e062",
+      "title": "Login: Editorial Quarterly",
+      "type": "html",
+      "width": 2560,
+      "height": 2048,
+      "deviceType": "DESKTOP",
+      "designSystem": "Editorial Quarterly",
+      "mapsToProductionRoute": "/login"
+    },
+    {
+      "file": "03-onboarding.html",
+      "id": "9ceab17c1d454f4b92842459da8e27a1",
+      "title": "Onboarding: Editorial Quarterly",
+      "type": "html",
+      "width": 2560,
+      "height": 2188,
+      "deviceType": "DESKTOP",
+      "designSystem": "Editorial Quarterly",
+      "mapsToProductionRoute": "/onboarding"
+    },
+    {
+      "file": "04-pricing.html",
+      "id": "1da9a8ba53b140868718a3f87fde7f7b",
+      "title": "Founding Membership Pricing",
+      "type": "html",
+      "width": 2560,
+      "height": 2048,
+      "deviceType": "DESKTOP",
+      "designSystem": "Editorial Quarterly",
+      "mapsToProductionRoute": "/#pricing"
+    },
+    {
+      "file": "05-success.html",
+      "id": "5f76a1d375c94489b235262046c49f12",
+      "title": "Success: Editorial Quarterly",
+      "type": "html",
+      "width": 2560,
+      "height": 2048,
+      "deviceType": "DESKTOP",
+      "designSystem": "Editorial Quarterly",
+      "mapsToProductionRoute": "/success"
+    },
+    {
+      "file": "06-dashboard.html",
+      "id": "42cf63eb1e244710bfda2e0521776bc7",
+      "title": "Dashboard: Editorial Quarterly",
+      "type": "html",
+      "width": 2560,
+      "height": 2940,
+      "deviceType": "DESKTOP",
+      "designSystem": "Editorial Quarterly",
+      "mapsToProductionRoute": "/dashboard"
+    },
+    {
+      "file": "07-module-fibonacci.html",
+      "id": "ca1603aad071475eb8dabe8762f9818f",
+      "title": "Module: Fibonacci Retracements",
+      "type": "html",
+      "width": 2560,
+      "height": 2048,
+      "deviceType": "DESKTOP",
+      "designSystem": "Editorial Quarterly",
+      "mapsToProductionRoute": "/trading/m/fibonacci-retracements"
+    },
+    {
+      "file": "08-home-private-terminal.html",
+      "id": "ae497a29c65c4b88b19da11cec393017",
+      "title": "Home: Private Terminal (alt theme)",
+      "type": "html",
+      "width": 2560,
+      "height": 2048,
+      "deviceType": "DESKTOP",
+      "designSystem": "Private Terminal",
+      "mapsToProductionRoute": "/ (variant exploration)"
+    },
+    {
+      "file": "09-home-quiet-luxury.html",
+      "id": "44e4711b2bf24d0e96e51a7c7fd35138",
+      "title": "Home: Quiet Luxury (alt theme)",
+      "type": "html",
+      "width": 2560,
+      "height": 5200,
+      "deviceType": "DESKTOP",
+      "designSystem": "Quiet Luxury",
+      "mapsToProductionRoute": "/ (variant exploration)"
+    }
+  ],
+  "designSystems": [
+    {
+      "name": "Editorial Quarterly",
+      "assetId": "assets/b5032d5723b14ca3bd7399843c1e4726",
+      "fontFamilies": ["Newsreader", "Inter"],
+      "primary": "#e8c085",
+      "primaryContainer": "#bf9a62",
+      "background": "#16130f",
+      "isActive": true,
+      "vibe": "high-end print journalism, hairline rules, oversized margins"
+    },
+    {
+      "name": "Private Terminal",
+      "assetId": "assets/3b684ca301ef43518c1ee482f18bfa03",
+      "fontFamilies": ["Inter Tight", "Space Grotesk"],
+      "primary": "#e8c085",
+      "primaryContainer": "#bf9a62",
+      "background": "#16130f",
+      "isActive": false,
+      "vibe": "Bloomberg terminal, 4px baseline, 1px borders, dense data"
+    },
+    {
+      "name": "Quiet Luxury",
+      "assetId": "assets/3d481a54224d4b819e548c617c2a530f",
+      "fontFamilies": ["Manrope", "Inter"],
+      "primary": "#e8c085",
+      "primaryContainer": "#bf9a62",
+      "background": "#16130f",
+      "isActive": false,
+      "vibe": "minimalism + tactile refinement, gold-foil hover, 48px container padding"
+    }
+  ]
+}

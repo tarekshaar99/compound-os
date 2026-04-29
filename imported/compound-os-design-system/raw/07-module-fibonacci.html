@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Compound OS - Active Module</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#e9e1da",
+                    "inverse-primary": "#775928",
+                    "tertiary-fixed-dim": "#ffb690",
+                    "surface-container-low": "#1e1b17",
+                    "surface-dim": "#16130f",
+                    "background": "#16130f",
+                    "surface-bright": "#3d3834",
+                    "on-tertiary-fixed": "#341100",
+                    "error-container": "#93000a",
+                    "inverse-surface": "#e9e1da",
+                    "tertiary-container": "#ff7921",
+                    "surface-tint": "#e8c085",
+                    "surface-container-lowest": "#110e0a",
+                    "surface-variant": "#38342f",
+                    "outline-variant": "#4e453a",
+                    "on-primary-fixed-variant": "#5d4212",
+                    "tertiary-fixed": "#ffdbca",
+                    "on-tertiary-container": "#5f2600",
+                    "on-primary": "#432c00",
+                    "secondary": "#41eec2",
+                    "secondary-container": "#00d1a7",
+                    "primary-container": "#bf9a62",
+                    "on-secondary-fixed-variant": "#00513f",
+                    "on-primary-container": "#4b3203",
+                    "primary-fixed": "#ffddaf",
+                    "on-surface-variant": "#d2c4b5",
+                    "error": "#ffb4ab",
+                    "surface-container-high": "#2d2925",
+                    "primary-fixed-dim": "#e8c085",
+                    "on-tertiary-fixed-variant": "#783200",
+                    "on-secondary-container": "#005441",
+                    "inverse-on-surface": "#34302b",
+                    "secondary-fixed": "#55fcd0",
+                    "tertiary": "#ffb690",
+                    "surface-container-highest": "#38342f",
+                    "surface-container": "#231f1b",
+                    "on-surface": "#e9e1da",
+                    "on-primary-fixed": "#281800",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed": "#002118",
+                    "on-error": "#690005",
+                    "outline": "#9a8f81",
+                    "on-secondary": "#00382b",
+                    "surface": "#16130f",
+                    "on-tertiary": "#552100",
+                    "primary": "#e8c085",
+                    "secondary-fixed-dim": "#28dfb5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "gutter": "24px",
+                    "lg": "32px",
+                    "xl": "64px",
+                    "xxl": "128px",
+                    "md": "16px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "margin": "48px"
+            },
+            "fontFamily": {
+                    "h3": ["Newsreader"],
+                    "display-xl": ["Newsreader"],
+                    "label-caps": ["Inter"],
+                    "caption": ["Inter"],
+                    "body-md": ["Inter"],
+                    "h1": ["Newsreader"],
+                    "h2": ["Newsreader"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "display-xl": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "300"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "caption": ["13px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h1": ["48px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                    "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar (Mobile Only) -->
+<header class="md:hidden flex justify-between items-center w-full px-6 py-4 bg-[#0a0b0f] fixed top-0 z-50 border-b-[0.5px] border-white/20">
+<div class="font-['Newsreader'] italic text-2xl tracking-tighter text-[#BF9A62]">
+            Compound OS
+        </div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-[#BF9A62] hover:text-white transition-colors cursor-pointer text-xl">account_circle</span>
+</div>
+</header>
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex flex-col py-12 px-8 space-y-8 bg-[#0a0b0f] fixed left-0 h-full w-64 border-r-[0.5px] border-white/10 z-40">
+<div class="mb-8">
+<div class="text-[#BF9A62] font-semibold text-lg font-['Newsreader'] tracking-wide">The Compound</div>
+<div class="font-['Newsreader'] text-sm tracking-wide text-white/60">Quarterly OS</div>
+</div>
+<div class="flex-1 flex flex-col space-y-4">
+<a class="flex items-center space-x-4 group" href="#">
+<span class="material-symbols-outlined text-white/40 group-hover:text-white transition-colors text-xl">menu_book</span>
+<span class="font-['Newsreader'] text-sm tracking-wide text-white/40 group-hover:text-white transition-colors">Library</span>
+</a>
+<a class="flex items-center space-x-4 text-[#BF9A62] font-medium italic translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-[#BF9A62] text-xl">import_contacts</span>
+<span class="font-['Newsreader'] text-sm tracking-wide">Active Module</span>
+</a>
+<a class="flex items-center space-x-4 group" href="#">
+<span class="material-symbols-outlined text-white/40 group-hover:text-white transition-colors text-xl">insights</span>
+<span class="font-['Newsreader'] text-sm tracking-wide text-white/40 group-hover:text-white transition-colors">Intelligence</span>
+</a>
+<a class="flex items-center space-x-4 group" href="#">
+<span class="material-symbols-outlined text-white/40 group-hover:text-white transition-colors text-xl">auto_stories</span>
+<span class="font-['Newsreader'] text-sm tracking-wide text-white/40 group-hover:text-white transition-colors">Correspondence</span>
+</a>
+<a class="flex items-center space-x-4 group" href="#">
+<span class="material-symbols-outlined text-white/40 group-hover:text-white transition-colors text-xl">settings</span>
+<span class="font-['Newsreader'] text-sm tracking-wide text-white/40 group-hover:text-white transition-colors">Settings</span>
+</a>
+</div>
+<div class="mt-auto pt-8 border-t-[0.5px] border-white/10">
+<a class="flex items-center space-x-4 group" href="#">
+<span class="material-symbols-outlined text-white/40 group-hover:text-white transition-colors text-xl">help_outline</span>
+<span class="font-['Newsreader'] text-sm tracking-wide text-white/40 group-hover:text-white transition-colors">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto w-full md:ml-64 pt-20 md:pt-0 pb-24 md:pb-0 scroll-smooth">
+<article class="max-w-[720px] mx-auto px-6 py-xl md:py-xxl">
+<!-- Editorial Header -->
+<header class="mb-xl">
+<span class="font-label-caps text-label-caps tracking-widest text-secondary-container uppercase mb-8 block">Module 04 • Markets</span>
+<h1 class="font-display-xl text-display-xl text-on-background mb-8 leading-none">
+                        The Geometry<br/>of Panic.
+                    </h1>
+<p class="font-h3 text-h3 text-on-surface-variant max-w-2xl leading-relaxed">
+                        An examination of market psychology through the lens of Fibonacci retracements, illustrating how human emotion reliably conforms to mathematical constants.
+                    </p>
+</header>
+<div class="w-full h-[1px] bg-outline-variant/30 my-xl"></div>
+<!-- Hero Image -->
+<div class="w-full aspect-[21/9] mb-xl bg-surface-container rounded-sm overflow-hidden relative group" data-alt="Abstract macro photography of a vintage stock ticker tape overlapping with faint golden ratio spirals etched on dark smoky glass, lit by subtle teal and champagne neon reflections">
+<img alt="Market Abstraction" class="w-full h-full object-cover opacity-60 mix-blend-luminosity group-hover:opacity-80 transition-opacity duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPhzQZaHRDHGklZfckMd7tayiOmVXE5OwdTVGW09ReAsAv6JJ3oCofWYG0KKkN3jnwuwJXvDSN_GqwU0225-EZGj318jNUuHxB1DI1bHSXiLDJcgmQHqaCJl3WpPArjaML1sZtvDuo_MJlvGMQ-cJknD2SRcPDlgS-M1jf9JY4N6sQKfjYnLVFYXxIaU3HNYNt67hcRLj1WpEAqsQrZRY_T5tuqCKc01Z8wiV3Mk4GVYS7vrw0DM4Epr1ddLY3DFkqhfZbl-8brbg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<!-- Main Body -->
+<div class="space-y-8">
+<p class="font-body-lg text-body-lg text-on-background/90">
+                        The natural world is governed by ratios. From the arrangement of seeds in a sunflower to the spiral of a nautilus shell, the mathematical sequence discovered by Leonardo of Pisa—Fibonacci—dictates structural efficiency. It is a profound realization that these same ratios, devoid of physical substance, govern the emotional oscillations of global financial markets.
+                    </p>
+<p class="font-body-lg text-body-lg text-on-background/90">
+                        When a market trends strongly in one direction, it inevitably exhausts itself. The subsequent reversal, or "retracement," is rarely random. It is driven by mass psychology—the collective greed of late entrants meeting the fear of early adopters securing profit. This tug-of-war finds equilibrium at specific mathematical demarcations.
+                    </p>
+<!-- Pull Quote -->
+<blockquote class="my-xl pl-8 border-l-[1px] border-secondary-container">
+<p class="font-h2 text-h2 italic text-on-background">
+                            "Markets are not driven by logic, but by liquidity and the predictable geometry of human exhaustion."
+                        </p>
+</blockquote>
+<p class="font-body-lg text-body-lg text-on-background/90">
+                        The key levels—38.2%, 50.0%, and 61.8%—act as psychological tripwires. The 61.8% level, often referred to as the "golden mean," represents the ultimate threshold. If a market retraces past this point, the prevailing thesis is generally considered broken, transitioning from a healthy correction into a fundamental trend reversal.
+                    </p>
+<!-- Technical Diagram -->
+<figure class="my-xl bg-surface-container border-[0.5px] border-outline-variant/50 p-8 rounded-sm">
+<figcaption class="font-label-caps text-label-caps text-secondary-container mb-6 tracking-widest uppercase">Fig 1. Idealized Retracement Wave</figcaption>
+<div class="w-full aspect-video relative">
+<!-- Diagram SVG -->
+<svg class="w-full h-full" viewbox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+<!-- Grid -->
+<g class="text-outline-variant/30" stroke="currentColor" stroke-dasharray="4 4" stroke-width="0.5">
+<line x1="0" x2="800" y1="50" y2="50"></line>
+<line x1="0" x2="800" y1="164.6" y2="164.6"></line> <!-- 38.2% -->
+<line x1="0" x2="800" y1="200" y2="200"></line> <!-- 50.0% -->
+<line x1="0" x2="800" y1="235.4" y2="235.4"></line> <!-- 61.8% -->
+<line x1="0" x2="800" y1="350" y2="350"></line>
+</g>
+<!-- Level Labels -->
+<g class="font-label-caps text-[10px] fill-on-surface-variant" text-anchor="end">
+<text x="790" y="45">0.0%</text>
+<text x="790" y="160">38.2%</text>
+<text x="790" y="195">50.0%</text>
+<text x="790" y="230">61.8%</text>
+<text x="790" y="345">100.0%</text>
+</g>
+<!-- Price Path -->
+<path d="M 50 350 L 150 280 L 200 310 L 350 100 L 400 130 L 450 50 L 550 164.6 L 600 120 L 700 235.4 L 750 180" fill="none" stroke="#e9e1da" stroke-linejoin="round" stroke-width="2"></path>
+<!-- Retracement Highlights -->
+<circle cx="450" cy="50" fill="#00d1a7" r="4"></circle>
+<circle cx="550" cy="164.6" fill="#00d1a7" r="4"></circle>
+<circle cx="700" cy="235.4" fill="#00d1a7" r="4"></circle>
+<!-- Connecting lines for highlights -->
+<line opacity="0.5" stroke="#00d1a7" stroke-dasharray="2 2" stroke-width="1" x1="450" x2="450" y1="50" y2="350"></line>
+<line opacity="0.5" stroke="#00d1a7" stroke-dasharray="2 2" stroke-width="1" x1="700" x2="700" y1="235.4" y2="350"></line>
+</svg>
+</div>
+</figure>
+<p class="font-body-lg text-body-lg text-on-background/90">
+                        Understanding this framework does not grant clairvoyance. It merely provides a structure for managing risk in an environment inherently hostile to certainty. By aligning entry and exit protocols with these zones of historical contention, one can navigate volatility not with panic, but with deliberate, calculated patience.
+                    </p>
+</div>
+<!-- Completion Checkpoint -->
+<div class="mt-xxl pt-xl border-t-[0.5px] border-outline-variant/30 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-secondary-container text-4xl mb-6 font-light">task_alt</span>
+<h3 class="font-h3 text-h3 text-on-background mb-8">Module Synthesized</h3>
+<button class="px-8 py-4 border-[0.5px] border-secondary-container text-secondary-container hover:bg-secondary-container/10 transition-colors duration-300 font-label-caps text-label-caps tracking-[0.2em] uppercase flex items-center space-x-3">
+<span>Mark as Complete</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</article>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-6 bg-[#0a0b0f]/95 backdrop-blur-md border-t border-white/10 pb-safe">
+<a class="flex flex-col items-center justify-center text-white/30 pt-2 active:text-[#BF9A62]" href="#">
+<span class="material-symbols-outlined text-xl mb-1">home_max</span>
+<span class="font-['Newsreader'] text-[10px] uppercase tracking-widest">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#BF9A62] pt-2 active:text-[#BF9A62]" href="#">
+<span class="material-symbols-outlined text-xl mb-1">article</span>
+<span class="font-['Newsreader'] text-[10px] uppercase tracking-widest">Read</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/30 pt-2 active:text-[#BF9A62]" href="#">
+<span class="material-symbols-outlined text-xl mb-1">analytics</span>
+<span class="font-['Newsreader'] text-[10px] uppercase tracking-widest">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/30 pt-2 active:text-[#BF9A62]" href="#">
+<span class="material-symbols-outlined text-xl mb-1">person</span>
+<span class="font-['Newsreader'] text-[10px] uppercase tracking-widest">Account</span>
+</a>
+</nav>
+</body></html>

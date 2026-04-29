@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>COMPOUND OS - TERMINAL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#432c00",
+                        "surface-tint": "#e8c085",
+                        "outline-variant": "#4e453a",
+                        "on-tertiary-container": "#5f2600",
+                        "secondary-fixed-dim": "#28dfb5",
+                        "on-primary-fixed": "#281800",
+                        "on-primary-fixed-variant": "#5d4212",
+                        "secondary-container": "#00d1a7",
+                        "primary": "#e8c085",
+                        "primary-fixed": "#ffddaf",
+                        "surface-variant": "#38342f",
+                        "tertiary": "#ffb690",
+                        "secondary": "#41eec2",
+                        "on-background": "#e9e1da",
+                        "on-tertiary-fixed-variant": "#783200",
+                        "tertiary-fixed-dim": "#ffb690",
+                        "inverse-surface": "#e9e1da",
+                        "on-surface": "#e9e1da",
+                        "on-secondary": "#00382b",
+                        "secondary-fixed": "#55fcd0",
+                        "surface-dim": "#16130f",
+                        "surface-container-highest": "#38342f",
+                        "on-secondary-container": "#005441",
+                        "on-secondary-fixed-variant": "#00513f",
+                        "outline": "#9a8f81",
+                        "surface-container-low": "#1e1b17",
+                        "surface-container": "#231f1b",
+                        "on-error": "#690005",
+                        "surface-container-high": "#2d2925",
+                        "on-secondary-fixed": "#002118",
+                        "primary-fixed-dim": "#e8c085",
+                        "inverse-primary": "#775928",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdbca",
+                        "surface": "#16130f",
+                        "surface-bright": "#3d3834",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#110e0a",
+                        "inverse-on-surface": "#34302b",
+                        "on-primary-container": "#4b3203",
+                        "primary-container": "#bf9a62",
+                        "on-surface-variant": "#d2c4b5",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#341100",
+                        "background": "#16130f",
+                        "on-tertiary": "#552100",
+                        "tertiary-container": "#ff7921"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "element-base": "8px",
+                        "grid-gutter": "1px",
+                        "card-gap": "12px",
+                        "element-tight": "4px",
+                        "container-padding": "24px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter Tight"],
+                        "headline-lg": ["Inter Tight"],
+                        "mono-data": ["Space Grotesk"],
+                        "display-xl": ["Inter Tight"],
+                        "label-xs": ["Inter Tight"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "mono-data": ["13px", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "display-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "600" }],
+                        "label-xs": ["11px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .scanline {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+            background-size: 100% 4px;
+        }
+        .matrix-bg {
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 8px 8px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen pt-12">
+<!-- TopAppBar Shared Component -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 h-12 bg-[#0a0b0f] docked full-width top-0 border-b border-white/10 flat no shadows font-inter tracking-tighter uppercase text-[10px] font-bold">
+<div class="font-mono text-xl font-black text-amber-200 tracking-widest">COMPOUND OS</div>
+<nav class="hidden md:flex gap-6 h-full items-end">
+<a class="text-amber-200 border-b border-amber-200 pb-1 hover:bg-white/5 transition-all duration-150 active:scale-[0.98] cursor-crosshair" href="#">TERMINAL</a>
+<a class="text-slate-500 hover:text-slate-200 hover:bg-white/5 transition-all duration-150 active:scale-[0.98] cursor-crosshair pb-1" href="#">ASSETS</a>
+<a class="text-slate-500 hover:text-slate-200 hover:bg-white/5 transition-all duration-150 active:scale-[0.98] cursor-crosshair pb-1" href="#">INTEL</a>
+<a class="text-slate-500 hover:text-slate-200 hover:bg-white/5 transition-all duration-150 active:scale-[0.98] cursor-crosshair pb-1" href="#">OPS</a>
+</nav>
+<div class="flex gap-4 items-center">
+<button class="text-slate-500 hover:text-amber-200 transition-colors">
+<span class="material-symbols-outlined text-[16px]">settings</span>
+</button>
+<button class="text-slate-500 hover:text-amber-200 transition-colors">
+<span class="material-symbols-outlined text-[16px]">notifications_active</span>
+</button>
+<button class="text-slate-500 hover:text-amber-200 transition-colors">
+<span class="material-symbols-outlined text-[16px]">account_circle</span>
+</button>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto p-container-padding grid grid-cols-1 md:grid-cols-12 gap-grid-gutter relative">
+<!-- Hero Section -->
+<section class="col-span-1 md:col-span-12 bg-[#12131a] border border-white/10 relative overflow-hidden matrix-bg mb-card-gap">
+<div class="absolute inset-0 scanline opacity-20 pointer-events-none"></div>
+<!-- Sparkline visualization background -->
+<div aria-hidden="true" class="absolute bottom-0 left-0 w-full h-1/2 opacity-10 flex items-end justify-between px-4">
+<div class="w-2 bg-primary h-[20%]"></div>
+<div class="w-2 bg-primary h-[35%]"></div>
+<div class="w-2 bg-primary h-[15%]"></div>
+<div class="w-2 bg-primary h-[60%]"></div>
+<div class="w-2 bg-primary h-[45%]"></div>
+<div class="w-2 bg-primary h-[80%]"></div>
+<div class="w-2 bg-primary h-[30%]"></div>
+<div class="w-2 bg-primary h-[75%]"></div>
+<div class="w-2 bg-primary h-[50%]"></div>
+<div class="w-2 bg-primary h-[90%]"></div>
+<div class="w-2 bg-primary h-[40%]"></div>
+<div class="w-2 bg-primary h-[65%]"></div>
+</div>
+<div class="p-8 md:p-16 relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[14px]">terminal</span>
+<span class="font-label-xs text-primary uppercase tracking-widest text-label-xs">System Initialization</span>
+</div>
+<h1 class="font-display-xl text-display-xl text-on-surface mb-6 uppercase">Private Terminal Environment</h1>
+<p class="font-body-md text-body-md text-surface-variant max-w-2xl mb-8">High-density intelligence layer. Secure operations protocol engaged. Access global assets and encrypted telemetry streams instantly.</p>
+<div class="flex gap-4">
+<button class="bg-primary text-[#0a0b0f] font-label-xs text-label-xs px-6 py-3 uppercase tracking-wider hover:bg-primary-fixed transition-colors">INITIATE SEQUENCE</button>
+<button class="border border-outline text-on-surface font-label-xs text-label-xs px-6 py-3 uppercase tracking-wider hover:bg-white/5 transition-colors">VIEW LOGS</button>
+</div>
+</div>
+</section>
+<!-- Pillar Cards - Intel & Progress -->
+<section class="col-span-1 md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-grid-gutter mb-card-gap">
+<!-- Intel Pillar -->
+<div class="bg-[#12131a] border border-white/10 flex flex-col">
+<div class="h-6 border-b border-white/10 flex justify-between items-center px-3 bg-surface-container-lowest">
+<span class="font-label-xs text-label-xs text-on-surface uppercase">Intel Feed</span>
+<span class="text-primary text-[10px]">∑</span>
+</div>
+<div class="p-6 flex-grow flex flex-col gap-4">
+<div class="flex justify-between items-baseline border-b border-white/5 pb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Global Anomalies</span>
+<span class="font-mono-data text-mono-data text-secondary-fixed">8,492</span>
+</div>
+<div class="flex justify-between items-baseline border-b border-white/5 pb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Encrypted Packets</span>
+<span class="font-mono-data text-mono-data text-tertiary">1.4 TB</span>
+</div>
+<div class="flex justify-between items-baseline border-b border-white/5 pb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Active Nodes</span>
+<span class="font-mono-data text-mono-data text-primary">349</span>
+</div>
+<div class="mt-auto pt-4">
+<div class="h-1 bg-surface-container w-full">
+<div class="h-full bg-secondary-fixed w-[72%]"></div>
+</div>
+<div class="flex justify-between mt-1">
+<span class="font-label-xs text-[9px] text-surface-variant">NETWORK STABILITY</span>
+<span class="font-mono-data text-[10px] text-secondary-fixed">72%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Progress Pillar -->
+<div class="bg-[#12131a] border border-white/10 flex flex-col">
+<div class="h-6 border-b border-white/10 flex justify-between items-center px-3 bg-surface-container-lowest">
+<span class="font-label-xs text-label-xs text-on-surface uppercase">Operation Progress</span>
+<span class="text-primary text-[10px]">∆</span>
+</div>
+<div class="p-6 flex-grow flex flex-col gap-6">
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-xs text-label-xs text-on-surface-variant">OP-ALPHA</span>
+<span class="font-mono-data text-mono-data text-on-surface">45.2%</span>
+</div>
+<div class="flex h-2 gap-1">
+<div class="flex-1 bg-primary"></div>
+<div class="flex-1 bg-primary"></div>
+<div class="flex-1 bg-surface-container"></div>
+<div class="flex-1 bg-surface-container"></div>
+<div class="flex-1 bg-surface-container"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-xs text-label-xs text-on-surface-variant">DATA INGESTION</span>
+<span class="font-mono-data text-mono-data text-on-surface">92.0%</span>
+</div>
+<div class="flex h-2 gap-1">
+<div class="flex-1 bg-tertiary"></div>
+<div class="flex-1 bg-tertiary"></div>
+<div class="flex-1 bg-tertiary"></div>
+<div class="flex-1 bg-tertiary"></div>
+<div class="flex-1 bg-surface-container"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing / System Log Component -->
+<section class="col-span-1 md:col-span-4 bg-[#1c1d26] border border-primary-container/30 mb-card-gap flex flex-col relative">
+<div class="h-6 border-b border-white/10 flex justify-between items-center px-3 bg-surface-container-lowest">
+<span class="font-label-xs text-label-xs text-primary uppercase">Access Protocol</span>
+<span class="text-primary text-[10px]">Ω</span>
+</div>
+<div class="p-6 flex-grow flex flex-col">
+<div class="font-mono-data text-[10px] text-surface-variant mb-4 uppercase">
+                    [SYSTEM MSG] ALLOCATION LIMIT REACHED. FOUNDING TIER AVAILABLE FOR IMMEDIATE DEPLOYMENT.
+                </div>
+<div class="mb-6 border-l-2 border-primary pl-4">
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-1">Founding Access</h3>
+<div class="flex items-baseline gap-1">
+<span class="font-mono-data text-[16px] text-on-surface-variant">$</span>
+<span class="font-display-xl text-display-xl text-primary">49</span>
+<span class="font-mono-data text-mono-data text-surface-variant">/mo</span>
+</div>
+</div>
+<ul class="flex flex-col gap-3 mb-8 flex-grow">
+<li class="flex items-center gap-2 font-mono-data text-mono-data text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-primary">check_small</span>
+                        Unrestricted Telemetry
+                    </li>
+<li class="flex items-center gap-2 font-mono-data text-mono-data text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-primary">check_small</span>
+                        Encrypted Data Vault
+                    </li>
+<li class="flex items-center gap-2 font-mono-data text-mono-data text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-primary">check_small</span>
+                        Priority Node Routing
+                    </li>
+</ul>
+<button class="w-full bg-primary text-[#0a0b0f] font-label-xs text-label-xs py-3 uppercase tracking-wider hover:bg-primary-fixed transition-colors">AUTHORIZE PAYMENT</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Shared Component -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-4 pb-safe bg-[#0a0b0f]/95 backdrop-blur-md docked full-width bottom-0 border-t border-white/10 no-shadow">
+<a class="flex flex-col items-center justify-center text-amber-200 scale-110 active:opacity-70 transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-mono text-[9px] uppercase mt-1">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-600 hover:text-amber-100 active:opacity-70 transition-all" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-mono text-[9px] uppercase mt-1">Grid</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-600 hover:text-amber-100 active:opacity-70 transition-all" href="#">
+<span class="material-symbols-outlined">shield</span>
+<span class="font-mono text-[9px] uppercase mt-1">Vault</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-600 hover:text-amber-100 active:opacity-70 transition-all" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span class="font-mono text-[9px] uppercase mt-1">Logs</span>
+</a>
+</nav>
+</body></html>

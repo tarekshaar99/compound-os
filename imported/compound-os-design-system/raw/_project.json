@@ -1,0 +1,25 @@
+{
+  "name": "projects/3281912290993590496",
+  "title": "Compound OS Design System",
+  "createdAt": "2026-04-29T05:00:49.384625Z",
+  "updatedAt": "2026-04-29T05:13:19.197058Z",
+  "deviceType": "DESKTOP",
+  "projectType": "TEXT_TO_UI_PRO",
+  "origin": "STITCH",
+  "visibility": "PRIVATE",
+  "userRole": "OWNER",
+  "activeTheme": {
+    "name": "Editorial Quarterly",
+    "headlineFont": "NEWSREADER",
+    "bodyFont": "INTER",
+    "labelFont": "INTER",
+    "primaryColor": "#BF9A62",
+    "secondaryColor": "#00d4aa",
+    "tertiaryColor": "#f97316",
+    "background": "#16130f",
+    "spacingScale": 2,
+    "colorMode": "DARK"
+  },
+  "screenCount": 10,
+  "designSystemCount": 3
+}

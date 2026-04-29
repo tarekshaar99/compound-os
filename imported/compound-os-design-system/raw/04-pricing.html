@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Compound OS - Allocation</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#e9e1da",
+                        "inverse-primary": "#775928",
+                        "tertiary-fixed-dim": "#ffb690",
+                        "surface-container-low": "#1e1b17",
+                        "surface-dim": "#16130f",
+                        "background": "#16130f",
+                        "surface-bright": "#3d3834",
+                        "on-tertiary-fixed": "#341100",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#e9e1da",
+                        "tertiary-container": "#ff7921",
+                        "surface-tint": "#e8c085",
+                        "surface-container-lowest": "#110e0a",
+                        "surface-variant": "#38342f",
+                        "outline-variant": "#4e453a",
+                        "on-primary-fixed-variant": "#5d4212",
+                        "tertiary-fixed": "#ffdbca",
+                        "on-tertiary-container": "#5f2600",
+                        "on-primary": "#432c00",
+                        "secondary": "#41eec2",
+                        "secondary-container": "#00d1a7",
+                        "primary-container": "#bf9a62",
+                        "on-secondary-fixed-variant": "#00513f",
+                        "on-primary-container": "#4b3203",
+                        "primary-fixed": "#ffddaf",
+                        "on-surface-variant": "#d2c4b5",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#2d2925",
+                        "primary-fixed-dim": "#e8c085",
+                        "on-tertiary-fixed-variant": "#783200",
+                        "on-secondary-container": "#005441",
+                        "inverse-on-surface": "#34302b",
+                        "secondary-fixed": "#55fcd0",
+                        "tertiary": "#ffb690",
+                        "surface-container-highest": "#38342f",
+                        "surface-container": "#231f1b",
+                        "on-surface": "#e9e1da",
+                        "on-primary-fixed": "#281800",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed": "#002118",
+                        "on-error": "#690005",
+                        "outline": "#9a8f81",
+                        "on-secondary": "#00382b",
+                        "surface": "#16130f",
+                        "on-tertiary": "#552100",
+                        "primary": "#e8c085",
+                        "secondary-fixed-dim": "#28dfb5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "lg": "32px",
+                        "xl": "64px",
+                        "xxl": "128px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "margin": "48px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Newsreader"],
+                        "display-xl": ["Newsreader"],
+                        "label-caps": ["Inter"],
+                        "caption": ["Inter"],
+                        "body-md": ["Inter"],
+                        "h1": ["Newsreader"],
+                        "h2": ["Newsreader"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "display-xl": ["80px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "300" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "caption": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "h2": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex items-center justify-center p-gutter selection:bg-primary-container selection:text-on-primary-container">
+<!-- Suppressing Navigation Shell: Transactional/Focused Page Intent -->
+<main class="w-full max-w-[480px]">
+<!-- Subtle Brand Anchor Above Card -->
+<div class="text-center mb-lg">
+<span class="material-symbols-outlined text-primary-container/80" style="font-size: 32px; font-weight: 200;">sync</span>
+</div>
+<!-- The Pricing Card -->
+<article class="bg-surface-container-lowest border border-outline-variant/50 relative overflow-hidden">
+<!-- Minimalist Header / Scarcity -->
+<header class="p-lg md:p-xl text-center flex flex-col items-center gap-md border-b border-outline-variant/30">
+<h1 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.2em]">Compound OS</h1>
+<p class="font-h3 text-h3 italic text-on-surface">"We choose who buys."</p>
+</header>
+<!-- Pricing Section -->
+<div class="p-lg md:p-xl flex flex-col items-center text-center gap-sm">
+<!-- Anchor Price -->
+<div class="font-body-md text-body-md text-on-surface-variant/60 line-through decoration-1 decoration-on-surface-variant/40 tracking-wide">
+                    $99 / Quarter
+                </div>
+<!-- Founding Price -->
+<div class="flex items-baseline justify-center gap-xs">
+<span class="font-display-xl text-display-xl text-primary-container">$49</span>
+</div>
+<div class="font-label-caps text-label-caps text-primary-container uppercase tracking-widest mt-sm">
+                    Founding Member
+                </div>
+</div>
+<!-- Allocation Indicator -->
+<div class="bg-surface py-md px-lg border-y border-outline-variant/30 flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.15em]">Allocation</span>
+<div class="flex items-baseline gap-2">
+<span class="font-h2 text-h2 text-primary-container">099</span>
+<span class="font-caption text-caption text-on-surface-variant italic">spots remaining</span>
+</div>
+</div>
+<!-- CTA Area -->
+<div class="p-lg md:p-xl">
+<button class="w-full bg-primary-container text-on-primary-container font-label-caps text-label-caps uppercase tracking-[0.15em] py-4 px-6 border border-primary-container hover:bg-transparent hover:text-primary-container transition-all duration-300 flex items-center justify-center gap-sm group" type="button">
+                    Request Access
+                    <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+</button>
+</div>
+<!-- Geometric/Print Detail (Hairline corner accents) -->
+<div class="absolute top-0 left-0 w-4 h-4 border-t border-l border-primary-container/20"></div>
+<div class="absolute top-0 right-0 w-4 h-4 border-t border-r border-primary-container/20"></div>
+<div class="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-primary-container/20"></div>
+<div class="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-primary-container/20"></div>
+</article>
+<!-- Footer context -->
+<div class="text-center mt-lg">
+<p class="font-caption text-caption text-on-surface-variant/50">Application review required. Not all requests are granted.</p>
+</div>
+</main>
+</body></html>

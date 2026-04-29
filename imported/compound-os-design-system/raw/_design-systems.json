@@ -1,0 +1,128 @@
+{
+  "active": "Editorial Quarterly",
+  "all": [
+    {
+      "name": "Editorial Quarterly",
+      "assetId": "assets/b5032d5723b14ca3bd7399843c1e4726",
+      "isActive": true,
+      "isProjectTheme": true,
+      "fonts": {
+        "headline": "Newsreader",
+        "body": "Inter",
+        "label": "Inter"
+      },
+      "typography": {
+        "display-xl": { "fontFamily": "Newsreader", "fontSize": "80px", "fontWeight": "300", "letterSpacing": "-0.02em", "lineHeight": "1.1" },
+        "h1": { "fontFamily": "Newsreader", "fontSize": "48px", "fontWeight": "400", "lineHeight": "1.2" },
+        "h2": { "fontFamily": "Newsreader", "fontSize": "32px", "fontWeight": "400", "lineHeight": "1.3" },
+        "h3": { "fontFamily": "Newsreader", "fontSize": "24px", "fontWeight": "400", "lineHeight": "1.4" },
+        "body-lg": { "fontFamily": "Inter", "fontSize": "18px", "fontWeight": "400", "lineHeight": "1.6" },
+        "body-md": { "fontFamily": "Inter", "fontSize": "16px", "fontWeight": "400", "lineHeight": "1.6" },
+        "label-caps": { "fontFamily": "Inter", "fontSize": "12px", "fontWeight": "600", "letterSpacing": "0.1em", "lineHeight": "1" },
+        "caption": { "fontFamily": "Inter", "fontSize": "13px", "fontWeight": "400", "lineHeight": "1.4" }
+      },
+      "colors": {
+        "background": "#16130f",
+        "surface": "#16130f",
+        "surface-dim": "#16130f",
+        "surface-bright": "#3d3834",
+        "surface-container-lowest": "#110e0a",
+        "surface-container-low": "#1e1b17",
+        "surface-container": "#231f1b",
+        "surface-container-high": "#2d2925",
+        "surface-container-highest": "#38342f",
+        "surface-variant": "#38342f",
+        "on-surface": "#e9e1da",
+        "on-surface-variant": "#d2c4b5",
+        "on-background": "#e9e1da",
+        "outline": "#9a8f81",
+        "outline-variant": "#4e453a",
+        "primary": "#e8c085",
+        "on-primary": "#432c00",
+        "primary-container": "#bf9a62",
+        "on-primary-container": "#4b3203",
+        "secondary": "#41eec2",
+        "on-secondary": "#00382b",
+        "tertiary": "#ffb690",
+        "on-tertiary": "#552100",
+        "error": "#ffb4ab",
+        "on-error": "#690005"
+      },
+      "overrides": {
+        "primary": "#BF9A62",
+        "secondary": "#00d4aa",
+        "tertiary": "#f97316"
+      },
+      "spacing": {
+        "unit": "4px",
+        "xs": "4px",
+        "sm": "8px",
+        "md": "16px",
+        "lg": "32px",
+        "xl": "64px",
+        "xxl": "128px",
+        "gutter": "24px",
+        "margin": "48px"
+      },
+      "shapeLanguage": "Sharp 0px corners (Fibonacci spiral is the only organic exception)",
+      "elevation": "Tonal layering + 0.5–1px hairline borders. Shadows almost never used.",
+      "vibe": "High-end print journalism translated to a digital OS"
+    },
+    {
+      "name": "Private Terminal",
+      "assetId": "assets/3b684ca301ef43518c1ee482f18bfa03",
+      "isActive": false,
+      "isProjectTheme": false,
+      "fonts": {
+        "headline": "Inter Tight",
+        "body": "Inter Tight",
+        "data": "Space Grotesk"
+      },
+      "typography": {
+        "display-xl": { "fontFamily": "Inter Tight", "fontSize": "48px", "fontWeight": "600", "letterSpacing": "-0.04em", "lineHeight": "1.1" },
+        "headline-lg": { "fontFamily": "Inter Tight", "fontSize": "24px", "fontWeight": "500", "letterSpacing": "-0.02em", "lineHeight": "1.2" },
+        "body-md": { "fontFamily": "Inter Tight", "fontSize": "14px", "fontWeight": "400", "lineHeight": "1.5" },
+        "mono-data": { "fontFamily": "Space Grotesk", "fontSize": "13px", "fontWeight": "500", "letterSpacing": "0.02em", "lineHeight": "1.4" },
+        "label-xs": { "fontFamily": "Inter Tight", "fontSize": "11px", "fontWeight": "700", "letterSpacing": "0.08em", "lineHeight": "1" }
+      },
+      "spacing": {
+        "unit": "4px",
+        "grid-gutter": "1px",
+        "container-padding": "24px",
+        "card-gap": "12px",
+        "element-tight": "4px",
+        "element-base": "8px"
+      },
+      "shapeLanguage": "Strict 0px sharp",
+      "elevation": "1px hairlines + dot-matrix overlay textures",
+      "vibe": "Bloomberg terminal, aerospace HUD, encrypted data ops"
+    },
+    {
+      "name": "Quiet Luxury",
+      "assetId": "assets/3d481a54224d4b819e548c617c2a530f",
+      "isActive": false,
+      "isProjectTheme": false,
+      "fonts": {
+        "headline": "Manrope",
+        "body": "Inter"
+      },
+      "typography": {
+        "display-lg": { "fontFamily": "Manrope", "fontSize": "48px", "fontWeight": "200", "letterSpacing": "-0.02em", "lineHeight": "1.1" },
+        "headline-md": { "fontFamily": "Manrope", "fontSize": "24px", "fontWeight": "400", "letterSpacing": "-0.01em", "lineHeight": "1.3" },
+        "body-main": { "fontFamily": "Inter", "fontSize": "16px", "fontWeight": "400", "lineHeight": "1.6" },
+        "label-caps": { "fontFamily": "Inter", "fontSize": "11px", "fontWeight": "600", "letterSpacing": "0.1em", "lineHeight": "1" },
+        "numeric-data": { "fontFamily": "Inter", "fontSize": "14px", "fontWeight": "500", "lineHeight": "1" }
+      },
+      "spacing": {
+        "unit": "8px",
+        "container-padding": "48px",
+        "gutter": "24px",
+        "component-gap": "16px",
+        "section-margin": "80px"
+      },
+      "shapeLanguage": "Strict 0px sharp",
+      "elevation": "Hairline outlines + 'gold-foil' hover state + 5%-opacity champagne glow",
+      "vibe": "Aesop boutique meets Apple precision; gallery-like negative space"
+    }
+  ]
+}

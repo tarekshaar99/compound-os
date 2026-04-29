@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Compound OS - Success</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#ffb690",
+                      "on-tertiary-fixed-variant": "#783200",
+                      "on-background": "#e9e1da",
+                      "inverse-surface": "#e9e1da",
+                      "surface-dim": "#16130f",
+                      "secondary-fixed": "#55fcd0",
+                      "on-surface": "#e9e1da",
+                      "on-secondary": "#00382b",
+                      "tertiary": "#ffb690",
+                      "secondary": "#41eec2",
+                      "primary-fixed": "#ffddaf",
+                      "surface-variant": "#38342f",
+                      "surface-tint": "#e8c085",
+                      "on-primary": "#432c00",
+                      "secondary-fixed-dim": "#28dfb5",
+                      "on-primary-fixed": "#281800",
+                      "outline-variant": "#4e453a",
+                      "on-tertiary-container": "#5f2600",
+                      "secondary-container": "#00d1a7",
+                      "primary": "#e8c085",
+                      "on-primary-fixed-variant": "#5d4212",
+                      "surface-container-lowest": "#110e0a",
+                      "inverse-on-surface": "#34302b",
+                      "primary-container": "#bf9a62",
+                      "on-surface-variant": "#d2c4b5",
+                      "on-primary-container": "#4b3203",
+                      "on-tertiary-fixed": "#341100",
+                      "error": "#ffb4ab",
+                      "background": "#16130f",
+                      "tertiary-container": "#ff7921",
+                      "on-tertiary": "#552100",
+                      "on-secondary-fixed": "#002118",
+                      "primary-fixed-dim": "#e8c085",
+                      "tertiary-fixed": "#ffdbca",
+                      "on-error-container": "#ffdad6",
+                      "inverse-primary": "#775928",
+                      "surface-bright": "#3d3834",
+                      "surface": "#16130f",
+                      "error-container": "#93000a",
+                      "surface-container-low": "#1e1b17",
+                      "outline": "#9a8f81",
+                      "on-error": "#690005",
+                      "surface-container": "#231f1b",
+                      "surface-container-high": "#2d2925",
+                      "surface-container-highest": "#38342f",
+                      "on-secondary-container": "#005441",
+                      "on-secondary-fixed-variant": "#00513f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "xxl": "128px",
+                      "md": "16px",
+                      "xl": "64px",
+                      "gutter": "24px",
+                      "margin": "48px",
+                      "lg": "32px",
+                      "xs": "4px",
+                      "sm": "8px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-xl": [
+                              "Newsreader"
+                      ],
+                      "h2": [
+                              "Newsreader"
+                      ],
+                      "h1": [
+                              "Newsreader"
+                      ],
+                      "caption": [
+                              "Inter"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "h3": [
+                              "Newsreader"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-xl": [
+                              "80px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "300"
+                              }
+                      ],
+                      "h2": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "caption": [
+                              "13px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h3": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col items-center justify-center font-body-md text-body-md overflow-hidden selection:bg-primary selection:text-on-primary">
+<!-- Cinematic Grain Overlay -->
+<div class="pointer-events-none fixed inset-0 z-50 opacity-[0.03] mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+<!-- Ambient Glow (Subtle Champagne) -->
+<div class="pointer-events-none fixed inset-0 z-0 flex items-center justify-center opacity-20">
+<div class="w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] rounded-full bg-primary blur-[120px]"></div>
+</div>
+<!-- Main Canvas -->
+<main class="relative z-10 w-full max-w-4xl px-margin flex flex-col items-center text-center space-y-xl">
+<!-- Brand Mark (Fibonacci / Spiral Concept) -->
+<div class="text-primary opacity-90 mb-lg">
+<svg class="mx-auto drop-shadow-[0_0_15px_rgba(232,192,133,0.3)]" fill="none" height="64" viewbox="0 0 64 64" width="64" xmlns="http://www.w3.org/2000/svg">
+<path d="M32 4C16.536 4 4 16.536 4 32C4 47.464 16.536 60 32 60C47.464 60 60 47.464 60 32" stroke="currentColor" stroke-linecap="round" stroke-width="1"></path>
+<path d="M32 12C20.9543 12 12 20.9543 12 32C12 43.0457 20.9543 52 32 52" stroke="currentColor" stroke-linecap="round" stroke-width="1"></path>
+<path d="M32 20C25.3726 20 20 25.3726 20 32C20 38.6274 25.3726 44 32 44" stroke="currentColor" stroke-linecap="round" stroke-width="1"></path>
+<path d="M32 28C29.7909 28 28 29.7909 28 32C28 34.2091 29.7909 36 32 36" stroke="currentColor" stroke-linecap="round" stroke-width="1"></path>
+<circle cx="32" cy="32" fill="currentColor" r="1"></circle>
+</svg>
+</div>
+<!-- Typography Cluster -->
+<div class="space-y-md max-w-2xl mx-auto">
+<h1 class="font-display-xl text-display-xl text-on-surface tracking-tight leading-none">
+<span class="italic font-light text-surface-variant mr-4">The</span>
+                system is yours.
+            </h1>
+<div class="h-[1px] w-12 bg-outline-variant mx-auto my-lg"></div>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mx-auto leading-relaxed">
+                Your transaction is complete. The digital architecture has been provisioned. Prepare to organize your thoughts, signals, and insights.
+            </p>
+</div>
+<!-- Action Area -->
+<div class="pt-lg">
+<a class="group relative inline-flex items-center justify-center px-lg py-sm bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-widest border border-primary hover:bg-transparent hover:text-primary transition-all duration-500 overflow-hidden" href="#">
+<span class="relative z-10 flex items-center gap-2">
+                    Begin Onboarding
+                    <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform duration-300">arrow_right_alt</span>
+</span>
+<div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+</a>
+<div class="mt-md text-center">
+<a class="font-caption text-caption text-outline hover:text-on-surface transition-colors duration-300 border-b border-transparent hover:border-outline pb-1" href="#">
+                    Download Receipt
+                </a>
+</div>
+</div>
+</main>
+<!-- Subdued Footer info (Optional, purely aesthetic anchoring) -->
+<div class="absolute bottom-12 left-0 right-0 text-center pointer-events-none">
+<p class="font-label-caps text-label-caps text-surface-variant tracking-[0.3em] uppercase">
+            Compound OS · MMXXIV
+        </p>
+</div>
+</body></html>

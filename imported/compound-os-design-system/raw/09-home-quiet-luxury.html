@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Compound OS - Direction 3: Quiet Luxury</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#38342f",
+                        "on-secondary-container": "#005441",
+                        "on-secondary-fixed-variant": "#00513f",
+                        "surface-container-low": "#1e1b17",
+                        "outline": "#9a8f81",
+                        "surface-container": "#231f1b",
+                        "on-error": "#690005",
+                        "surface-container-high": "#2d2925",
+                        "on-secondary-fixed": "#002118",
+                        "primary-fixed-dim": "#e8c085",
+                        "inverse-primary": "#775928",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdbca",
+                        "error-container": "#93000a",
+                        "surface-bright": "#3d3834",
+                        "surface": "#16130f",
+                        "inverse-on-surface": "#34302b",
+                        "surface-container-lowest": "#110e0a",
+                        "on-surface-variant": "#d2c4b5",
+                        "primary-container": "#bf9a62",
+                        "on-primary-container": "#4b3203",
+                        "background": "#16130f",
+                        "on-tertiary-fixed": "#341100",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#552100",
+                        "tertiary-container": "#ff7921",
+                        "on-primary": "#432c00",
+                        "surface-tint": "#e8c085",
+                        "outline-variant": "#4e453a",
+                        "on-tertiary-container": "#5f2600",
+                        "on-primary-fixed": "#281800",
+                        "secondary-fixed-dim": "#28dfb5",
+                        "on-primary-fixed-variant": "#5d4212",
+                        "secondary-container": "#00d1a7",
+                        "primary": "#e8c085",
+                        "primary-fixed": "#ffddaf",
+                        "surface-variant": "#38342f",
+                        "tertiary": "#ffb690",
+                        "secondary": "#41eec2",
+                        "tertiary-fixed-dim": "#ffb690",
+                        "on-tertiary-fixed-variant": "#783200",
+                        "on-background": "#e9e1da",
+                        "inverse-surface": "#e9e1da",
+                        "on-secondary": "#00382b",
+                        "on-surface": "#e9e1da",
+                        "surface-dim": "#16130f",
+                        "secondary-fixed": "#55fcd0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "component-gap": "16px",
+                        "section-margin": "80px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "container-padding": "48px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "numeric-data": ["Inter"],
+                        "display-lg": ["Manrope"],
+                        "body-main": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["11px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+                        "numeric-data": ["14px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "200" }],
+                        "body-main": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-12 h-20 bg-stone-950/80 backdrop-blur-xl border-b border-white/10">
+<div class="text-lg tracking-widest font-bold text-white">Compound OS</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-['Manrope'] tracking-[0.2em] uppercase text-xs font-light text-[#BF9A62] border-b border-[#BF9A62] pb-1 cursor-pointer transition-all duration-700 ease-out" href="#">System</a>
+<a class="font-['Manrope'] tracking-[0.2em] uppercase text-xs font-light text-stone-400 hover:text-[#BF9A62] transition-colors duration-500 cursor-pointer transition-all duration-700 ease-out" href="#">Pillars</a>
+<a class="font-['Manrope'] tracking-[0.2em] uppercase text-xs font-light text-stone-400 hover:text-[#BF9A62] transition-colors duration-500 cursor-pointer transition-all duration-700 ease-out" href="#">Pricing</a>
+<a class="font-['Manrope'] tracking-[0.2em] uppercase text-xs font-light text-stone-400 hover:text-[#BF9A62] transition-colors duration-500 cursor-pointer transition-all duration-700 ease-out" href="#">Journal</a>
+</div>
+<button class="font-['Manrope'] tracking-[0.2em] uppercase text-xs font-light text-[#BF9A62] hover:text-white transition-colors duration-500 px-6 py-2 border border-white/10 hover:border-[#BF9A62]">Inquire</button>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center justify-center px-container-padding py-section-margin overflow-hidden bg-surface-container-lowest">
+<div class="absolute inset-0 z-0 opacity-20 bg-cover bg-center" data-alt="close up of abstract dark grey brushed metal texture with subtle lighting and soft grain" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBulbNuQb3Yfs9qjU-DogIkcD2dp40Z5wy3OWKlap64CNzcXTOrKcEnXbEKNO6skHVgqTUtBTNlT3RXkxTnuqtZH6Vu3qVmrpeB930B7XYOnB6HjqOFlcCARFLSc7VKoOSlW_k-esQjsxYKbhsr1SzVZRs9nIa31GZbmzJ4RqTPYVMyA44prmgf4lLio1AvYsH-nVIob_jag7gKX8ylxMT8MAe4plMvdYjznwim1nEq2ggyvvZ0L-B-qcbrICsw2h115g3fnRVSUfU');"></div>
+<div class="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center gap-12">
+<!-- Fibonacci Mark Placeholder -->
+<div class="w-16 h-16 border border-primary/30 flex items-center justify-center rotate-45 mb-8">
+<div class="w-8 h-8 border border-primary/50 rotate-45 flex items-center justify-center">
+<div class="w-2 h-2 bg-primary"></div>
+</div>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface">
+                    A Foundation for Deep Work.
+                </h1>
+<p class="font-body-main text-body-main text-on-surface-variant max-w-2xl font-light">
+                    An operating system designed not to disrupt, but to anchor. Built on principles of quiet luxury, material integrity, and spatial hierarchy.
+                </p>
+<button class="mt-8 px-10 py-4 border border-outline-variant font-label-caps text-label-caps text-on-surface hover:bg-gradient-to-r hover:from-primary/20 hover:to-transparent hover:border-primary/50 hover:text-primary transition-all duration-500">
+                    Explore the System
+                </button>
+</div>
+</section>
+<!-- Pillars Section -->
+<section class="py-section-margin px-container-padding bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16 flex justify-between items-end border-b border-white/5 pb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface">The Three Pillars</h2>
+<span class="font-label-caps text-label-caps text-primary">01 // Architecture</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-0 border border-white/5">
+<!-- Pillar 1 -->
+<div class="p-12 border-r border-b md:border-b-0 border-white/5 group hover:bg-white/[0.02] transition-colors duration-500 flex flex-col justify-between min-h-[400px]">
+<div>
+<span class="font-label-caps text-label-caps text-outline mb-6 block">Core</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Structure</h3>
+<p class="font-body-main text-body-main text-on-surface-variant">The fixed grid. A rigid framework that allows the content to breathe. Space is treated as a premium material.</p>
+</div>
+<div class="flex justify-between items-center mt-12 border-t border-white/5 pt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+<span class="font-label-caps text-label-caps text-primary">View Details</span>
+<span class="material-symbols-outlined text-primary" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<!-- Pillar 2 -->
+<div class="p-12 border-r border-b md:border-b-0 border-white/5 group hover:bg-white/[0.02] transition-colors duration-500 flex flex-col justify-between min-h-[400px]">
+<div>
+<span class="font-label-caps text-label-caps text-outline mb-6 block">Assets</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Materiality</h3>
+<p class="font-body-main text-body-main text-on-surface-variant">Texture over color. Hairline precision over heavy shadows. Elements that feel physically etched into the screen.</p>
+</div>
+<div class="flex justify-between items-center mt-12 border-t border-white/5 pt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+<span class="font-label-caps text-label-caps text-primary">View Details</span>
+<span class="material-symbols-outlined text-primary" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<!-- Pillar 3 -->
+<div class="p-12 group hover:bg-white/[0.02] transition-colors duration-500 flex flex-col justify-between min-h-[400px]">
+<div>
+<span class="font-label-caps text-label-caps text-outline mb-6 block">Flow</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Pacing</h3>
+<p class="font-body-main text-body-main text-on-surface-variant">Intentional friction. Animations that are deliberately slow and considered. A system that respects your time by moving with purpose.</p>
+</div>
+<div class="flex justify-between items-center mt-12 border-t border-white/5 pt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+<span class="font-label-caps text-label-caps text-primary">View Details</span>
+<span class="material-symbols-outlined text-primary" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Founder Note & Pricing -->
+<section class="py-section-margin px-container-padding bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
+<!-- Founder Note -->
+<div class="flex flex-col justify-center border-l border-primary/20 pl-12 relative">
+<div class="absolute -left-[5px] top-0 w-2 h-2 bg-primary"></div>
+<span class="font-label-caps text-label-caps text-primary mb-8">Manifesto</span>
+<blockquote class="font-display-lg text-[32px] leading-tight text-on-surface font-light mb-12">
+                        "We built Compound OS to counter the noise. A digital environment should feel like a private gallery: vast, silent, and deeply focused."
+                    </blockquote>
+<div class="flex items-center gap-6">
+<img alt="Founder Portrait" class="w-16 h-16 grayscale rounded-none" data-alt="black and white portrait of a man in profile against a dark background with soft rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHIpc6_5VUWddi8QfwXBCnDmG6tqM9GGD-m2ZOzXqda4rrdU8j7V1CL6YpVjCkIEoEudTTKUpOtp1g4AlAwiqYjiBwUlRw1TFe0FyFIViNi_sF-E__MlOFjjKg7IFZM-as-sFhCeoiOEfvXxD4YNuk0-ezwFN5a8tzym7CV6KwNcq1E1hI44UlFKndgrqAf3PyBJnnZH06X69ucuBbeOeBkOV6MIIdhCBZPmuKrJq8If-RMak4DoOb0874OVcmBBd32EDUjXFVWC8"/>
+<div>
+<p class="font-numeric-data text-numeric-data text-on-surface mb-1">A. M. Founder</p>
+<p class="font-label-caps text-label-caps text-outline">Architect, Compound OS</p>
+</div>
+</div>
+</div>
+<!-- Minimal Pricing Card -->
+<div class="p-12 border border-white/10 bg-surface-container/50 backdrop-blur-sm flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-center mb-12 border-b border-white/5 pb-6">
+<span class="font-label-caps text-label-caps text-on-surface">License</span>
+<span class="font-numeric-data text-numeric-data text-primary">V 1.0</span>
+</div>
+<h3 class="font-display-lg text-display-lg text-on-surface mb-4">Unlimited</h3>
+<p class="font-body-main text-body-main text-on-surface-variant mb-12">Full access to the core framework, components, and future updates. A single, transparent investment.</p>
+<div class="space-y-4 mb-16">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check">check</span>
+<span class="font-body-main text-body-main text-on-surface">Complete source code</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check">check</span>
+<span class="font-body-main text-body-main text-on-surface">Perpetual license</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check">check</span>
+<span class="font-body-main text-body-main text-on-surface">Priority support channel</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-white/5 pt-8">
+<span class="font-numeric-data text-[24px] text-on-surface font-light">$499</span>
+<button class="px-8 py-3 border border-outline-variant font-label-caps text-label-caps text-on-surface hover:bg-gradient-to-r hover:from-primary/20 hover:to-transparent hover:border-primary/50 hover:text-primary transition-all duration-500">
+                            Acquire
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 px-12 flex flex-col md:flex-row justify-between items-center gap-8 bg-stone-950 full-width border-t border-white/5">
+<div class="text-white font-medium font-['Manrope'] tracking-widest">Compound OS</div>
+<div class="font-['Manrope'] text-[9px] tracking-[0.3em] font-light uppercase text-stone-600">© 2024 COMPOUND OS. ALL RIGHTS RESERVED.</div>
+<div class="flex gap-6">
+<a class="font-['Manrope'] text-[9px] tracking-[0.3em] font-light uppercase text-stone-600 hover:text-[#BF9A62] transition-colors" href="#">Privacy</a>
+<a class="font-['Manrope'] text-[9px] tracking-[0.3em] font-light uppercase text-stone-600 hover:text-[#BF9A62] transition-colors" href="#">Terms</a>
+<a class="font-['Manrope'] text-[9px] tracking-[0.3em] font-light uppercase text-stone-600 hover:text-[#BF9A62] transition-colors" href="#">Manifesto</a>
+</div>
+</footer>
+</body></html>
