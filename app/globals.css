@@ -1,39 +1,156 @@
 @import "tailwindcss";
 
+/* ───────────────────────────────────────────────────────────────────
+   COMPOUND OS — Editorial Quarterly design system
+   ports: imported/compound-os-design-system/raw/_design-systems.json
+   tokens: champagne accent, ink dark, hairlines, sharp corners
+   ─────────────────────────────────────────────────────────────────── */
+
 :root {
-  --bg: #0a0b0f;
-  --sidebar-bg: #0e0f14;
-  --card-bg: #13141a;
-  --card-bg-2: #16171e;
-  --border: #1e2028;
-  --border-soft: #16181f;
-  --accent: #00d4aa;
-  --accent-trading: #00d4aa;
-  --accent-mindset: #a78bfa;
-  --accent-fitness: #f97316;
-  --text-primary: #e8e9ed;
-  --text-secondary: #9498a8;
-  --text-muted: #5a5e6e;
+  /* Surfaces (cool ink base — matches the actual brand bg per the design brief) */
+  --bg: #0a0b0f;                          /* base page bg, "ink" */
+  --sidebar-bg: #110e0a;                  /* sidebar / lowest container */
+  --card-bg: #1e1b17;                     /* surface-container-low */
+  --card-bg-2: #231f1b;                   /* surface-container */
+  --surface-high: #2d2925;                /* surface-container-high */
+  --surface-highest: #38342f;             /* surface-container-highest */
+
+  /* Hairlines (replace shadows entirely in this system) */
+  --border: #2d2925;                      /* default 1px hairline */
+  --border-soft: #1e1b17;                 /* subtler 0.5px hairline */
+  --outline: #4e453a;                     /* outline-variant for stronger separators */
+
+  /* Primary — champagne. Used for brand moments + active states + CTAs. */
+  --accent: #BF9A62;                      /* "primary-container" — solid CTA bg */
+  --accent-bright: #e8c085;               /* "primary" — text on dark when accent is decorative */
+  --accent-fixed: #ffddaf;                /* "primary-fixed" — high-contrast accent text */
+  --on-accent: #432c00;                   /* text/icon on solid champagne button */
+
+  /* Pillar colors — preserved from launch brand */
+  --accent-trading: #00d4aa;              /* Markets / teal */
+  --accent-fitness: #f97316;              /* Fitness / orange */
+  --accent-mindset: #a78bfa;              /* Mindset / violet */
+
+  /* Text */
+  --text-primary: #e9e1da;                /* on-surface, body + headings */
+  --text-secondary: #d2c4b5;              /* on-surface-variant, secondary copy */
+  --text-muted: #9a8f81;                  /* "outline" text — captions, metadata */
+
+  /* Spacing rhythm (Editorial Quarterly modular scale) */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+  --space-xxl: 128px;
+  --gutter: 24px;
+  --margin: 48px;
+
+  /* Radii — sharp by default per brand. Allow pill for badges. */
+  --radius-sharp: 0;
+  --radius-pill: 9999px;
 }
 
+/* Tailwind v4 inline theme — exposes our tokens to utility classes
+   like bg-background, text-foreground, font-serif, etc. */
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--text-primary);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
+  --color-accent-trading: var(--accent-trading);
+  --color-accent-fitness: var(--accent-fitness);
+  --color-accent-mindset: var(--accent-mindset);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-card: var(--card-bg);
+
+  --font-serif: var(--font-newsreader);
+  --font-sans: var(--font-inter);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+/* ───────────────────────────────────────────────────────────────────
+   BASE
+   ─────────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  /* Prevent serif font swap from causing layout shift */
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--bg);
   color: var(--text-primary);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11"; /* Inter stylistic alternates */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Newsreader serif — used for headings + display only */
+h1, h2, h3, .font-serif, .editorial-heading {
+  font-family: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  font-feature-settings: "kern" 1, "ss01" 1;
 }
 
-::-webkit-scrollbar { width: 6px; }
+::selection {
+  background: rgba(191, 154, 98, 0.25);  /* champagne tint */
+  color: var(--text-primary);
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 0; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ───────────────────────────────────────────────────────────────────
+   EDITORIAL UTILITIES
+   Used by ported pages for hairline rules, label-caps, etc.
+   ─────────────────────────────────────────────────────────────────── */
+
+.label-caps {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hairline-t { border-top: 1px solid var(--border); }
+.hairline-b { border-bottom: 1px solid var(--border); }
+.hairline-l { border-left: 1px solid var(--border); }
+.hairline-r { border-right: 1px solid var(--border); }
+
+/* Cinematic grain overlay used on success/dashboard cards. */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  z-index: 0;
+}
+
+/* Reduced-motion baseline — honored everywhere. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

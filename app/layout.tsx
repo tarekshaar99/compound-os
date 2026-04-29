@@ -1,16 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Newsreader, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+/**
+ * Newsreader — display serif for headlines + editorial pull-quotes.
+ * Stand-in for GT Sectra per the design brief. Loaded with italic +
+ * weight 300 (display) and 400/500 (h1–h3, body emphasis).
+ */
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+/**
+ * Inter — body, labels, UI. Stand-in for Söhne.
+ */
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const SITE_URL = "https://thecompoundsystem.com";
@@ -94,7 +107,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${newsreader.variable} ${inter.variable} antialiased`}
       >
         {children}
         <Analytics />
