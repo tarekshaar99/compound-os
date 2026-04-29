@@ -1,23 +1,22 @@
 import type { MetadataRoute } from "next";
 
 /**
- * Sitemap for search engines. Lists ONLY the public, indexable pages.
+ * Sitemap for search engines. Lists the public, indexable pages.
  *
- * What's intentionally NOT in here:
- *   - Pillar indexes (/trading, /fitness, /mindset) — middleware 307s
- *     unauthenticated traffic to /login, which Google reports as
- *     "Page with redirect" in Search Console and removes from the index.
- *   - Module pages (/trading/m/*, /fitness/m/*, /mindset/m/*) — same
- *     reason. Listing them creates 21 "redirected" entries that dilute
- *     crawl budget and look like duplicate-content noise.
+ * Pillar index pages (/trading, /fitness, /mindset) are public:
+ * middleware lets unauthenticated traffic through, and PillarIndex
+ * renders an editorial preview (module list + paywall block) for
+ * Googlebot and signed-out visitors. Their *sub-paths* — module pages
+ * and library pages — remain gated and are NOT in the sitemap.
+ *
+ * Intentionally NOT in here:
+ *   - /trading/m/*, /fitness/m/*, /mindset/m/* — module pages still
+ *     307 to /login for unauth traffic. (May change in a future phase
+ *     if we want module-level long-tail SEO.)
+ *   - /trading/library, /fitness/library, /mindset/library — gated.
  *   - /login — no SEO value, just dilutes crawl budget.
  *   - /dashboard, /account, /reflections, /onboarding, /success — all
  *     gated or transactional, none should be indexed.
- *
- * If we ever want module URLs to be indexable, the path is to render an
- * unauthenticated preview at each module URL (first lesson section +
- * <Paywall> block) instead of redirecting. Until then, paywalled paths
- * stay out of the sitemap.
  */
 
 const SITE_URL = "https://thecompoundsystem.com";
@@ -37,6 +36,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/trading`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/fitness`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/mindset`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
     },
     {
       url: `${SITE_URL}/contact`,

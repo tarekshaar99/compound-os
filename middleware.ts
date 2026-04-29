@@ -28,14 +28,24 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(dashUrl);
   }
 
+  // Pillar index pages (/trading, /fitness, /mindset) are PUBLIC for SEO —
+  // they render an editorial preview with module titles + paywall CTA when
+  // unauthenticated. Their sub-paths (/trading/m/*, /trading/library, etc.)
+  // remain gated.
+  const isPublicPillarIndex =
+    pathname === "/trading" ||
+    pathname === "/fitness" ||
+    pathname === "/mindset";
+
   // Paywalled / private routes.
   const isPaywalled =
-    pathname.startsWith("/trading") ||
-    pathname.startsWith("/fitness") ||
-    pathname.startsWith("/mindset") ||
-    pathname.startsWith("/dashboard") ||
-    pathname.startsWith("/account") ||
-    pathname.startsWith("/onboarding");
+    !isPublicPillarIndex &&
+    (pathname.startsWith("/trading") ||
+      pathname.startsWith("/fitness") ||
+      pathname.startsWith("/mindset") ||
+      pathname.startsWith("/dashboard") ||
+      pathname.startsWith("/account") ||
+      pathname.startsWith("/onboarding"));
 
   if (isPaywalled) {
     if (authed) return NextResponse.next();
