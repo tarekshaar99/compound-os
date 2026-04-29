@@ -42,9 +42,25 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     const msg = err instanceof Error ? err.message : "unknown";
     console.error("[stripe-webhook] signature verification failed:", msg);
-    // Signature failures are usually a config problem (wrong STRIPE_WEBHOOK_SECRET)
-    // or a spoofed request. Either way, we want to know about it in Sentry.
-    Sentry.captureException(err, { tags: { area: "stripe-webhook", stage: "signature" } });
+
+    // Real Stripe webhooks always send User-Agent: Stripe/1.0 (or similar
+    // Stripe/<version> string). If the failing request didn't come from
+    // Stripe, it's a bot/scraper/probe hitting our public webhook URL —
+    // we still 400 it, but we don't fire a Sentry alert for the noise.
+    //
+    // A real signature mismatch from a genuine Stripe webhook (which would
+    // indicate STRIPE_WEBHOOK_SECRET drift between Vercel and the Stripe
+    // dashboard) DOES still fire — that's the alert we want to keep.
+    const ua = req.headers.get("user-agent") ?? "";
+    const isRealStripe = ua.startsWith("Stripe/");
+
+    if (isRealStripe) {
+      Sentry.captureException(err, {
+        tags: { area: "stripe-webhook", stage: "signature" },
+        extra: { user_agent: ua },
+      });
+    }
+
     return NextResponse.json({ error: `Webhook Error: ${msg}` }, { status: 400 });
   }
 
