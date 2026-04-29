@@ -1,21 +1,64 @@
 import { ImageResponse } from "next/og";
 
 /**
- * Dynamically generated Open Graph image.
+ * Editorial Quarterly Open Graph image.
  *
  * Notes on staying compatible with Satori (the engine behind ImageResponse):
  *   - Avoid complex CSS (multi-stop radial gradients, shadows) -> use plain
  *     colors and positioned divs for "glow" effects.
- *   - Avoid non-ASCII glyphs like ◈ -> use inline SVG shapes.
- *   - Avoid `runtime = "edge"` when the page does not strictly need it -
- *     the Node runtime is more forgiving and renders identically.
+ *   - Newsreader is loaded explicitly via fetch() since Satori doesn't pull
+ *     from next/font; if the fetch fails we fall back to plain serif.
+ *   - Avoid `runtime = "edge"` — the Node runtime is more forgiving and
+ *     renders identically.
  */
 
-export const alt = "Compound OS - the operating system for a compounding life.";
+export const alt =
+  "Compound OS — the operating system for a compounding life.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+async function fetchFontData(url: string): Promise<ArrayBuffer | null> {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    return await res.arrayBuffer();
+  } catch {
+    return null;
+  }
+}
+
 export default async function OgImage() {
+  // Newsreader Light (300) for the headline + Regular (400) for body / mark.
+  // Hosted via Google Fonts CSS endpoint which 302s to woff2 binaries.
+  const [light, regular] = await Promise.all([
+    fetchFontData(
+      "https://fonts.gstatic.com/s/newsreader/v30/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438KizI.woff2"
+    ),
+    fetchFontData(
+      "https://fonts.gstatic.com/s/newsreader/v30/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438Ki1k.woff2"
+    ),
+  ]);
+
+  const fonts = [
+    light && {
+      name: "Newsreader",
+      data: light,
+      style: "normal" as const,
+      weight: 300 as const,
+    },
+    regular && {
+      name: "Newsreader",
+      data: regular,
+      style: "normal" as const,
+      weight: 400 as const,
+    },
+  ].filter(Boolean) as Array<{
+    name: string;
+    data: ArrayBuffer;
+    style: "normal";
+    weight: 300 | 400;
+  }>;
+
   return new ImageResponse(
     (
       <div
@@ -27,153 +70,174 @@ export default async function OgImage() {
           justifyContent: "space-between",
           padding: "72px 80px",
           backgroundColor: "#0a0b0f",
-          color: "#ffffff",
+          color: "#e9e1da",
           position: "relative",
-          fontFamily: "sans-serif",
+          fontFamily: "Newsreader, Georgia, serif",
         }}
       >
-        {/* Soft accent glow top-left */}
+        {/* Soft champagne glow top-right (Editorial restraint — only one) */}
         <div
           style={{
             position: "absolute",
             top: -200,
-            left: -200,
+            right: -150,
             width: 700,
             height: 700,
             borderRadius: 9999,
-            backgroundColor: "#00d4aa",
-            opacity: 0.14,
-            filter: "blur(80px)",
-          }}
-        />
-        {/* Soft accent glow bottom-right */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: -200,
-            right: -200,
-            width: 700,
-            height: 700,
-            borderRadius: 9999,
-            backgroundColor: "#a78bfa",
+            backgroundColor: "#BF9A62",
             opacity: 0.12,
             filter: "blur(80px)",
           }}
         />
 
-        {/* Top: brand mark */}
+        {/* Top: masthead */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 18,
+            justifyContent: "space-between",
           }}
         >
-          {/* Stack mark — three bars in champagne (5:8:13 Fibonacci) */}
-          <svg
-            width="52"
-            height="52"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect x="35" y="23" width="30" height="14" fill="#BF9A62" />
-            <rect x="25" y="43" width="50" height="14" fill="#BF9A62" />
-            <rect x="10" y="63" width="80" height="14" fill="#BF9A62" />
-          </svg>
+          {/* Brand mark + wordmark */}
           <div
             style={{
-              fontSize: 32,
-              fontWeight: 700,
-              letterSpacing: "-0.01em",
+              display: "flex",
+              alignItems: "center",
+              gap: 18,
             }}
           >
-            Compound OS
+            <svg
+              width="44"
+              height="44"
+              viewBox="0 0 100 100"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect x="35" y="23" width="30" height="14" fill="#BF9A62" />
+              <rect x="25" y="43" width="50" height="14" fill="#BF9A62" />
+              <rect x="10" y="63" width="80" height="14" fill="#BF9A62" />
+            </svg>
+            <div
+              style={{
+                fontSize: 22,
+                fontWeight: 400,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#BF9A62",
+              }}
+            >
+              Compound OS
+            </div>
+          </div>
+
+          {/* Issue indicator */}
+          <div
+            style={{
+              fontSize: 14,
+              fontWeight: 400,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "#9a8f81",
+            }}
+          >
+            Vol. I · Issue 01
           </div>
         </div>
 
-        {/* Middle: headline */}
+        {/* Middle: serif display headline */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: 24,
+            gap: 32,
           }}
         >
           <div
             style={{
               fontSize: 84,
-              fontWeight: 800,
-              lineHeight: 1.04,
-              letterSpacing: "-0.035em",
+              fontWeight: 300,
+              lineHeight: 1.05,
+              letterSpacing: "-0.02em",
               maxWidth: 1000,
-              color: "#ffffff",
+              color: "#e9e1da",
             }}
           >
             The operating system for a compounding life.
           </div>
           <div
             style={{
-              fontSize: 32,
-              color: "#a1a1aa",
-              letterSpacing: "-0.01em",
-              maxWidth: 950,
+              fontSize: 28,
+              fontStyle: "italic",
+              fontWeight: 400,
+              color: "#d2c4b5",
+              letterSpacing: "-0.005em",
+              maxWidth: 900,
+              lineHeight: 1.5,
             }}
           >
             Three pillars. One system. Markets. Fitness. Mindset.
           </div>
         </div>
 
-        {/* Bottom: pillar chips + URL */}
+        {/* Bottom: pillar chapters + URL */}
         <div
           style={{
             display: "flex",
-            alignItems: "center",
+            alignItems: "flex-end",
             justifyContent: "space-between",
             width: "100%",
+            paddingTop: 28,
+            borderTop: "1px solid #4e453a",
           }}
         >
           <div
             style={{
               display: "flex",
-              gap: 14,
+              gap: 40,
             }}
           >
             {[
-              { label: "Markets", color: "#00d4aa" },
-              { label: "Fitness", color: "#f97316" },
-              { label: "Mindset", color: "#a78bfa" },
+              { roman: "I", label: "Markets", color: "#00d4aa" },
+              { roman: "II", label: "Fitness", color: "#f97316" },
+              { roman: "III", label: "Mindset", color: "#a78bfa" },
             ].map((p) => (
               <div
                 key={p.label}
                 style={{
                   display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  padding: "12px 22px",
-                  borderRadius: 999,
-                  border: `1.5px solid ${p.color}`,
-                  fontSize: 24,
-                  fontWeight: 600,
-                  color: p.color,
+                  flexDirection: "column",
+                  gap: 4,
                 }}
               >
                 <div
                   style={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: 999,
-                    backgroundColor: p.color,
+                    display: "flex",
+                    fontSize: 14,
+                    fontWeight: 400,
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                    color: p.color,
                   }}
-                />
-                {p.label}
+                >
+                  {`Ch. ${p.roman}`}
+                </div>
+                <div
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 300,
+                    color: "#e9e1da",
+                  }}
+                >
+                  {p.label}
+                </div>
               </div>
             ))}
           </div>
           <div
             style={{
-              fontSize: 22,
-              color: "#71717a",
-              letterSpacing: "-0.005em",
+              fontSize: 16,
+              fontStyle: "italic",
+              fontWeight: 400,
+              color: "#9a8f81",
             }}
           >
             thecompoundsystem.com
@@ -181,6 +245,9 @@ export default async function OgImage() {
         </div>
       </div>
     ),
-    { ...size },
+    {
+      ...size,
+      ...(fonts.length > 0 ? { fonts } : {}),
+    }
   );
 }

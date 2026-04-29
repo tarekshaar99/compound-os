@@ -9,14 +9,18 @@ interface PricingLite {
   isFounding: boolean;
 }
 
+/**
+ * Sticky-bottom CTA on mobile only. Slides in once the user has scrolled
+ * past the hero (~500px), gets out of the way for paid users entirely.
+ * Editorial Quarterly styling: hairline top border, no rounded corners,
+ * Newsreader serif price, label-caps CTA.
+ */
 export default function MobileCTA() {
   const [visible, setVisible] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [pricing, setPricing] = useState<PricingLite | null>(null);
 
   useEffect(() => {
-    // Real auth state comes from the httpOnly cos_session cookie,
-    // queried via /api/me (reads the cookie server-side).
     fetch("/api/me", { credentials: "same-origin" })
       .then((r) => r.json())
       .then((d) => {
@@ -26,14 +30,12 @@ export default function MobileCTA() {
       })
       .catch(() => {});
 
-    // Live pricing - reflects whether founding spots remain.
     fetch("/api/pricing", { credentials: "same-origin" })
       .then((r) => r.json())
       .then((d) => setPricing(d))
       .catch(() => {});
 
     const onScroll = () => {
-      // Show after scrolling past the hero (~500px)
       setVisible(window.scrollY > 500);
     };
 
@@ -45,29 +47,37 @@ export default function MobileCTA() {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-50 md:hidden transition-transform duration-300 ${
+      className={`fixed bottom-0 left-0 right-0 z-50 md:hidden transition-transform duration-500 ${
         visible ? "translate-y-0" : "translate-y-full"
       }`}
     >
-      <div className="bg-[var(--bg)]/95 backdrop-blur-xl border-t border-[var(--border)] px-4 py-3 flex items-center justify-between gap-3">
+      <div className="bg-[var(--bg)]/95 backdrop-blur-xl border-t border-[var(--border)] px-4 py-3.5 flex items-center justify-between gap-3">
         <div className="min-w-0">
-          <div className="text-sm font-bold text-[var(--text-primary)]">Compound OS</div>
-          <div className="text-xs text-[var(--text-muted)]">
-            {pricing?.isFounding && (
-              <span className="line-through text-[var(--text-muted)]/60 mr-1.5">
+          <div className="label-caps text-[var(--text-muted)] mb-1">
+            Compound OS
+          </div>
+          <div className="font-serif text-[15px] flex items-baseline gap-2 leading-tight">
+            {pricing?.isFounding && pricing.standardDisplay && (
+              <span className="text-[var(--text-muted)] line-through decoration-1 text-[13px]">
                 {pricing.standardDisplay}
               </span>
             )}
-            <span className="text-[var(--accent)] font-semibold">
+            <span className="text-[var(--accent)] text-[20px] font-light tabular-nums">
               {pricing?.display ?? "$49"}
             </span>
-            <span className="ml-1.5">
-              {pricing?.isFounding ? "founding price" : "one-time"}
+            <span className="font-serif italic text-[12px] text-[var(--text-muted)]">
+              {pricing?.isFounding ? "founding" : "one-time"}
             </span>
           </div>
         </div>
-        <CheckoutButton className="shrink-0 px-6 py-2.5 rounded-lg bg-[var(--accent)] text-[#0a0b0f] font-bold text-sm transition-all hover:opacity-90 cursor-pointer">
+        <CheckoutButton className="group inline-flex items-center justify-center gap-2 shrink-0 px-5 py-3 bg-[var(--accent)] text-[var(--on-accent)] label-caps border border-[var(--accent)] transition-all duration-300 cursor-pointer">
           Get Access
+          <span
+            aria-hidden
+            className="inline-block transition-transform duration-300 group-hover:translate-x-0.5"
+          >
+            &rarr;
+          </span>
         </CheckoutButton>
       </div>
     </div>
