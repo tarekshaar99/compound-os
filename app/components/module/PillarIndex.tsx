@@ -494,8 +494,7 @@ async function PublicPillarPreview({ pillar }: { pillar: Pillar }) {
 
               {pricing.isFounding && (
                 <p className="mt-6 font-serif italic text-[13px] text-[var(--text-muted)]">
-                  Founding price &middot; {pricing.spotsRemaining} spots
-                  remaining of {100}.
+                  Founding price &middot; early access window open.
                 </p>
               )}
             </div>

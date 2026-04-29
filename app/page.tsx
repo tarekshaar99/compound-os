@@ -541,21 +541,6 @@ export default async function Home() {
                 </p>
               </div>
 
-              {/* Allocation indicator */}
-              {pricing.isFounding && (
-                <div className="px-6 md:px-10 py-5 border-y border-[var(--border)] flex items-baseline justify-between">
-                  <span className="label-caps text-[var(--text-muted)]">
-                    Allocation
-                  </span>
-                  <span className="font-serif text-[24px] text-[var(--accent)]">
-                    <CountUp to={pricing.spotsRemaining} duration={1.6} />
-                    <span className="font-serif italic text-[13px] text-[var(--text-muted)] ml-2">
-                      spots remaining
-                    </span>
-                  </span>
-                </div>
-              )}
-
               {/* Features list */}
               <ul className="px-6 md:px-10 py-8 space-y-4">
                 {[
