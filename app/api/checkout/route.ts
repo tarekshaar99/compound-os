@@ -33,11 +33,20 @@ export async function POST(req: NextRequest) {
   try {
     // Email is optional here - Stripe collects it on the checkout page.
     // If the client passes it (from the pricing CTA in Phase 5), we lock identity.
+    //
+    // eventId is the conversion-tracking dedupe key minted by the client
+    // pixel layer. It travels into Stripe session metadata and back out
+    // via the webhook so the server-side Meta CAPI / TikTok Events fire
+    // matches the client-side InitiateCheckout / Purchase fires.
     let prefillEmail: string | undefined;
+    let eventId: string | undefined;
     try {
       const body = await req.json();
       if (typeof body?.email === "string" && body.email.includes("@")) {
         prefillEmail = body.email.trim().toLowerCase();
+      }
+      if (typeof body?.eventId === "string" && body.eventId.length > 0 && body.eventId.length <= 128) {
+        eventId = body.eventId;
       }
     } catch {
       // No body is fine.
@@ -108,6 +117,7 @@ export async function POST(req: NextRequest) {
         },
       ],
       client_reference_id: prefillEmail ?? undefined,
+      ...(eventId ? { metadata: { eventId } } : {}),
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/#pricing`,
     });

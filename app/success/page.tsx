@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import LoginForm from "../components/LoginForm";
 import Reveal from "../components/motion/Reveal";
+import { trackPurchase } from "../lib/ads-client";
 
 function SuccessContent() {
   const searchParams = useSearchParams();
@@ -35,6 +36,28 @@ function SuccessContent() {
         if (data.valid) {
           if (data.email) setEmail(data.email);
           setStatus("success");
+
+          // Fire client-side Purchase conversion event for Meta /
+          // Google / TikTok pixels. Server-side webhook fires the same
+          // event with the same eventId for dedupe; sessionStorage
+          // gates against re-firing if the user refreshes /success.
+          //
+          // eventId is only present on the slow-path response (when
+          // verify fetched the Stripe session itself). On the fast
+          // path, the webhook already fired server-side, so we skip
+          // the client fire to avoid double-counting.
+          if (data.eventId && typeof window !== "undefined") {
+            const guardKey = `cos_purchase_fired_${sessionId}`;
+            if (!window.sessionStorage.getItem(guardKey)) {
+              trackPurchase({
+                eventId: data.eventId,
+                email: data.email ?? null,
+                value: 49,
+                currency: "USD",
+              });
+              window.sessionStorage.setItem(guardKey, "1");
+            }
+          }
         } else {
           setStatus("error");
         }

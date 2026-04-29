@@ -4,6 +4,7 @@ import * as Sentry from "@sentry/nextjs";
 import { getServiceSupabase } from "../../../lib/supabase";
 import { sendWelcomeEmail } from "../../../lib/email";
 import { FOUNDING_LIMIT } from "../../../lib/pricing";
+import { serverFirePurchase } from "../../../lib/ads-server";
 
 // Webhook must run on Node.js (not Edge) - needs raw body + stripe SDK.
 export const runtime = "nodejs";
@@ -69,6 +70,7 @@ export async function POST(req: NextRequest) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
         await grantAccess(session);
+        await mirrorPurchaseToAdsPlatforms(session, req);
         break;
       }
 
@@ -76,6 +78,7 @@ export async function POST(req: NextRequest) {
         // Covers delayed payment methods (bank debits, etc.)
         const session = event.data.object as Stripe.Checkout.Session;
         await grantAccess(session);
+        await mirrorPurchaseToAdsPlatforms(session, req);
         break;
       }
 
@@ -193,6 +196,60 @@ async function grantAccess(session: Stripe.Checkout.Session) {
       level: "warning",
       tags: { area: "stripe-webhook", stage: "welcome-email" },
       extra: { email: normalizedEmail },
+    });
+  }
+}
+
+/**
+ * Fires server-side Purchase events to Meta CAPI + TikTok Events API
+ * after a successful Stripe payment. Uses the eventId stamped on the
+ * Stripe session by /api/checkout so the client-side Purchase fire from
+ * /success dedupes against this one (when both fire for the same buyer).
+ *
+ * Best-effort — never throws. A platform outage must not retry the
+ * webhook (which would risk double-grant).
+ */
+async function mirrorPurchaseToAdsPlatforms(
+  session: Stripe.Checkout.Session,
+  req: NextRequest
+) {
+  if (session.payment_status !== "paid") return;
+
+  const email =
+    session.customer_details?.email?.trim().toLowerCase() ??
+    session.customer_email?.trim().toLowerCase() ??
+    null;
+  if (!email) return;
+
+  const eventId =
+    typeof session.metadata?.eventId === "string" && session.metadata.eventId.length > 0
+      ? session.metadata.eventId
+      : `srv-${session.id}`;
+
+  // Best-effort: pull request-level forensics so Meta's match algorithm
+  // has more signal. The client_ip the webhook sees is Stripe's, not the
+  // buyer's, so we don't forward IP — Meta scores that against Stripe
+  // ranges anyway. User-Agent is omitted for the same reason.
+  const valueDollars =
+    typeof session.amount_total === "number" ? session.amount_total / 100 : 49;
+  const currency =
+    typeof session.currency === "string" ? session.currency.toUpperCase() : "USD";
+
+  try {
+    await serverFirePurchase({
+      eventId,
+      email,
+      value: valueDollars,
+      currency,
+      eventSourceUrl: `${req.nextUrl.origin}/success`,
+    });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "unknown";
+    console.error("[stripe-webhook] ads mirror failed (non-fatal):", msg);
+    Sentry.captureException(err, {
+      level: "warning",
+      tags: { area: "stripe-webhook", stage: "ads-mirror" },
+      extra: { event_id: eventId, session_id: session.id },
     });
   }
 }

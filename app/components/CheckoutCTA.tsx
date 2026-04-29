@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { track } from "../lib/track";
+import { newEventId, trackInitiateCheckout } from "../lib/ads-client";
 
 /**
  * Button-only checkout CTA for the homepage pricing block.
@@ -27,11 +28,20 @@ export default function CheckoutCTA({
   const handleClick = async () => {
     setError(null);
     setLoading(true);
+
+    // Same event_id pattern as <CheckoutButton /> — minted client-side,
+    // travels through Stripe metadata to the webhook for server-side fire,
+    // dedupes matched conversion events on Meta + TikTok.
+    const eventId = newEventId();
+
     track("checkout_initiated", { source: "homepage_cta" }, "anon");
+    trackInitiateCheckout({ eventId });
+
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ eventId }),
       });
       const data = await res.json();
       if (data.url) {

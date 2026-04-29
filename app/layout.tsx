@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Newsreader, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import AdsPixels from "./components/AdsPixels";
+import PageViewTracker from "./components/PageViewTracker";
 import "./globals.css";
 
 /**
@@ -110,6 +113,14 @@ export default function RootLayout({
         className={`${newsreader.variable} ${inter.variable} antialiased`}
       >
         {children}
+        {/* Ad-platform conversion pixels (Meta, Google, TikTok). Each is
+            gated on its NEXT_PUBLIC_* env var; missing = no script loaded. */}
+        <AdsPixels />
+        {/* PageViewTracker uses useSearchParams; must be in Suspense per
+            Next.js App Router rules. */}
+        <Suspense fallback={null}>
+          <PageViewTracker />
+        </Suspense>
         <Analytics />
       </body>
     </html>

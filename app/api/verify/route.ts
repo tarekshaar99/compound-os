@@ -40,6 +40,10 @@ export async function POST(req: NextRequest) {
       .maybeSingle();
 
     if (userBySession?.paid) {
+      // Fast path. The webhook has already processed this session, which
+      // means the server-side Purchase event was fired from the webhook.
+      // No client-side eventId returned — /success skips its client fire
+      // and we avoid double-counting.
       return await mintAndRespond({
         email: userBySession.email,
         paid: true,
@@ -63,6 +67,15 @@ export async function POST(req: NextRequest) {
     if (!email) {
       return NextResponse.json({ valid: false, reason: "no_email" }, { status: 400 });
     }
+
+    // Pull the conversion-tracking event_id stamped onto the Stripe
+    // session by /api/checkout so /success can fire the matching
+    // client-side Purchase event with the same eventId. This is what
+    // makes Meta + TikTok dedupe the client and server fires.
+    const eventId =
+      typeof session.metadata?.eventId === "string"
+        ? session.metadata.eventId
+        : undefined;
 
     const { error } = await supabase.from("users").upsert(
       {
@@ -92,6 +105,7 @@ export async function POST(req: NextRequest) {
       email: after?.email ?? email,
       paid: true,
       admin: after?.admin === true,
+      eventId,
     });
   } catch (err) {
     const msg = err instanceof Error ? err.message : "unknown";
@@ -100,9 +114,18 @@ export async function POST(req: NextRequest) {
   }
 }
 
-async function mintAndRespond(args: { email: string; paid: boolean; admin: boolean }) {
+async function mintAndRespond(args: {
+  email: string;
+  paid: boolean;
+  admin: boolean;
+  eventId?: string;
+}) {
   const jwt = await signSession({ sub: args.email, paid: args.paid, admin: args.admin });
-  const res = NextResponse.json({ valid: true, email: args.email });
+  const res = NextResponse.json({
+    valid: true,
+    email: args.email,
+    ...(args.eventId ? { eventId: args.eventId } : {}),
+  });
   setSessionCookie(res, jwt);
   return res;
 }

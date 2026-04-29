@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { track } from "../lib/track";
+import { newEventId, trackInitiateCheckout } from "../lib/ads-client";
 
 export default function CheckoutButton({
   children,
@@ -33,11 +34,24 @@ export default function CheckoutButton({
         emailToSend = collected.trim();
       }
 
+      // Mint an event ID up-front so the same identifier travels client →
+      // Stripe metadata → webhook server-side fire. Meta + TikTok dedupe
+      // matched events with the same event_id.
+      const eventId = newEventId();
+
       track("checkout_initiated", { source: "checkout_button" }, emailToSend || null);
+      trackInitiateCheckout({
+        eventId,
+        email: emailToSend || null,
+      });
+
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(emailToSend ? { email: emailToSend } : {}),
+        body: JSON.stringify({
+          ...(emailToSend ? { email: emailToSend } : {}),
+          eventId,
+        }),
       });
       const data = await res.json();
       if (res.status === 409 && data.alreadyPaid && emailToSend) {
