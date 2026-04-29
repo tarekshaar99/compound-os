@@ -3,32 +3,38 @@
 import { ReactNode } from "react";
 import Link from "next/link";
 import Header from "../Header";
+import Reveal from "../motion/Reveal";
 import { ModuleProvider } from "./ModuleContext";
 import type { Pillar } from "../../lib/modules";
 
 /**
- * Shell every lesson page uses. Sets module context, renders the header/
- * breadcrumb, and gives child sections a consistent vertical rhythm.
- *
- * Usage:
- *   <Lesson moduleId="trading.foundations" pillar="trading"
- *           title="Investing Foundations"
- *           subtitle="The mental model behind every position.">
- *     <LessonSection title="What this is">...</LessonSection>
- *     <Principle>...</Principle>
- *     <Example>...</Example>
- *     <Mistakes items={[...]} />
- *     <Checklist items={[...]} />
- *     <Quiz questions={[...]} />
- *     <Reflection prompt="..." />
- *     <CompleteModule nextPath="/trading" />
- *   </Lesson>
+ * Editorial-Quarterly module shell. Every lesson page renders inside this.
+ * Sets module context, renders the masthead/breadcrumb, and gives child
+ * sections a consistent vertical rhythm.
  */
 
-const PILLAR_META: Record<Pillar, { label: string; color: string; href: string }> = {
-  trading: { label: "Markets", color: "#00d4aa", href: "/trading" },
-  fitness: { label: "Fitness", color: "#f97316", href: "/fitness" },
-  mindset: { label: "Mindset", color: "#a78bfa", href: "/mindset" },
+const PILLAR_META: Record<
+  Pillar,
+  { label: string; chapter: string; color: string; href: string }
+> = {
+  trading: {
+    label: "Markets",
+    chapter: "Chapter I",
+    color: "var(--accent-trading)",
+    href: "/trading",
+  },
+  fitness: {
+    label: "Fitness",
+    chapter: "Chapter II",
+    color: "var(--accent-fitness)",
+    href: "/fitness",
+  },
+  mindset: {
+    label: "Mindset",
+    chapter: "Chapter III",
+    color: "var(--accent-mindset)",
+    href: "/mindset",
+  },
 };
 
 export function Lesson({
@@ -51,36 +57,53 @@ export function Lesson({
     <ModuleProvider moduleId={moduleId}>
       <div className="min-h-screen bg-[var(--bg)]">
         <Header />
-        <article className="max-w-2xl mx-auto px-6 pt-24 pb-24">
-          {/* Breadcrumb */}
-          <div className="mb-6 flex items-center gap-2 text-xs uppercase tracking-widest text-[var(--text-muted)]">
-            <Link href="/dashboard" className="hover:text-[var(--text-secondary)] transition-colors">
-              Dashboard
-            </Link>
-            <span>/</span>
-            <Link href={meta.href} className="hover:text-[var(--text-secondary)] transition-colors" style={{ color: meta.color }}>
-              {meta.label}
-            </Link>
-          </div>
+        <article className="max-w-[680px] mx-auto px-6 pt-32 md:pt-36 pb-24">
+          {/* Editorial breadcrumb */}
+          <Reveal>
+            <div className="mb-8 flex items-center gap-3 label-caps">
+              <Link
+                href="/dashboard"
+                className="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
+              >
+                Dashboard
+              </Link>
+              <span className="text-[var(--text-muted)]">/</span>
+              <Link
+                href={meta.href}
+                className="hover:opacity-80 transition-opacity"
+                style={{ color: meta.color }}
+              >
+                {meta.label}
+              </Link>
+            </div>
+          </Reveal>
 
-          {/* Hero */}
-          <header className="mb-12 pb-8 border-b border-[var(--border)]">
-            <h1 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] tracking-tight leading-[1.15]">
-              {title}
-            </h1>
-            {subtitle && (
-              <p className="mt-4 text-[var(--text-secondary)] text-[15px] leading-relaxed">
-                {subtitle}
-              </p>
-            )}
-            {estMinutes && (
-              <p className="mt-5 text-xs text-[var(--text-muted)] uppercase tracking-widest">
-                {estMinutes} min &middot; Read, then do the task
-              </p>
-            )}
-          </header>
+          {/* Editorial hero */}
+          <Reveal delay={0.1}>
+            <header className="mb-14 pb-10 border-b border-[var(--border)]">
+              <span
+                className="label-caps block mb-4"
+                style={{ color: meta.color }}
+              >
+                {meta.chapter} &middot; Module
+              </span>
+              <h1 className="font-serif text-[40px] md:text-[56px] leading-[1.05] tracking-[-0.02em] text-[var(--text-primary)] font-light">
+                {title}
+              </h1>
+              {subtitle && (
+                <p className="mt-5 font-serif italic text-[18px] md:text-[20px] text-[var(--text-secondary)] leading-[1.55] max-w-[560px]">
+                  {subtitle}
+                </p>
+              )}
+              {estMinutes && (
+                <p className="mt-8 label-caps text-[var(--text-muted)]">
+                  {estMinutes} min &middot; Read, then do the task
+                </p>
+              )}
+            </header>
+          </Reveal>
 
-          <div className="space-y-14">{children}</div>
+          <div className="space-y-16">{children}</div>
         </article>
       </div>
     </ModuleProvider>
@@ -95,33 +118,42 @@ export function LessonSection({
   children: ReactNode;
 }) {
   return (
-    <section>
-      <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)] mb-4">
+    <Reveal as="section">
+      <h2 className="label-caps text-[var(--accent)] mb-5 pb-3 border-b border-[var(--border)]">
         {title}
       </h2>
-      <div className="space-y-4 text-[var(--text-secondary)] text-[15px] leading-[1.75]">
+      <div className="space-y-4 font-serif text-[16px] md:text-[17px] text-[var(--text-secondary)] leading-[1.75]">
         {children}
       </div>
-    </section>
+    </Reveal>
   );
 }
 
 export function P({ children }: { children: ReactNode }) {
-  return <p className="text-[var(--text-secondary)] text-[15px] leading-[1.75]">{children}</p>;
+  return (
+    <p className="font-serif text-[16px] md:text-[17px] text-[var(--text-secondary)] leading-[1.75]">
+      {children}
+    </p>
+  );
 }
 
 export function Principle({ children }: { children: ReactNode }) {
   return (
-    <section>
-      <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)] mb-4">
+    <Reveal as="section">
+      <h2 className="label-caps text-[var(--accent)] mb-5 pb-3 border-b border-[var(--border)]">
         Core principle
       </h2>
-      <div className="p-5 md:p-6 rounded-xl border border-[var(--accent)]/25 bg-[var(--accent)]/[0.04]">
-        <div className="text-[var(--text-primary)] text-[16px] leading-[1.7] font-medium">
+      <div className="relative bg-[var(--card-bg)] border border-[var(--border)] p-6 md:p-8">
+        {/* Corner accents */}
+        <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[var(--accent)]" />
+        <span className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[var(--accent)]" />
+        <span className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-[var(--accent)]" />
+        <span className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[var(--accent)]" />
+        <div className="font-serif italic text-[18px] md:text-[20px] text-[var(--text-primary)] leading-[1.65]">
           {children}
         </div>
       </div>
-    </section>
+    </Reveal>
   );
 }
 
@@ -133,38 +165,42 @@ export function Example({
   children: ReactNode;
 }) {
   return (
-    <section>
-      <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)] mb-4">
+    <Reveal as="section">
+      <h2 className="label-caps text-[var(--text-muted)] mb-5 pb-3 border-b border-[var(--border)]">
         {title ?? "Real-world example"}
       </h2>
-      <div className="p-5 md:p-6 rounded-xl border border-[var(--border)] bg-[var(--card-bg)] space-y-3 text-[var(--text-secondary)] text-[15px] leading-[1.75]">
+      <div className="bg-[var(--card-bg)] border border-[var(--border)] p-6 md:p-8 space-y-4 font-serif text-[16px] md:text-[17px] text-[var(--text-secondary)] leading-[1.75]">
         {children}
       </div>
-    </section>
+    </Reveal>
   );
 }
 
 export function Mistakes({ items }: { items: string[] }) {
   return (
-    <section>
-      <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)] mb-4">
+    <Reveal as="section">
+      <h2 className="label-caps text-[var(--text-muted)] mb-5 pb-3 border-b border-[var(--border)]">
         Common mistakes
       </h2>
-      <ul className="space-y-3">
+      <ul className="divide-y divide-[var(--border)]">
         {items.map((text, i) => (
           <li
             key={i}
-            className="flex gap-3 p-4 rounded-xl border border-[var(--border)] bg-[var(--card-bg)]"
+            className="flex items-baseline gap-4 py-4"
           >
-            <span className="text-[#ef4444] font-bold shrink-0" aria-hidden>
-              ✕
+            <span
+              className="label-caps shrink-0 w-10"
+              style={{ color: "#ff8a8a" }}
+              aria-hidden
+            >
+              No.
             </span>
-            <span className="text-[var(--text-secondary)] text-[15px] leading-[1.7]">
+            <span className="font-serif text-[16px] md:text-[17px] text-[var(--text-secondary)] leading-[1.7]">
               {text}
             </span>
           </li>
         ))}
       </ul>
-    </section>
+    </Reveal>
   );
 }

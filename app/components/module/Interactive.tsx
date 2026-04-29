@@ -3,14 +3,13 @@
 import { useMemo, useState } from "react";
 import { useModule } from "./ModuleContext";
 import { decodeEntities } from "../../lib/text";
+import Reveal from "../motion/Reveal";
 
 /* ────────────────── Checklist ────────────────── */
 
 /**
  * Persisted checklist. Each item has a stable local `id` so we can hydrate
  * from ModuleContext.items[itemId] = boolean.
- *
- * Designed so `CompleteModule` can require "all checked" before enabling.
  */
 export interface ChecklistItem {
   id: string;
@@ -38,54 +37,62 @@ export function Checklist({
   const doneCount = items.filter((it) => map[it.id]).length;
 
   return (
-    <section>
-      <div className="flex items-end justify-between mb-4">
-        <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+    <Reveal as="section">
+      <div className="flex items-baseline justify-between mb-5 pb-3 border-b border-[var(--border)]">
+        <h2 className="label-caps text-[var(--accent)]">
           {title ?? "Action checklist"}
         </h2>
-        <span className="text-xs text-[var(--text-muted)] tabular-nums">
+        <span className="label-caps text-[var(--text-muted)] tabular-nums">
           {doneCount} / {items.length}
         </span>
       </div>
-      <ul className="space-y-2">
+      <ul className="divide-y divide-[var(--border)]">
         {items.map((it) => {
           const checked = !!map[it.id];
           return (
             <li key={it.id}>
               <button
+                type="button"
                 onClick={() => toggle(it.id)}
-                className={`w-full text-left flex gap-3 p-4 rounded-xl border transition-all cursor-pointer ${
-                  checked
-                    ? "border-[var(--accent)]/40 bg-[var(--accent)]/[0.04]"
-                    : "border-[var(--border)] bg-[var(--card-bg)] hover:border-white/[0.12]"
-                }`}
+                className="w-full text-left flex items-baseline gap-4 py-4 hover:bg-[var(--card-bg)] transition-colors px-2 -mx-2 cursor-pointer"
               >
                 <span
-                  className={`shrink-0 w-5 h-5 mt-0.5 rounded-md border-2 flex items-center justify-center transition-colors ${
+                  className="shrink-0 w-5 h-5 mt-0.5 border flex items-center justify-center transition-colors"
+                  style={
                     checked
-                      ? "border-[var(--accent)] bg-[var(--accent)]"
-                      : "border-[var(--text-muted)]"
-                  }`}
+                      ? {
+                          borderColor: "var(--accent)",
+                          background: "var(--accent)",
+                        }
+                      : { borderColor: "var(--text-muted)" }
+                  }
                   aria-hidden
                 >
                   {checked && (
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#0a0b0f" strokeWidth="2.5">
+                    <svg
+                      width="11"
+                      height="11"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      stroke="#0a0b0f"
+                      strokeWidth="2.5"
+                    >
                       <polyline points="2 6 5 9 10 3" />
                     </svg>
                   )}
                 </span>
                 <span className="flex-1">
                   <span
-                    className={`block text-[15px] leading-snug ${
+                    className={`block font-serif text-[16px] md:text-[17px] leading-snug ${
                       checked
-                        ? "text-[var(--text-primary)] font-medium"
+                        ? "text-[var(--text-primary)]"
                         : "text-[var(--text-secondary)]"
                     }`}
                   >
                     {decodeEntities(it.label)}
                   </span>
                   {it.hint && (
-                    <span className="block mt-1 text-[13px] text-[var(--text-muted)] leading-relaxed">
+                    <span className="block mt-1.5 font-serif italic text-[14px] text-[var(--text-muted)] leading-relaxed">
                       {decodeEntities(it.hint)}
                     </span>
                   )}
@@ -95,7 +102,7 @@ export function Checklist({
           );
         })}
       </ul>
-    </section>
+    </Reveal>
   );
 }
 
@@ -129,20 +136,28 @@ export function Quiz({
   };
 
   return (
-    <section>
-      <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)] mb-4">
+    <Reveal as="section">
+      <h2 className="label-caps text-[var(--accent)] mb-5 pb-3 border-b border-[var(--border)]">
         {title ?? "Quick check"}
       </h2>
-      <div className="space-y-6">
-        {questions.map((q) => {
+      <div className="space-y-8">
+        {questions.map((q, qi) => {
           const chosen = answers[q.id];
           const answered = typeof chosen === "number";
           return (
-            <div key={q.id} className="p-5 rounded-xl border border-[var(--border)] bg-[var(--card-bg)]">
-              <p className="text-[15px] text-[var(--text-primary)] font-medium leading-snug mb-4">
-                {decodeEntities(q.prompt)}
-              </p>
-              <div className="space-y-2">
+            <div
+              key={q.id}
+              className="bg-[var(--card-bg)] border border-[var(--border)] p-5 md:p-6"
+            >
+              <div className="flex items-baseline gap-3 mb-5">
+                <span className="label-caps text-[var(--text-muted)] shrink-0">
+                  Q{String(qi + 1).padStart(2, "0")}
+                </span>
+                <p className="font-serif text-[16px] md:text-[18px] text-[var(--text-primary)] leading-snug">
+                  {decodeEntities(q.prompt)}
+                </p>
+              </div>
+              <div className="space-y-1.5">
                 {q.options.map((opt, i) => {
                   const isChosen = chosen === i;
                   const isCorrect = i === q.correct;
@@ -154,20 +169,21 @@ export function Quiz({
                   }
                   const cls =
                     state === "right"
-                      ? "border-[var(--accent)]/60 bg-[var(--accent)]/[0.08] text-[var(--text-primary)]"
+                      ? "border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--text-primary)]"
                       : state === "wrong"
-                      ? "border-[#ef4444]/50 bg-[#ef4444]/[0.06] text-[var(--text-secondary)]"
-                      : state === "missed"
-                      ? "border-[var(--accent)]/30 text-[var(--text-secondary)]"
-                      : isChosen
-                      ? "border-white/20 bg-white/[0.03] text-[var(--text-primary)]"
-                      : "border-[var(--border)] hover:border-white/15 text-[var(--text-secondary)]";
+                        ? "border-[#ef4444]/50 bg-[#ef4444]/[0.06] text-[var(--text-secondary)]"
+                        : state === "missed"
+                          ? "border-[var(--accent)]/30 text-[var(--text-secondary)]"
+                          : isChosen
+                            ? "border-[var(--text-primary)] text-[var(--text-primary)]"
+                            : "border-[var(--border)] hover:border-[var(--text-muted)] text-[var(--text-secondary)]";
                   return (
                     <button
                       key={i}
+                      type="button"
                       onClick={() => choose(q.id, i)}
                       disabled={answered}
-                      className={`w-full text-left px-4 py-3 rounded-lg border text-[14px] leading-snug transition-colors ${cls} ${
+                      className={`w-full text-left px-4 py-3 border font-serif text-[15px] leading-snug transition-colors ${cls} ${
                         answered ? "cursor-default" : "cursor-pointer"
                       }`}
                     >
@@ -177,7 +193,7 @@ export function Quiz({
                 })}
               </div>
               {answered && q.explain && (
-                <p className="mt-4 text-[13px] text-[var(--text-muted)] leading-relaxed">
+                <p className="mt-4 pt-4 border-t border-[var(--border-soft)] font-serif italic text-[14px] text-[var(--text-muted)] leading-relaxed">
                   {decodeEntities(q.explain)}
                 </p>
               )}
@@ -185,7 +201,7 @@ export function Quiz({
           );
         })}
       </div>
-    </section>
+    </Reveal>
   );
 }
 
@@ -208,31 +224,35 @@ export function Reflection({
   const ok = chars >= minChars;
 
   return (
-    <section>
-      <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)] mb-4">
+    <Reveal as="section">
+      <h2 className="label-caps text-[var(--accent)] mb-5 pb-3 border-b border-[var(--border)]">
         Reflection
       </h2>
-      <div className="p-5 rounded-xl border border-[var(--border)] bg-[var(--card-bg)]">
-        <p className="text-[15px] text-[var(--text-primary)] font-medium leading-snug mb-3">
+      <div className="bg-[var(--card-bg)] border border-[var(--border)] p-5 md:p-6">
+        <p className="font-serif italic text-[16px] md:text-[18px] text-[var(--text-primary)] leading-snug mb-4">
           {decodeEntities(prompt)}
         </p>
+        <label className="sr-only" htmlFor={`reflection-${storageKey}`}>
+          Your reflection
+        </label>
         <textarea
+          id={`reflection-${storageKey}`}
           value={value}
           onChange={(e) => setItem(storageKey, e.target.value)}
           placeholder={placeholder}
           rows={5}
-          className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 py-2.5 text-[14px] text-[var(--text-primary)] leading-relaxed outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/30 resize-y"
+          className="w-full border border-[var(--border)] bg-[var(--bg)] px-4 py-3 font-serif text-[15px] text-[var(--text-primary)] leading-relaxed outline-none focus:border-[var(--accent)] focus-visible:border-[var(--accent)] resize-y placeholder:font-serif placeholder:italic placeholder:text-[var(--text-muted)]"
         />
-        <div className="mt-2 flex justify-between items-center text-[11px] tabular-nums">
-          <span className="text-[var(--text-muted)]">
-            {ok ? "Saved locally. Only you can see this." : `At least ${minChars} characters`}
+        <div className="mt-3 flex justify-between items-center label-caps tabular-nums">
+          <span className="text-[var(--text-muted)] normal-case tracking-normal font-serif italic text-[12px]">
+            {ok ? "Saved locally · only you can see this" : `At least ${minChars} characters`}
           </span>
           <span className={ok ? "text-[var(--accent)]" : "text-[var(--text-muted)]"}>
-            {chars} chars
+            {chars}
           </span>
         </div>
       </div>
-    </section>
+    </Reveal>
   );
 }
 
@@ -246,23 +266,24 @@ export function Calculator({
   children: React.ReactNode;
 }) {
   return (
-    <section>
-      <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)] mb-4">
+    <Reveal as="section">
+      <h2 className="label-caps text-[var(--accent)] mb-5 pb-3 border-b border-[var(--border)]">
         {title}
       </h2>
-      <div className="p-5 md:p-6 rounded-xl border border-[var(--accent)]/25 bg-[var(--accent)]/[0.03]">
+      <div className="relative bg-[var(--card-bg)] border border-[var(--border)] p-5 md:p-6">
+        <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[var(--accent)]" />
+        <span className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[var(--accent)]" />
         {children}
       </div>
-    </section>
+    </Reveal>
   );
 }
 
 /* ────────────────── CompleteModule ────────────────── */
 
 /**
- * The action that actually marks the module complete on the server.
- * If `requireChecklistKey` is set, it checks that every item in that
- * checklist is ticked before enabling the button.
+ * Marks the module complete on the server. If `requireChecklistKey` is set,
+ * checks that every item in that checklist is ticked before enabling.
  */
 export function CompleteModule({
   nextPath,
@@ -299,7 +320,6 @@ export function CompleteModule({
     setSaving(false);
     if (ok) {
       setJustCompleted(true);
-      // Give the success state a beat, then move on.
       setTimeout(() => {
         if (nextPath) window.location.href = nextPath;
       }, 900);
@@ -309,36 +329,42 @@ export function CompleteModule({
   const isDone = completed || justCompleted;
 
   return (
-    <section className="pt-6 border-t border-[var(--border)]">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <section className="pt-10 border-t border-[var(--border)]">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
         <div>
-          <div className="text-xs uppercase tracking-widest text-[var(--text-muted)]">
-            {isDone ? "Module complete" : "When you've done the task"}
-          </div>
-          <div className="text-[15px] text-[var(--text-primary)] font-medium mt-1">
+          <span className="label-caps text-[var(--text-muted)] block mb-2">
+            {isDone ? "Module synthesized" : "When you've done the task"}
+          </span>
+          <p className="font-serif text-[16px] md:text-[18px] text-[var(--text-primary)] leading-snug">
             {isDone
               ? "Nice. Your progress is saved to your account."
               : canComplete
-              ? "Mark complete to save progress and unlock what's next."
-              : "Finish the checklist above to enable the completion button."}
-          </div>
+                ? "Mark complete to save progress and unlock what's next."
+                : "Finish the checklist above to enable the completion button."}
+          </p>
         </div>
         <button
+          type="button"
           onClick={onClick}
           disabled={!canComplete || saving}
-          className={`shrink-0 px-5 py-3 rounded-xl text-sm font-bold transition-all disabled:opacity-40 disabled:cursor-not-allowed ${
+          className={`group inline-flex items-center justify-center gap-3 px-7 py-4 label-caps border transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed shrink-0 ${
             isDone
-              ? "bg-[var(--accent)]/20 text-[var(--accent)] border border-[var(--accent)]/40"
-              : "bg-[var(--accent)] text-[#0a0b0f] hover:opacity-90 cursor-pointer"
+              ? "border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)]/10 cursor-pointer"
+              : "bg-[var(--accent)] text-[var(--on-accent)] border-[var(--accent)] hover:bg-transparent hover:text-[var(--accent)] cursor-pointer"
           }`}
         >
           {saving
-            ? "Saving..."
+            ? "Saving…"
             : isDone
-            ? nextLabel
-              ? `${nextLabel} →`
-              : "Continue →"
-            : "Mark complete"}
+              ? nextLabel
+                ? `${nextLabel}`
+                : "Continue"
+              : "Mark Complete"}
+          {!saving && (
+            <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+              &rarr;
+            </span>
+          )}
         </button>
       </div>
     </section>
@@ -355,36 +381,45 @@ export function UnlockGate({
   pillarHref: string;
 }) {
   return (
-    <div className="max-w-2xl mx-auto px-6 pt-24 pb-24">
-      <div className="p-8 rounded-2xl border border-[var(--border)] bg-[var(--card-bg)] text-center">
-        <div className="mx-auto w-12 h-12 rounded-full bg-white/[0.04] flex items-center justify-center mb-4">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="var(--text-muted)" strokeWidth="1.8">
-            <rect x="4" y="9" width="12" height="8" rx="1.5" />
-            <path d="M7 9V6a3 3 0 0 1 6 0v3" />
-          </svg>
-        </div>
-        <h2 className="text-xl font-bold text-[var(--text-primary)] mb-2">
-          Advanced module
+    <div className="max-w-2xl mx-auto px-6 pt-32 pb-24">
+      <div className="relative bg-[var(--card-bg)] border border-[var(--border)] p-8 md:p-12 text-center">
+        <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[var(--accent)]" />
+        <span className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[var(--accent)]" />
+        <span className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-[var(--accent)]" />
+        <span className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[var(--accent)]" />
+
+        <span className="label-caps text-[var(--accent)] block mb-6">
+          Advanced &middot; locked
+        </span>
+        <h2 className="font-serif text-[28px] md:text-[36px] leading-[1.1] tracking-tight text-[var(--text-primary)] font-light mb-4">
+          Finish these first.
         </h2>
-        <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">
-          Finish these first. It takes maybe fifteen minutes and the advanced material lands much harder with them in place.
+        <p className="font-serif italic text-[15px] md:text-[16px] text-[var(--text-secondary)] leading-relaxed mb-8 max-w-md mx-auto">
+          It takes maybe fifteen minutes and the advanced material lands much
+          harder with them in place.
         </p>
-        <ul className="inline-block text-left space-y-2 mb-8">
+        <ul className="inline-block text-left space-y-3 mb-10">
           {requiredTitles.map((t) => (
-            <li key={t} className="flex items-center gap-2.5 text-[14px] text-[var(--text-secondary)]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" aria-hidden />
+            <li
+              key={t}
+              className="flex items-baseline gap-3 font-serif text-[15px] md:text-[16px] text-[var(--text-secondary)]"
+            >
+              <span
+                className="label-caps text-[var(--accent)] shrink-0"
+                aria-hidden
+              >
+                &mdash;
+              </span>
               {t}
             </li>
           ))}
         </ul>
-        <div>
-          <a
-            href={pillarHref}
-            className="inline-block px-5 py-3 rounded-xl bg-[var(--accent)] text-[#0a0b0f] text-sm font-bold hover:opacity-90 transition-opacity"
-          >
-            Back to pillar
-          </a>
-        </div>
+        <a
+          href={pillarHref}
+          className="inline-flex items-center gap-3 px-7 py-4 bg-[var(--accent)] text-[var(--on-accent)] label-caps border border-[var(--accent)] hover:bg-transparent hover:text-[var(--accent)] transition-all duration-300"
+        >
+          Back to pillar
+        </a>
       </div>
     </div>
   );

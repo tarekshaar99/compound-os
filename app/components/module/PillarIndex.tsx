@@ -11,19 +11,19 @@ import {
 } from "../../lib/modules";
 
 /**
- * Pillar index page. Used by /trading, /fitness, /mindset. Shows the full
- * module list split into Core (always unlocked) and Advanced (gated).
+ * Pillar index page in the Editorial Quarterly direction. Used by /trading,
+ * /fitness, /mindset.
  *
- * This is a server component so the locked/completed state is rendered
- * from the user's actual DB progress on first paint.
+ * Server component — locked/completed state is rendered from the user's
+ * actual DB progress on first paint, no flash.
  */
 
 const PILLAR_META: Record<
   Pillar,
   {
     label: string;
+    chapter: string;
     accent: string;
-    icon: string;
     tagline: string;
     libraryHref: string;
     libraryLabel: string;
@@ -31,30 +31,30 @@ const PILLAR_META: Record<
 > = {
   trading: {
     label: "Markets",
-    accent: "#00d4aa",
-    icon: "◈",
+    chapter: "Chapter I",
+    accent: "var(--accent-trading)",
     tagline:
       "Capital preservation first. Then regime-aware deployment. Then income strategies. Work top-down.",
     libraryHref: "/trading/library",
-    libraryLabel: "Full reference library",
+    libraryLabel: "The deep reference library",
   },
   fitness: {
     label: "Fitness",
-    accent: "#f97316",
-    icon: "⚡",
+    chapter: "Chapter II",
+    accent: "var(--accent-fitness)",
     tagline:
       "Hybrid athlete. Strength, cardio, mobility, recovery. Less volume, more intent.",
     libraryHref: "/fitness/library",
-    libraryLabel: "Full program library",
+    libraryLabel: "The full program library",
   },
   mindset: {
     label: "Mindset",
-    accent: "#a78bfa",
-    icon: "◉",
+    chapter: "Chapter III",
+    accent: "var(--accent-mindset)",
     tagline:
       "The operating layer under everything else. Identity, regulation, discipline, self-observation.",
     libraryHref: "/mindset/library",
-    libraryLabel: "Deep library",
+    libraryLabel: "The deep library",
   },
 };
 
@@ -79,123 +79,111 @@ export default async function PillarIndex({ pillar }: { pillar: Pillar }) {
   return (
     <div className="min-h-screen bg-[var(--bg)]">
       <Header />
-      <div className="max-w-3xl mx-auto px-6 pt-24 pb-20">
-        {/* Pillar header */}
-        <div className="mb-12">
-          <Link
-            href="/dashboard"
-            className="text-xs uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors"
-          >
-            ← Dashboard
-          </Link>
-          <div className="mt-6 flex items-start gap-4">
-            <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shrink-0"
-              style={{ background: `${p.accent}20`, color: p.accent }}
-            >
-              {p.icon}
-            </div>
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] tracking-tight leading-[1.1]">
-                {p.label}
-              </h1>
-              <p className="mt-2 text-[var(--text-secondary)] text-[15px] leading-relaxed max-w-xl">
-                {p.tagline}
-              </p>
-            </div>
-          </div>
-          {/* progress */}
-          <div className="mt-6 flex items-center gap-4">
-            <div className="flex-1 h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all duration-700"
-                style={{ width: `${stats.pct}%`, background: p.accent }}
-              />
-            </div>
-            <div className="text-xs text-[var(--text-muted)] tabular-nums shrink-0">
-              {stats.completed}/{stats.total} complete
-            </div>
-          </div>
-        </div>
+      <div className="max-w-[800px] mx-auto px-6 pt-32 md:pt-36 pb-24">
+        {/* Back link */}
+        <Link
+          href="/dashboard"
+          className="label-caps text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors inline-block mb-10"
+        >
+          &larr; Dashboard
+        </Link>
 
-        {/* Core */}
-        <section className="mb-12">
-          <div className="flex items-end justify-between mb-4">
-            <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
-              Core modules
-            </h2>
-            <span className="text-[11px] text-[var(--text-muted)]">
-              Unlocked. Start anywhere.
+        {/* Pillar masthead */}
+        <header className="mb-16">
+          <span
+            className="label-caps block mb-4"
+            style={{ color: p.accent }}
+          >
+            {p.chapter}
+          </span>
+          <h1 className="font-serif text-[44px] md:text-[64px] leading-[1.05] tracking-[-0.02em] text-[var(--text-primary)] font-light mb-6">
+            {p.label}
+          </h1>
+          <p className="font-serif italic text-[18px] md:text-[20px] text-[var(--text-secondary)] leading-[1.6] max-w-[560px]">
+            {p.tagline}
+          </p>
+
+          {/* Progress meter — hairline + serif percent */}
+          <div className="mt-10 flex items-baseline justify-between pb-3 border-b border-[var(--border)]">
+            <span className="label-caps text-[var(--text-muted)]">
+              Progress
+            </span>
+            <span className="font-serif text-[24px] tabular-nums" style={{ color: p.accent }}>
+              {stats.completed}{" "}
+              <span className="text-[var(--text-muted)]">/ {stats.total}</span>
             </span>
           </div>
-          <div className="space-y-3">
+          <div className="relative w-full h-px bg-[var(--border)] overflow-hidden">
+            <div
+              className="absolute inset-y-0 left-0 origin-left transition-transform duration-700"
+              style={{ background: p.accent, width: `${stats.pct}%` }}
+            />
+          </div>
+        </header>
+
+        {/* Core modules */}
+        <section className="mb-16">
+          <div className="flex items-baseline justify-between mb-6 pb-3 border-b border-[var(--border)]">
+            <h2 className="label-caps text-[var(--accent)]">
+              Core modules
+            </h2>
+            <span className="label-caps text-[var(--text-muted)]">
+              Unlocked &middot; start anywhere
+            </span>
+          </div>
+
+          <ul className="divide-y divide-[var(--border)]">
             {core.map((m) => {
               const done = completed.has(m.id);
               return (
-                <Link
-                  key={m.id}
-                  href={m.path}
-                  className="group block p-5 rounded-2xl border border-[var(--border)] bg-[var(--card-bg)] hover:border-white/[0.15] transition-all"
-                >
-                  <div className="flex items-start gap-4">
-                    <div
-                      className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 mt-0.5 ${
-                        done ? "" : "border-2 border-[var(--text-muted)]/60"
-                      }`}
-                      style={done ? { background: p.accent } : undefined}
-                    >
-                      {done && (
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#0a0b0f" strokeWidth="2.5">
-                          <polyline points="2 6 5 9 10 3" />
-                        </svg>
+                <li key={m.id}>
+                  <Link
+                    href={m.path}
+                    className="group flex items-baseline gap-5 py-5 hover:bg-[var(--card-bg)] transition-colors px-2 -mx-2"
+                  >
+                    {/* status indicator */}
+                    <span className="label-caps shrink-0 w-16 mt-1.5">
+                      {done ? (
+                        <span style={{ color: p.accent }}>&#10003; Read</span>
+                      ) : m.startHere ? (
+                        <span style={{ color: p.accent }}>Begin</span>
+                      ) : (
+                        <span className="text-[var(--text-muted)]">Core</span>
                       )}
-                    </div>
+                    </span>
+
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-[16px] font-bold text-[var(--text-primary)] leading-tight">
-                          {m.title}
-                        </h3>
-                        {m.startHere && !done && (
-                          <span
-                            className="text-[9px] uppercase tracking-widest font-bold px-1.5 py-0.5 rounded shrink-0"
-                            style={{ background: `${p.accent}18`, color: p.accent }}
-                          >
-                            Start here
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
+                      <h3 className="font-serif text-[19px] md:text-[22px] tracking-tight text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors leading-snug mb-2">
+                        {m.title}
+                      </h3>
+                      <p className="font-serif text-[14px] md:text-[15px] text-[var(--text-secondary)] leading-[1.65] max-w-prose">
                         {m.blurb}
                       </p>
-                      <div className="mt-2 text-[11px] text-[var(--text-muted)] uppercase tracking-widest">
-                        {m.estMinutes} min
-                      </div>
                     </div>
-                    <span
-                      className="hidden sm:block self-center text-sm font-semibold shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                      style={{ color: p.accent }}
-                    >
-                      →
+
+                    <span className="label-caps text-[var(--text-muted)] shrink-0 hidden sm:block mt-1.5">
+                      {m.estMinutes} min
                     </span>
-                  </div>
-                </Link>
+                  </Link>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </section>
 
-        {/* Advanced */}
+        {/* Advanced modules */}
         {advanced.length > 0 && (
-          <section className="mb-12">
-            <div className="flex items-end justify-between mb-4">
-              <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+          <section className="mb-16">
+            <div className="flex items-baseline justify-between mb-6 pb-3 border-b border-[var(--border)]">
+              <h2 className="label-caps text-[var(--text-muted)]">
                 Advanced modules
               </h2>
-              <span className="text-[11px] text-[var(--text-muted)]">
+              <span className="label-caps text-[var(--text-muted)]">
                 Unlock by completing prerequisites
               </span>
             </div>
-            <div className="space-y-3">
+
+            <ul className="divide-y divide-[var(--border)]">
               {advanced.map((m) => {
                 const done = completed.has(m.id);
                 const isLocked = !unlocked.has(m.id);
@@ -205,95 +193,81 @@ export default async function PillarIndex({ pillar }: { pillar: Pillar }) {
 
                 if (isLocked) {
                   return (
-                    <div
+                    <li
                       key={m.id}
-                      className="p-5 rounded-2xl border border-[var(--border)] bg-white/[0.01] opacity-70"
+                      className="flex items-baseline gap-5 py-5 px-2 -mx-2 opacity-50"
                     >
-                      <div className="flex items-start gap-4">
-                        <div className="w-6 h-6 rounded-md flex items-center justify-center shrink-0 mt-0.5 text-[var(--text-muted)]">
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                            <rect x="3" y="5.5" width="6" height="5" rx="0.5" />
-                            <path d="M4.5 5.5V4a1.5 1.5 0 0 1 3 0v1.5" />
-                          </svg>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-[16px] font-bold text-[var(--text-muted)] leading-tight mb-1">
-                            {m.title}
-                          </h3>
-                          <p className="text-[13px] text-[var(--text-muted)] leading-relaxed mb-2">
-                            {m.blurb}
-                          </p>
-                          <p className="text-[11px] text-[var(--text-muted)]">
-                            Unlocks after: {missing.join(", ")}
-                          </p>
-                        </div>
+                      <span className="label-caps shrink-0 w-16 mt-1.5 text-[var(--text-muted)]">
+                        Locked
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-serif italic text-[19px] md:text-[22px] tracking-tight text-[var(--text-muted)] leading-snug mb-2">
+                          {m.title}
+                        </h3>
+                        <p className="font-serif text-[13px] text-[var(--text-muted)] leading-[1.6]">
+                          Unlocks after: {missing.join(" &middot; ")}
+                        </p>
                       </div>
-                    </div>
+                    </li>
                   );
                 }
 
                 return (
-                  <Link
-                    key={m.id}
-                    href={m.path}
-                    className="group block p-5 rounded-2xl border border-[var(--border)] bg-[var(--card-bg)] hover:border-white/[0.15] transition-all"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div
-                        className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 mt-0.5 ${
-                          done ? "" : "border-2 border-[var(--text-muted)]/60"
-                        }`}
-                        style={done ? { background: p.accent } : undefined}
-                      >
-                        {done && (
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#0a0b0f" strokeWidth="2.5">
-                            <polyline points="2 6 5 9 10 3" />
-                          </svg>
-                        )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <h3 className="text-[16px] font-bold text-[var(--text-primary)] leading-tight">
-                            {m.title}
-                          </h3>
-                          <span
-                            className="text-[9px] uppercase tracking-widest font-bold px-1.5 py-0.5 rounded shrink-0"
-                            style={{ background: `${p.accent}18`, color: p.accent }}
-                          >
-                            Unlocked
+                  <li key={m.id}>
+                    <Link
+                      href={m.path}
+                      className="group flex items-baseline gap-5 py-5 hover:bg-[var(--card-bg)] transition-colors px-2 -mx-2"
+                    >
+                      <span className="label-caps shrink-0 w-16 mt-1.5">
+                        {done ? (
+                          <span style={{ color: p.accent }}>
+                            &#10003; Read
                           </span>
-                        </div>
-                        <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
+                        ) : (
+                          <span style={{ color: p.accent }}>Adv</span>
+                        )}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-serif text-[19px] md:text-[22px] tracking-tight text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors leading-snug mb-2">
+                          {m.title}
+                        </h3>
+                        <p className="font-serif text-[14px] md:text-[15px] text-[var(--text-secondary)] leading-[1.65] max-w-prose">
                           {m.blurb}
                         </p>
-                        <div className="mt-2 text-[11px] text-[var(--text-muted)] uppercase tracking-widest">
-                          {m.estMinutes} min
-                        </div>
                       </div>
-                    </div>
-                  </Link>
+                      <span className="label-caps text-[var(--text-muted)] shrink-0 hidden sm:block mt-1.5">
+                        {m.estMinutes} min
+                      </span>
+                    </Link>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </section>
         )}
 
         {/* Library link */}
-        <section className="pt-6 border-t border-[var(--border)]">
+        <section className="pt-8 border-t border-[var(--border)]">
           <Link
             href={p.libraryHref}
-            className="flex items-center justify-between p-4 rounded-xl border border-[var(--border)] bg-white/[0.02] hover:border-white/[0.15] transition-all group"
+            className="group flex items-baseline justify-between gap-4 py-4 hover:bg-[var(--card-bg)] transition-colors px-4 -mx-4"
           >
             <div>
-              <div className="text-[14px] font-semibold text-[var(--text-primary)]">
+              <span className="label-caps text-[var(--text-muted)] block mb-2">
+                Reference
+              </span>
+              <h3 className="font-serif text-[20px] md:text-[24px] text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors mb-1">
                 {p.libraryLabel}
-              </div>
-              <div className="text-[12px] text-[var(--text-muted)] mt-0.5">
-                The deep-dive reference. Navigate by section. Good once you've done the modules.
-              </div>
+              </h3>
+              <p className="font-serif italic text-[14px] text-[var(--text-secondary)]">
+                Navigate by section. Good once you&apos;ve done the modules.
+              </p>
             </div>
-            <span className="text-sm text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-colors">
-              →
+            <span
+              className="label-caps shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
+              style={{ color: p.accent }}
+            >
+              Open &rarr;
             </span>
           </Link>
         </section>
