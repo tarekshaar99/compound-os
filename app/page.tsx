@@ -5,6 +5,10 @@ import Footer from "./components/Footer";
 import HowItWorks from "./components/HowItWorks";
 import MobileCTA from "./components/MobileCTA";
 import ProductPreview from "./components/ProductPreview";
+import Reveal from "./components/motion/Reveal";
+import { Stagger, StaggerItem } from "./components/motion/Stagger";
+import WordsReveal from "./components/motion/WordsReveal";
+import CountUp from "./components/motion/CountUp";
 import { getPricing } from "./lib/pricing";
 import { MODULES } from "./lib/modules";
 
@@ -14,48 +18,43 @@ export const revalidate = 30;
 
 /* ────────────────────── DATA ────────────────────── */
 
-/**
- * Public "what's in the product" feature list.
- *
- * Every bullet here maps to an actual module in `app/lib/modules.ts`.
- * If a bullet isn't backed by a real module, it does not belong on the
- * homepage. That rule is the whole reason this list looks short and
- * specific instead of puffy and long.
- */
 const systemIncludes = [
   {
     pillar: "Markets",
-    accent: "#00d4aa",
-    icon: "\u25C8",
+    accent: "var(--accent-trading)",
+    chapter: "Chapter I",
     tagline: "Capital-building without the gambling.",
-    body: "Clear rules for sizing, drawdown, and the trades you shouldn\u2019t take.",
+    body:
+      "Clear rules for sizing, drawdown, and the trades you shouldn’t take. Dispassionate frameworks where conviction usually fails.",
   },
   {
     pillar: "Fitness",
-    accent: "#f97316",
-    icon: "\u25B3",
-    tagline: "Strong, mobile, durable \u2014 for decades.",
-    body: "Hybrid training with honest answers on recovery and risk.",
+    accent: "var(--accent-fitness)",
+    chapter: "Chapter II",
+    tagline: "Strong, mobile, durable — for decades.",
+    body:
+      "Hybrid training with honest answers on recovery, intensity, and risk. The protocols that compound across a decade, not a season.",
   },
   {
     pillar: "Mindset",
-    accent: "#a78bfa",
-    icon: "\u25C9",
-    tagline: "Execute on days you don\u2019t feel like it.",
-    body: "Daily anchors and the structure that makes willpower unnecessary.",
+    accent: "var(--accent-mindset)",
+    chapter: "Chapter III",
+    tagline: "Execute on days you don’t feel like it.",
+    body:
+      "Daily anchors and the operational structure that makes willpower unnecessary. Built for operators, not the inspired.",
   },
 ];
 
 const forYou = [
   "You want structure, not motivation",
   "You have income and ambition but scattered execution",
-  "You've bought courses that collected dust",
+  "You’ve bought courses that collected dust",
   "You want rules you can follow, not content to consume",
-  "You're building something real and need your systems dialed in",
+  "You’re building something real and need your systems dialed in",
 ];
 
 const notForYou = [
-  "You\u2019re looking for signals, tips, or quick wins",
+  "You’re looking for signals, tips, or quick wins",
   "You prefer prescriptions over frameworks",
   "You want live coaching or ongoing accountability",
   "You believe more information is the answer",
@@ -86,7 +85,7 @@ function buildFaqs(isFounding: boolean) {
       a: "Yes. New modules and refinements are added over time, covered by one payment.",
     },
     {
-      q: "What if it\u2019s not for me?",
+      q: "What if it’s not for me?",
       a: "Fourteen-day refund, no questions. Past that, the purchase is final.",
     },
     pricingFaq,
@@ -106,402 +105,599 @@ function buildFaqs(isFounding: boolean) {
 export default async function Home() {
   const pricing = await getPricing();
   const faqs = buildFaqs(pricing.isFounding);
-  const moduleCount = MODULES.length; // single source of truth
+  const moduleCount = MODULES.length;
   const totalMinutes = MODULES.reduce((a, m) => a + m.estMinutes, 0);
+  const hours = Math.round((totalMinutes / 60) * 10) / 10;
 
-  const priceBig = pricing.display; // "$49" or "$99"
-  const anchorPrice = pricing.standardDisplay; // always "$99"
+  const priceBig = pricing.display;
+  const anchorPrice = pricing.standardDisplay;
   const foundingTag = pricing.isFounding
-    ? `Founding Member \u00b7 early access pricing`
-    : `Standard pricing \u00b7 founding window closed`;
-  const foundingNote = pricing.isFounding
-    ? `Every future update included.`
-    : `Every future update included.`;
+    ? "Founding Member · early access pricing"
+    : "Standard pricing · founding window closed";
   const heroSubcopy = pricing.isFounding
     ? `${anchorPrice} after the founding window.`
     : `One-time. Every future update included.`;
-  const primaryCtaLabel = `Get Compound OS \u00b7 ${priceBig}`;
-  const stackedCtaLabel = `Get Compound OS \u00b7 ${priceBig}`;
+  const primaryCtaLabel = `Get Compound OS · ${priceBig}`;
+  const stackedCtaLabel = `Get Compound OS · ${priceBig}`;
   const finalCtaSubcopy = pricing.isFounding
     ? `${anchorPrice} after the founding window`
     : `No subscription. No upsells.`;
 
-  // Module list, grouped by pillar, for the transparent TOC section.
-  const pillarOrder: Array<{ key: "trading" | "fitness" | "mindset"; label: string; accent: string }> = [
-    { key: "trading", label: "Markets", accent: "#00d4aa" },
-    { key: "fitness", label: "Fitness", accent: "#f97316" },
-    { key: "mindset", label: "Mindset", accent: "#a78bfa" },
+  const pillarOrder: Array<{
+    key: "trading" | "fitness" | "mindset";
+    label: string;
+    accent: string;
+  }> = [
+    { key: "trading", label: "Markets", accent: "var(--accent-trading)" },
+    { key: "fitness", label: "Fitness", accent: "var(--accent-fitness)" },
+    { key: "mindset", label: "Mindset", accent: "var(--accent-mindset)" },
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* ───── HERO ───── */}
-      <section className="relative flex flex-col items-center justify-center text-center px-6 pt-28 pb-14 md:pt-36 md:pb-20 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[var(--accent)]/5 rounded-full blur-[120px] pointer-events-none" />
+      {/* ──────────────────── HERO ──────────────────── */}
+      <section className="relative px-6 md:px-12 pt-32 md:pt-40 pb-20 md:pb-28 overflow-hidden">
+        {/* Soft champagne ambient glow */}
+        <div
+          aria-hidden
+          className="absolute pointer-events-none top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] opacity-[0.18]"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, rgba(191,154,98,0.5), transparent 60%)",
+            filter: "blur(120px)",
+          }}
+        />
 
-        <h1 className="relative text-[1.75rem] md:text-5xl lg:text-[3.25rem] font-bold tracking-tight text-[var(--text-primary)] leading-[1.15] max-w-3xl">
-          A practical operating system for trading, fitness, and self-discipline.
-        </h1>
-        <p className="relative mt-5 text-[var(--text-secondary)] text-base md:text-xl max-w-xl mx-auto leading-relaxed">
-          {moduleCount} focused modules across Markets, Fitness, and Mindset.
-          Rules, checklists, and weekly protocols built to execute, not consume.
-        </p>
+        <div className="relative max-w-[1280px] mx-auto">
+          {/* Issue line — masthead-style "publication" framing */}
+          <Reveal className="flex items-center justify-between mb-12 md:mb-16">
+            <span className="label-caps text-[var(--text-muted)]">
+              Vol. I &middot; Issue 01
+            </span>
+            <span className="label-caps text-[var(--text-muted)] hidden sm:block">
+              {hours} hours &middot; {moduleCount} modules
+            </span>
+          </Reveal>
 
-        <div className="relative mt-8 md:mt-10">
-          <CheckoutButton className="px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-base transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] cursor-pointer">
-            {primaryCtaLabel}
-          </CheckoutButton>
-          <p className="mt-3.5 text-sm text-[var(--text-muted)]">
-            {heroSubcopy}
-          </p>
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
+            {/* Headline column */}
+            <div className="md:col-span-7">
+              <WordsReveal
+                as="h1"
+                text="The operating system for a compounding life."
+                className="font-serif text-[44px] sm:text-[58px] md:text-[68px] lg:text-[80px] leading-[1.05] tracking-[-0.02em] text-[var(--text-primary)] font-light"
+              />
 
-        {/* Trust strip */}
-        <div className="relative mt-12 flex flex-wrap justify-center gap-x-6 gap-y-2.5 text-xs text-[var(--text-muted)]">
-          <span className="flex items-center gap-1.5">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
-            {moduleCount} modules across 3 pillars
-          </span>
-          <span className="flex items-center gap-1.5">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
-            Roughly {Math.round(totalMinutes / 60 * 10) / 10} hours of applied content
-          </span>
+              <Reveal delay={0.4}>
+                <p className="mt-8 md:mt-10 font-serif italic text-[20px] md:text-[22px] text-[var(--text-secondary)] leading-[1.55] max-w-[560px]">
+                  Three pillars. One system. Markets, Fitness, Mindset —
+                  built for the operator who values precision over noise.
+                </p>
+              </Reveal>
+
+              {/* Hairline rule */}
+              <Reveal delay={0.55} className="mt-10 md:mt-12">
+                <div className="h-px w-24 bg-[var(--accent)] origin-left" />
+              </Reveal>
+
+              {/* Subhead + CTA */}
+              <Reveal delay={0.7} className="mt-10 md:mt-12">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8">
+                  <CheckoutButton className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[var(--accent)] text-[var(--on-accent)] label-caps border border-[var(--accent)] hover:bg-transparent hover:text-[var(--accent)] transition-all duration-500 cursor-pointer">
+                    {primaryCtaLabel}
+                    <span
+                      aria-hidden
+                      className="inline-block transition-transform duration-300 group-hover:translate-x-1"
+                    >
+                      &rarr;
+                    </span>
+                  </CheckoutButton>
+
+                  <span className="font-serif italic text-[14px] text-[var(--text-muted)]">
+                    {heroSubcopy}
+                  </span>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* Editorial sidebar — Fibonacci-styled stat block */}
+            <div className="md:col-span-5">
+              <Reveal delay={0.3}>
+                <div className="relative border border-[var(--border)] p-8 md:p-10 bg-[var(--card-bg)]">
+                  {/* Corner accents */}
+                  <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[var(--accent)]" />
+                  <span className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[var(--accent)]" />
+                  <span className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-[var(--accent)]" />
+                  <span className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[var(--accent)]" />
+
+                  <span className="label-caps text-[var(--accent)] block mb-2">
+                    The Manuscript
+                  </span>
+                  <p className="font-serif text-[15px] leading-[1.7] text-[var(--text-secondary)]">
+                    A library of {moduleCount} focused modules. Frameworks,
+                    checklists, and weekly protocols across the three areas
+                    that actually compound — capital, body, and
+                    discipline.
+                  </p>
+
+                  <div className="mt-8 grid grid-cols-3 gap-4 pt-6 border-t border-[var(--border)]">
+                    <Stat label="Modules" value={moduleCount} />
+                    <Stat label="Hours" value={hours} suffix="" />
+                    <Stat label="Pillars" value={3} />
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ───── SEE INSIDE ───── */}
-      <section className="px-6 pt-4 pb-16 md:pb-24">
-        <div className="text-center mb-8">
-          <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-medium">
+      {/* ──────────────────── PRODUCT PREVIEW ──────────────────── */}
+      <section className="px-6 md:px-12 py-20 md:py-28 border-t border-[var(--border)]">
+        <Reveal className="text-center mb-12">
+          <p className="label-caps text-[var(--accent)]">
             Preview the product
           </p>
+          <h2 className="mt-4 font-serif text-[34px] md:text-[48px] leading-[1.1] tracking-[-0.02em] font-light text-[var(--text-primary)]">
+            See inside the system.
+          </h2>
+        </Reveal>
+        <div className="max-w-[1100px] mx-auto">
+          <ProductPreview />
         </div>
-        <ProductPreview />
       </section>
 
-      {/* ───── PROBLEM ───── */}
-      <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-8 tracking-tight">
-            You don&apos;t need more information.<br className="hidden sm:block" />
-            You need a system that runs.
-          </h2>
-          <div className="space-y-4 text-left">
+      {/* ──────────────────── PROBLEM (Editorial pull-out) ──────────────────── */}
+      <section className="px-6 md:px-12 py-20 md:py-28 border-t border-[var(--border)] bg-[var(--sidebar-bg)]">
+        <div className="max-w-[760px] mx-auto">
+          <Reveal>
+            <span className="label-caps text-[var(--text-muted)] block mb-6">
+              Editor&apos;s note
+            </span>
+            <h2 className="font-serif text-[34px] md:text-[44px] leading-[1.15] tracking-[-0.015em] text-[var(--text-primary)] font-light">
+              You don&apos;t need more information. You need a system that
+              runs.
+            </h2>
+          </Reveal>
+
+          <div className="mt-12 space-y-6 max-w-[640px]">
             {[
-              "You\u2019ve saved the posts and read the threads, and still feel scattered when it\u2019s time to execute.",
+              "You’ve saved the posts and read the threads, and still feel scattered when it’s time to execute.",
               "You start strong Monday and lose structure by Wednesday.",
               "You know what to do in theory but have no concrete rules for practice.",
-              "You\u2019re burning energy deciding what to do instead of doing it.",
+              "You’re burning energy deciding what to do instead of doing it.",
             ].map((line, i) => (
-              <div key={i} className="flex items-start gap-3.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--text-muted)] mt-2.5 shrink-0" />
-                <p className="text-[var(--text-secondary)] text-[15px] md:text-base leading-relaxed">
+              <Reveal key={i} delay={i * 0.06} className="flex items-start gap-4">
+                <span className="font-serif italic text-[var(--accent)] text-[15px] mt-1 shrink-0">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="font-serif text-[17px] md:text-[18px] text-[var(--text-secondary)] leading-[1.7]">
                   {line}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
-          <p className="mt-10 text-[var(--text-primary)] text-[15px] md:text-base font-medium leading-relaxed max-w-lg mx-auto">
-            Compound OS replaces the noise with clear rules and repeatable protocols across the three areas that actually compound.
-          </p>
+
+          <Reveal delay={0.3} className="mt-12 pt-8 border-t border-[var(--border)]">
+            <p className="font-serif italic text-[18px] md:text-[20px] text-[var(--text-primary)] leading-[1.6] max-w-[560px]">
+              Compound OS replaces the noise with clear rules and repeatable
+              protocols across the three areas that actually compound.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      {/* ───── WHAT'S INSIDE ───── */}
-      <section id="whats-inside" className="px-6 py-16 md:py-24">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4 tracking-tight">
-              What you get
+      {/* ──────────────────── THE THREE PILLARS ──────────────────── */}
+      <section
+        id="whats-inside"
+        className="px-6 md:px-12 py-20 md:py-28 border-t border-[var(--border)]"
+      >
+        <div className="max-w-[1280px] mx-auto">
+          <Reveal className="flex items-end justify-between mb-12 md:mb-16">
+            <h2 className="font-serif text-[34px] md:text-[48px] leading-[1.1] tracking-[-0.02em] text-[var(--text-primary)] font-light">
+              The Three Pillars
             </h2>
-            <p className="text-[var(--text-secondary)] max-w-lg mx-auto text-[15px]">
-              Three pillars. One system.
-            </p>
-          </div>
+            <span className="label-caps text-[var(--text-muted)] hidden sm:block">
+              Section A
+            </span>
+          </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)]">
             {systemIncludes.map((pillar) => (
-              <div
+              <StaggerItem
                 key={pillar.pillar}
-                className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-6 md:p-7"
+                as="article"
+                className="bg-[var(--bg)] p-8 md:p-10 transition-colors duration-500 hover:bg-[var(--card-bg)] group"
               >
-                <div className="flex items-center gap-3 mb-2">
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center text-lg"
-                    style={{
-                      background: `color-mix(in srgb, ${pillar.accent} 12%, transparent)`,
-                      color: pillar.accent,
-                    }}
-                  >
-                    {pillar.icon}
-                  </div>
-                  <h3
-                    className="text-lg font-bold tracking-tight"
-                    style={{ color: pillar.accent }}
-                  >
-                    {pillar.pillar}
-                  </h3>
-                </div>
-                <p className="text-[13px] text-[var(--text-primary)] font-medium mb-2 leading-relaxed">
+                <span
+                  className="label-caps block mb-6"
+                  style={{ color: pillar.accent }}
+                >
+                  {pillar.chapter}
+                </span>
+                <h3 className="font-serif text-[28px] md:text-[32px] text-[var(--text-primary)] mb-4 transition-colors duration-300">
+                  {pillar.pillar}
+                </h3>
+                <p className="font-serif italic text-[16px] md:text-[17px] text-[var(--text-primary)] leading-[1.55] mb-4">
                   {pillar.tagline}
                 </p>
-                <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">
+                <p className="text-[14px] md:text-[15px] text-[var(--text-secondary)] leading-[1.7]">
                   {pillar.body}
                 </p>
-              </div>
+                <div
+                  className="mt-8 h-px bg-[var(--border)] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
+                  style={{ backgroundColor: pillar.accent }}
+                />
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
-      {/* ───── THE FULL TABLE OF CONTENTS ───── */}
-      <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-medium mb-3">
+      {/* ──────────────────── EDITORIAL PULL QUOTE ──────────────────── */}
+      <section className="px-6 md:px-12 py-24 md:py-32 border-y border-[var(--border)]">
+        <div className="max-w-[760px] mx-auto text-center">
+          <Reveal>
+            <span className="font-serif text-[80px] leading-[1] text-[var(--accent)]/30 block mb-4">
+              &ldquo;
+            </span>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <blockquote className="font-serif italic text-[26px] md:text-[34px] leading-[1.3] tracking-[-0.01em] text-[var(--text-primary)] font-light">
+              Excellence is not a singular act, but a habit. You are what you
+              repeatedly do, compounded over decades.
+            </blockquote>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ──────────────────── TABLE OF CONTENTS ──────────────────── */}
+      <section className="px-6 md:px-12 py-20 md:py-28 bg-[var(--sidebar-bg)] border-b border-[var(--border)]">
+        <div className="max-w-[960px] mx-auto">
+          <Reveal className="text-center mb-16">
+            <p className="label-caps text-[var(--accent)] mb-3">
               Full table of contents
             </p>
-            <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] tracking-tight">
+            <h2 className="font-serif text-[34px] md:text-[48px] leading-[1.1] tracking-[-0.02em] text-[var(--text-primary)] font-light">
               Every module, every minute.
             </h2>
-          </div>
+          </Reveal>
 
-          <div className="space-y-10">
+          <div className="space-y-14">
             {pillarOrder.map((po) => {
               const pillarMods = MODULES.filter((m) => m.pillar === po.key);
               return (
-                <div key={po.key}>
-                  <div className="flex items-baseline justify-between mb-4 pb-3 border-b border-[var(--border)]">
-                    <h3 className="text-sm font-bold uppercase tracking-widest" style={{ color: po.accent }}>
+                <Reveal key={po.key}>
+                  <div className="flex items-baseline justify-between mb-5 pb-4 border-b border-[var(--border)]">
+                    <h3
+                      className="font-serif text-[24px] md:text-[28px] tracking-tight"
+                      style={{ color: po.accent }}
+                    >
                       {po.label}
                     </h3>
-                    <span className="text-[11px] text-[var(--text-muted)]">
+                    <span className="label-caps text-[var(--text-muted)]">
                       {pillarMods.length} modules
                     </span>
                   </div>
-                  <ul className="divide-y divide-[var(--border)]">
+                  <ul>
                     {pillarMods.map((m) => (
-                      <li key={m.id} className="flex items-center justify-between py-2.5 gap-4">
-                        <div className="flex items-center gap-3 min-w-0">
-                          <span className="text-[10px] uppercase tracking-wider text-[var(--text-muted)] w-20 shrink-0">
-                            {m.tier === "core" ? "Core" : "Advanced"}
+                      <li
+                        key={m.id}
+                        className="flex items-baseline justify-between py-3 gap-4 border-b border-[var(--border-soft)] last:border-b-0"
+                      >
+                        <div className="flex items-baseline gap-4 min-w-0">
+                          <span className="label-caps text-[var(--text-muted)] w-16 shrink-0">
+                            {m.tier === "core" ? "Core" : "Adv"}
                           </span>
-                          <span className="text-[14px] text-[var(--text-secondary)] truncate">
+                          <span className="font-serif text-[15px] md:text-[16px] text-[var(--text-secondary)] truncate">
                             {m.title}
                           </span>
                         </div>
-                        <span className="text-[11px] text-[var(--text-muted)] shrink-0 whitespace-nowrap">
+                        <span className="label-caps text-[var(--text-muted)] shrink-0 whitespace-nowrap">
                           {m.estMinutes} min
                         </span>
                       </li>
                     ))}
                   </ul>
-                </div>
+                </Reveal>
               );
             })}
           </div>
 
-          <p className="mt-10 text-center text-xs text-[var(--text-muted)]">
-            Plus reference playbooks with templates and quick-access cheat sheets for each pillar.
-          </p>
+          <Reveal delay={0.3} className="mt-14 text-center">
+            <p className="font-serif italic text-[14px] text-[var(--text-muted)]">
+              Plus reference playbooks with templates and quick-access cheat
+              sheets for each pillar.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      {/* ───── HOW IT WORKS ───── */}
+      {/* ──────────────────── HOW IT WORKS ──────────────────── */}
       <HowItWorks label={stackedCtaLabel} />
 
-      {/* ───── WHO IT'S FOR / NOT FOR ───── */}
-      <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-7">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-lg bg-[var(--accent)]/12 flex items-center justify-center">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
-              </div>
-              <h3 className="text-base font-bold text-[var(--text-primary)]">
+      {/* ──────────────────── WHO IT'S FOR ──────────────────── */}
+      <section className="px-6 md:px-12 py-20 md:py-28 border-t border-[var(--border)]">
+        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)]">
+          {/* Built for you */}
+          <Reveal>
+            <div className="bg-[var(--bg)] p-8 md:p-10">
+              <span className="label-caps text-[var(--accent)] block mb-4">
                 Built for you if
-              </h3>
-            </div>
-            <ul className="space-y-3.5">
-              {forYou.map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="text-[var(--accent)] mt-1.5 shrink-0 text-[8px]">●</span>
-                  <span className="text-[var(--text-secondary)] text-sm leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-7">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-lg bg-[#ef4444]/12 flex items-center justify-center">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5"><path d="M18 6 6 18M6 6l12 12" /></svg>
-              </div>
-              <h3 className="text-base font-bold text-[var(--text-primary)]">
-                Not for you if
-              </h3>
-            </div>
-            <ul className="space-y-3.5">
-              {notForYou.map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="text-[#ef4444] mt-1.5 shrink-0 text-[8px]">●</span>
-                  <span className="text-[var(--text-secondary)] text-sm leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* ───── WHY THIS EXISTS ───── */}
-      <section className="px-6 py-16 md:py-24">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-xs uppercase tracking-widest text-[var(--accent)] font-medium mb-8 text-center">
-            Why this exists
-          </h2>
-          <p className="text-[var(--text-secondary)] text-[15px] leading-[1.9] mb-6">
-            I built Compound OS after years of learning the expensive way — courses that overpromised, injuries from ego-driven training, inconsistent execution. Eventually I stopped chasing information and started building systems.
-          </p>
-          <div className="pt-5 border-t border-[var(--border)]">
-            <p className="text-[var(--text-primary)] text-[15px] leading-relaxed font-medium">
-              This is the one I wish I had earlier. Built for myself first. Shared because it works better than scattered notes and half-finished courses.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ───── OFFER STACK ───── */}
-      <section id="pricing" className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
-        <div className="max-w-xl mx-auto">
-          <div className="relative bg-[var(--card-bg)] border border-[var(--accent)]/20 rounded-2xl p-8 md:p-12 overflow-hidden">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-[var(--accent)]/8 rounded-full blur-[80px] pointer-events-none" />
-
-            <div className="relative flex justify-center mb-5">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/8 text-[11px] font-semibold text-[var(--accent)] uppercase tracking-wider">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
-                {foundingTag}
               </span>
+              <h3 className="font-serif text-[24px] md:text-[28px] text-[var(--text-primary)] mb-6 font-light">
+                You operate, you don&apos;t consume.
+              </h3>
+              <ul className="space-y-4">
+                {forYou.map((item, i) => (
+                  <li key={i} className="flex items-start gap-4">
+                    <span className="label-caps text-[var(--accent)] mt-1 shrink-0">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-serif text-[15px] md:text-[16px] text-[var(--text-secondary)] leading-[1.7]">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
+          </Reveal>
 
-            <div className="relative text-center mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] tracking-tight">
-                Full system. One price.
-              </h2>
+          {/* Not for you */}
+          <Reveal delay={0.1}>
+            <div className="bg-[var(--bg)] p-8 md:p-10">
+              <span className="label-caps text-[var(--text-muted)] block mb-4">
+                Not for you if
+              </span>
+              <h3 className="font-serif text-[24px] md:text-[28px] text-[var(--text-primary)] mb-6 font-light">
+                You&apos;re looking for shortcuts.
+              </h3>
+              <ul className="space-y-4">
+                {notForYou.map((item, i) => (
+                  <li key={i} className="flex items-start gap-4">
+                    <span className="label-caps text-[var(--text-muted)] mt-1 shrink-0">
+                      &mdash;
+                    </span>
+                    <span className="font-serif text-[15px] md:text-[16px] text-[var(--text-secondary)] leading-[1.7]">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            <div className="relative text-center mb-8">
-              <div className="mb-1 flex items-baseline justify-center gap-3">
-                {pricing.isFounding && (
-                  <span className="text-3xl md:text-4xl font-bold text-[var(--text-muted)] line-through decoration-2">
-                    {anchorPrice}
-                  </span>
-                )}
-                <span className="text-6xl md:text-7xl font-bold text-[var(--accent)]">
-                  {priceBig}
-                </span>
-              </div>
-              <p className="text-sm text-[var(--text-muted)] mt-2">
-                one-time &middot; no subscription
-              </p>
-              <p className="text-xs text-[var(--accent)]/90 font-medium mt-3">
-                {foundingNote}
-              </p>
-            </div>
-
-            {/* What you actually get */}
-            <ul className="relative space-y-3 max-w-sm mx-auto mb-10">
-              {[
-                "All three pillars, every module",
-                "Checklists, templates, and weekly protocols",
-                "Progress saved to any device",
-                "Fourteen-day refund",
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-2.5">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5" className="mt-0.5 shrink-0"><polyline points="20 6 9 17 4 12" /></svg>
-                  <span className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="relative">
-              <CheckoutCTA label={stackedCtaLabel} />
-              <p className="mt-4 text-xs text-[var(--text-muted)] text-center">
-                Already have access?{" "}
-                <a
-                  href="/login"
-                  className="text-[var(--text-secondary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)] transition-colors"
-                >
-                  Sign in &rarr;
-                </a>
-              </p>
-            </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ───── FAQ ───── */}
-      <section className="px-6 py-16 md:py-24">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] text-center mb-10 tracking-tight">
-            Questions
-          </h2>
+      {/* ──────────────────── WHY THIS EXISTS (FOUNDER) ──────────────────── */}
+      <section className="px-6 md:px-12 py-20 md:py-28 border-t border-[var(--border)] bg-[var(--sidebar-bg)]">
+        <div className="max-w-[720px] mx-auto">
+          <Reveal>
+            <span className="label-caps text-[var(--accent)] block mb-8 text-center">
+              Letter from the editor
+            </span>
+            <p className="font-serif text-[18px] md:text-[20px] text-[var(--text-secondary)] leading-[1.85]">
+              I built Compound OS after years of learning the expensive way
+              — courses that overpromised, injuries from ego-driven
+              training, inconsistent execution. Eventually I stopped chasing
+              information and started building systems.
+            </p>
+            <div className="mt-10 pt-8 border-t border-[var(--border)]">
+              <p className="font-serif italic text-[18px] md:text-[20px] text-[var(--text-primary)] leading-[1.65]">
+                This is the one I wish I had earlier. Built for myself first.
+                Shared because it works better than scattered notes and
+                half-finished courses.
+              </p>
+              <p className="mt-6 label-caps text-[var(--text-muted)]">
+                &mdash; Tarek Shaar, Founder
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
-          <div className="space-y-0">
-            {faqs.map((faq, i) => (
-              <details
-                key={i}
-                className="group border-b border-[var(--border)] [&:first-child]:border-t"
-              >
-                <summary className="flex items-center justify-between py-5 cursor-pointer list-none text-[var(--text-primary)] font-medium text-[15px] hover:text-[var(--accent)] transition-colors">
-                  {faq.q}
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    className="shrink-0 ml-4 transition-transform duration-200 group-open:rotate-45 text-[var(--text-muted)]"
-                  >
-                    <path d="M12 5v14M5 12h14" />
-                  </svg>
-                </summary>
-                <p className="pb-5 text-sm text-[var(--text-secondary)] leading-relaxed pr-8">
-                  {faq.a}
+      {/* ──────────────────── PRICING (Editorial card with corner accents) ──────────────────── */}
+      <section
+        id="pricing"
+        className="px-6 md:px-12 py-20 md:py-28 border-t border-[var(--border)]"
+      >
+        <div className="max-w-[520px] mx-auto">
+          <Reveal>
+            <article className="relative bg-[var(--card-bg)] border border-[var(--border)] overflow-hidden">
+              {/* Corner accents (4) */}
+              <span className="absolute top-0 left-0 w-4 h-4 border-t border-l border-[var(--accent)]" />
+              <span className="absolute top-0 right-0 w-4 h-4 border-t border-r border-[var(--accent)]" />
+              <span className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-[var(--accent)]" />
+              <span className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-[var(--accent)]" />
+
+              {/* Founding tag */}
+              <header className="text-center px-6 md:px-10 pt-10 md:pt-12 pb-6 border-b border-[var(--border)]">
+                <span className="label-caps text-[var(--accent)] inline-flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
+                  {foundingTag}
+                </span>
+                <h2 className="mt-5 font-serif text-[28px] md:text-[34px] text-[var(--text-primary)] tracking-tight font-light">
+                  Compound Access
+                </h2>
+                <p className="mt-2 font-serif italic text-[14px] text-[var(--text-secondary)]">
+                  &ldquo;We choose who buys.&rdquo;
                 </p>
-              </details>
+              </header>
+
+              {/* Price */}
+              <div className="text-center px-6 md:px-10 py-10 md:py-12">
+                {pricing.isFounding && (
+                  <p className="label-caps text-[var(--text-muted)] line-through decoration-1 mb-2">
+                    {anchorPrice} &middot; standard
+                  </p>
+                )}
+                <div className="font-serif text-[80px] md:text-[96px] leading-[0.95] tracking-[-0.04em] text-[var(--accent)] font-light">
+                  {priceBig}
+                </div>
+                <p className="mt-3 label-caps text-[var(--text-muted)]">
+                  one-time &middot; no subscription
+                </p>
+              </div>
+
+              {/* Allocation indicator */}
+              {pricing.isFounding && (
+                <div className="px-6 md:px-10 py-5 border-y border-[var(--border)] flex items-baseline justify-between">
+                  <span className="label-caps text-[var(--text-muted)]">
+                    Allocation
+                  </span>
+                  <span className="font-serif text-[24px] text-[var(--accent)]">
+                    <CountUp to={pricing.spotsRemaining} duration={1.6} />
+                    <span className="font-serif italic text-[13px] text-[var(--text-muted)] ml-2">
+                      spots remaining
+                    </span>
+                  </span>
+                </div>
+              )}
+
+              {/* Features list */}
+              <ul className="px-6 md:px-10 py-8 space-y-4">
+                {[
+                  "All three pillars, every module",
+                  "Checklists, templates, and weekly protocols",
+                  "Progress saved to any device",
+                  "Fourteen-day refund window",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-baseline gap-3 font-serif text-[15px] text-[var(--text-secondary)] leading-[1.55]"
+                  >
+                    <span className="label-caps text-[var(--accent)] shrink-0">
+                      &mdash;
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA */}
+              <div className="px-6 md:px-10 pb-10 md:pb-12">
+                <CheckoutCTA
+                  label={stackedCtaLabel}
+                  className="group w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-[var(--accent)] text-[var(--on-accent)] label-caps border border-[var(--accent)] hover:bg-transparent hover:text-[var(--accent)] transition-all duration-500 cursor-pointer disabled:opacity-60"
+                />
+                <p className="mt-5 text-center font-serif italic text-[13px] text-[var(--text-muted)]">
+                  Already have access?{" "}
+                  <a
+                    href="/login"
+                    className="text-[var(--text-secondary)] hover:text-[var(--accent)] underline underline-offset-4 decoration-[var(--border)] transition-colors"
+                  >
+                    Sign in &rarr;
+                  </a>
+                </p>
+              </div>
+            </article>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ──────────────────── FAQ ──────────────────── */}
+      <section className="px-6 md:px-12 py-20 md:py-28 border-t border-[var(--border)] bg-[var(--sidebar-bg)]">
+        <div className="max-w-[760px] mx-auto">
+          <Reveal className="text-center mb-12">
+            <span className="label-caps text-[var(--accent)] block mb-3">
+              Reader inquiries
+            </span>
+            <h2 className="font-serif text-[34px] md:text-[44px] leading-[1.1] tracking-[-0.02em] text-[var(--text-primary)] font-light">
+              Questions
+            </h2>
+          </Reveal>
+
+          <div className="border-t border-[var(--border)]">
+            {faqs.map((faq, i) => (
+              <Reveal key={i} delay={i * 0.04}>
+                <details className="group border-b border-[var(--border)]">
+                  <summary className="flex items-center justify-between py-6 cursor-pointer list-none font-serif text-[17px] md:text-[18px] text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">
+                    <span className="flex items-baseline gap-4">
+                      <span className="label-caps text-[var(--text-muted)] w-8">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      {faq.q}
+                    </span>
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className="shrink-0 ml-4 transition-transform duration-300 group-open:rotate-45 text-[var(--text-muted)]"
+                    >
+                      <path d="M12 5v14M5 12h14" />
+                    </svg>
+                  </summary>
+                  <p className="pb-6 pl-12 pr-4 font-serif text-[15px] text-[var(--text-secondary)] leading-[1.75]">
+                    {faq.a}
+                  </p>
+                </details>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ───── FINAL CTA ───── */}
-      <section className="px-6 py-16 md:py-24 bg-[var(--sidebar-bg)]">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4 tracking-tight">
-            Start executing.
-          </h2>
-          <p className="text-[var(--text-secondary)] mb-10 text-base md:text-lg max-w-md mx-auto">
-            One payment. Instant access.
-          </p>
-
-          <CheckoutButton className="inline-block px-10 py-4 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-lg transition-all hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-6px_rgba(0,212,170,0.35)] cursor-pointer">
-            {stackedCtaLabel}
-          </CheckoutButton>
-
-          <p className="mt-5 text-xs text-[var(--text-muted)]">
-            {finalCtaSubcopy}
-          </p>
+      {/* ──────────────────── FINAL CTA ──────────────────── */}
+      <section className="px-6 md:px-12 py-24 md:py-32 border-t border-[var(--border)]">
+        <div className="max-w-[640px] mx-auto text-center">
+          <Reveal>
+            <h2 className="font-serif text-[44px] md:text-[64px] leading-[1.05] tracking-[-0.02em] text-[var(--text-primary)] font-light">
+              Start executing.
+            </h2>
+            <p className="mt-6 font-serif italic text-[18px] md:text-[20px] text-[var(--text-secondary)]">
+              One payment. Instant access. No subscription.
+            </p>
+          </Reveal>
+          <Reveal delay={0.2} className="mt-12">
+            <CheckoutButton className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-[var(--accent)] text-[var(--on-accent)] label-caps border border-[var(--accent)] hover:bg-transparent hover:text-[var(--accent)] transition-all duration-500 cursor-pointer">
+              {stackedCtaLabel}
+              <span
+                aria-hidden
+                className="inline-block transition-transform duration-300 group-hover:translate-x-1"
+              >
+                &rarr;
+              </span>
+            </CheckoutButton>
+            <p className="mt-6 label-caps text-[var(--text-muted)]">
+              {finalCtaSubcopy}
+            </p>
+          </Reveal>
         </div>
       </section>
 
       <Footer />
-
       <MobileCTA />
+    </div>
+  );
+}
+
+/**
+ * Editorial stat block — used in the hero sidebar. Numerals in serif,
+ * label in label-caps, plain hairline separator above. Animated count-up
+ * triggers when scrolled into view.
+ */
+function Stat({
+  label,
+  value,
+  suffix = "",
+}: {
+  label: string;
+  value: number;
+  suffix?: string;
+}) {
+  return (
+    <div>
+      <span className="font-serif text-[28px] md:text-[32px] text-[var(--text-primary)] block leading-none font-light">
+        <CountUp to={value} suffix={suffix} />
+      </span>
+      <span className="label-caps text-[var(--text-muted)] block mt-2">
+        {label}
+      </span>
     </div>
   );
 }
