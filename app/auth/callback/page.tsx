@@ -2,6 +2,7 @@
 
 import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { getSupabase } from "../../lib/supabase";
 
 function CallbackHandler() {
@@ -74,30 +75,42 @@ function CallbackHandler() {
     return (
       <div className="min-h-screen flex items-center justify-center px-6">
         <div className="text-center max-w-md">
-          <div className="text-4xl mb-6">⚠</div>
-          <h1 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
-            Login link expired
+          <span className="font-serif text-[44px] block mb-4 text-[var(--accent)]/40">
+            &mdash;
+          </span>
+          <h1 className="font-serif text-[34px] text-[var(--text-primary)] mb-4 font-light">
+            Login link expired.
           </h1>
-          <p className="text-[var(--text-secondary)] mb-8">
-            This login link has expired or was already used. Please request a new one.
+          <p className="font-serif italic text-[16px] text-[var(--text-secondary)] mb-10 leading-relaxed">
+            This sign-in link has expired or was already used. Please request
+            a fresh one.
           </p>
-          <a
+          <Link
             href="/login"
-            className="inline-block px-8 py-3 rounded-xl bg-[var(--accent)] text-[#0a0b0f] font-bold text-sm transition-all hover:opacity-90"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-[var(--accent)] text-[var(--on-accent)] label-caps border border-[var(--accent)] hover:bg-transparent hover:text-[var(--accent)] transition-all duration-300"
           >
             Back to Sign In
-          </a>
+          </Link>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6">
-      <div className="text-center">
-        <div className="w-12 h-12 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin mx-auto mb-6" />
-        <p className="text-[var(--text-secondary)] text-lg">
-          Signing you in...
+    <div className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
+      <div
+        aria-hidden
+        className="absolute pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] opacity-15 rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle at center, rgba(191,154,98,0.5), transparent 70%)",
+          filter: "blur(120px)",
+        }}
+      />
+      <div className="relative text-center">
+        <div className="w-10 h-10 border border-[var(--accent)] border-t-transparent rounded-full animate-spin mx-auto mb-6" />
+        <p className="font-serif italic text-[16px] text-[var(--text-secondary)]">
+          Signing you in…
         </p>
       </div>
     </div>
@@ -109,7 +122,7 @@ export default function AuthCallbackPage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center px-6">
-          <div className="w-12 h-12 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
+          <div className="w-10 h-10 border border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
         </div>
       }
     >

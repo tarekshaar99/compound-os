@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import type { Pillar } from "../lib/modules";
 import { MODULES } from "../lib/modules";
+import { conditionalEnter } from "../lib/motion";
 
 /**
  * Three-step onboarding. First login after purchase only. Runs once.
@@ -11,39 +13,39 @@ import { MODULES } from "../lib/modules";
  *   Step 0: welcome + what this is
  *   Step 1: pick priority pillar
  *   Step 2: show recommended starting module + "Start here"
+ *
+ * Visual: Editorial Quarterly direction — Newsreader serif, sharp 0px
+ * corners, hairline rules, champagne accent for active states.
  */
 
 const PILLAR_OPTIONS: Array<{
   id: Pillar;
   label: string;
+  romanNumeral: string;
   tagline: string;
   accent: string;
-  accentBg: string;
-  icon: string;
 }> = [
   {
     id: "trading",
     label: "Markets",
+    romanNumeral: "I",
     tagline: "Build income. Protect capital. Think in regimes.",
-    accent: "#00d4aa",
-    accentBg: "rgba(0, 212, 170, 0.12)",
-    icon: "◈",
+    accent: "var(--accent-trading)",
   },
   {
     id: "fitness",
     label: "Fitness",
+    romanNumeral: "II",
     tagline: "Strength, cardio, mobility, recovery. A hybrid athlete system.",
-    accent: "#f97316",
-    accentBg: "rgba(249, 115, 22, 0.12)",
-    icon: "⚡",
+    accent: "var(--accent-fitness)",
   },
   {
     id: "mindset",
     label: "Mindset",
-    tagline: "Identity, regulation, discipline. The operating system for the other two.",
-    accent: "#a78bfa",
-    accentBg: "rgba(167, 139, 250, 0.12)",
-    icon: "◉",
+    romanNumeral: "III",
+    tagline:
+      "Identity, regulation, discipline. The operating system for the other two.",
+    accent: "var(--accent-mindset)",
   },
 ];
 
@@ -84,181 +86,264 @@ export default function OnboardingClient({ email }: { email: string }) {
     }
   };
 
+  const stepLabels = ["I. Proem", "II. Focus", "III. Module"];
+
   return (
-    <div className="min-h-screen bg-[var(--bg)] flex items-start md:items-center justify-center px-6 py-16">
-      <div className="w-full max-w-xl">
-        {/* step dots */}
-        <div className="flex items-center justify-center gap-2 mb-10">
-          {[0, 1, 2].map((i) => (
-            <span
-              key={i}
-              className={`h-1 rounded-full transition-all ${
-                i === step
-                  ? "w-10 bg-[var(--accent)]"
-                  : i < step
-                  ? "w-6 bg-[var(--accent)]/40"
-                  : "w-6 bg-white/[0.08]"
-              }`}
-            />
-          ))}
-        </div>
+    <div className="min-h-screen bg-[var(--bg)] flex flex-col px-6 py-12 md:py-16 relative overflow-hidden">
+      {/* Editorial header */}
+      <header className="max-w-[1200px] mx-auto w-full flex items-center justify-between mb-12 md:mb-16">
+        <span
+          className="font-serif italic text-[var(--accent)] text-[20px] tracking-tight"
+        >
+          Compound OS
+        </span>
+        <span className="label-caps text-[var(--text-muted)]">
+          Initial Sequence
+        </span>
+      </header>
 
-        {step === 0 && (
-          <div className="text-center">
-            <p className="text-xs uppercase tracking-[0.18em] text-[var(--accent)] font-medium mb-4">
-              Welcome aboard
-            </p>
-            <h1 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] tracking-tight leading-[1.1] mb-5">
-              You're in, {greeting}.
-            </h1>
-            <p className="text-[var(--text-secondary)] text-[15px] leading-[1.75] mb-8 max-w-md mx-auto">
-              Compound OS is not a course. It's a working system. Three pillars, each with Core modules you can use right away and Advanced modules that open up as you execute. Progress is saved to your account, so you can pick up on any device.
-            </p>
-            <p className="text-[var(--text-secondary)] text-[15px] leading-[1.75] mb-10 max-w-md mx-auto">
-              This next step takes ten seconds. Pick the pillar that matters most to you right now. You can work on all three, but one will be your anchor.
-            </p>
-            <button
-              onClick={() => setStep(1)}
-              className="px-6 py-3 rounded-xl bg-[var(--accent)] text-[#0a0b0f] text-sm font-bold hover:opacity-90 transition-opacity cursor-pointer"
-            >
-              Pick my pillar →
-            </button>
+      <div className="max-w-[640px] mx-auto w-full flex-1 flex items-center">
+        <div className="w-full">
+          {/* Step indicator */}
+          <div className="flex items-center justify-between gap-4 mb-12 pb-6 border-b border-[var(--border)]">
+            {stepLabels.map((label, i) => (
+              <span
+                key={i}
+                className={`label-caps transition-colors duration-300 ${
+                  i === step
+                    ? "text-[var(--accent)]"
+                    : i < step
+                      ? "text-[var(--text-secondary)]"
+                      : "text-[var(--text-muted)] opacity-50"
+                }`}
+              >
+                {label}
+              </span>
+            ))}
           </div>
-        )}
 
-        {step === 1 && (
-          <div>
-            <div className="text-center mb-8">
-              <p className="text-xs uppercase tracking-[0.18em] text-[var(--text-muted)] font-medium mb-3">
-                Pick your anchor pillar
-              </p>
-              <h1 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] tracking-tight leading-[1.15] mb-3">
-                What are you here to solve first?
-              </h1>
-              <p className="text-[var(--text-secondary)] text-[14px] leading-relaxed max-w-sm mx-auto">
-                Be honest. Your dashboard will anchor on this pillar until you change it.
-              </p>
-            </div>
-            <div className="space-y-3">
-              {PILLAR_OPTIONS.map((opt) => {
-                const selected = choice === opt.id;
-                return (
-                  <button
-                    key={opt.id}
-                    onClick={() => setChoice(opt.id)}
-                    className={`w-full text-left p-5 rounded-2xl border-2 transition-all cursor-pointer ${
-                      selected
-                        ? "bg-white/[0.03]"
-                        : "border-[var(--border)] bg-[var(--card-bg)] hover:border-white/[0.15]"
-                    }`}
-                    style={selected ? { borderColor: opt.accent } : undefined}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div
-                        className="w-11 h-11 rounded-xl flex items-center justify-center text-lg font-bold shrink-0"
-                        style={{ background: opt.accentBg, color: opt.accent }}
+          <AnimatePresence mode="wait">
+            {step === 0 && (
+              <motion.div
+                key="step-0"
+                variants={conditionalEnter}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="text-center md:text-left"
+              >
+                <span className="label-caps text-[var(--accent)] block mb-6">
+                  Welcome aboard
+                </span>
+                <h1 className="font-serif text-[44px] md:text-[64px] leading-[1.05] tracking-[-0.02em] text-[var(--text-primary)] font-light mb-6">
+                  A deliberate
+                  <br />
+                  approach to growth.
+                </h1>
+                <p className="font-serif text-[17px] md:text-[18px] text-[var(--text-secondary)] leading-[1.7] mb-6">
+                  Welcome to Compound OS, {greeting}. This environment is
+                  designed for intentional focus. Before we configure your
+                  dashboard, we&apos;ll establish your primary pillar of
+                  pursuit.
+                </p>
+                <p className="font-serif italic text-[16px] text-[var(--text-secondary)] leading-[1.7] mb-10">
+                  This next step takes ten seconds.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setStep(1)}
+                  className="group inline-flex items-center gap-3 px-8 py-4 bg-[var(--accent)] text-[var(--on-accent)] label-caps border border-[var(--accent)] hover:bg-transparent hover:text-[var(--accent)] transition-all duration-300 cursor-pointer"
+                >
+                  Pick my pillar
+                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                    &rarr;
+                  </span>
+                </button>
+              </motion.div>
+            )}
+
+            {step === 1 && (
+              <motion.div
+                key="step-1"
+                variants={conditionalEnter}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <div className="mb-10">
+                  <span className="label-caps text-[var(--accent)] block mb-4">
+                    Select Core Focus
+                  </span>
+                  <h1 className="font-serif text-[34px] md:text-[44px] leading-[1.1] tracking-[-0.015em] text-[var(--text-primary)] font-light mb-4">
+                    What are you here to solve first?
+                  </h1>
+                  <p className="font-serif italic text-[15px] text-[var(--text-secondary)] leading-relaxed">
+                    Be honest. Your dashboard will anchor on this pillar
+                    until you change it.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)]">
+                  {PILLAR_OPTIONS.map((opt) => {
+                    const selected = choice === opt.id;
+                    return (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        onClick={() => setChoice(opt.id)}
+                        className="bg-[var(--bg)] hover:bg-[var(--card-bg)] transition-colors duration-300 p-6 text-left group relative"
+                        style={
+                          selected
+                            ? {
+                                background: "var(--card-bg)",
+                                outline: `1px solid ${opt.accent}`,
+                                outlineOffset: "-1px",
+                              }
+                            : undefined
+                        }
                       >
-                        {opt.icon}
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-[16px] font-bold text-[var(--text-primary)] mb-0.5">
+                        <span
+                          className="label-caps block mb-3"
+                          style={{ color: opt.accent }}
+                        >
+                          {opt.romanNumeral}
+                        </span>
+                        <h3
+                          className="font-serif text-[22px] mb-2 transition-colors"
+                          style={{
+                            color: selected ? opt.accent : undefined,
+                          }}
+                        >
                           {opt.label}
-                        </div>
-                        <div className="text-[13px] text-[var(--text-muted)] leading-relaxed">
+                        </h3>
+                        <p className="font-serif italic text-[13px] text-[var(--text-muted)] leading-relaxed">
                           {opt.tagline}
-                        </div>
-                      </div>
-                      <span
-                        className={`shrink-0 w-5 h-5 rounded-full border-2 mt-1 flex items-center justify-center transition-all ${
-                          selected ? "" : "border-[var(--text-muted)]"
-                        }`}
-                        style={selected ? { borderColor: opt.accent, background: opt.accent } : undefined}
-                      >
+                        </p>
                         {selected && (
-                          <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="#0a0b0f" strokeWidth="2.5">
-                            <polyline points="2 6 4.5 8.5 9 3" />
-                          </svg>
+                          <span
+                            className="absolute top-4 right-4 w-5 h-5 flex items-center justify-center"
+                            style={{ background: opt.accent }}
+                            aria-hidden="true"
+                          >
+                            <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="#0a0b0f" strokeWidth="2.5">
+                              <polyline points="2 6 4.5 8.5 9 3" />
+                            </svg>
+                          </span>
                         )}
-                      </span>
-                    </div>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-10 flex items-center justify-between pt-6 border-t border-[var(--border)]">
+                  <button
+                    type="button"
+                    onClick={() => setStep(0)}
+                    className="label-caps text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+                  >
+                    &larr; Back
                   </button>
-                );
-              })}
-            </div>
-            <div className="mt-8 flex items-center justify-between">
-              <button
-                onClick={() => setStep(0)}
-                className="text-sm text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors cursor-pointer"
-              >
-                ← Back
-              </button>
-              <button
-                onClick={() => choice && setStep(2)}
-                disabled={!choice}
-                className="px-6 py-3 rounded-xl bg-[var(--accent)] text-[#0a0b0f] text-sm font-bold transition-all hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-              >
-                Next →
-              </button>
-            </div>
-          </div>
-        )}
+                  <button
+                    type="button"
+                    onClick={() => choice && setStep(2)}
+                    disabled={!choice}
+                    className="group inline-flex items-center gap-3 px-7 py-3.5 bg-[var(--accent)] text-[var(--on-accent)] label-caps border border-[var(--accent)] hover:bg-transparent hover:text-[var(--accent)] transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                  >
+                    Initialize Configuration
+                    <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                      &rarr;
+                    </span>
+                  </button>
+                </div>
+              </motion.div>
+            )}
 
-        {step === 2 && choice && firstModule && (
-          <div>
-            <div className="text-center mb-8">
-              <p
-                className="text-xs uppercase tracking-[0.18em] font-medium mb-3"
-                style={{
-                  color: PILLAR_OPTIONS.find((p) => p.id === choice)?.accent,
-                }}
+            {step === 2 && choice && firstModule && (
+              <motion.div
+                key="step-2"
+                variants={conditionalEnter}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
               >
-                Recommended start
-              </p>
-              <h1 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] tracking-tight leading-[1.15] mb-4">
-                Begin with {firstModule.title}.
-              </h1>
-              <p className="text-[var(--text-secondary)] text-[14px] leading-relaxed max-w-md mx-auto">
-                About {firstModule.estMinutes} minutes. Ends with a short action checklist so you walk away with something done, not just read.
-              </p>
-            </div>
+                <div className="mb-10">
+                  <span
+                    className="label-caps block mb-4"
+                    style={{
+                      color: PILLAR_OPTIONS.find((p) => p.id === choice)
+                        ?.accent,
+                    }}
+                  >
+                    Recommended Start
+                  </span>
+                  <h1 className="font-serif text-[34px] md:text-[44px] leading-[1.1] tracking-[-0.015em] text-[var(--text-primary)] font-light mb-4">
+                    Begin with{" "}
+                    <span className="italic">{firstModule.title}</span>.
+                  </h1>
+                  <p className="font-serif italic text-[15px] text-[var(--text-secondary)] leading-relaxed">
+                    About {firstModule.estMinutes} minutes. Ends with a
+                    short action checklist so you walk away with something
+                    done, not just read.
+                  </p>
+                </div>
 
-            <div className="p-5 rounded-2xl border border-[var(--border)] bg-[var(--card-bg)] mb-8">
-              <div className="text-[13px] uppercase tracking-widest text-[var(--text-muted)] mb-2">
-                What {firstModule.title} covers
-              </div>
-              <div className="text-[15px] text-[var(--text-primary)] leading-[1.75]">
-                {firstModule.blurb}
-              </div>
-            </div>
+                <div className="relative bg-[var(--card-bg)] border border-[var(--border)] p-6 md:p-8 mb-10">
+                  <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[var(--accent)]" />
+                  <span className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[var(--accent)]" />
 
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button
-                onClick={() => finish("module")}
-                disabled={saving}
-                className="flex-1 px-5 py-3.5 rounded-xl bg-[var(--accent)] text-[#0a0b0f] text-sm font-bold transition-all hover:opacity-90 disabled:opacity-60 cursor-pointer"
-              >
-                {saving ? "Starting..." : "Start this module →"}
-              </button>
-              <button
-                onClick={() => finish("dashboard")}
-                disabled={saving}
-                className="flex-1 px-5 py-3.5 rounded-xl border border-[var(--border)] bg-[var(--card-bg)] hover:border-white/[0.15] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-sm font-medium transition-all cursor-pointer"
-              >
-                Explore dashboard
-              </button>
-            </div>
+                  <span className="label-caps text-[var(--text-muted)] block mb-3">
+                    What this module covers
+                  </span>
+                  <p className="font-serif text-[15px] md:text-[16px] text-[var(--text-primary)] leading-[1.75]">
+                    {firstModule.blurb}
+                  </p>
+                </div>
 
-            <div className="mt-6 text-center">
-              <button
-                onClick={() => setStep(1)}
-                className="text-sm text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors cursor-pointer"
-              >
-                ← Pick a different pillar
-              </button>
-            </div>
-          </div>
-        )}
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <button
+                    type="button"
+                    onClick={() => finish("module")}
+                    disabled={saving}
+                    className="group flex-1 inline-flex items-center justify-center gap-3 px-6 py-4 bg-[var(--accent)] text-[var(--on-accent)] label-caps border border-[var(--accent)] hover:bg-transparent hover:text-[var(--accent)] transition-all duration-300 disabled:opacity-60 cursor-pointer"
+                  >
+                    {saving ? "Starting…" : "Start this module"}
+                    {!saving && (
+                      <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                        &rarr;
+                      </span>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => finish("dashboard")}
+                    disabled={saving}
+                    className="flex-1 px-6 py-4 label-caps text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--text-primary)] hover:text-[var(--text-primary)] transition-all cursor-pointer"
+                  >
+                    Explore dashboard
+                  </button>
+                </div>
+
+                <div className="mt-8 text-center">
+                  <button
+                    type="button"
+                    onClick={() => setStep(1)}
+                    className="label-caps text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+                  >
+                    &larr; Pick a different pillar
+                  </button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
+
+      {/* Editorial footer note */}
+      <footer className="max-w-[1200px] mx-auto w-full text-center mt-16 pt-8 border-t border-[var(--border)]">
+        <p className="label-caps text-[var(--text-muted)]">
+          &copy; MMXXVI Compound OS
+        </p>
+      </footer>
     </div>
   );
 }

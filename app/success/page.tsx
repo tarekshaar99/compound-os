@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Suspense } from "react";
 import LoginForm from "../components/LoginForm";
+import Reveal from "../components/motion/Reveal";
 
 function SuccessContent() {
   const searchParams = useSearchParams();
@@ -45,9 +46,9 @@ function SuccessContent() {
     return (
       <div className="min-h-screen flex items-center justify-center px-6">
         <div className="text-center">
-          <div className="w-12 h-12 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin mx-auto mb-6" />
-          <p className="text-[var(--text-secondary)] text-lg">
-            Verifying your payment...
+          <div className="w-10 h-10 border border-[var(--accent)] border-t-transparent rounded-full animate-spin mx-auto mb-6" />
+          <p className="font-serif italic text-[16px] text-[var(--text-secondary)]">
+            Verifying your payment…
           </p>
         </div>
       </div>
@@ -58,24 +59,26 @@ function SuccessContent() {
     return (
       <div className="min-h-screen flex items-center justify-center px-6">
         <div className="text-center max-w-md">
-          <div className="text-4xl mb-6">⚠</div>
-          <h1 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
-            Something went wrong
+          <span className="font-serif text-[44px] block mb-4 text-[var(--accent)]/40">
+            &mdash;
+          </span>
+          <h1 className="font-serif text-[34px] text-[var(--text-primary)] mb-4 font-light">
+            Something went wrong.
           </h1>
-          <p className="text-[var(--text-secondary)] mb-8">
-            We couldn't verify your payment. If you were charged, please
-            contact us and we'll sort it out immediately.
+          <p className="font-serif italic text-[16px] text-[var(--text-secondary)] mb-10 leading-relaxed">
+            We couldn&apos;t verify your payment. If you were charged, please
+            contact us and we&apos;ll sort it out immediately.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="mailto:tarek@thecompoundsystem.com"
-              className="px-6 py-3 rounded-xl bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)] text-sm font-medium transition-all hover:bg-[var(--accent)]/20"
+              className="px-6 py-3 label-caps text-[var(--accent)] border border-[var(--accent)] hover:bg-[var(--accent)]/10 transition-all"
             >
-              Email support
+              Email Support
             </a>
             <Link
               href="/"
-              className="px-6 py-3 rounded-xl border border-[var(--border)] text-[var(--text-primary)] text-sm font-medium transition-all hover:border-[var(--text-muted)]"
+              className="px-6 py-3 label-caps text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--text-primary)] transition-all"
             >
               Back to Home
             </Link>
@@ -86,98 +89,146 @@ function SuccessContent() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-20">
-      <div className="w-full max-w-lg">
-        {/* Success header */}
-        <div className="text-center mb-10">
-          <div className="w-16 h-16 rounded-full bg-[var(--accent)]/12 flex items-center justify-center mx-auto mb-6">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-3 tracking-tight">
-            You're in. Welcome.
-          </h1>
-          <p className="text-[var(--text-secondary)] text-lg leading-relaxed max-w-md mx-auto">
-            Payment confirmed. You now have lifetime access to the full Compound System.
-          </p>
-        </div>
+    <div className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
+      {/* Cinematic ambient glow */}
+      <div
+        aria-hidden
+        className="absolute pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-15 rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle at center, rgba(191,154,98,0.55), transparent 65%)",
+          filter: "blur(120px)",
+        }}
+      />
 
-        {/* Step 1: Create account */}
-        <div className="bg-[var(--sidebar-bg)] border border-[var(--border)] rounded-2xl p-8 mb-6">
-          <div className="flex items-center gap-3 mb-5">
-            <div className="w-7 h-7 rounded-full bg-[var(--accent)] text-[#0a0b0f] flex items-center justify-center text-xs font-bold shrink-0">
-              1
+      <div className="relative w-full max-w-xl">
+        {/* Brand mark + headline */}
+        <Reveal>
+          <div className="text-center mb-10">
+            {/* Fibonacci spiral mark */}
+            <div className="text-[var(--accent)] mx-auto mb-8 inline-block">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M32 4C16.536 4 4 16.536 4 32C4 47.464 16.536 60 32 60C47.464 60 60 47.464 60 32" stroke="currentColor" strokeLinecap="round" strokeWidth="1" />
+                <path d="M32 12C20.9543 12 12 20.9543 12 32C12 43.0457 20.9543 52 32 52" stroke="currentColor" strokeLinecap="round" strokeWidth="1" />
+                <path d="M32 20C25.3726 20 20 25.3726 20 32C20 38.6274 25.3726 44 32 44" stroke="currentColor" strokeLinecap="round" strokeWidth="1" />
+                <path d="M32 28C29.7909 28 28 29.7909 28 32C28 34.2091 29.7909 36 32 36" stroke="currentColor" strokeLinecap="round" strokeWidth="1" />
+                <circle cx="32" cy="32" r="1" fill="currentColor" />
+              </svg>
             </div>
-            <h2 className="text-lg font-bold text-[var(--text-primary)]">
-              Save your access
-            </h2>
+            <h1 className="font-serif text-[44px] md:text-[56px] leading-[1.05] tracking-[-0.02em] text-[var(--text-primary)] font-light">
+              <span className="font-serif italic font-light text-[var(--accent)] mr-3">The</span>
+              system is yours.
+            </h1>
+            <Reveal delay={0.2}>
+              <div className="h-px w-12 bg-[var(--accent)] mx-auto my-8" />
+              <p className="font-serif italic text-[16px] md:text-[18px] text-[var(--text-secondary)] leading-relaxed max-w-md mx-auto">
+                Your transaction is complete. The digital architecture has
+                been provisioned. Save your access below.
+              </p>
+            </Reveal>
           </div>
-          <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5 pl-10">
-            Create your account so you can log in from any device. We'll send a magic link - no password needed.
-          </p>
-          <div className="pl-10">
-            <LoginForm defaultEmail={email} mode="signup" compact />
-          </div>
-        </div>
+        </Reveal>
 
-        {/* Step 2: Choose your starting point */}
-        <div className="bg-[var(--sidebar-bg)] border border-[var(--border)] rounded-2xl p-8">
-          <div className="flex items-center gap-3 mb-5">
-            <div className="w-7 h-7 rounded-full border-2 border-[var(--text-muted)] text-[var(--text-muted)] flex items-center justify-center text-xs font-bold shrink-0">
-              2
+        {/* Step 1: Save access */}
+        <Reveal delay={0.4}>
+          <div className="relative bg-[var(--card-bg)] border border-[var(--border)] p-8 md:p-10 mb-5">
+            {/* Corner accents */}
+            <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[var(--accent)]" />
+            <span className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[var(--accent)]" />
+            <span className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-[var(--accent)]" />
+            <span className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[var(--accent)]" />
+
+            <div className="flex items-baseline gap-4 mb-5">
+              <span className="label-caps text-[var(--accent)] shrink-0">
+                Step I
+              </span>
+              <h2 className="font-serif text-[22px] md:text-[26px] text-[var(--text-primary)] font-light">
+                Save your access.
+              </h2>
             </div>
-            <h2 className="text-lg font-bold text-[var(--text-primary)]">
-              Choose where to start
-            </h2>
+            <p className="font-serif italic text-[14px] text-[var(--text-secondary)] leading-relaxed mb-6 pl-12">
+              Create your account so you can sign in from any device.
+            </p>
+            <div className="pl-12">
+              <LoginForm defaultEmail={email} mode="signup" compact />
+            </div>
           </div>
-          <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5 pl-10">
-            All three pillars are unlocked. Start with what matters most to you right now.
-          </p>
-          <div className="grid grid-cols-1 gap-3 pl-10">
-            <Link
-              href="/trading"
-              className="flex items-center gap-4 px-5 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] transition-all hover:border-[var(--accent-trading)]/30 hover:-translate-y-0.5 group"
-            >
-              <span className="text-xl" style={{ color: "#00d4aa" }}>◈</span>
-              <div className="flex-1">
-                <div className="text-sm font-semibold text-[var(--text-primary)]">Markets</div>
-                <div className="text-xs text-[var(--text-muted)]">Investing foundations, the Wheel Strategy, VIX framework, weekly review</div>
-              </div>
-              <span className="text-xs font-semibold text-[var(--accent-trading)] opacity-0 group-hover:opacity-100 transition-opacity">
-                Start &rarr;
+        </Reveal>
+
+        {/* Step 2: Choose pillar */}
+        <Reveal delay={0.55}>
+          <div className="bg-[var(--card-bg)] border border-[var(--border)] p-8 md:p-10">
+            <div className="flex items-baseline gap-4 mb-5">
+              <span className="label-caps text-[var(--text-muted)] shrink-0">
+                Step II
               </span>
-            </Link>
-            <Link
-              href="/fitness"
-              className="flex items-center gap-4 px-5 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] transition-all hover:border-[var(--accent-fitness)]/30 hover:-translate-y-0.5 group"
-            >
-              <span className="text-xl" style={{ color: "#f97316" }}>⚡</span>
-              <div className="flex-1">
-                <div className="text-sm font-semibold text-[var(--text-primary)]">Fitness</div>
-                <div className="text-xs text-[var(--text-muted)]">Hybrid athlete system, weekly split, Zone 2 & intervals, recovery</div>
-              </div>
-              <span className="text-xs font-semibold text-[var(--accent-fitness)] opacity-0 group-hover:opacity-100 transition-opacity">
-                Start &rarr;
-              </span>
-            </Link>
-            <Link
-              href="/mindset"
-              className="flex items-center gap-4 px-5 py-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border)] transition-all hover:border-[var(--accent-mindset)]/30 hover:-translate-y-0.5 group"
-            >
-              <span className="text-xl" style={{ color: "#a78bfa" }}>◉</span>
-              <div className="flex-1">
-                <div className="text-sm font-semibold text-[var(--text-primary)]">Mindset</div>
-                <div className="text-xs text-[var(--text-muted)]">Identity, emotional regulation, daily discipline, the operator&apos;s week</div>
-              </div>
-              <span className="text-xs font-semibold text-[var(--accent-mindset)] opacity-0 group-hover:opacity-100 transition-opacity">
-                Start &rarr;
-              </span>
-            </Link>
+              <h2 className="font-serif text-[22px] md:text-[26px] text-[var(--text-primary)] font-light">
+                Choose where to start.
+              </h2>
+            </div>
+            <p className="font-serif italic text-[14px] text-[var(--text-secondary)] leading-relaxed mb-6 pl-12">
+              All three pillars are unlocked. Start with what matters most
+              to you right now.
+            </p>
+            <div className="grid grid-cols-1 gap-px bg-[var(--border)] border border-[var(--border)] ml-12">
+              <PillarLink
+                href="/trading"
+                label="Markets"
+                accent="var(--accent-trading)"
+                description="Investing foundations, the Wheel Strategy, VIX framework, weekly review"
+              />
+              <PillarLink
+                href="/fitness"
+                label="Fitness"
+                accent="var(--accent-fitness)"
+                description="Hybrid athlete system, weekly split, Zone 2 & intervals, recovery"
+              />
+              <PillarLink
+                href="/mindset"
+                label="Mindset"
+                accent="var(--accent-mindset)"
+                description="Identity, emotional regulation, daily discipline, the operator's week"
+              />
+            </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </div>
+  );
+}
+
+function PillarLink({
+  href,
+  label,
+  accent,
+  description,
+}: {
+  href: string;
+  label: string;
+  accent: string;
+  description: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="flex items-baseline gap-5 px-5 py-5 bg-[var(--bg)] hover:bg-[var(--card-bg-2)] transition-colors duration-300 group"
+    >
+      <span
+        className="label-caps shrink-0 w-20"
+        style={{ color: accent }}
+      >
+        {label}
+      </span>
+      <span className="font-serif text-[14px] text-[var(--text-secondary)] leading-relaxed flex-1">
+        {description}
+      </span>
+      <span
+        className="label-caps shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
+        style={{ color: accent }}
+      >
+        Begin &rarr;
+      </span>
+    </Link>
   );
 }
 
@@ -186,7 +237,7 @@ export default function SuccessPage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center px-6">
-          <div className="w-12 h-12 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
+          <div className="w-10 h-10 border border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
         </div>
       }
     >
