@@ -15,6 +15,13 @@ export interface SectionItem {
   icon: string;
 }
 
+/**
+ * Editorial Quarterly library shell. Used by /trading/library, /fitness/library,
+ * /mindset/library. Persistent sidebar (table of contents) + main reading area.
+ *
+ * Visual language: hairline borders, sharp 0px corners, Newsreader serif body,
+ * label-caps section labels, champagne (or pillar-color) for active state.
+ */
 export default function SectionLayout({
   title,
   subtitle,
@@ -84,49 +91,65 @@ export default function SectionLayout({
 
   const completedCount = completedSections.length;
   const totalCount = sections.length;
+  const completionPct =
+    totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
   return (
-    <div className="h-screen flex overflow-hidden">
+    <div className="h-screen flex overflow-hidden bg-[var(--bg)]">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
           onClick={() => setSidebarOpen(false)}
-          className="fixed inset-0 bg-black/60 z-40 md:hidden"
+          className="fixed inset-0 bg-black/70 z-40 md:hidden"
         />
       )}
 
       {/* Sidebar */}
       <nav
-        className={`w-64 min-w-[256px] bg-[var(--sidebar-bg)] border-r border-[var(--border)] flex flex-col overflow-hidden
+        aria-label={`${title} table of contents`}
+        className={`w-72 min-w-[288px] bg-[var(--sidebar-bg)] border-r border-[var(--border)] flex flex-col overflow-hidden
           ${sidebarOpen ? "fixed inset-y-0 left-0 z-50" : "hidden md:flex"}`}
       >
-        <div className="p-5 pb-3 border-b border-[var(--border)]">
+        {/* Sidebar header */}
+        <div className="p-6 pb-4 border-b border-[var(--border)]">
           <Link
             href="/dashboard"
-            className="text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)] uppercase tracking-widest"
+            className="label-caps text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors block mb-5"
           >
             &larr; Dashboard
           </Link>
-          <div
-            className="text-xl font-bold mt-2 mb-0.5"
+          <span
+            className="label-caps block mb-3"
             style={{ color: accent }}
           >
+            Reference Library
+          </span>
+          <h2
+            className="font-serif text-[24px] md:text-[28px] tracking-tight font-light leading-tight mb-2"
+            style={{ color: "var(--text-primary)" }}
+          >
             {title}
-          </div>
-          <div className="text-xs text-[var(--text-muted)]">{subtitle}</div>
+          </h2>
+          <p className="font-serif italic text-[13px] text-[var(--text-secondary)] leading-relaxed">
+            {subtitle}
+          </p>
 
           {/* Progress indicator */}
           {pillar && !locked && (
-            <div className="mt-3 mb-1">
-              <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)] mb-1.5">
-                <span>{completedCount} of {totalCount} complete</span>
-                <span>{totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0}%</span>
+            <div className="mt-5">
+              <div className="flex items-baseline justify-between mb-2">
+                <span className="label-caps text-[var(--text-muted)]">
+                  Read
+                </span>
+                <span className="label-caps text-[var(--text-muted)] tabular-nums">
+                  {completedCount} / {totalCount} &middot; {completionPct}%
+                </span>
               </div>
-              <div className="w-full h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+              <div className="w-full h-px bg-[var(--border)] overflow-hidden">
                 <div
-                  className="h-full rounded-full transition-all duration-500"
+                  className="h-full transition-all duration-700 origin-left"
                   style={{
-                    width: `${totalCount > 0 ? (completedCount / totalCount) * 100 : 0}%`,
+                    width: `${completionPct}%`,
                     background: accent,
                   }}
                 />
@@ -134,80 +157,131 @@ export default function SectionLayout({
             </div>
           )}
 
+          <label className="sr-only" htmlFor="library-search">
+            Search sections
+          </label>
           <input
+            id="library-search"
             type="text"
-            placeholder="Search sections..."
+            placeholder="Search sections"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full mt-3 px-3 py-2 rounded-lg border border-[var(--border)] bg-[var(--bg)] text-[var(--text-primary)] text-sm outline-none placeholder:text-[var(--text-muted)]"
+            className="w-full mt-5 px-3 py-2.5 border border-[var(--border)] bg-[var(--bg)] text-[var(--text-primary)] font-serif text-[14px] outline-none placeholder:text-[var(--text-muted)] placeholder:font-serif placeholder:italic focus:border-[var(--accent)]"
           />
         </div>
-        <div className="flex-1 overflow-auto p-2">
-          {filtered.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => {
-                setActive(s.id);
-                setSidebarOpen(false);
-              }}
-              className="flex items-center gap-2.5 w-full px-3 py-2.5 rounded-lg text-sm text-left mb-0.5 transition-all"
-              style={{
-                background:
-                  active === s.id ? `${accent}15` : "transparent",
-                color: active === s.id ? accent : "var(--text-secondary)",
-                fontWeight: active === s.id ? 600 : 400,
-              }}
-            >
-              {/* Completion checkmark or icon */}
-              {pillar && !locked && isCompleted(s.id) ? (
-                <span className="text-base min-w-[22px]" style={{ color: accent }}>
-                  ✓
-                </span>
-              ) : (
-                <span className="text-base min-w-[22px]">{s.icon}</span>
-              )}
-              {s.label}
-            </button>
-          ))}
+
+        {/* Section list */}
+        <div className="flex-1 overflow-auto">
+          <ul>
+            {filtered.map((s) => {
+              const isActive = active === s.id;
+              const done = pillar && !locked && isCompleted(s.id);
+              return (
+                <li key={s.id}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActive(s.id);
+                      setSidebarOpen(false);
+                    }}
+                    className="flex items-baseline gap-3 w-full px-6 py-3 text-left transition-colors duration-200 border-l-2"
+                    style={{
+                      background: isActive
+                        ? "var(--card-bg)"
+                        : "transparent",
+                      borderLeftColor: isActive ? accent : "transparent",
+                    }}
+                  >
+                    <span
+                      className="label-caps shrink-0 w-6"
+                      style={{
+                        color: done
+                          ? accent
+                          : isActive
+                            ? accent
+                            : "var(--text-muted)",
+                      }}
+                    >
+                      {done ? "✓" : String(filtered.indexOf(s) + 1).padStart(2, "0")}
+                    </span>
+                    <span
+                      className="font-serif text-[14px] leading-snug truncate"
+                      style={{
+                        color: isActive
+                          ? "var(--text-primary)"
+                          : "var(--text-secondary)",
+                      }}
+                    >
+                      {s.label}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </nav>
 
-      {/* Main */}
-      <main ref={contentRef} className="flex-1 overflow-auto px-6 md:px-10 py-8 pb-16">
+      {/* Main reading area */}
+      <main
+        ref={contentRef}
+        className="flex-1 overflow-auto px-6 md:px-12 py-10 md:py-12 pb-20"
+      >
         <button
+          type="button"
           onClick={() => setSidebarOpen(true)}
-          className="md:hidden mb-5 px-3.5 py-2 rounded-lg border border-[var(--border)] bg-[var(--card-bg)] text-[var(--text-primary)] text-sm"
+          className="md:hidden mb-8 px-4 py-2.5 label-caps border border-[var(--border)] bg-[var(--card-bg)] text-[var(--text-primary)] cursor-pointer"
         >
-          Menu
+          Contents
         </button>
-        <div className="max-w-[860px]">
+        <div className="max-w-[760px]">
           {children(active)}
 
           {/* Mark Complete button at bottom of each section */}
           {pillar && !locked && (
-            <div className="mt-10 pt-6 border-t border-[var(--border)]">
+            <div className="mt-16 pt-8 border-t border-[var(--border)]">
               <button
+                type="button"
                 onClick={() => toggleComplete(active)}
-                className="flex items-center gap-2.5 px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer border"
+                className="group inline-flex items-center gap-3 px-6 py-3.5 label-caps border transition-all duration-300 cursor-pointer"
                 style={{
                   background: isCompleted(active)
-                    ? `color-mix(in srgb, ${accent} 12%, transparent)`
+                    ? `color-mix(in srgb, ${accent} 10%, transparent)`
                     : "transparent",
-                  borderColor: isCompleted(active) ? accent : "var(--border)",
-                  color: isCompleted(active) ? accent : "var(--text-secondary)",
+                  borderColor: isCompleted(active)
+                    ? accent
+                    : "var(--border)",
+                  color: isCompleted(active)
+                    ? accent
+                    : "var(--text-secondary)",
                 }}
               >
                 <span
-                  className="w-5 h-5 rounded-md border-2 flex items-center justify-center text-xs transition-all"
+                  className="w-4 h-4 border flex items-center justify-center transition-all"
                   style={{
-                    borderColor: isCompleted(active) ? accent : "var(--text-muted)",
-                    background: isCompleted(active) ? accent : "transparent",
-                    color: isCompleted(active) ? "#0a0b0f" : "transparent",
+                    borderColor: isCompleted(active)
+                      ? accent
+                      : "var(--text-muted)",
+                    background: isCompleted(active)
+                      ? accent
+                      : "transparent",
                   }}
+                  aria-hidden
                 >
-                  ✓
+                  {isCompleted(active) && (
+                    <svg
+                      width="10"
+                      height="10"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      stroke="#0a0b0f"
+                      strokeWidth="2.5"
+                    >
+                      <polyline points="2 6 5 9 10 3" />
+                    </svg>
+                  )}
                 </span>
-                {isCompleted(active) ? "Completed" : "Mark as complete"}
+                {isCompleted(active) ? "Completed" : "Mark as read"}
               </button>
             </div>
           )}

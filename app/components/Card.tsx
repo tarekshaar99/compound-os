@@ -1,5 +1,17 @@
 "use client";
 
+/**
+ * Editorial Quarterly card primitives used by the deep-dive libraries
+ * (/trading/library, /fitness/library, /mindset/library).
+ *
+ * - Card: hairline-bordered article block with left accent rule
+ * - StatBox: editorial fact tile with serif numeral + label-caps caption
+ * - Table: hairline-ruled data table with label-caps headers
+ * - RuleCard: numbered editorial rule with serif body
+ *
+ * All sharp 0px corners, no rounded geometry, no shadows.
+ */
+
 export function Card({
   title,
   children,
@@ -11,15 +23,18 @@ export function Card({
 }) {
   return (
     <div
-      className="rounded-xl border border-[var(--border)] bg-[var(--card-bg)] p-6 mb-5"
-      style={{ borderLeft: `3px solid ${accent}` }}
+      className="border border-[var(--border)] bg-[var(--card-bg)] p-6 mb-6"
+      style={{ borderLeft: `2px solid ${accent}` }}
     >
       {title && (
-        <h3 className="text-lg font-semibold mb-4" style={{ color: accent }}>
+        <h3
+          className="label-caps mb-5 pb-3 border-b border-[var(--border-soft)]"
+          style={{ color: accent }}
+        >
           {title}
         </h3>
       )}
-      <div className="text-[var(--text-secondary)] text-sm leading-7">
+      <div className="font-serif text-[15px] md:text-[16px] text-[var(--text-secondary)] leading-[1.75] space-y-4">
         {children}
       </div>
     </div>
@@ -36,13 +51,17 @@ export function StatBox({
   sub?: string;
 }) {
   return (
-    <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-5 flex-1 min-w-[160px]">
-      <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider mb-1.5 font-mono">
+    <div className="bg-[var(--card-bg)] border border-[var(--border)] p-5 flex-1 min-w-[160px]">
+      <div className="label-caps text-[var(--text-muted)] mb-3">
         {label}
       </div>
-      <div className="text-2xl font-bold text-[var(--accent)]">{value}</div>
+      <div className="font-serif text-[24px] md:text-[28px] text-[var(--accent)] tracking-tight font-light leading-tight">
+        {value}
+      </div>
       {sub && (
-        <div className="text-xs text-[var(--text-secondary)] mt-1">{sub}</div>
+        <div className="font-serif italic text-[13px] text-[var(--text-secondary)] mt-2 leading-relaxed">
+          {sub}
+        </div>
       )}
     </div>
   );
@@ -56,14 +75,14 @@ export function Table({
   rows: string[][];
 }) {
   return (
-    <div className="overflow-x-auto mb-4">
-      <table className="w-full border-collapse text-sm">
+    <div className="overflow-x-auto mb-6">
+      <table className="w-full border-collapse">
         <thead>
           <tr>
             {headers.map((h, i) => (
               <th
                 key={i}
-                className="text-left px-3.5 py-2.5 border-b-2 border-[var(--accent)] text-[var(--accent)] font-semibold whitespace-nowrap"
+                className="label-caps text-left px-4 py-3 border-b border-[var(--accent)] text-[var(--accent)] whitespace-nowrap"
               >
                 {h}
               </th>
@@ -72,11 +91,14 @@ export function Table({
         </thead>
         <tbody>
           {rows.map((row, ri) => (
-            <tr key={ri} className="border-b border-[var(--border)]">
+            <tr
+              key={ri}
+              className="border-b border-[var(--border-soft)] last:border-b-0"
+            >
               {row.map((cell, ci) => (
                 <td
                   key={ci}
-                  className="px-3.5 py-2.5 text-[var(--text-secondary)] align-top"
+                  className="px-4 py-3 font-serif text-[14px] md:text-[15px] text-[var(--text-secondary)] align-top leading-[1.65]"
                 >
                   {cell}
                 </td>
@@ -99,17 +121,16 @@ export function RuleCard({
   highlight?: boolean;
 }) {
   return (
-    <div className="flex gap-4 items-start bg-[var(--card-bg)] border border-[var(--border)] rounded-xl px-5 py-4 mb-3">
-      <div
-        className="min-w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm font-mono"
+    <div className="flex items-baseline gap-5 border border-[var(--border)] bg-[var(--card-bg)] px-5 py-4 mb-3">
+      <span
+        className="label-caps shrink-0 w-10"
         style={{
-          background: highlight ? "var(--accent)" : "var(--border)",
-          color: highlight ? "#000" : "var(--text-secondary)",
+          color: highlight ? "var(--accent)" : "var(--text-muted)",
         }}
       >
-        {number}
-      </div>
-      <p className="text-[var(--text-primary)] leading-relaxed text-sm">
+        №{String(number).padStart(2, "0")}
+      </span>
+      <p className="font-serif text-[15px] md:text-[16px] text-[var(--text-primary)] leading-[1.7]">
         {text}
       </p>
     </div>
