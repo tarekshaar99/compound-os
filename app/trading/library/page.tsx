@@ -655,9 +655,7 @@ function Mistakes() {
       <Sub>In a bull market, discipline is the #1 requirement. In a bear market, it's courage. Most mistakes are just one of those two missing.</Sub>
       {items.map((item, i) => (
         <Card key={i} title={`${i + 1}. ${item.title}`} accent={i % 3 === 0 ? "#4ecdc4" : i % 3 === 1 ? "#ffd93d" : "#ff6b6b"}>
-          <P last>
-            <span dangerouslySetInnerHTML={{ __html: item.body }} />
-          </P>
+          <P last>{item.body}</P>
         </Card>
       ))}
       <Card title="The Asymmetric Risk Question" accent="#4ecdc4">

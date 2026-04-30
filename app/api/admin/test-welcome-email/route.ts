@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentSession } from "../../../lib/session";
 import { sendWelcomeEmail } from "../../../lib/email";
+import { rateLimit } from "../../../lib/rate-limit";
+import { validEmail } from "../../../lib/validate";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -13,31 +15,37 @@ export const dynamic = "force-dynamic";
  *   GET /api/admin/test-welcome-email?to=<email>&founding=<true|false>
  *
  * Gating: requires the cos_session cookie to be present AND `admin: true`.
- * Anyone without an admin cookie gets 403.
+ * Anyone without an admin cookie gets 403. Additionally rate-limited to
+ * 5 sends/min per IP so a leaked admin cookie can't be used to spam Resend.
  *
- * This is intentionally a GET so it's easy to trigger from a browser by
- * an admin who's already signed in. Side-effect-y for a GET, but it's an
- * admin tool — convenience > strict REST.
+ * Email format strictly validated to prevent header-injection / open-relay.
  */
 export async function GET(req: NextRequest) {
+  // Auth gate first — quietly 403 unauthorized callers without burning
+  // a rate-limit slot.
   const session = await getCurrentSession();
   if (!session || !session.admin) {
-    return NextResponse.json(
-      { error: "admin_only" },
-      { status: 403 }
-    );
+    return NextResponse.json({ error: "admin_only" }, { status: 403 });
   }
 
-  const { searchParams } = req.nextUrl;
-  const to = searchParams.get("to")?.trim().toLowerCase();
-  if (!to || !to.includes("@")) {
+  // Rate limit by IP to cap Resend cost in case the admin cookie ever
+  // leaks. 5/min is loose for human QA and tight for automated abuse.
+  const limit = rateLimit(req, {
+    prefix: "admin-test-welcome",
+    max: 5,
+    windowMs: 60_000,
+  });
+  if (!limit.ok) return limit.response;
+
+  const to = validEmail(req.nextUrl.searchParams.get("to"));
+  if (!to) {
     return NextResponse.json(
       { error: "missing_or_invalid_to_param" },
       { status: 400 }
     );
   }
 
-  const isFounding = searchParams.get("founding") === "true";
+  const isFounding = req.nextUrl.searchParams.get("founding") === "true";
 
   const ok = await sendWelcomeEmail({ to, isFounding });
   return NextResponse.json({ ok, to, isFounding, sentBy: session.sub });

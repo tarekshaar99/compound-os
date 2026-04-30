@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getPricing } from "../../lib/pricing";
 import { getServiceSupabase } from "../../lib/supabase";
+import { rateLimit } from "../../lib/rate-limit";
+import { parseJsonBody, validEmail, validId } from "../../lib/validate";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -30,26 +32,45 @@ function getOrigin(req: NextRequest): string {
 }
 
 export async function POST(req: NextRequest) {
+  // Rate limit Stripe-session creation: 10 per minute per IP. A real
+  // buyer clicks at most a handful of times; anything heavier looks
+  // like checkout-spam (Stripe-API exhaustion, dead-session inflation).
+  const limit = rateLimit(req, {
+    prefix: "checkout",
+    max: 10,
+    windowMs: 60_000,
+  });
+  if (!limit.ok) return limit.response;
+
   try {
-    // Email is optional here - Stripe collects it on the checkout page.
-    // If the client passes it (from the pricing CTA in Phase 5), we lock identity.
+    // Email is optional here — Stripe collects it on the checkout page.
+    // If the client passes it (from the pricing CTA), we lock identity.
     //
     // eventId is the conversion-tracking dedupe key minted by the client
     // pixel layer. It travels into Stripe session metadata and back out
     // via the webhook so the server-side Meta CAPI / TikTok Events fire
     // matches the client-side InitiateCheckout / Purchase fires.
+    const parsed = await parseJsonBody<{ email?: unknown; eventId?: unknown }>(
+      req,
+      { maxBytes: 4 * 1024 }
+    );
+    if (!parsed.ok) return parsed.response;
+
     let prefillEmail: string | undefined;
     let eventId: string | undefined;
-    try {
-      const body = await req.json();
-      if (typeof body?.email === "string" && body.email.includes("@")) {
-        prefillEmail = body.email.trim().toLowerCase();
+    if (parsed.body.email !== undefined) {
+      const e = validEmail(parsed.body.email);
+      if (e === null) {
+        return NextResponse.json({ error: "bad_email" }, { status: 400 });
       }
-      if (typeof body?.eventId === "string" && body.eventId.length > 0 && body.eventId.length <= 128) {
-        eventId = body.eventId;
+      prefillEmail = e;
+    }
+    if (parsed.body.eventId !== undefined) {
+      const id = validId(parsed.body.eventId, { min: 8, max: 128 });
+      if (id === null) {
+        return NextResponse.json({ error: "bad_event_id" }, { status: 400 });
       }
-    } catch {
-      // No body is fine.
+      eventId = id;
     }
 
     const origin = getOrigin(req);

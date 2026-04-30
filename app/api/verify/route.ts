@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getServiceSupabase } from "../../lib/supabase";
 import { signSession, setSessionCookie } from "../../lib/session";
+import { rateLimit } from "../../lib/rate-limit";
+import { parseJsonBody, validId } from "../../lib/validate";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -21,15 +23,36 @@ function getStripe() {
  *   2. Mints the signed cos_session cookie so middleware will allow access
  *      on subsequent requests.
  *
- * No fake tokens, no localStorage grants.
+ * Hardening:
+ *   - Rate limited to 20 calls/min per IP (slow-path hits Stripe API)
+ *   - Body capped at 4KB (session_id is ~80 chars; anything larger is junk)
+ *   - session_id strictly validated against Stripe's `cs_*_<alnum>` shape
  */
 export async function POST(req: NextRequest) {
-  try {
-    const { session_id } = await req.json();
-    if (!session_id || typeof session_id !== "string") {
-      return NextResponse.json({ valid: false, reason: "missing_session_id" }, { status: 400 });
-    }
+  // Slow path calls Stripe API (costs us money + rate against Stripe).
+  // 20/min is generous for a real /success page-load loop and tight
+  // enough to stop session-id brute-forcing.
+  const limit = rateLimit(req, {
+    prefix: "verify",
+    max: 20,
+    windowMs: 60_000,
+  });
+  if (!limit.ok) return limit.response;
 
+  const parsed = await parseJsonBody<{ session_id?: unknown }>(req, {
+    maxBytes: 4 * 1024,
+  });
+  if (!parsed.ok) return parsed.response;
+
+  const session_id = validId(parsed.body.session_id, { min: 10, max: 200 });
+  if (!session_id) {
+    return NextResponse.json(
+      { valid: false, reason: "missing_session_id" },
+      { status: 400 }
+    );
+  }
+
+  try {
     const supabase = getServiceSupabase();
 
     // Fast path: webhook already processed this session.

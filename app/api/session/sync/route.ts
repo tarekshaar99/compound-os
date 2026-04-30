@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import * as Sentry from "@sentry/nextjs";
 import { getServiceSupabase } from "../../../lib/supabase";
 import { signSession, setSessionCookie } from "../../../lib/session";
+import { rateLimit } from "../../../lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -23,8 +24,26 @@ export const dynamic = "force-dynamic";
  * on some other device (webhook created the row).
  */
 export async function POST(req: NextRequest) {
+  // Rate-limit session-sync attempts. Legitimate flow is one call per
+  // OAuth/OTP success — bursts of 20+/min from the same IP indicate
+  // bearer-token brute-force or scraping. 20/min stays loose enough for
+  // dev hot-reload + parallel tabs.
+  const limit = rateLimit(req, {
+    prefix: "session-sync",
+    max: 20,
+    windowMs: 60_000,
+  });
+  if (!limit.ok) return limit.response;
+
   try {
     const authHeader = req.headers.get("authorization") ?? "";
+    // Cap header length so a multi-MB bearer string can't OOM the parser.
+    if (authHeader.length > 4096) {
+      return NextResponse.json(
+        { error: "auth_header_too_large" },
+        { status: 400 }
+      );
+    }
     const match = authHeader.match(/^Bearer (.+)$/i);
     if (!match) {
       return NextResponse.json({ error: "missing_bearer" }, { status: 401 });
