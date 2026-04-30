@@ -30,8 +30,11 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files — every concrete .env* file is private (.env, .env.local,
+# .env.production, etc.). The .env.example template IS committed so
+# new contributors / Vercel can see what vars are required.
 .env*
+!.env.example
 
 # vercel
 .vercel
