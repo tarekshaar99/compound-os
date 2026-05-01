@@ -97,6 +97,10 @@ function buildFaqs(isFounding: boolean) {
       q: "Can I access it on my phone?",
       a: "Yes. Fully responsive. Built to open on the phone during your market session, at the gym, or in the morning.",
     },
+    {
+      q: "Is there a community?",
+      a: "Yes — a private Discord that comes with access. I'm in it daily. Right now it's small, a handful of operators working through the modules together. I'm bringing in specialists across markets, fitness, and mindset over time. Being early is the pitch, not a flaw to hide — the room you join now is the room you help shape.",
+    },
   ];
 }
 
@@ -216,10 +220,10 @@ export default async function Home() {
                     The Manuscript
                   </span>
                   <p className="font-serif text-[15px] leading-[1.7] text-[var(--text-secondary)]">
-                    A library of {moduleCount} focused modules. Frameworks,
-                    checklists, and weekly protocols across the three areas
-                    that actually compound — capital, body, and
-                    discipline.
+                    A library of {moduleCount} focused modules across
+                    capital, body, and discipline — plus a private
+                    founder-led room where the system is being lived in
+                    real time.
                   </p>
 
                   <div className="mt-8 grid grid-cols-3 gap-4 pt-6 border-t border-[var(--border)]">
@@ -498,6 +502,46 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ──────────────────── INSIDE THE ROOM (Community framing) ──────────────────── */}
+      <section className="px-6 md:px-12 py-20 md:py-28 border-t border-[var(--border)]">
+        <div className="max-w-[720px] mx-auto">
+          <Reveal>
+            <span className="label-caps text-[var(--accent)] block mb-6">
+              Inside the room
+            </span>
+            <h2 className="font-serif text-[34px] md:text-[44px] leading-[1.15] tracking-[-0.015em] text-[var(--text-primary)] font-light">
+              You&apos;re not just buying a system. You&apos;re joining
+              the room I&apos;m building it in.
+            </h2>
+          </Reveal>
+
+          <Reveal delay={0.15} className="mt-10 space-y-6">
+            <p className="font-serif text-[17px] md:text-[18px] text-[var(--text-secondary)] leading-[1.85]">
+              Compound OS comes with access to a private Discord. I&apos;m
+              in there, every day, alongside the small group of operators
+              already inside — answering the questions that don&apos;t
+              fit in a checklist and sharing what&apos;s actually working
+              in real conditions.
+            </p>
+            <p className="font-serif text-[17px] md:text-[18px] text-[var(--text-secondary)] leading-[1.85]">
+              Over the coming months I&apos;m bringing in specialists I
+              trust — across markets, fitness, and mindset — to add depth
+              where the modules can&apos;t.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.3} className="mt-10 pt-8 border-t border-[var(--border)]">
+            <p className="font-serif italic text-[18px] md:text-[20px] text-[var(--text-primary)] leading-[1.65]">
+              It&apos;s small on purpose. Being early means you shape
+              what it becomes.
+            </p>
+            <p className="mt-6 label-caps text-[var(--text-muted)]">
+              &mdash; Tarek
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ──────────────────── PRICING (Editorial card with corner accents) ──────────────────── */}
       <section
         id="pricing"
@@ -546,6 +590,7 @@ export default async function Home() {
                 {[
                   "All three pillars, every module",
                   "Checklists, templates, and weekly protocols",
+                  "Private founder Discord — buyers-only, small on purpose",
                   "Progress saved to any device",
                   "Fourteen-day refund window",
                 ].map((item, i) => (
